@@ -1,0 +1,58 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Crystal
+        uses: crystal-lang/install-crystal@v1
+
+      - name: Setup Miniconda (Ubuntu)
+        if: runner.os == 'Linux'
+        uses: conda-incubator/setup-miniconda@v3
+        with:
+          activate-environment: test
+          auto-activate-base: false
+          channels: conda-forge
+          conda-remove-defaults: true
+
+      - name: Install HDF5 dependencies (Ubuntu)
+        if: runner.os == 'Linux'
+        shell: bash -el {0}
+        run: |
+          conda install -n test hdf5 pkg-config
+
+          PREFIX="$CONDA/envs/test"
+
+          echo "PKG_CONFIG_PATH=$PREFIX/lib/pkgconfig" >> "$GITHUB_ENV"
+          echo "LIBRARY_PATH=$PREFIX/lib" >> "$GITHUB_ENV"
+          echo "LD_LIBRARY_PATH=$PREFIX/lib" >> "$GITHUB_ENV"
+          echo "CPATH=$PREFIX/include" >> "$GITHUB_ENV"
+          echo "$PREFIX/bin" >> "$GITHUB_PATH"
+
+          pkg-config --modversion hdf5
+          pkg-config --libs hdf5
+          pkg-config --cflags hdf5
+
+      - name: Install HDF5 (macOS)
+        if: runner.os == 'macOS'
+        run: |
+          brew install hdf5 pkg-config
+
+      - name: Install shards
+        run: shards install
+
+      - name: Run specs
+        run: crystal spec
