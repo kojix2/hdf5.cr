@@ -1,6 +1,6 @@
 module HDF5
   class File
-    include GroupMethods
+    include Container
 
     H5F_ACC_RDONLY = 0x0000_u32
     H5F_ACC_RDWR   = 0x0001_u32
@@ -45,7 +45,7 @@ module HDF5
       else
         raise Error.new("Unknown file mode: #{mode}")
       end
-      raise Error.new("Failed to open/create HDF5 file '#{filename}' (mode=#{mode})") if @id == LibHDF5::H5_INVALID_HID
+      raise FileError.new("Failed to open/create HDF5 file '#{filename}' (mode=#{mode})") if @id == LibHDF5::H5_INVALID_HID
     end
 
     def hid : LibHDF5::Hid

@@ -11,16 +11,35 @@ module HDF5
       Dataspace.new(space_id)
     end
 
-    def dims : Array(UInt64)
+    # Crystal-native shape API
+    def shape : Array(UInt64)
       dataspace.dims
     end
 
-    def ndims : Int32
+    def rank : Int32
       dataspace.ndims
+    end
+
+    def size : UInt64
+      n = dataspace.npoints
+      n < 0 ? 0_u64 : n.to_u64
+    end
+
+    # HDF5-style aliases
+    def dims : Array(UInt64)
+      shape
+    end
+
+    def ndims : Int32
+      rank
     end
 
     def npoints : Int64
       dataspace.npoints
+    end
+
+    def attrs : Attributes
+      Attributes.new(@id)
     end
 
     def read(type : T.class) : Array(T) forall T
@@ -33,6 +52,22 @@ module HDF5
       ret = LibHDF5.H5Dread(@id, dtype, LibHDF5::H5S_ALL, LibHDF5::H5S_ALL,
         LibHDF5::H5P_DEFAULT, buf.to_unsafe.as(Void*))
       raise Error.new("Failed to read dataset") if ret < 0
+      buf
+    end
+
+    def read(type : T.class, selection : Selection) : Array(T) forall T
+      file_space = dataspace
+      selection.apply_to(file_space.id)
+      n = LibHDF5.H5Sget_select_npoints(file_space.id)
+      raise Error.new("Invalid selection") if n <= 0
+      mem_space = Dataspace.simple([n.to_u64])
+      buf = Array(T).new(n.to_i) { T.zero }
+      dtype = NativeType.for(T)
+      ret = LibHDF5.H5Dread(@id, dtype, mem_space.id, file_space.id,
+        LibHDF5::H5P_DEFAULT, buf.to_unsafe.as(Void*))
+      mem_space.close
+      file_space.close
+      raise Error.new("Failed to read dataset with selection") if ret < 0
       buf
     end
 
@@ -55,6 +90,22 @@ module HDF5
       ret = LibHDF5.H5Dwrite(@id, dtype, LibHDF5::H5S_ALL, LibHDF5::H5S_ALL,
         LibHDF5::H5P_DEFAULT, data.to_unsafe.as(Void*))
       raise Error.new("Failed to write dataset") if ret < 0
+    end
+
+    def write(data : Array(T), selection : Selection) forall T
+      file_space = dataspace
+      selection.apply_to(file_space.id)
+      n = LibHDF5.H5Sget_select_npoints(file_space.id)
+      raise ShapeMismatchError.new(
+        "Selection covers #{n} points but data has #{data.size} elements"
+      ) if data.size != n
+      mem_space = Dataspace.simple([n.to_u64])
+      dtype = NativeType.for(T)
+      ret = LibHDF5.H5Dwrite(@id, dtype, mem_space.id, file_space.id,
+        LibHDF5::H5P_DEFAULT, data.to_unsafe.as(Void*))
+      mem_space.close
+      file_space.close
+      raise Error.new("Failed to write dataset with selection") if ret < 0
     end
 
     def write_strings(data : Array(String))
@@ -80,39 +131,27 @@ module HDF5
       ptrs.map { |ptr| ptr.null? ? "" : String.new(ptr) }
     end
 
-    def set_attribute(name : String, value : T) forall T
-      {% if T < Number %}
-        dtype = NativeType.for(T)
-        space = Dataspace.scalar
-        attr_id = LibHDF5.H5Acreate2(@id, name, dtype, space.id,
-          LibHDF5::H5P_DEFAULT, LibHDF5::H5P_DEFAULT)
-        space.close
-        raise Error.new("Failed to create attribute '#{name}'") if attr_id == LibHDF5::H5_INVALID_HID
-        attr = Attribute.new(attr_id)
-        attr.write(value)
-        attr.close
-      {% elsif T == String %}
-        set_string_attribute(name, value)
-      {% else %}
-        {% raise "Unsupported attribute type: #{T}" %}
-      {% end %}
-    end
-
-    def get_attribute(name : String, type : T.class) : T forall T
-      attr_id = LibHDF5.H5Aopen(@id, name, LibHDF5::H5P_DEFAULT)
-      raise Error.new("Failed to open attribute '#{name}'") if attr_id == LibHDF5::H5_INVALID_HID
-      attr = Attribute.new(attr_id)
-      result = attr.read(T)
-      attr.close
-      result
-    end
-
-    def has_attribute?(name : String) : Bool
-      LibHDF5.H5Aexists(@id, name) > 0
+    def resize(new_shape : Indexable) : Nil
+      udims = new_shape.map(&.to_u64).to_a
+      ret = LibHDF5.H5Dset_extent(@id, udims.to_unsafe)
+      raise Error.new("Failed to resize dataset") if ret < 0
     end
 
     def storage_size : UInt64
       LibHDF5.H5Dget_storage_size(@id)
+    end
+
+    # Backward-compat attribute helpers (delegate to attrs proxy)
+    def set_attribute(name : String, value : T) forall T
+      attrs[name] = value
+    end
+
+    def get_attribute(name : String, type : T.class) : T forall T
+      attrs.get(name, T)
+    end
+
+    def has_attribute?(name : String) : Bool
+      attrs.has_key?(name)
     end
 
     def close
@@ -122,22 +161,6 @@ module HDF5
 
     def finalize
       close
-    end
-
-    private def set_string_attribute(name : String, value : String)
-      type_id = NativeType.variable_length_string
-      space = Dataspace.scalar
-      attr_id = LibHDF5.H5Acreate2(@id, name, type_id, space.id,
-        LibHDF5::H5P_DEFAULT, LibHDF5::H5P_DEFAULT)
-      space.close
-      LibHDF5.H5Tclose(type_id)
-      raise Error.new("Failed to create string attribute '#{name}'") if attr_id == LibHDF5::H5_INVALID_HID
-      write_type = NativeType.variable_length_string
-      ptr = value.to_unsafe
-      ret = LibHDF5.H5Awrite(attr_id, write_type, pointerof(ptr).as(Void*))
-      LibHDF5.H5Tclose(write_type)
-      LibHDF5.H5Aclose(attr_id)
-      raise Error.new("Failed to write string attribute '#{name}'") if ret < 0
     end
   end
 end

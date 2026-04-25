@@ -60,9 +60,11 @@ lib LibHDF5
   $h5t_c_s1_g = H5T_C_S1_g : Hid
 
   # Library management
+  H5E_DEFAULT = 0_i64
   fun H5open : Herr
   fun H5close : Herr
   fun H5get_libversion(majnum : UInt32*, minnum : UInt32*, relnum : UInt32*) : Herr
+  fun H5Eset_auto2(estack_id : Hid, func : Void*, client_data : Void*) : Herr
 
   # File operations
   fun H5Fcreate(filename : UInt8*, flags : UInt32, fcpl_id : Hid, fapl_id : Hid) : Hid
@@ -117,6 +119,7 @@ lib LibHDF5
   fun H5Sselect_hyperslab(space_id : Hid, op : Int32, start : Hsize*, stride : Hsize*,
                           count : Hsize*, block : Hsize*) : Herr
   fun H5Sselect_all(spaceid : Hid) : Herr
+  fun H5Sget_select_npoints(spaceid : Hid) : Hssize
 
   # Datatype operations
   fun H5Tcopy(type_id : Hid) : Hid
@@ -142,8 +145,15 @@ lib LibHDF5
   fun H5Aexists(obj_id : Hid, attr_name : UInt8*) : Htri
   fun H5Adelete(loc_id : Hid, attr_name : UInt8*) : Herr
   fun H5Aget_num_attrs = H5Aget_storage_size(attr_id : Hid) : Hsize
+  fun H5Aopen_by_idx(loc_id : Hid, obj_name : UInt8*, idx_type : IndexType,
+                     order : IterOrder, n : Hsize, aapl_id : Hid, lapl_id : Hid) : Hid
+  fun H5Aget_name_by_idx(loc_id : Hid, obj_name : UInt8*, idx_type : IndexType,
+                         order : IterOrder, n : Hsize, name : UInt8*,
+                         size : LibC::SizeT, lapl_id : Hid) : LibC::SSizeT
 
-  # Object info
+  # Object operations
+  fun H5Oopen(loc_id : Hid, name : UInt8*, lapl_id : Hid) : Hid
+  fun H5Oclose(object_id : Hid) : Herr
   fun H5Oget_info3(loc_id : Hid, oinfo : ObjInfo*, fields : UInt32) : Herr
 
   struct ObjInfo
@@ -162,12 +172,27 @@ lib LibHDF5
     data : UInt8[16]
   end
 
+  # ID management
+  fun H5Iget_type(id : Hid) : Int32
+
+  H5I_GROUP   = 2
+  H5I_DATASET = 5
+
+  # Object info field masks
+  H5O_INFO_BASIC     = 0x0001_u32
+  H5O_INFO_TIME      = 0x0002_u32
+  H5O_INFO_NUM_ATTRS = 0x0004_u32
+  H5O_INFO_ALL       = 0x0007_u32
+
   # Property list
   fun H5Pcreate(cls_id : Hid) : Hid
   fun H5Pclose(plist_id : Hid) : Herr
   fun H5Pset_chunk(plist_id : Hid, ndims : Int32, dim : Hsize*) : Herr
   fun H5Pset_deflate(plist_id : Hid, level : UInt32) : Herr
+  fun H5Pset_shuffle(plist_id : Hid) : Herr
+  fun H5Pset_fletcher32(plist_id : Hid) : Herr
   fun H5Pset_create_intermediate_group(plist_id : Hid, crt_intmd : UInt32) : Herr
+  fun H5Pset_fill_value(plist_id : Hid, type_id : Hid, value : Void*) : Herr
 
   $h5p_cls_dataset_create_id_g = H5P_CLS_DATASET_CREATE_ID_g : Hid
   $h5p_cls_link_create_id_g = H5P_CLS_LINK_CREATE_ID_g : Hid

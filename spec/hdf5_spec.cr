@@ -7,12 +7,84 @@ describe HDF5 do
     File.delete(TMP_FILE) if File.exists?(TMP_FILE)
   end
 
+  # ── Top-level module API ───────────────────────────────────────────────────
+
   describe ".lib_version" do
     it "returns the HDF5 library version string" do
-      ver = HDF5.lib_version
-      ver.should match(/^\d+\.\d+\.\d+$/)
+      HDF5.lib_version.should match(/^\d+\.\d+\.\d+$/)
     end
   end
+
+  describe ".open" do
+    it "creates a file via HDF5.open block form" do
+      HDF5.open(TMP_FILE, :w) { }
+      File.exists?(TMP_FILE).should be_true
+    end
+
+    it "returns a File object in non-block form" do
+      HDF5.open(TMP_FILE, :w).close
+      file = HDF5.open(TMP_FILE, :r)
+      file.id.should_not eq(LibHDF5::H5_INVALID_HID)
+      file.close
+    end
+  end
+
+  describe ".accessible?" do
+    it "returns true for a valid HDF5 file" do
+      HDF5.open(TMP_FILE, :w) { }
+      HDF5.accessible?(TMP_FILE).should be_true
+    end
+
+    it "returns false for a missing file" do
+      HDF5.accessible?("/no/such/file.h5").should be_false
+    end
+  end
+
+  describe ".s selection builder" do
+    it "builds a 1D range selection" do
+      sel = HDF5.s[0...10]
+      sel.slices.size.should eq(1)
+      slice = sel.slices[0]
+      slice.should_not be_nil
+      if slice
+        slice.start.should eq(0)
+        slice.count.should eq(10)
+      end
+    end
+
+    it "builds a 2D range selection" do
+      sel = HDF5.s[0...5, 0...8]
+      sel.slices.size.should eq(2)
+      slice0 = sel.slices[0]
+      slice1 = sel.slices[1]
+      slice0.should_not be_nil
+      slice1.should_not be_nil
+      if slice0 && slice1
+        slice0.count.should eq(5)
+        slice1.count.should eq(8)
+      end
+    end
+
+    it "treats HDF5.all as full-axis (nil slice)" do
+      sel = HDF5.s[HDF5.all, 0...4]
+      sel.slices[0].should be_nil
+      sel.slices[1].should_not be_nil
+    end
+  end
+
+  describe "Selection.hyperslab" do
+    it "builds from start/count" do
+      sel = HDF5::Selection.hyperslab(start: [0, 0], count: [3, 4])
+      slice = sel.slices[0]
+      slice.should_not be_nil
+      if slice
+        slice.start.should eq(0)
+        slice.count.should eq(3)
+      end
+    end
+  end
+
+  # ── File ──────────────────────────────────────────────────────────────────
 
   describe "File" do
     it "creates a new file in write mode" do
@@ -25,8 +97,8 @@ describe HDF5 do
       HDF5::File.open(TMP_FILE, :r) { |file| file.id.should_not eq(LibHDF5::H5_INVALID_HID) }
     end
 
-    it "raises on missing file in read mode" do
-      expect_raises(HDF5::Error) do
+    it "raises FileError on missing file in read mode" do
+      expect_raises(HDF5::FileError) do
         HDF5::File.open("/nonexistent_path/missing.h5", :r) { }
       end
     end
@@ -38,25 +110,81 @@ describe HDF5 do
     end
   end
 
+  # ── Group ─────────────────────────────────────────────────────────────────
+
   describe "Group" do
     it "creates and opens a group" do
       HDF5::File.open(TMP_FILE, :w) do |file|
-        g = file.create_group("mygroup")
-        g.close
-
-        g2 = file.open_group("mygroup")
-        g2.close
+        file.create_group("mygroup").close
+        file.open_group("mygroup").close
       end
     end
 
-    it "creates nested groups via create_group with path" do
+    it "create_group raises AlreadyExistsError if group exists" do
       HDF5::File.open(TMP_FILE, :w) do |file|
-        g = file.create_group("a/b/c")
-        g.close
+        file.create_group("dup").close
+        expect_raises(HDF5::AlreadyExistsError) do
+          file.create_group("dup")
+        end
+      end
+    end
 
-        file.link_exists?("a").should be_true
-        file.link_exists?("a/b").should be_true
-        file.link_exists?("a/b/c").should be_true
+    it "open_group raises ObjectNotFoundError if missing" do
+      HDF5::File.open(TMP_FILE, :w) do |file|
+        expect_raises(HDF5::ObjectNotFoundError) do
+          file.open_group("ghost")
+        end
+      end
+    end
+
+    it "create_group supports block form" do
+      HDF5::File.open(TMP_FILE, :w) do |file|
+        file.create_group("grp") do |grp|
+          grp.set_attribute("x", 1_i32)
+        end
+        file.exists?("grp").should be_true
+      end
+    end
+
+    it "open_group supports block form" do
+      HDF5::File.open(TMP_FILE, :w) do |file|
+        file.create_group("grp").close
+        accessed = false
+        file.open_group("grp") { accessed = true }
+        accessed.should be_true
+      end
+    end
+
+    it "require_group opens existing group" do
+      HDF5::File.open(TMP_FILE, :w) do |file|
+        file.create_group("existing").close
+        file.require_group("existing").close
+        file.nlinks.should eq(1)
+      end
+    end
+
+    it "require_group creates missing group" do
+      HDF5::File.open(TMP_FILE, :w) do |file|
+        file.require_group("new_group").close
+        file.exists?("new_group").should be_true
+      end
+    end
+
+    it "require_group supports block form" do
+      HDF5::File.open(TMP_FILE, :w) do |file|
+        file.require_group("samples/S1") do |grp|
+          grp["values"] = [1.0, 2.0, 3.0]
+        end
+        file.exists?("samples/S1").should be_true
+      end
+    end
+
+    it "creates nested groups via create_group" do
+      HDF5::File.open(TMP_FILE, :w) do |file|
+        file.create_group("a/b/c").close
+        file.exists?("a").should be_true
+        file.exists?("a/b").should be_true
+        file.exists?("a/b/c").should be_true
       end
     end
 
@@ -65,9 +193,17 @@ describe HDF5 do
         file.create_group("alpha").close
         file.create_group("beta").close
         file.create_group("gamma").close
+        file.keys.sort!.should eq(["alpha", "beta", "gamma"])
+      end
+    end
 
-        keys = file.keys
-        keys.sort.should eq(["alpha", "beta", "gamma"])
+    it "iterates keys with each" do
+      HDF5::File.open(TMP_FILE, :w) do |file|
+        file.create_group("one").close
+        file.create_group("two").close
+        found = [] of String
+        file.each { |k| found << k }
+        found.sort.should eq(["one", "two"])
       end
     end
 
@@ -80,153 +216,454 @@ describe HDF5 do
       end
     end
 
-    it "checks link_exists?" do
+    it "checks exists?" do
       HDF5::File.open(TMP_FILE, :w) do |file|
-        file.link_exists?("absent").should be_false
+        file.exists?("absent").should be_false
         file.create_group("present").close
-        file.link_exists?("present").should be_true
+        file.exists?("present").should be_true
       end
     end
 
     it "deletes a link" do
       HDF5::File.open(TMP_FILE, :w) do |file|
         file.create_group("removeme").close
-        file.link_exists?("removeme").should be_true
-        file.delete_link("removeme")
-        file.link_exists?("removeme").should be_false
+        file.delete("removeme")
+        file.exists?("removeme").should be_false
+      end
+    end
+
+    it "[] returns a Group for a group path" do
+      HDF5::File.open(TMP_FILE, :w) do |file|
+        file.create_group("grp").close
+        obj = file["grp"]
+        obj.should be_a(HDF5::Group)
+        obj.as(HDF5::Group).close
+      end
+    end
+
+    it "[] returns a Dataset for a dataset path" do
+      HDF5::File.open(TMP_FILE, :w) do |file|
+        file["nums"] = [1, 2, 3]
+        obj = file["nums"]
+        obj.should be_a(HDF5::Dataset)
+        obj.as(HDF5::Dataset).close
+      end
+    end
+
+    it "[] raises ObjectNotFoundError for missing path" do
+      HDF5::File.open(TMP_FILE, :w) do |file|
+        expect_raises(HDF5::ObjectNotFoundError) do
+          file["no_such_thing"]
+        end
+      end
+    end
+
+    it "[]= creates a dataset from array" do
+      HDF5::File.open(TMP_FILE, :w) do |file|
+        file["values"] = [10, 20, 30]
+        file.exists?("values").should be_true
+      end
+    end
+
+    it "[]= replaces an existing dataset" do
+      HDF5::File.open(TMP_FILE, :w) do |file|
+        file["values"] = [1, 2, 3]
+        file["values"] = [4, 5, 6]
+        result = file.dataset("values", Int32).read
+        result.should eq([4, 5, 6])
       end
     end
   end
 
+  # ── Attributes proxy ──────────────────────────────────────────────────────
+
+  describe "Attributes" do
+    it "sets and gets a numeric attribute via attrs[]=" do
+      HDF5.open(TMP_FILE, :w) do |file|
+        file.attrs["answer"] = 42_i32
+        file.attrs.get("answer", Int32).should eq(42)
+      end
+    end
+
+    it "sets and gets a Float64 attribute" do
+      HDF5.open(TMP_FILE, :w) do |file|
+        file.attrs["pi"] = 3.14159_f64
+        file.attrs.get("pi", Float64).should be_close(3.14159, 1e-12)
+      end
+    end
+
+    it "sets and gets a String attribute" do
+      HDF5.open(TMP_FILE, :w) do |file|
+        file.attrs["title"] = "experiment"
+        file.attrs.get("title", String).should eq("experiment")
+      end
+    end
+
+    it "get? returns nil for missing attribute" do
+      HDF5.open(TMP_FILE, :w) do |file|
+        file.attrs.get?("missing", Int32).should be_nil
+      end
+    end
+
+    it "get? returns value for existing attribute" do
+      HDF5.open(TMP_FILE, :w) do |file|
+        file.attrs["n"] = 7_i32
+        file.attrs.get?("n", Int32).should eq(7)
+      end
+    end
+
+    it "has_key? works" do
+      HDF5.open(TMP_FILE, :w) do |file|
+        file.attrs.has_key?("nope").should be_false
+        file.attrs["yes"] = 1_i32
+        file.attrs.has_key?("yes").should be_true
+      end
+    end
+
+    it "lists attribute keys" do
+      HDF5.open(TMP_FILE, :w) do |file|
+        file.attrs["a"] = 1_i32
+        file.attrs["b"] = 2_i32
+        file.attrs["c"] = 3_i32
+        file.attrs.keys.sort!.should eq(["a", "b", "c"])
+      end
+    end
+
+    it "deletes an attribute" do
+      HDF5.open(TMP_FILE, :w) do |file|
+        file.attrs["temp"] = 99_i32
+        file.attrs.delete("temp")
+        file.attrs.has_key?("temp").should be_false
+      end
+    end
+
+    it "iterates with each" do
+      HDF5.open(TMP_FILE, :w) do |file|
+        file.attrs["x"] = 1_i32
+        file.attrs["y"] = 2_i32
+        names = [] of String
+        file.attrs.each { |name, _attr| names << name }
+        names.sort.should eq(["x", "y"])
+      end
+    end
+
+    it "overwrites an existing attribute via []=" do
+      HDF5.open(TMP_FILE, :w) do |file|
+        file.attrs["v"] = 1_i32
+        file.attrs["v"] = 2_i32
+        file.attrs.get("v", Int32).should eq(2)
+      end
+    end
+
+    it "sets attribute on a group" do
+      HDF5.open(TMP_FILE, :w) do |file|
+        file.create_group("grp") do |group|
+          group.attrs["version"] = 2_i32
+          group.attrs.get("version", Int32).should eq(2)
+        end
+      end
+    end
+
+    it "sets attribute on a dataset" do
+      HDF5.open(TMP_FILE, :w) do |file|
+        file.create_dataset("ds", Int32, shape: {4}) do |dataset|
+          dataset.attrs["unit"] = "count"
+          dataset.attrs.get("unit", String).should eq("count")
+        end
+      end
+    end
+  end
+
+  # ── Dataset – numeric ──────────────────────────────────────────────────────
+
   describe "Dataset - numeric" do
     it "writes and reads Int32 array" do
       data = [1, 2, 3, 4, 5]
-      HDF5::File.open(TMP_FILE, :w) do |file|
+      HDF5.open(TMP_FILE, :w) do |file|
         file.write_dataset("ints", data)
       end
-      HDF5::File.open(TMP_FILE, :r) do |file|
-        result = file.read_dataset("ints", Int32)
-        result.should eq(data)
+      HDF5.open(TMP_FILE, :r) do |file|
+        file.read_dataset("ints", Int32).should eq(data)
       end
     end
 
     it "writes and reads Float64 array" do
       data = [1.1, 2.2, 3.3, 4.4]
-      HDF5::File.open(TMP_FILE, :w) do |file|
+      HDF5.open(TMP_FILE, :w) do |file|
         file.write_dataset("floats", data)
       end
-      HDF5::File.open(TMP_FILE, :r) do |file|
+      HDF5.open(TMP_FILE, :r) do |file|
         result = file.read_dataset("floats", Float64)
-        result.size.should eq(4)
         result.each_with_index { |val, idx| val.should be_close(data[idx], 1e-12) }
       end
     end
 
     it "writes and reads Float32 array" do
       data = [1.0_f32, 2.5_f32, -3.14_f32]
-      HDF5::File.open(TMP_FILE, :w) do |file|
+      HDF5.open(TMP_FILE, :w) do |file|
         file.write_dataset("f32", data)
       end
-      HDF5::File.open(TMP_FILE, :r) do |file|
+      HDF5.open(TMP_FILE, :r) do |file|
         result = file.read_dataset("f32", Float32)
-        result.size.should eq(3)
         result.each_with_index { |val, idx| val.should be_close(data[idx], 1e-6_f32) }
       end
     end
 
     it "writes and reads Int8 array" do
       data = [-128_i8, 0_i8, 127_i8]
-      HDF5::File.open(TMP_FILE, :w) do |file|
+      HDF5.open(TMP_FILE, :w) do |file|
         file.write_dataset("i8", data)
       end
-      HDF5::File.open(TMP_FILE, :r) do |file|
+      HDF5.open(TMP_FILE, :r) do |file|
         file.read_dataset("i8", Int8).should eq(data)
       end
     end
 
     it "writes and reads UInt64 array" do
       data = [0_u64, UInt64::MAX // 2, UInt64::MAX]
-      HDF5::File.open(TMP_FILE, :w) do |file|
+      HDF5.open(TMP_FILE, :w) do |file|
         file.write_dataset("u64", data)
       end
-      HDF5::File.open(TMP_FILE, :r) do |file|
+      HDF5.open(TMP_FILE, :r) do |file|
         file.read_dataset("u64", UInt64).should eq(data)
       end
     end
 
-    it "reports dataset dims and npoints" do
-      data = Array(Float64).new(12, &.to_f64)
-      HDF5::File.open(TMP_FILE, :w) do |file|
-        ds = file.create_dataset("mat", Float64, [3_u64, 4_u64])
-        ds.write(data)
-        ds.dims.should eq([3_u64, 4_u64])
-        ds.ndims.should eq(2)
-        ds.npoints.should eq(12)
-        ds.close
-      end
-    end
-
-    it "raises on opening nonexistent dataset" do
-      HDF5::File.open(TMP_FILE, :w) do |file|
-        expect_raises(HDF5::Error) do
+    it "raises ObjectNotFoundError opening nonexistent dataset" do
+      HDF5.open(TMP_FILE, :w) do |file|
+        expect_raises(HDF5::ObjectNotFoundError) do
           file.open_dataset("ghost")
         end
       end
     end
   end
 
-  describe "Dataset - strings" do
+  # ── TypedDataset ──────────────────────────────────────────────────────────
+
+  describe "TypedDataset" do
+    it "create_dataset with shape: returns TypedDataset" do
+      HDF5.open(TMP_FILE, :w) do |file|
+        ds = file.create_dataset("mat", Float64, shape: {3, 4})
+        ds.should be_a(HDF5::TypedDataset(Float64))
+        ds.shape.should eq([3_u64, 4_u64])
+        ds.rank.should eq(2)
+        ds.size.should eq(12)
+        ds.close
+      end
+    end
+
+    it "dataset(path, T) opens as TypedDataset" do
+      HDF5.open(TMP_FILE, :w) do |file|
+        file["vals"] = [1.0, 2.0, 3.0]
+      end
+      HDF5.open(TMP_FILE, :r) do |file|
+        ds = file.dataset("vals", Float64)
+        ds.should be_a(HDF5::TypedDataset(Float64))
+        ds.read.should eq([1.0, 2.0, 3.0])
+        ds.close
+      end
+    end
+
+    it "dataset(path, T) supports block form" do
+      HDF5.open(TMP_FILE, :w) do |file|
+        file["nums"] = [10, 20, 30]
+      end
+      HDF5.open(TMP_FILE, :r) do |file|
+        result = nil
+        file.dataset("nums", Int32) { |dataset| result = dataset.read }
+        result.should eq([10, 20, 30])
+      end
+    end
+
+    it "create_dataset with data infers type" do
+      HDF5.open(TMP_FILE, :w) do |file|
+        ds = file.create_dataset("v", [10_i32, 20_i32, 30_i32])
+        ds.should be_a(HDF5::TypedDataset(Int32))
+        ds.close
+      end
+    end
+
+    it "create_dataset supports block form with shape:" do
+      HDF5.open(TMP_FILE, :w) do |file|
+        data = Array(Float64).new(12, &.to_f64)
+        file.create_dataset("mat", Float64, shape: {3, 4}) do |dataset|
+          dataset.write(data)
+          dataset.attrs["desc"] = "test matrix"
+        end
+      end
+      HDF5.open(TMP_FILE, :r) do |file|
+        ds = file.dataset("mat", Float64)
+        ds.shape.should eq([3_u64, 4_u64])
+        ds.attrs.get("desc", String).should eq("test matrix")
+        ds.close
+      end
+    end
+
+    it "shape/rank/size are consistent" do
+      HDF5.open(TMP_FILE, :w) do |file|
+        ds = file.create_dataset("cube", Float32, shape: {2, 3, 4})
+        ds.shape.should eq([2_u64, 3_u64, 4_u64])
+        ds.rank.should eq(3)
+        ds.size.should eq(24)
+        ds.close
+      end
+    end
+  end
+
+  # ── TypedDataset – strings ────────────────────────────────────────────────
+
+  describe "TypedDataset - strings" do
     it "writes and reads variable-length string array" do
       data = ["hello", "world", "HDF5"]
-      HDF5::File.open(TMP_FILE, :w) do |file|
-        file.write_string_dataset("strs", data)
+      HDF5.open(TMP_FILE, :w) do |file|
+        file.create_dataset("strs", data).close
       end
-      HDF5::File.open(TMP_FILE, :r) do |file|
-        result = file.read_string_dataset("strs")
-        result.should eq(data)
+      HDF5.open(TMP_FILE, :r) do |file|
+        file.dataset("strs", String).read.should eq(data)
+      end
+    end
+
+    it "[]= and dataset() roundtrip for strings" do
+      HDF5.open(TMP_FILE, :w) do |file|
+        file["genes"] = ["TP53", "CTNNB1", "TERT"]
+      end
+      HDF5.open(TMP_FILE, :r) do |file|
+        file.dataset("genes", String).read.should eq(["TP53", "CTNNB1", "TERT"])
       end
     end
   end
 
-  describe "Attributes on groups" do
-    it "sets and gets Int32 attribute on file root" do
-      HDF5::File.open(TMP_FILE, :w) do |file|
-        file.set_attribute("answer", 42_i32)
-        file.get_attribute("answer", Int32).should eq(42)
+  # ── Partial I/O with Selection ────────────────────────────────────────────
+
+  describe "Selection partial I/O" do
+    it "reads a slice of a 1D dataset" do
+      data = Array(Int32).new(10) { |idx| idx * 10 }
+      HDF5.open(TMP_FILE, :w) do |file|
+        file["seq"] = data
+      end
+      HDF5.open(TMP_FILE, :r) do |file|
+        sel = HDF5.s[2...5]
+        result = file.dataset("seq", Int32).read(sel)
+        result.should eq([20, 30, 40])
       end
     end
 
-    it "sets and gets Float64 attribute" do
-      HDF5::File.open(TMP_FILE, :w) do |file|
-        file.set_attribute("pi", 3.14159_f64)
-        file.get_attribute("pi", Float64).should be_close(3.14159, 1e-12)
+    it "reads a 2D slice of a matrix" do
+      data = Array(Float64).new(12, &.to_f64)
+      HDF5.open(TMP_FILE, :w) do |file|
+        ds = file.create_dataset("mat", Float64, shape: {3, 4})
+        ds.write(data)
+        ds.close
+      end
+      HDF5.open(TMP_FILE, :r) do |file|
+        sel = HDF5.s[1...3, 0...2]
+        result = file.dataset("mat", Float64).read(sel)
+        result.should eq([4.0, 5.0, 8.0, 9.0])
       end
     end
 
-    it "sets and gets String attribute" do
-      HDF5::File.open(TMP_FILE, :w) do |file|
-        file.set_attribute("title", "My Dataset")
-        file.get_attribute("title", String).should eq("My Dataset")
+    it "writes a selection into a dataset" do
+      HDF5.open(TMP_FILE, :w) do |file|
+        ds = file.create_dataset("buf", Int32, shape: {6})
+        ds.write(Array(Int32).new(6, 0))
+        ds.write([99, 88], HDF5.s[2...4])
+        ds.close
+      end
+      HDF5.open(TMP_FILE, :r) do |file|
+        file.dataset("buf", Int32).read.should eq([0, 0, 99, 88, 0, 0])
       end
     end
 
-    it "checks has_attribute?" do
-      HDF5::File.open(TMP_FILE, :w) do |file|
-        file.has_attribute?("nope").should be_false
-        file.set_attribute("yes", 1_i32)
-        file.has_attribute?("yes").should be_true
+    it "TypedDataset [] and []= shortcuts" do
+      HDF5.open(TMP_FILE, :w) do |file|
+        ds = file.create_dataset("v", Int32, shape: {5})
+        ds.write([1, 2, 3, 4, 5])
+        block = ds[HDF5.s[1...4]]
+        block.should eq([2, 3, 4])
+        ds[HDF5.s[1...4]] = [20, 30, 40]
+        ds.read.should eq([1, 20, 30, 40, 5])
+        ds.close
       end
     end
 
-    it "sets attribute on a group" do
-      HDF5::File.open(TMP_FILE, :w) do |file|
-        group = file.create_group("grp")
-        group.set_attribute("version", 2_i32)
-        group.get_attribute("version", Int32).should eq(2)
-        group.close
+    it "raises ShapeMismatchError when write data size mismatches selection" do
+      HDF5.open(TMP_FILE, :w) do |file|
+        ds = file.create_dataset("v", Int32, shape: {5})
+        ds.write([1, 2, 3, 4, 5])
+        expect_raises(HDF5::ShapeMismatchError) do
+          ds.write([1, 2, 3], HDF5.s[0...2])
+        end
+        ds.close
       end
     end
   end
+
+  # ── Compression and chunking ──────────────────────────────────────────────
+
+  describe "Compression" do
+    it "creates a gzip-compressed chunked dataset" do
+      data = Array(Float64).new(100, &.to_f64)
+      HDF5.open(TMP_FILE, :w) do |file|
+        file.create_dataset(
+          "compressed",
+          Float64,
+          shape: {100},
+          chunk: {20},
+          compression: :gzip,
+          compression_level: 4
+        ) do |dataset|
+          dataset.write(data)
+        end
+      end
+      HDF5.open(TMP_FILE, :r) do |file|
+        result = file.dataset("compressed", Float64).read
+        result.size.should eq(100)
+        result[50].should be_close(50.0, 1e-12)
+      end
+    end
+
+    it "accepts HDF5::Compression.gzip object" do
+      HDF5.open(TMP_FILE, :w) do |file|
+        file.create_dataset(
+          "ds",
+          Int32,
+          shape: {50},
+          chunk: {10},
+          compression: HDF5::Compression.gzip(level: 3)
+        ) do |dataset|
+          dataset.write(Array(Int32).new(50) { |idx| idx })
+        end
+      end
+      HDF5.open(TMP_FILE, :r) do |file|
+        file.dataset("ds", Int32).read[25].should eq(25)
+      end
+    end
+  end
+
+  # ── Resizable dataset ─────────────────────────────────────────────────────
+
+  describe "Resizable dataset" do
+    it "resizes a chunked dataset and writes to the new region" do
+      HDF5.open(TMP_FILE, :w) do |file|
+        ds = file.create_dataset(
+          "events",
+          Int32,
+          shape: {3},
+          max_shape: {HDF5.unlimited},
+          chunk: {3}
+        )
+        ds.write([1, 2, 3])
+        ds.resize({6})
+        ds.write([4, 5, 6], HDF5.s[3...6])
+        ds.close
+      end
+      HDF5.open(TMP_FILE, :r) do |file|
+        file.dataset("events", Int32).read.should eq([1, 2, 3, 4, 5, 6])
+      end
+    end
+  end
+
+  # ── Dataspace ─────────────────────────────────────────────────────────────
 
   describe "Dataspace" do
     it "creates scalar dataspace" do
@@ -235,7 +672,7 @@ describe HDF5 do
       sp.close
     end
 
-    it "creates simple 1D dataspace" do
+    it "creates 1D simple dataspace" do
       sp = HDF5::Dataspace.simple([10_u64])
       sp.ndims.should eq(1)
       sp.dims.should eq([10_u64])
@@ -243,7 +680,7 @@ describe HDF5 do
       sp.close
     end
 
-    it "creates simple 2D dataspace" do
+    it "creates 2D simple dataspace" do
       sp = HDF5::Dataspace.simple([3_u64, 4_u64])
       sp.ndims.should eq(2)
       sp.dims.should eq([3_u64, 4_u64])
@@ -258,25 +695,45 @@ describe HDF5 do
     end
   end
 
+  # ── Backward-compat attribute methods ────────────────────────────────────
+
+  describe "backward-compat attribute methods" do
+    it "set_attribute / get_attribute / has_attribute? still work" do
+      HDF5.open(TMP_FILE, :w) do |file|
+        file.set_attribute("answer", 42_i32)
+        file.get_attribute("answer", Int32).should eq(42)
+        file.has_attribute?("answer").should be_true
+        file.has_attribute?("missing").should be_false
+      end
+    end
+  end
+
+  # ── Complex round-trip ────────────────────────────────────────────────────
+
   describe "round-trip with nested groups and datasets" do
     it "writes and reads nested structure" do
-      HDF5::File.open(TMP_FILE, :w) do |file|
-        group = file.create_group("sensors")
-        group.write_dataset("temperature", [20.0_f64, 21.5_f64, 19.8_f64])
-        group.write_dataset("humidity", [55_i32, 60_i32, 58_i32])
-        group.set_attribute("units", "SI")
-        group.close
+      HDF5.open(TMP_FILE, :w) do |file|
+        file.attrs["title"] = "RNA-seq"
+
+        file.require_group("samples/S1") do |sample|
+          sample["genes"] = ["TP53", "CTNNB1", "TERT"]
+          sample["vaf"] = [0.42, 0.31, 0.18]
+          sample.attrs["units"] = "SI"
+        end
       end
 
-      HDF5::File.open(TMP_FILE, :r) do |file|
-        group = file.open_group("sensors")
-        temps = group.read_dataset("temperature", Float64)
-        temps.size.should eq(3)
-        temps[0].should be_close(20.0, 1e-12)
-        humids = group.read_dataset("humidity", Int32)
-        humids.should eq([55, 60, 58])
-        group.get_attribute("units", String).should eq("SI")
-        group.close
+      HDF5.open(TMP_FILE, :r) do |file|
+        file.attrs.get("title", String).should eq("RNA-seq")
+
+        genes = file.dataset("samples/S1/genes", String).read
+        genes.should eq(["TP53", "CTNNB1", "TERT"])
+
+        vaf = file.dataset("samples/S1/vaf", Float64).read
+        vaf[0].should be_close(0.42, 1e-12)
+
+        file.open_group("samples/S1") do |sample|
+          sample.attrs.get("units", String).should eq("SI")
+        end
       end
     end
   end
