@@ -14,7 +14,7 @@
 <script type="text/javascript" src="../js/doc.js"></script>
 
   <meta name="repository-name" content="hdf5">
-  <title>HDF5::NativeType - hdf5 main</title>
+  <title>HDF5::Selection - hdf5 main</title>
   <script type="text/javascript">
     CrystalDocs.base_path = "../";
   </script>
@@ -137,7 +137,7 @@
       
     </li>
   
-  <li class=" current" data-id="hdf5/HDF5/NativeType" data-name="hdf5::nativetype">
+  <li class=" " data-id="hdf5/HDF5/NativeType" data-name="hdf5::nativetype">
       <a href="../HDF5/NativeType.html">NativeType</a>
       
     </li>
@@ -147,7 +147,7 @@
       
     </li>
   
-  <li class="parent " data-id="hdf5/HDF5/Selection" data-name="hdf5::selection">
+  <li class="parent open current" data-id="hdf5/HDF5/Selection" data-name="hdf5::selection">
       <a href="../HDF5/Selection.html">Selection</a>
       
         <ul>
@@ -197,11 +197,13 @@
 <h1 class="type-name">
 
   <span class="kind">
-    module
-  </span> HDF5::<wbr>NativeType
+    class
+  </span> HDF5::<wbr>Selection
 
 </h1>
 
+
+  <ul class="superclass-hierarchy"><li class="superclass"><a href="../HDF5/Selection.html">HDF5::Selection</a></li><li class="superclass">Reference</li><li class="superclass">Object</li></ul>
 
 
 
@@ -231,8 +233,8 @@
   </h2>
   
     
-      <a href="https://github.com/kojix2/hdf5.cr/blob/ef750792cac0587e9fdff652493d47af478cc200/src/hdf5/datatype.cr#L2" target="_blank">
-        hdf5/datatype.cr
+      <a href="https://github.com/kojix2/hdf5.cr/blob/ef750792cac0587e9fdff652493d47af478cc200/src/hdf5/selection.cr#L2" target="_blank">
+        hdf5/selection.cr
       </a>
     
     <br/>
@@ -243,30 +245,23 @@
 
 
   
-
-  
   <h2>
-    <a id="class-method-summary" class="anchor" href="#class-method-summary">
+    <a id="constructors" class="anchor" href="#constructors">
   <svg class="octicon-link" aria-hidden="true">
     <use href="#octicon-link"/>
   </svg>
 </a>
-    Class Method Summary
+    Constructors
   </h2>
   <ul class="list-summary">
     
       <li class="entry-summary">
-        <a href="#fixed_length_string%28size%3AInt%29%3ALibHDF5%3A%3AHid-class-method" class="signature"><strong>.fixed_length_string</strong>(size : Int) : LibHDF5::Hid</a>
+        <a href="#hyperslab%28start%3AIndexable%2Ccount%3AIndexable%2Cstride%3AIndexable%7CNil%3Dnil%2Cblock%3AIndexable%7CNil%3Dnil%29%3ASelection-class-method" class="signature"><strong>.hyperslab</strong>(start : Indexable, count : Indexable, stride : Indexable | Nil = <span class="n">nil</span>, block : Indexable | Nil = <span class="n">nil</span>) : Selection</a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#for%28type%3AT.class%29forallT-class-method" class="signature"><strong>.for</strong>(type : <span class="t">T</span>.<span class="k">class</span>) forall T</a>
-        
-      </li>
-    
-      <li class="entry-summary">
-        <a href="#variable_length_string%3ALibHDF5%3A%3AHid-class-method" class="signature"><strong>.variable_length_string</strong> : LibHDF5::Hid</a>
+        <a href="#new%28slices%3AArray%28Slice%7CNil%29%29-class-method" class="signature"><strong>.new</strong>(slices : Array(Slice | Nil))</a>
         
       </li>
     
@@ -277,76 +272,173 @@
 
   
 
+  
+  <h2>
+    <a id="instance-method-summary" class="anchor" href="#instance-method-summary">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Instance Method Summary
+  </h2>
+  <ul class="list-summary">
+    
+      <li class="entry-summary">
+        <a href="#apply_to%28space_id%3ALibHDF5%3A%3AHid%29%3ANil-instance-method" class="signature"><strong>#apply_to</strong>(space_id : LibHDF5::Hid) : Nil</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#npoints%28space_id%3ALibHDF5%3A%3AHid%29%3AInt64-instance-method" class="signature"><strong>#npoints</strong>(space_id : LibHDF5::Hid) : Int64</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#slices%3AArray%28Slice%7CNil%29-instance-method" class="signature"><strong>#slices</strong> : Array(Slice | Nil)</a>
+        
+      </li>
+    
+  </ul>
+
+
 
   <div class="methods-inherited">
     
+      
+
+
+      
+
+
+      
+
+
+      
+
+
+    
+      
+
+
+      
+
+
+      
+
+
+      
+
+
+    
   </div>
+
+  
+  <h2>
+    <a id="constructor-detail" class="anchor" href="#constructor-detail">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Constructor Detail
+  </h2>
+  
+    <div class="entry-detail" id="hyperslab(start:Indexable,count:Indexable,stride:Indexable|Nil=nil,block:Indexable|Nil=nil):Selection-class-method">
+      <div class="signature">
+        
+        def self.<strong>hyperslab</strong>(start : Indexable, count : Indexable, stride : Indexable | Nil = <span class="n">nil</span>, block : Indexable | Nil = <span class="n">nil</span>) : <a href="../HDF5/Selection.html">Selection</a>
+
+        <a class="method-permalink" href="#hyperslab%28start%3AIndexable%2Ccount%3AIndexable%2Cstride%3AIndexable%7CNil%3Dnil%2Cblock%3AIndexable%7CNil%3Dnil%29%3ASelection-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/ef750792cac0587e9fdff652493d47af478cc200/src/hdf5/selection.cr#L14" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="new(slices:Array(Slice|Nil))-class-method">
+      <div class="signature">
+        
+        def self.<strong>new</strong>(slices : Array(<a href="../HDF5/Selection/Slice.html">Slice</a> | Nil))
+
+        <a class="method-permalink" href="#new%28slices%3AArray%28Slice%7CNil%29%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/ef750792cac0587e9fdff652493d47af478cc200/src/hdf5/selection.cr#L11" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+
+
+  
 
   
 
   
   <h2>
-    <a id="class-method-detail" class="anchor" href="#class-method-detail">
+    <a id="instance-method-detail" class="anchor" href="#instance-method-detail">
   <svg class="octicon-link" aria-hidden="true">
     <use href="#octicon-link"/>
   </svg>
 </a>
-    Class Method Detail
+    Instance Method Detail
   </h2>
   
-    <div class="entry-detail" id="fixed_length_string(size:Int):LibHDF5::Hid-class-method">
+    <div class="entry-detail" id="apply_to(space_id:LibHDF5::Hid):Nil-instance-method">
       <div class="signature">
         
-        def self.<strong>fixed_length_string</strong>(size : Int) : LibHDF5::Hid
+        def <strong>apply_to</strong>(space_id : LibHDF5::Hid) : Nil
 
-        <a class="method-permalink" href="#fixed_length_string%28size%3AInt%29%3ALibHDF5%3A%3AHid-class-method">#</a>
+        <a class="method-permalink" href="#apply_to%28space_id%3ALibHDF5%3A%3AHid%29%3ANil-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/hdf5.cr/blob/ef750792cac0587e9fdff652493d47af478cc200/src/hdf5/datatype.cr#L37" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/ef750792cac0587e9fdff652493d47af478cc200/src/hdf5/selection.cr#L32" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="for(type:T.class)forallT-class-method">
+    <div class="entry-detail" id="npoints(space_id:LibHDF5::Hid):Int64-instance-method">
       <div class="signature">
         
-        def self.<strong>for</strong>(type : <span class="t">T</span>.<span class="k">class</span>) forall T
+        def <strong>npoints</strong>(space_id : LibHDF5::Hid) : Int64
 
-        <a class="method-permalink" href="#for%28type%3AT.class%29forallT-class-method">#</a>
+        <a class="method-permalink" href="#npoints%28space_id%3ALibHDF5%3A%3AHid%29%3AInt64-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/hdf5.cr/blob/ef750792cac0587e9fdff652493d47af478cc200/src/hdf5/datatype.cr#L3" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/ef750792cac0587e9fdff652493d47af478cc200/src/hdf5/selection.cr#L62" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="variable_length_string:LibHDF5::Hid-class-method">
+    <div class="entry-detail" id="slices:Array(Slice|Nil)-instance-method">
       <div class="signature">
         
-        def self.<strong>variable_length_string</strong> : LibHDF5::Hid
+        def <strong>slices</strong> : Array(<a href="../HDF5/Selection/Slice.html">Slice</a> | Nil)
 
-        <a class="method-permalink" href="#variable_length_string%3ALibHDF5%3A%3AHid-class-method">#</a>
+        <a class="method-permalink" href="#slices%3AArray%28Slice%7CNil%29-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/hdf5.cr/blob/ef750792cac0587e9fdff652493d47af478cc200/src/hdf5/datatype.cr#L29" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/ef750792cac0587e9fdff652493d47af478cc200/src/hdf5/selection.cr#L9" target="_blank">View source</a>]
         
       </div>
     </div>
   
 
-
-  
-
-  
 
 
 </div>

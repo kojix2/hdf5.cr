@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Crystal Docs 1.19.1">
+<meta name="crystal_docs.project_version" content="main">
+<meta name="crystal_docs.project_name" content="hdf5">
+
+
+
+<link href="../../css/style.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="../../js/doc.js"></script>
+
+  <meta name="repository-name" content="hdf5">
+  <title>HDF5::Selection::Slice - hdf5 main</title>
+  <script type="text/javascript">
+    CrystalDocs.base_path = "../../";
+  </script>
+</head>
+<body>
+
+<svg class="hidden">
+  <symbol id="octicon-link" viewBox="0 0 16 16">
+    <path fill="currentColor" fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path>
+  </symbol>
+</svg>
+<input type="checkbox" id="sidebar-btn">
+<label for="sidebar-btn" id="sidebar-btn-label">
+  <svg class="open" xmlns="http://www.w3.org/2000/svg" height="2em" width="2em" viewBox="0 0 512 512"><title>Open Sidebar</title><path fill="currentColor" d="M80 96v64h352V96H80zm0 112v64h352v-64H80zm0 112v64h352v-64H80z"></path></svg>
+  <svg class="close" xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" viewBox="0 0 512 512"><title>Close Sidebar</title><path fill="currentColor" d="m118.6 73.4-45.2 45.2L210.7 256 73.4 393.4l45.2 45.2L256 301.3l137.4 137.3 45.2-45.2L301.3 256l137.3-137.4-45.2-45.2L256 210.7Z"></path></svg>
+</label>
+<div class="sidebar">
+  <div class="sidebar-header">
+    <div class="search-box">
+      <input type="search" class="search-input" placeholder="Search..." spellcheck="false" aria-label="Search">
+    </div>
+
+    <div class="project-summary">
+      <h1 class="project-name">
+        <a href="../../index.html">
+          hdf5
+        </a>
+      </h1>
+
+      <span class="project-version">
+        main
+      </span>
+    </div>
+  </div>
+
+  <div class="search-results hidden">
+    <ul class="search-list"></ul>
+  </div>
+
+  <div class="types-list">
+    <ul>
+  
+  <li class="parent open current" data-id="hdf5/HDF5" data-name="hdf5">
+      <a href="../../HDF5.html">HDF5</a>
+      
+        <ul>
+  
+  <li class=" " data-id="hdf5/HDF5/AlreadyExistsError" data-name="hdf5::alreadyexistserror">
+      <a href="../../HDF5/AlreadyExistsError.html">AlreadyExistsError</a>
+      
+    </li>
+  
+  <li class=" " data-id="hdf5/HDF5/Attribute" data-name="hdf5::attribute">
+      <a href="../../HDF5/Attribute.html">Attribute</a>
+      
+    </li>
+  
+  <li class=" " data-id="hdf5/HDF5/Attributes" data-name="hdf5::attributes">
+      <a href="../../HDF5/Attributes.html">Attributes</a>
+      
+    </li>
+  
+  <li class=" " data-id="hdf5/HDF5/ClosedObjectError" data-name="hdf5::closedobjecterror">
+      <a href="../../HDF5/ClosedObjectError.html">ClosedObjectError</a>
+      
+    </li>
+  
+  <li class="parent " data-id="hdf5/HDF5/Compression" data-name="hdf5::compression">
+      <a href="../../HDF5/Compression.html">Compression</a>
+      
+        <ul>
+  
+  <li class=" " data-id="hdf5/HDF5/Compression/Filter" data-name="hdf5::compression::filter">
+      <a href="../../HDF5/Compression/Filter.html">Filter</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class=" " data-id="hdf5/HDF5/Container" data-name="hdf5::container">
+      <a href="../../HDF5/Container.html">Container</a>
+      
+    </li>
+  
+  <li class=" " data-id="hdf5/HDF5/Dataset" data-name="hdf5::dataset">
+      <a href="../../HDF5/Dataset.html">Dataset</a>
+      
+    </li>
+  
+  <li class=" " data-id="hdf5/HDF5/DatasetCreateOptions" data-name="hdf5::datasetcreateoptions">
+      <a href="../../HDF5/DatasetCreateOptions.html">DatasetCreateOptions</a>
+      
+    </li>
+  
+  <li class=" " data-id="hdf5/HDF5/Dataspace" data-name="hdf5::dataspace">
+      <a href="../../HDF5/Dataspace.html">Dataspace</a>
+      
+    </li>
+  
+  <li class=" " data-id="hdf5/HDF5/Error" data-name="hdf5::error">
+      <a href="../../HDF5/Error.html">Error</a>
+      
+    </li>
+  
+  <li class=" " data-id="hdf5/HDF5/File" data-name="hdf5::file">
+      <a href="../../HDF5/File.html">File</a>
+      
+    </li>
+  
+  <li class=" " data-id="hdf5/HDF5/FileError" data-name="hdf5::fileerror">
+      <a href="../../HDF5/FileError.html">FileError</a>
+      
+    </li>
+  
+  <li class=" " data-id="hdf5/HDF5/Group" data-name="hdf5::group">
+      <a href="../../HDF5/Group.html">Group</a>
+      
+    </li>
+  
+  <li class=" " data-id="hdf5/HDF5/NativeType" data-name="hdf5::nativetype">
+      <a href="../../HDF5/NativeType.html">NativeType</a>
+      
+    </li>
+  
+  <li class=" " data-id="hdf5/HDF5/ObjectNotFoundError" data-name="hdf5::objectnotfounderror">
+      <a href="../../HDF5/ObjectNotFoundError.html">ObjectNotFoundError</a>
+      
+    </li>
+  
+  <li class="parent open current" data-id="hdf5/HDF5/Selection" data-name="hdf5::selection">
+      <a href="../../HDF5/Selection.html">Selection</a>
+      
+        <ul>
+  
+  <li class=" current" data-id="hdf5/HDF5/Selection/Slice" data-name="hdf5::selection::slice">
+      <a href="../../HDF5/Selection/Slice.html">Slice</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class=" " data-id="hdf5/HDF5/SelectionProxy" data-name="hdf5::selectionproxy">
+      <a href="../../HDF5/SelectionProxy.html">SelectionProxy</a>
+      
+    </li>
+  
+  <li class=" " data-id="hdf5/HDF5/ShapeMismatchError" data-name="hdf5::shapemismatcherror">
+      <a href="../../HDF5/ShapeMismatchError.html">ShapeMismatchError</a>
+      
+    </li>
+  
+  <li class=" " data-id="hdf5/HDF5/TypedDataset" data-name="hdf5::typeddataset(t)">
+      <a href="../../HDF5/TypedDataset.html">TypedDataset</a>
+      
+    </li>
+  
+  <li class=" " data-id="hdf5/HDF5/TypeMismatchError" data-name="hdf5::typemismatcherror">
+      <a href="../../HDF5/TypeMismatchError.html">TypeMismatchError</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+</ul>
+
+  </div>
+</div>
+
+
+<div class="main-content">
+<h1 class="type-name">
+
+  <span class="kind">
+    struct
+  </span> HDF5::<wbr>Selection::<wbr>Slice
+
+</h1>
+
+
+  <ul class="superclass-hierarchy"><li class="superclass"><a href="../../HDF5/Selection/Slice.html">HDF5::Selection::Slice</a></li><li class="superclass">Struct</li><li class="superclass">Value</li><li class="superclass">Object</li></ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2>
+    <a id="defined-in" class="anchor" href="#defined-in">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Defined in:
+  </h2>
+  
+    
+      <a href="https://github.com/kojix2/hdf5.cr/blob/ef750792cac0587e9fdff652493d47af478cc200/src/hdf5/selection.cr#L3" target="_blank">
+        hdf5/selection.cr
+      </a>
+    
+    <br/>
+  
+
+
+
+
+
+  
+  <h2>
+    <a id="constructors" class="anchor" href="#constructors">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Constructors
+  </h2>
+  <ul class="list-summary">
+    
+      <li class="entry-summary">
+        <a href="#new%28start%3AInt64%2Ccount%3AInt64%2Cstride%3AInt64%3D1_i64%2Cblock%3AInt64%3D1_i64%29-class-method" class="signature"><strong>.new</strong>(start : Int64, count : Int64, stride : Int64 = <span class="n">1_i64</span>, block : Int64 = <span class="n">1_i64</span>)</a>
+        
+      </li>
+    
+  </ul>
+
+
+  
+
+  
+
+  
+  <h2>
+    <a id="instance-method-summary" class="anchor" href="#instance-method-summary">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Instance Method Summary
+  </h2>
+  <ul class="list-summary">
+    
+      <li class="entry-summary">
+        <a href="#block%3AInt64-instance-method" class="signature"><strong>#block</strong> : Int64</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#clone-instance-method" class="signature"><strong>#clone</strong></a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#copy_with%28start_start%3D%40start%2Ccount_count%3D%40count%2Cstride_stride%3D%40stride%2Cblock_block%3D%40block%29-instance-method" class="signature"><strong>#copy_with</strong>(start _start = @start, count _count = @count, stride _stride = @stride, block _block = @block)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#count%3AInt64-instance-method" class="signature"><strong>#count</strong> : Int64</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#start%3AInt64-instance-method" class="signature"><strong>#start</strong> : Int64</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#stride%3AInt64-instance-method" class="signature"><strong>#stride</strong> : Int64</a>
+        
+      </li>
+    
+  </ul>
+
+
+
+  <div class="methods-inherited">
+    
+      
+
+
+      
+
+
+      
+
+
+      
+
+
+    
+      
+
+
+      
+
+
+      
+
+
+      
+
+
+    
+      
+
+
+      
+
+
+      
+
+
+      
+
+
+    
+  </div>
+
+  
+  <h2>
+    <a id="constructor-detail" class="anchor" href="#constructor-detail">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Constructor Detail
+  </h2>
+  
+    <div class="entry-detail" id="new(start:Int64,count:Int64,stride:Int64=1_i64,block:Int64=1_i64)-class-method">
+      <div class="signature">
+        
+        def self.<strong>new</strong>(start : Int64, count : Int64, stride : Int64 = <span class="n">1_i64</span>, block : Int64 = <span class="n">1_i64</span>)
+
+        <a class="method-permalink" href="#new%28start%3AInt64%2Ccount%3AInt64%2Cstride%3AInt64%3D1_i64%2Cblock%3AInt64%3D1_i64%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/ef750792cac0587e9fdff652493d47af478cc200/src/hdf5/selection.cr#L3" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+
+
+  
+
+  
+
+  
+  <h2>
+    <a id="instance-method-detail" class="anchor" href="#instance-method-detail">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Instance Method Detail
+  </h2>
+  
+    <div class="entry-detail" id="block:Int64-instance-method">
+      <div class="signature">
+        
+        def <strong>block</strong> : Int64
+
+        <a class="method-permalink" href="#block%3AInt64-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="clone-instance-method">
+      <div class="signature">
+        
+        def <strong>clone</strong>
+
+        <a class="method-permalink" href="#clone-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/ef750792cac0587e9fdff652493d47af478cc200/src/hdf5/selection.cr#L3" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="copy_with(start_start=@start,count_count=@count,stride_stride=@stride,block_block=@block)-instance-method">
+      <div class="signature">
+        
+        def <strong>copy_with</strong>(start _start = @start, count _count = @count, stride _stride = @stride, block _block = @block)
+
+        <a class="method-permalink" href="#copy_with%28start_start%3D%40start%2Ccount_count%3D%40count%2Cstride_stride%3D%40stride%2Cblock_block%3D%40block%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/ef750792cac0587e9fdff652493d47af478cc200/src/hdf5/selection.cr#L3" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="count:Int64-instance-method">
+      <div class="signature">
+        
+        def <strong>count</strong> : Int64
+
+        <a class="method-permalink" href="#count%3AInt64-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="start:Int64-instance-method">
+      <div class="signature">
+        
+        def <strong>start</strong> : Int64
+
+        <a class="method-permalink" href="#start%3AInt64-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="stride:Int64-instance-method">
+      <div class="signature">
+        
+        def <strong>stride</strong> : Int64
+
+        <a class="method-permalink" href="#stride%3AInt64-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+      </div>
+    </div>
+  
+
+
+
+</div>
+
+</body>
+</html>

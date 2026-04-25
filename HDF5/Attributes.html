@@ -14,7 +14,7 @@
 <script type="text/javascript" src="../js/doc.js"></script>
 
   <meta name="repository-name" content="hdf5">
-  <title>HDF5::Attribute - hdf5 main</title>
+  <title>HDF5::Attributes - hdf5 main</title>
   <script type="text/javascript">
     CrystalDocs.base_path = "../";
   </script>
@@ -67,12 +67,12 @@
       
     </li>
   
-  <li class=" current" data-id="hdf5/HDF5/Attribute" data-name="hdf5::attribute">
+  <li class=" " data-id="hdf5/HDF5/Attribute" data-name="hdf5::attribute">
       <a href="../HDF5/Attribute.html">Attribute</a>
       
     </li>
   
-  <li class=" " data-id="hdf5/HDF5/Attributes" data-name="hdf5::attributes">
+  <li class=" current" data-id="hdf5/HDF5/Attributes" data-name="hdf5::attributes">
       <a href="../HDF5/Attributes.html">Attributes</a>
       
     </li>
@@ -198,12 +198,12 @@
 
   <span class="kind">
     class
-  </span> HDF5::<wbr>Attribute
+  </span> HDF5::<wbr>Attributes
 
 </h1>
 
 
-  <ul class="superclass-hierarchy"><li class="superclass"><a href="../HDF5/Attribute.html">HDF5::Attribute</a></li><li class="superclass">Reference</li><li class="superclass">Object</li></ul>
+  <ul class="superclass-hierarchy"><li class="superclass"><a href="../HDF5/Attributes.html">HDF5::Attributes</a></li><li class="superclass">Reference</li><li class="superclass">Object</li></ul>
 
 
 
@@ -213,6 +213,20 @@
 
 
 
+
+  <h2>
+    <a id="included-modules" class="anchor" href="#included-modules">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Included Modules
+  </h2>
+  <ul class="other-types-list">
+    
+      <li class="other-type">Enumerable({String, <a href="../HDF5/Attribute.html">HDF5::Attribute</a>})</li>
+    
+  </ul>
 
 
 
@@ -233,8 +247,8 @@
   </h2>
   
     
-      <a href="https://github.com/kojix2/hdf5.cr/blob/ef750792cac0587e9fdff652493d47af478cc200/src/hdf5/attribute.cr#L2" target="_blank">
-        hdf5/attribute.cr
+      <a href="https://github.com/kojix2/hdf5.cr/blob/ef750792cac0587e9fdff652493d47af478cc200/src/hdf5/attributes.cr#L2" target="_blank">
+        hdf5/attributes.cr
       </a>
     
     <br/>
@@ -256,7 +270,7 @@
   <ul class="list-summary">
     
       <li class="entry-summary">
-        <a href="#new%28id%3ALibHDF5%3A%3AHid%29-class-method" class="signature"><strong>.new</strong>(id : LibHDF5::Hid)</a>
+        <a href="#new%28loc_id%3ALibHDF5%3A%3AHid%29-class-method" class="signature"><strong>.new</strong>(loc_id : LibHDF5::Hid)</a>
         
       </li>
     
@@ -279,42 +293,44 @@
   <ul class="list-summary">
     
       <li class="entry-summary">
-        <a href="#close-instance-method" class="signature"><strong>#close</strong></a>
+        <a href="#%5B%5D%3D%28name%3AString%2Cvalue%3A%7BString%2CHDF5%3A%3AAttribute%7D%29forallT-instance-method" class="signature"><strong>#[]=</strong>(name : String, value : {String, HDF5::Attribute}) forall T</a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#finalize-instance-method" class="signature"><strong>#finalize</strong></a>
+        <a href="#%5B%5D%3D%28name%3AString%2Cvalue%3AArray%28%7BString%2CHDF5%3A%3AAttribute%7D%29%29forallT-instance-method" class="signature"><strong>#[]=</strong>(name : String, value : Array({String, HDF5::Attribute})) forall T</a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#id%3ALibHDF5%3A%3AHid-instance-method" class="signature"><strong>#id</strong> : LibHDF5::Hid</a>
+        <a href="#delete%28name%3AString%29%3ANil-instance-method" class="signature"><strong>#delete</strong>(name : String) : Nil</a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#name%3AString-instance-method" class="signature"><strong>#name</strong> : String</a>
+        <a href="#each%28%26%3ATuple%28String%2CAttribute%29-%3E%29%3ANil-instance-method" class="signature"><strong>#each</strong>(& : Tuple(String, Attribute) -> ) : Nil</a>
+        
+          <div class="summary"><p>Must yield this collection's elements to the block.</p></div>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#read%28type%3AT.class%29%3ATforallT-instance-method" class="signature"><strong>#read</strong>(type : <span class="t">T</span>.<span class="k">class</span>) : T forall T</a>
+        <a href="#get%28name%3AString%2Ctype%3AT.class%29%3A%7BString%2CHDF5%3A%3AAttribute%7DforallT-instance-method" class="signature"><strong>#get</strong>(name : String, type : <span class="t">T</span>.<span class="k">class</span>) : {String, HDF5::Attribute} forall T</a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#read_array%28type%3AT.class%29%3AArray%28T%29forallT-instance-method" class="signature"><strong>#read_array</strong>(type : <span class="t">T</span>.<span class="k">class</span>) : Array(T) forall T</a>
+        <a href="#get%3F%28name%3AString%2Ctype%3AT.class%29%3A%7BString%2CHDF5%3A%3AAttribute%7D%7CNilforallT-instance-method" class="signature"><strong>#get?</strong>(name : String, type : <span class="t">T</span>.<span class="k">class</span>) : {String, HDF5::Attribute} | Nil forall T</a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#write%28value%3AT%29forallT-instance-method" class="signature"><strong>#write</strong>(value : T) forall T</a>
+        <a href="#has_key%3F%28name%3AString%29%3ABool-instance-method" class="signature"><strong>#has_key?</strong>(name : String) : Bool</a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#write_array%28data%3AArray%28T%29%29forallT-instance-method" class="signature"><strong>#write_array</strong>(data : Array(T)) forall T</a>
+        <a href="#keys%3AArray%28String%29-instance-method" class="signature"><strong>#keys</strong> : Array(String)</a>
         
       </li>
     
@@ -323,6 +339,19 @@
 
 
   <div class="methods-inherited">
+    
+      
+
+
+      
+
+
+      
+
+
+      
+
+
     
       
 
@@ -362,18 +391,18 @@
     Constructor Detail
   </h2>
   
-    <div class="entry-detail" id="new(id:LibHDF5::Hid)-class-method">
+    <div class="entry-detail" id="new(loc_id:LibHDF5::Hid)-class-method">
       <div class="signature">
         
-        def self.<strong>new</strong>(id : LibHDF5::Hid)
+        def self.<strong>new</strong>(loc_id : LibHDF5::Hid)
 
-        <a class="method-permalink" href="#new%28id%3ALibHDF5%3A%3AHid%29-class-method">#</a>
+        <a class="method-permalink" href="#new%28loc_id%3ALibHDF5%3A%3AHid%29-class-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/hdf5.cr/blob/ef750792cac0587e9fdff652493d47af478cc200/src/hdf5/attribute.cr#L5" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/ef750792cac0587e9fdff652493d47af478cc200/src/hdf5/attributes.cr#L5" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -394,130 +423,139 @@
     Instance Method Detail
   </h2>
   
-    <div class="entry-detail" id="close-instance-method">
+    <div class="entry-detail" id="[]=(name:String,value:{String,HDF5::Attribute})forallT-instance-method">
       <div class="signature">
         
-        def <strong>close</strong>
+        def <strong>[]=</strong>(name : String, value : {String, <a href="../HDF5/Attribute.html">HDF5::Attribute</a>}) forall T
 
-        <a class="method-permalink" href="#close-instance-method">#</a>
+        <a class="method-permalink" href="#%5B%5D%3D%28name%3AString%2Cvalue%3A%7BString%2CHDF5%3A%3AAttribute%7D%29forallT-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/hdf5.cr/blob/ef750792cac0587e9fdff652493d47af478cc200/src/hdf5/attribute.cr#L61" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/ef750792cac0587e9fdff652493d47af478cc200/src/hdf5/attributes.cr#L8" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="finalize-instance-method">
+    <div class="entry-detail" id="[]=(name:String,value:Array({String,HDF5::Attribute}))forallT-instance-method">
       <div class="signature">
         
-        def <strong>finalize</strong>
+        def <strong>[]=</strong>(name : String, value : Array({String, <a href="../HDF5/Attribute.html">HDF5::Attribute</a>})) forall T
 
-        <a class="method-permalink" href="#finalize-instance-method">#</a>
+        <a class="method-permalink" href="#%5B%5D%3D%28name%3AString%2Cvalue%3AArray%28%7BString%2CHDF5%3A%3AAttribute%7D%29%29forallT-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/hdf5.cr/blob/ef750792cac0587e9fdff652493d47af478cc200/src/hdf5/attribute.cr#L66" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/ef750792cac0587e9fdff652493d47af478cc200/src/hdf5/attributes.cr#L19" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="id:LibHDF5::Hid-instance-method">
+    <div class="entry-detail" id="delete(name:String):Nil-instance-method">
       <div class="signature">
         
-        def <strong>id</strong> : LibHDF5::Hid
+        def <strong>delete</strong>(name : String) : Nil
 
-        <a class="method-permalink" href="#id%3ALibHDF5%3A%3AHid-instance-method">#</a>
+        <a class="method-permalink" href="#delete%28name%3AString%29%3ANil-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/hdf5.cr/blob/ef750792cac0587e9fdff652493d47af478cc200/src/hdf5/attribute.cr#L3" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/ef750792cac0587e9fdff652493d47af478cc200/src/hdf5/attributes.cr#L48" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="name:String-instance-method">
+    <div class="entry-detail" id="each(&amp;:Tuple(String,Attribute)-&gt;):Nil-instance-method">
       <div class="signature">
         
-        def <strong>name</strong> : String
+        def <strong>each</strong>(& : Tuple(String, <a href="../HDF5/Attribute.html">Attribute</a>) -> ) : Nil
 
-        <a class="method-permalink" href="#name%3AString-instance-method">#</a>
+        <a class="method-permalink" href="#each%28%26%3ATuple%28String%2CAttribute%29-%3E%29%3ANil-instance-method">#</a>
       </div>
+      
+        <div class="doc">
+          
+            <div class="doc-inherited">
+              Description copied from module Enumerable({String, <a href="../HDF5/Attribute.html">HDF5::Attribute</a>})
+            </div>
+          
+          <p>Must yield this collection's elements to the block.</p>
+        </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/hdf5.cr/blob/ef750792cac0587e9fdff652493d47af478cc200/src/hdf5/attribute.cr#L8" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/ef750792cac0587e9fdff652493d47af478cc200/src/hdf5/attributes.cr#L75" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="read(type:T.class):TforallT-instance-method">
+    <div class="entry-detail" id="get(name:String,type:T.class):{String,HDF5::Attribute}forallT-instance-method">
       <div class="signature">
         
-        def <strong>read</strong>(type : <span class="t">T</span>.<span class="k">class</span>) : T forall T
+        def <strong>get</strong>(name : String, type : <span class="t">T</span>.<span class="k">class</span>) : {String, <a href="../HDF5/Attribute.html">HDF5::Attribute</a>} forall T
 
-        <a class="method-permalink" href="#read%28type%3AT.class%29%3ATforallT-instance-method">#</a>
+        <a class="method-permalink" href="#get%28name%3AString%2Ctype%3AT.class%29%3A%7BString%2CHDF5%3A%3AAttribute%7DforallT-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/hdf5.cr/blob/ef750792cac0587e9fdff652493d47af478cc200/src/hdf5/attribute.cr#L16" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/ef750792cac0587e9fdff652493d47af478cc200/src/hdf5/attributes.cr#L30" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="read_array(type:T.class):Array(T)forallT-instance-method">
+    <div class="entry-detail" id="get?(name:String,type:T.class):{String,HDF5::Attribute}|NilforallT-instance-method">
       <div class="signature">
         
-        def <strong>read_array</strong>(type : <span class="t">T</span>.<span class="k">class</span>) : Array(T) forall T
+        def <strong>get?</strong>(name : String, type : <span class="t">T</span>.<span class="k">class</span>) : {String, <a href="../HDF5/Attribute.html">HDF5::Attribute</a>} | Nil forall T
 
-        <a class="method-permalink" href="#read_array%28type%3AT.class%29%3AArray%28T%29forallT-instance-method">#</a>
+        <a class="method-permalink" href="#get%3F%28name%3AString%2Ctype%3AT.class%29%3A%7BString%2CHDF5%3A%3AAttribute%7D%7CNilforallT-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/hdf5.cr/blob/ef750792cac0587e9fdff652493d47af478cc200/src/hdf5/attribute.cr#L30" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/ef750792cac0587e9fdff652493d47af478cc200/src/hdf5/attributes.cr#L39" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="write(value:T)forallT-instance-method">
+    <div class="entry-detail" id="has_key?(name:String):Bool-instance-method">
       <div class="signature">
         
-        def <strong>write</strong>(value : T) forall T
+        def <strong>has_key?</strong>(name : String) : Bool
 
-        <a class="method-permalink" href="#write%28value%3AT%29forallT-instance-method">#</a>
+        <a class="method-permalink" href="#has_key%3F%28name%3AString%29%3ABool-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/hdf5.cr/blob/ef750792cac0587e9fdff652493d47af478cc200/src/hdf5/attribute.cr#L43" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/ef750792cac0587e9fdff652493d47af478cc200/src/hdf5/attributes.cr#L44" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="write_array(data:Array(T))forallT-instance-method">
+    <div class="entry-detail" id="keys:Array(String)-instance-method">
       <div class="signature">
         
-        def <strong>write_array</strong>(data : Array(T)) forall T
+        def <strong>keys</strong> : Array(String)
 
-        <a class="method-permalink" href="#write_array%28data%3AArray%28T%29%29forallT-instance-method">#</a>
+        <a class="method-permalink" href="#keys%3AArray%28String%29-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/hdf5.cr/blob/ef750792cac0587e9fdff652493d47af478cc200/src/hdf5/attribute.cr#L55" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/ef750792cac0587e9fdff652493d47af478cc200/src/hdf5/attributes.cr#L53" target="_blank">View source</a>]
         
       </div>
     </div>

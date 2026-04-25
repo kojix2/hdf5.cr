@@ -14,7 +14,7 @@
 <script type="text/javascript" src="../js/doc.js"></script>
 
   <meta name="repository-name" content="hdf5">
-  <title>HDF5::NativeType - hdf5 main</title>
+  <title>HDF5::Compression - hdf5 main</title>
   <script type="text/javascript">
     CrystalDocs.base_path = "../";
   </script>
@@ -82,7 +82,7 @@
       
     </li>
   
-  <li class="parent " data-id="hdf5/HDF5/Compression" data-name="hdf5::compression">
+  <li class="parent open current" data-id="hdf5/HDF5/Compression" data-name="hdf5::compression">
       <a href="../HDF5/Compression.html">Compression</a>
       
         <ul>
@@ -137,7 +137,7 @@
       
     </li>
   
-  <li class=" current" data-id="hdf5/HDF5/NativeType" data-name="hdf5::nativetype">
+  <li class=" " data-id="hdf5/HDF5/NativeType" data-name="hdf5::nativetype">
       <a href="../HDF5/NativeType.html">NativeType</a>
       
     </li>
@@ -197,11 +197,13 @@
 <h1 class="type-name">
 
   <span class="kind">
-    module
-  </span> HDF5::<wbr>NativeType
+    class
+  </span> HDF5::<wbr>Compression
 
 </h1>
 
+
+  <ul class="superclass-hierarchy"><li class="superclass"><a href="../HDF5/Compression.html">HDF5::Compression</a></li><li class="superclass">Reference</li><li class="superclass">Object</li></ul>
 
 
 
@@ -231,8 +233,8 @@
   </h2>
   
     
-      <a href="https://github.com/kojix2/hdf5.cr/blob/ef750792cac0587e9fdff652493d47af478cc200/src/hdf5/datatype.cr#L2" target="_blank">
-        hdf5/datatype.cr
+      <a href="https://github.com/kojix2/hdf5.cr/blob/ef750792cac0587e9fdff652493d47af478cc200/src/hdf5/compression.cr#L2" target="_blank">
+        hdf5/compression.cr
       </a>
     
     <br/>
@@ -243,30 +245,28 @@
 
 
   
-
-  
   <h2>
-    <a id="class-method-summary" class="anchor" href="#class-method-summary">
+    <a id="constructors" class="anchor" href="#constructors">
   <svg class="octicon-link" aria-hidden="true">
     <use href="#octicon-link"/>
   </svg>
 </a>
-    Class Method Summary
+    Constructors
   </h2>
   <ul class="list-summary">
     
       <li class="entry-summary">
-        <a href="#fixed_length_string%28size%3AInt%29%3ALibHDF5%3A%3AHid-class-method" class="signature"><strong>.fixed_length_string</strong>(size : Int) : LibHDF5::Hid</a>
+        <a href="#gzip%28level%3AInt32%3D6%29%3ACompression-class-method" class="signature"><strong>.gzip</strong>(level : Int32 = <span class="n">6</span>) : Compression</a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#for%28type%3AT.class%29forallT-class-method" class="signature"><strong>.for</strong>(type : <span class="t">T</span>.<span class="k">class</span>) forall T</a>
+        <a href="#new%28filter%3AFilter%2Clevel%3AInt32%3D1%29-class-method" class="signature"><strong>.new</strong>(filter : Filter, level : Int32 = <span class="n">1</span>)</a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#variable_length_string%3ALibHDF5%3A%3AHid-class-method" class="signature"><strong>.variable_length_string</strong> : LibHDF5::Hid</a>
+        <a href="#none%3ACompression-class-method" class="signature"><strong>.none</strong> : Compression</a>
         
       </li>
     
@@ -277,76 +277,189 @@
 
   
 
+  
+  <h2>
+    <a id="instance-method-summary" class="anchor" href="#instance-method-summary">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Instance Method Summary
+  </h2>
+  <ul class="list-summary">
+    
+      <li class="entry-summary">
+        <a href="#filter%3AFilter-instance-method" class="signature"><strong>#filter</strong> : Filter</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#level%3AInt32-instance-method" class="signature"><strong>#level</strong> : Int32</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#none%3F%3ABool-instance-method" class="signature"><strong>#none?</strong> : Bool</a>
+        
+      </li>
+    
+  </ul>
+
+
 
   <div class="methods-inherited">
     
+      
+
+
+      
+
+
+      
+
+
+      
+
+
+    
+      
+
+
+      
+
+
+      
+
+
+      
+
+
+    
   </div>
+
+  
+  <h2>
+    <a id="constructor-detail" class="anchor" href="#constructor-detail">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Constructor Detail
+  </h2>
+  
+    <div class="entry-detail" id="gzip(level:Int32=6):Compression-class-method">
+      <div class="signature">
+        
+        def self.<strong>gzip</strong>(level : Int32 = <span class="n">6</span>) : <a href="../HDF5/Compression.html">Compression</a>
+
+        <a class="method-permalink" href="#gzip%28level%3AInt32%3D6%29%3ACompression-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/ef750792cac0587e9fdff652493d47af478cc200/src/hdf5/compression.cr#L14" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="new(filter:Filter,level:Int32=1)-class-method">
+      <div class="signature">
+        
+        def self.<strong>new</strong>(filter : <a href="../HDF5/Compression/Filter.html">Filter</a>, level : Int32 = <span class="n">1</span>)
+
+        <a class="method-permalink" href="#new%28filter%3AFilter%2Clevel%3AInt32%3D1%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/ef750792cac0587e9fdff652493d47af478cc200/src/hdf5/compression.cr#L11" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="none:Compression-class-method">
+      <div class="signature">
+        
+        def self.<strong>none</strong> : <a href="../HDF5/Compression.html">Compression</a>
+
+        <a class="method-permalink" href="#none%3ACompression-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/ef750792cac0587e9fdff652493d47af478cc200/src/hdf5/compression.cr#L18" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+
+
+  
 
   
 
   
   <h2>
-    <a id="class-method-detail" class="anchor" href="#class-method-detail">
+    <a id="instance-method-detail" class="anchor" href="#instance-method-detail">
   <svg class="octicon-link" aria-hidden="true">
     <use href="#octicon-link"/>
   </svg>
 </a>
-    Class Method Detail
+    Instance Method Detail
   </h2>
   
-    <div class="entry-detail" id="fixed_length_string(size:Int):LibHDF5::Hid-class-method">
+    <div class="entry-detail" id="filter:Filter-instance-method">
       <div class="signature">
         
-        def self.<strong>fixed_length_string</strong>(size : Int) : LibHDF5::Hid
+        def <strong>filter</strong> : <a href="../HDF5/Compression/Filter.html">Filter</a>
 
-        <a class="method-permalink" href="#fixed_length_string%28size%3AInt%29%3ALibHDF5%3A%3AHid-class-method">#</a>
+        <a class="method-permalink" href="#filter%3AFilter-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/hdf5.cr/blob/ef750792cac0587e9fdff652493d47af478cc200/src/hdf5/datatype.cr#L37" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/ef750792cac0587e9fdff652493d47af478cc200/src/hdf5/compression.cr#L8" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="for(type:T.class)forallT-class-method">
+    <div class="entry-detail" id="level:Int32-instance-method">
       <div class="signature">
         
-        def self.<strong>for</strong>(type : <span class="t">T</span>.<span class="k">class</span>) forall T
+        def <strong>level</strong> : Int32
 
-        <a class="method-permalink" href="#for%28type%3AT.class%29forallT-class-method">#</a>
+        <a class="method-permalink" href="#level%3AInt32-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/hdf5.cr/blob/ef750792cac0587e9fdff652493d47af478cc200/src/hdf5/datatype.cr#L3" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/ef750792cac0587e9fdff652493d47af478cc200/src/hdf5/compression.cr#L9" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="variable_length_string:LibHDF5::Hid-class-method">
+    <div class="entry-detail" id="none?:Bool-instance-method">
       <div class="signature">
         
-        def self.<strong>variable_length_string</strong> : LibHDF5::Hid
+        def <strong>none?</strong> : Bool
 
-        <a class="method-permalink" href="#variable_length_string%3ALibHDF5%3A%3AHid-class-method">#</a>
+        <a class="method-permalink" href="#none%3F%3ABool-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/hdf5.cr/blob/ef750792cac0587e9fdff652493d47af478cc200/src/hdf5/datatype.cr#L29" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/ef750792cac0587e9fdff652493d47af478cc200/src/hdf5/compression.cr#L22" target="_blank">View source</a>]
         
       </div>
     </div>
   
 
-
-  
-
-  
 
 
 </div>

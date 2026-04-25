@@ -1,0 +1,1071 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Crystal Docs 1.19.1">
+<meta name="crystal_docs.project_version" content="main">
+<meta name="crystal_docs.project_name" content="hdf5">
+
+
+
+<link href="../css/style.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="../js/doc.js"></script>
+
+  <meta name="repository-name" content="hdf5">
+  <title>HDF5::Container - hdf5 main</title>
+  <script type="text/javascript">
+    CrystalDocs.base_path = "../";
+  </script>
+</head>
+<body>
+
+<svg class="hidden">
+  <symbol id="octicon-link" viewBox="0 0 16 16">
+    <path fill="currentColor" fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path>
+  </symbol>
+</svg>
+<input type="checkbox" id="sidebar-btn">
+<label for="sidebar-btn" id="sidebar-btn-label">
+  <svg class="open" xmlns="http://www.w3.org/2000/svg" height="2em" width="2em" viewBox="0 0 512 512"><title>Open Sidebar</title><path fill="currentColor" d="M80 96v64h352V96H80zm0 112v64h352v-64H80zm0 112v64h352v-64H80z"></path></svg>
+  <svg class="close" xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" viewBox="0 0 512 512"><title>Close Sidebar</title><path fill="currentColor" d="m118.6 73.4-45.2 45.2L210.7 256 73.4 393.4l45.2 45.2L256 301.3l137.4 137.3 45.2-45.2L301.3 256l137.3-137.4-45.2-45.2L256 210.7Z"></path></svg>
+</label>
+<div class="sidebar">
+  <div class="sidebar-header">
+    <div class="search-box">
+      <input type="search" class="search-input" placeholder="Search..." spellcheck="false" aria-label="Search">
+    </div>
+
+    <div class="project-summary">
+      <h1 class="project-name">
+        <a href="../index.html">
+          hdf5
+        </a>
+      </h1>
+
+      <span class="project-version">
+        main
+      </span>
+    </div>
+  </div>
+
+  <div class="search-results hidden">
+    <ul class="search-list"></ul>
+  </div>
+
+  <div class="types-list">
+    <ul>
+  
+  <li class="parent open current" data-id="hdf5/HDF5" data-name="hdf5">
+      <a href="../HDF5.html">HDF5</a>
+      
+        <ul>
+  
+  <li class=" " data-id="hdf5/HDF5/AlreadyExistsError" data-name="hdf5::alreadyexistserror">
+      <a href="../HDF5/AlreadyExistsError.html">AlreadyExistsError</a>
+      
+    </li>
+  
+  <li class=" " data-id="hdf5/HDF5/Attribute" data-name="hdf5::attribute">
+      <a href="../HDF5/Attribute.html">Attribute</a>
+      
+    </li>
+  
+  <li class=" " data-id="hdf5/HDF5/Attributes" data-name="hdf5::attributes">
+      <a href="../HDF5/Attributes.html">Attributes</a>
+      
+    </li>
+  
+  <li class=" " data-id="hdf5/HDF5/ClosedObjectError" data-name="hdf5::closedobjecterror">
+      <a href="../HDF5/ClosedObjectError.html">ClosedObjectError</a>
+      
+    </li>
+  
+  <li class="parent " data-id="hdf5/HDF5/Compression" data-name="hdf5::compression">
+      <a href="../HDF5/Compression.html">Compression</a>
+      
+        <ul>
+  
+  <li class=" " data-id="hdf5/HDF5/Compression/Filter" data-name="hdf5::compression::filter">
+      <a href="../HDF5/Compression/Filter.html">Filter</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class=" current" data-id="hdf5/HDF5/Container" data-name="hdf5::container">
+      <a href="../HDF5/Container.html">Container</a>
+      
+    </li>
+  
+  <li class=" " data-id="hdf5/HDF5/Dataset" data-name="hdf5::dataset">
+      <a href="../HDF5/Dataset.html">Dataset</a>
+      
+    </li>
+  
+  <li class=" " data-id="hdf5/HDF5/DatasetCreateOptions" data-name="hdf5::datasetcreateoptions">
+      <a href="../HDF5/DatasetCreateOptions.html">DatasetCreateOptions</a>
+      
+    </li>
+  
+  <li class=" " data-id="hdf5/HDF5/Dataspace" data-name="hdf5::dataspace">
+      <a href="../HDF5/Dataspace.html">Dataspace</a>
+      
+    </li>
+  
+  <li class=" " data-id="hdf5/HDF5/Error" data-name="hdf5::error">
+      <a href="../HDF5/Error.html">Error</a>
+      
+    </li>
+  
+  <li class=" " data-id="hdf5/HDF5/File" data-name="hdf5::file">
+      <a href="../HDF5/File.html">File</a>
+      
+    </li>
+  
+  <li class=" " data-id="hdf5/HDF5/FileError" data-name="hdf5::fileerror">
+      <a href="../HDF5/FileError.html">FileError</a>
+      
+    </li>
+  
+  <li class=" " data-id="hdf5/HDF5/Group" data-name="hdf5::group">
+      <a href="../HDF5/Group.html">Group</a>
+      
+    </li>
+  
+  <li class=" " data-id="hdf5/HDF5/NativeType" data-name="hdf5::nativetype">
+      <a href="../HDF5/NativeType.html">NativeType</a>
+      
+    </li>
+  
+  <li class=" " data-id="hdf5/HDF5/ObjectNotFoundError" data-name="hdf5::objectnotfounderror">
+      <a href="../HDF5/ObjectNotFoundError.html">ObjectNotFoundError</a>
+      
+    </li>
+  
+  <li class="parent " data-id="hdf5/HDF5/Selection" data-name="hdf5::selection">
+      <a href="../HDF5/Selection.html">Selection</a>
+      
+        <ul>
+  
+  <li class=" " data-id="hdf5/HDF5/Selection/Slice" data-name="hdf5::selection::slice">
+      <a href="../HDF5/Selection/Slice.html">Slice</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class=" " data-id="hdf5/HDF5/SelectionProxy" data-name="hdf5::selectionproxy">
+      <a href="../HDF5/SelectionProxy.html">SelectionProxy</a>
+      
+    </li>
+  
+  <li class=" " data-id="hdf5/HDF5/ShapeMismatchError" data-name="hdf5::shapemismatcherror">
+      <a href="../HDF5/ShapeMismatchError.html">ShapeMismatchError</a>
+      
+    </li>
+  
+  <li class=" " data-id="hdf5/HDF5/TypedDataset" data-name="hdf5::typeddataset(t)">
+      <a href="../HDF5/TypedDataset.html">TypedDataset</a>
+      
+    </li>
+  
+  <li class=" " data-id="hdf5/HDF5/TypeMismatchError" data-name="hdf5::typemismatcherror">
+      <a href="../HDF5/TypeMismatchError.html">TypeMismatchError</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+</ul>
+
+  </div>
+</div>
+
+
+<div class="main-content">
+<h1 class="type-name">
+
+  <span class="kind">
+    module
+  </span> HDF5::<wbr>Container
+
+</h1>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2>
+    <a id="direct-including-types" class="anchor" href="#direct-including-types">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Direct including types
+  </h2>
+  <ul class="other-types-list">
+    
+      <li class="other-type"><a href="../HDF5/File.html">HDF5::File</a></li>
+    
+      <li class="other-type"><a href="../HDF5/Group.html">HDF5::Group</a></li>
+    
+  </ul>
+
+
+
+
+  <h2>
+    <a id="defined-in" class="anchor" href="#defined-in">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Defined in:
+  </h2>
+  
+    
+      <a href="https://github.com/kojix2/hdf5.cr/blob/ef750792cac0587e9fdff652493d47af478cc200/src/hdf5/group.cr#L2" target="_blank">
+        hdf5/group.cr
+      </a>
+    
+    <br/>
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  <h2>
+    <a id="instance-method-summary" class="anchor" href="#instance-method-summary">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Instance Method Summary
+  </h2>
+  <ul class="list-summary">
+    
+      <li class="entry-summary">
+        <a href="#%5B%5D%28path%3AString%29%3AGroup%7CDataset-instance-method" class="signature"><strong>#[]</strong>(path : String) : Group | Dataset</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#%5B%5D%3D%28path%3AString%2Cdata%3AArray%28T%29%29forallT-instance-method" class="signature"><strong>#[]=</strong>(path : String, data : Array(T)) forall T</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#attrs%3AAttributes-instance-method" class="signature"><strong>#attrs</strong> : Attributes</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#create_dataset%28path%3AString%2Ctype%3AT.class%2Cdims%3AArray%28UInt64%29%2Cmax_dims%3AArray%28UInt64%29%7CNil%3Dnil%2Cchunk_dims%3AArray%28UInt64%29%7CNil%3Dnil%2Ccompress%3AInt32%3D0%29%3ATypedDataset%28T%29forallT-instance-method" class="signature"><strong>#create_dataset</strong>(path : String, type : <span class="t">T</span>.<span class="k">class</span>, dims : Array(UInt64), max_dims : Array(UInt64) | Nil = <span class="n">nil</span>, chunk_dims : Array(UInt64) | Nil = <span class="n">nil</span>, compress : Int32 = <span class="n">0</span>) : TypedDataset(T) forall T</a>
+        
+          <div class="summary"><p>Old-style positional dims (backward compat) — returns TypedDataset(T)</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#create_dataset%28path%3AString%2Cdata%3AArray%28T%29%29%3ATypedDataset%28T%29forallT-instance-method" class="signature"><strong>#create_dataset</strong>(path : String, data : Array(T)) : TypedDataset(T) forall T</a>
+        
+          <div class="summary"><p>Create from data (infer type and shape from array)</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#create_dataset%28path%3AString%2Cdata%3AArray%28T%29%2C%26block%3ATypedDataset%28T%29-%3E%29%3ANilforallT-instance-method" class="signature"><strong>#create_dataset</strong>(path : String, data : Array(T), &block : TypedDataset(T) -> ) : Nil forall T</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#create_dataset%28path%3AString%2Ctype%3AT.class%2C%2Adims%3AInt%2Ccompress%3AInt32%3D0%29%3ATypedDataset%28T%29forallT-instance-method" class="signature"><strong>#create_dataset</strong>(path : String, type : <span class="t">T</span>.<span class="k">class</span>, *dims : Int, compress : Int32 = <span class="n">0</span>) : TypedDataset(T) forall T</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#create_dataset%28path%3AString%2Ctype%3AT.class%2C%2A%2Cshape%3AIndexable%2Cmax_shape%3AIndexable%7CNil%3Dnil%2Cchunk%3AIndexable%7CNil%3Dnil%2Ccompression%3ACompression%7CSymbol%7CNil%3Dnil%2Ccompression_level%3AInt32%3D6%2Cshuffle%3ABool%3Dfalse%2Cfletcher32%3ABool%3Dfalse%2Coptions%3ADatasetCreateOptions%7CNil%3Dnil%29%3ATypedDataset%28T%29forallT-instance-method" class="signature"><strong>#create_dataset</strong>(path : String, type : <span class="t">T</span>.<span class="k">class</span>, *, shape : Indexable, max_shape : Indexable | Nil = <span class="n">nil</span>, chunk : Indexable | Nil = <span class="n">nil</span>, compression : Compression | Symbol | Nil = <span class="n">nil</span>, compression_level : Int32 = <span class="n">6</span>, shuffle : Bool = <span class="n">false</span>, fletcher32 : Bool = <span class="n">false</span>, options : DatasetCreateOptions | Nil = <span class="n">nil</span>) : TypedDataset(T) forall T</a>
+        
+          <div class="summary"><p>Create from type + explicit shape (named params)</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#create_dataset%28path%3AString%2Ctype%3AT.class%2C%2A%2Cshape%3AIndexable%2Cmax_shape%3AIndexable%7CNil%3Dnil%2Cchunk%3AIndexable%7CNil%3Dnil%2Ccompression%3ACompression%7CSymbol%7CNil%3Dnil%2Ccompression_level%3AInt32%3D6%2Cshuffle%3ABool%3Dfalse%2Cfletcher32%3ABool%3Dfalse%2Coptions%3ADatasetCreateOptions%7CNil%3Dnil%2C%26block%3ATypedDataset%28T%29-%3E%29%3ANilforallT-instance-method" class="signature"><strong>#create_dataset</strong>(path : String, type : <span class="t">T</span>.<span class="k">class</span>, *, shape : Indexable, max_shape : Indexable | Nil = <span class="n">nil</span>, chunk : Indexable | Nil = <span class="n">nil</span>, compression : Compression | Symbol | Nil = <span class="n">nil</span>, compression_level : Int32 = <span class="n">6</span>, shuffle : Bool = <span class="n">false</span>, fletcher32 : Bool = <span class="n">false</span>, options : DatasetCreateOptions | Nil = <span class="n">nil</span>, &block : TypedDataset(T) -> ) : Nil forall T</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#create_group%28path%3AString%29%3AGroup-instance-method" class="signature"><strong>#create_group</strong>(path : String) : Group</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#create_group%28path%3AString%2C%26block%3AGroup-%3E%29%3ANil-instance-method" class="signature"><strong>#create_group</strong>(path : String, &block : Group -> ) : Nil</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#dataset%28path%3AString%2Ctype%3AT.class%29%3ATypedDataset%28T%29forallT-instance-method" class="signature"><strong>#dataset</strong>(path : String, type : <span class="t">T</span>.<span class="k">class</span>) : TypedDataset(T) forall T</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#dataset%28path%3AString%2Ctype%3AT.class%2C%26block%3ATypedDataset%28T%29-%3E%29%3ANilforallT-instance-method" class="signature"><strong>#dataset</strong>(path : String, type : <span class="t">T</span>.<span class="k">class</span>, &block : TypedDataset(T) -> ) : Nil forall T</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#delete%28path%3AString%29%3ANil-instance-method" class="signature"><strong>#delete</strong>(path : String) : Nil</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#delete_link%28path%3AString%29%3ANil-instance-method" class="signature"><strong>#delete_link</strong>(path : String) : Nil</a>
+        
+          <div class="summary"><p>Backward-compat alias</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#each%28%26%3AString-%3E%29%3ANil-instance-method" class="signature"><strong>#each</strong>(& : String -> ) : Nil</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#exists%3F%28path%3AString%29%3ABool-instance-method" class="signature"><strong>#exists?</strong>(path : String) : Bool</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#get_attribute%28name%3AString%2Ctype%3AT.class%29%3ATforallT-instance-method" class="signature"><strong>#get_attribute</strong>(name : String, type : <span class="t">T</span>.<span class="k">class</span>) : T forall T</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#group%28path%3AString%29%3AGroup-instance-method" class="signature"><strong>#group</strong>(path : String) : Group</a>
+        
+          <div class="summary"><p>Backward-compat alias</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#has_attribute%3F%28name%3AString%29%3ABool-instance-method" class="signature"><strong>#has_attribute?</strong>(name : String) : Bool</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#keys%3AArray%28String%29-instance-method" class="signature"><strong>#keys</strong> : Array(String)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#link_exists%3F%28path%3AString%29%3ABool-instance-method" class="signature"><strong>#link_exists?</strong>(path : String) : Bool</a>
+        
+          <div class="summary"><p>Backward-compat alias</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#nlinks%3AUInt64-instance-method" class="signature"><strong>#nlinks</strong> : UInt64</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#open_dataset%28path%3AString%29%3ADataset-instance-method" class="signature"><strong>#open_dataset</strong>(path : String) : Dataset</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#open_group%28path%3AString%29%3AGroup-instance-method" class="signature"><strong>#open_group</strong>(path : String) : Group</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#open_group%28path%3AString%2C%26block%3AGroup-%3E%29%3ANil-instance-method" class="signature"><strong>#open_group</strong>(path : String, &block : Group -> ) : Nil</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#read_dataset%28path%3AString%2Ctype%3AT.class%29%3AArray%28T%29forallT-instance-method" class="signature"><strong>#read_dataset</strong>(path : String, type : <span class="t">T</span>.<span class="k">class</span>) : Array(T) forall T</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#read_string_dataset%28path%3AString%29%3AArray%28String%29-instance-method" class="signature"><strong>#read_string_dataset</strong>(path : String) : Array(String)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#require_group%28path%3AString%29%3AGroup-instance-method" class="signature"><strong>#require_group</strong>(path : String) : Group</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#require_group%28path%3AString%2C%26block%3AGroup-%3E%29%3ANil-instance-method" class="signature"><strong>#require_group</strong>(path : String, &block : Group -> ) : Nil</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#set_attribute%28name%3AString%2Cvalue%3AT%29forallT-instance-method" class="signature"><strong>#set_attribute</strong>(name : String, value : T) forall T</a>
+        
+          <div class="summary"><p>Backward-compat attribute helpers</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#write_dataset%28path%3AString%2Cdata%3AArray%28T%29%29forallT-instance-method" class="signature"><strong>#write_dataset</strong>(path : String, data : Array(T)) forall T</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#write_dataset%28path%3AString%2Cdata%3AArray%28T%29%2C%2Ashape%3AInt%29forallT-instance-method" class="signature"><strong>#write_dataset</strong>(path : String, data : Array(T), *shape : Int) forall T</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#write_string_dataset%28path%3AString%2Cdata%3AArray%28String%29%29-instance-method" class="signature"><strong>#write_string_dataset</strong>(path : String, data : Array(String))</a>
+        
+      </li>
+    
+  </ul>
+
+
+
+  <div class="methods-inherited">
+    
+  </div>
+
+  
+
+  
+
+  
+
+  
+  <h2>
+    <a id="instance-method-detail" class="anchor" href="#instance-method-detail">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Instance Method Detail
+  </h2>
+  
+    <div class="entry-detail" id="[](path:String):Group|Dataset-instance-method">
+      <div class="signature">
+        
+        def <strong>[]</strong>(path : String) : <a href="../HDF5/Group.html">Group</a> | <a href="../HDF5/Dataset.html">Dataset</a>
+
+        <a class="method-permalink" href="#%5B%5D%28path%3AString%29%3AGroup%7CDataset-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/ef750792cac0587e9fdff652493d47af478cc200/src/hdf5/group.cr#L183" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="[]=(path:String,data:Array(T))forallT-instance-method">
+      <div class="signature">
+        
+        def <strong>[]=</strong>(path : String, data : Array(T)) forall T
+
+        <a class="method-permalink" href="#%5B%5D%3D%28path%3AString%2Cdata%3AArray%28T%29%29forallT-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/ef750792cac0587e9fdff652493d47af478cc200/src/hdf5/group.cr#L198" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="attrs:Attributes-instance-method">
+      <div class="signature">
+        
+        def <strong>attrs</strong> : <a href="../HDF5/Attributes.html">Attributes</a>
+
+        <a class="method-permalink" href="#attrs%3AAttributes-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/ef750792cac0587e9fdff652493d47af478cc200/src/hdf5/group.cr#L255" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="create_dataset(path:String,type:T.class,dims:Array(UInt64),max_dims:Array(UInt64)|Nil=nil,chunk_dims:Array(UInt64)|Nil=nil,compress:Int32=0):TypedDataset(T)forallT-instance-method">
+      <div class="signature">
+        
+        def <strong>create_dataset</strong>(path : String, type : <span class="t">T</span>.<span class="k">class</span>, dims : Array(UInt64), max_dims : Array(UInt64) | Nil = <span class="n">nil</span>, chunk_dims : Array(UInt64) | Nil = <span class="n">nil</span>, compress : Int32 = <span class="n">0</span>) : <a href="../HDF5/TypedDataset.html">TypedDataset</a>(T) forall T
+
+        <a class="method-permalink" href="#create_dataset%28path%3AString%2Ctype%3AT.class%2Cdims%3AArray%28UInt64%29%2Cmax_dims%3AArray%28UInt64%29%7CNil%3Dnil%2Cchunk_dims%3AArray%28UInt64%29%7CNil%3Dnil%2Ccompress%3AInt32%3D0%29%3ATypedDataset%28T%29forallT-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>Old-style positional dims (backward compat) — returns TypedDataset(T)</p>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/ef750792cac0587e9fdff652493d47af478cc200/src/hdf5/group.cr#L138" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="create_dataset(path:String,data:Array(T)):TypedDataset(T)forallT-instance-method">
+      <div class="signature">
+        
+        def <strong>create_dataset</strong>(path : String, data : Array(T)) : <a href="../HDF5/TypedDataset.html">TypedDataset</a>(T) forall T
+
+        <a class="method-permalink" href="#create_dataset%28path%3AString%2Cdata%3AArray%28T%29%29%3ATypedDataset%28T%29forallT-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>Create from data (infer type and shape from array)</p>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/ef750792cac0587e9fdff652493d47af478cc200/src/hdf5/group.cr#L65" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="create_dataset(path:String,data:Array(T),&amp;block:TypedDataset(T)-&gt;):NilforallT-instance-method">
+      <div class="signature">
+        
+        def <strong>create_dataset</strong>(path : String, data : Array(T), &block : <a href="../HDF5/TypedDataset.html">TypedDataset</a>(T) -> ) : Nil forall T
+
+        <a class="method-permalink" href="#create_dataset%28path%3AString%2Cdata%3AArray%28T%29%2C%26block%3ATypedDataset%28T%29-%3E%29%3ANilforallT-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/ef750792cac0587e9fdff652493d47af478cc200/src/hdf5/group.cr#L78" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="create_dataset(path:String,type:T.class,*dims:Int,compress:Int32=0):TypedDataset(T)forallT-instance-method">
+      <div class="signature">
+        
+        def <strong>create_dataset</strong>(path : String, type : <span class="t">T</span>.<span class="k">class</span>, *dims : Int, compress : Int32 = <span class="n">0</span>) : <a href="../HDF5/TypedDataset.html">TypedDataset</a>(T) forall T
+
+        <a class="method-permalink" href="#create_dataset%28path%3AString%2Ctype%3AT.class%2C%2Adims%3AInt%2Ccompress%3AInt32%3D0%29%3ATypedDataset%28T%29forallT-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/ef750792cac0587e9fdff652493d47af478cc200/src/hdf5/group.cr#L155" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="create_dataset(path:String,type:T.class,*,shape:Indexable,max_shape:Indexable|Nil=nil,chunk:Indexable|Nil=nil,compression:Compression|Symbol|Nil=nil,compression_level:Int32=6,shuffle:Bool=false,fletcher32:Bool=false,options:DatasetCreateOptions|Nil=nil):TypedDataset(T)forallT-instance-method">
+      <div class="signature">
+        
+        def <strong>create_dataset</strong>(path : String, type : <span class="t">T</span>.<span class="k">class</span>, *, shape : Indexable, max_shape : Indexable | Nil = <span class="n">nil</span>, chunk : Indexable | Nil = <span class="n">nil</span>, compression : <a href="../HDF5/Compression.html">Compression</a> | Symbol | Nil = <span class="n">nil</span>, compression_level : Int32 = <span class="n">6</span>, shuffle : Bool = <span class="n">false</span>, fletcher32 : Bool = <span class="n">false</span>, options : <a href="../HDF5/DatasetCreateOptions.html">DatasetCreateOptions</a> | Nil = <span class="n">nil</span>) : <a href="../HDF5/TypedDataset.html">TypedDataset</a>(T) forall T
+
+        <a class="method-permalink" href="#create_dataset%28path%3AString%2Ctype%3AT.class%2C%2A%2Cshape%3AIndexable%2Cmax_shape%3AIndexable%7CNil%3Dnil%2Cchunk%3AIndexable%7CNil%3Dnil%2Ccompression%3ACompression%7CSymbol%7CNil%3Dnil%2Ccompression_level%3AInt32%3D6%2Cshuffle%3ABool%3Dfalse%2Cfletcher32%3ABool%3Dfalse%2Coptions%3ADatasetCreateOptions%7CNil%3Dnil%29%3ATypedDataset%28T%29forallT-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>Create from type + explicit shape (named params)</p>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/ef750792cac0587e9fdff652493d47af478cc200/src/hdf5/group.cr#L88" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="create_dataset(path:String,type:T.class,*,shape:Indexable,max_shape:Indexable|Nil=nil,chunk:Indexable|Nil=nil,compression:Compression|Symbol|Nil=nil,compression_level:Int32=6,shuffle:Bool=false,fletcher32:Bool=false,options:DatasetCreateOptions|Nil=nil,&amp;block:TypedDataset(T)-&gt;):NilforallT-instance-method">
+      <div class="signature">
+        
+        def <strong>create_dataset</strong>(path : String, type : <span class="t">T</span>.<span class="k">class</span>, *, shape : Indexable, max_shape : Indexable | Nil = <span class="n">nil</span>, chunk : Indexable | Nil = <span class="n">nil</span>, compression : <a href="../HDF5/Compression.html">Compression</a> | Symbol | Nil = <span class="n">nil</span>, compression_level : Int32 = <span class="n">6</span>, shuffle : Bool = <span class="n">false</span>, fletcher32 : Bool = <span class="n">false</span>, options : <a href="../HDF5/DatasetCreateOptions.html">DatasetCreateOptions</a> | Nil = <span class="n">nil</span>, &block : <a href="../HDF5/TypedDataset.html">TypedDataset</a>(T) -> ) : Nil forall T
+
+        <a class="method-permalink" href="#create_dataset%28path%3AString%2Ctype%3AT.class%2C%2A%2Cshape%3AIndexable%2Cmax_shape%3AIndexable%7CNil%3Dnil%2Cchunk%3AIndexable%7CNil%3Dnil%2Ccompression%3ACompression%7CSymbol%7CNil%3Dnil%2Ccompression_level%3AInt32%3D6%2Cshuffle%3ABool%3Dfalse%2Cfletcher32%3ABool%3Dfalse%2Coptions%3ADatasetCreateOptions%7CNil%3Dnil%2C%26block%3ATypedDataset%28T%29-%3E%29%3ANilforallT-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/ef750792cac0587e9fdff652493d47af478cc200/src/hdf5/group.cr#L113" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="create_group(path:String):Group-instance-method">
+      <div class="signature">
+        
+        def <strong>create_group</strong>(path : String) : <a href="../HDF5/Group.html">Group</a>
+
+        <a class="method-permalink" href="#create_group%28path%3AString%29%3AGroup-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/ef750792cac0587e9fdff652493d47af478cc200/src/hdf5/group.cr#L5" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="create_group(path:String,&amp;block:Group-&gt;):Nil-instance-method">
+      <div class="signature">
+        
+        def <strong>create_group</strong>(path : String, &block : <a href="../HDF5/Group.html">Group</a> -> ) : Nil
+
+        <a class="method-permalink" href="#create_group%28path%3AString%2C%26block%3AGroup-%3E%29%3ANil-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/ef750792cac0587e9fdff652493d47af478cc200/src/hdf5/group.cr#L16" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="dataset(path:String,type:T.class):TypedDataset(T)forallT-instance-method">
+      <div class="signature">
+        
+        def <strong>dataset</strong>(path : String, type : <span class="t">T</span>.<span class="k">class</span>) : <a href="../HDF5/TypedDataset.html">TypedDataset</a>(T) forall T
+
+        <a class="method-permalink" href="#dataset%28path%3AString%2Ctype%3AT.class%29%3ATypedDataset%28T%29forallT-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/ef750792cac0587e9fdff652493d47af478cc200/src/hdf5/group.cr#L168" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="dataset(path:String,type:T.class,&amp;block:TypedDataset(T)-&gt;):NilforallT-instance-method">
+      <div class="signature">
+        
+        def <strong>dataset</strong>(path : String, type : <span class="t">T</span>.<span class="k">class</span>, &block : <a href="../HDF5/TypedDataset.html">TypedDataset</a>(T) -> ) : Nil forall T
+
+        <a class="method-permalink" href="#dataset%28path%3AString%2Ctype%3AT.class%2C%26block%3ATypedDataset%28T%29-%3E%29%3ANilforallT-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/ef750792cac0587e9fdff652493d47af478cc200/src/hdf5/group.cr#L172" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="delete(path:String):Nil-instance-method">
+      <div class="signature">
+        
+        def <strong>delete</strong>(path : String) : Nil
+
+        <a class="method-permalink" href="#delete%28path%3AString%29%3ANil-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/ef750792cac0587e9fdff652493d47af478cc200/src/hdf5/group.cr#L214" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="delete_link(path:String):Nil-instance-method">
+      <div class="signature">
+        
+        def <strong>delete_link</strong>(path : String) : Nil
+
+        <a class="method-permalink" href="#delete_link%28path%3AString%29%3ANil-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>Backward-compat alias</p>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/ef750792cac0587e9fdff652493d47af478cc200/src/hdf5/group.cr#L220" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="each(&amp;:String-&gt;):Nil-instance-method">
+      <div class="signature">
+        
+        def <strong>each</strong>(& : String -> ) : Nil
+
+        <a class="method-permalink" href="#each%28%26%3AString-%3E%29%3ANil-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/ef750792cac0587e9fdff652493d47af478cc200/src/hdf5/group.cr#L244" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="exists?(path:String):Bool-instance-method">
+      <div class="signature">
+        
+        def <strong>exists?</strong>(path : String) : Bool
+
+        <a class="method-permalink" href="#exists%3F%28path%3AString%29%3ABool-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/ef750792cac0587e9fdff652493d47af478cc200/src/hdf5/group.cr#L205" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="get_attribute(name:String,type:T.class):TforallT-instance-method">
+      <div class="signature">
+        
+        def <strong>get_attribute</strong>(name : String, type : <span class="t">T</span>.<span class="k">class</span>) : T forall T
+
+        <a class="method-permalink" href="#get_attribute%28name%3AString%2Ctype%3AT.class%29%3ATforallT-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/ef750792cac0587e9fdff652493d47af478cc200/src/hdf5/group.cr#L289" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="group(path:String):Group-instance-method">
+      <div class="signature">
+        
+        def <strong>group</strong>(path : String) : <a href="../HDF5/Group.html">Group</a>
+
+        <a class="method-permalink" href="#group%28path%3AString%29%3AGroup-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>Backward-compat alias</p>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/ef750792cac0587e9fdff652493d47af478cc200/src/hdf5/group.cr#L58" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="has_attribute?(name:String):Bool-instance-method">
+      <div class="signature">
+        
+        def <strong>has_attribute?</strong>(name : String) : Bool
+
+        <a class="method-permalink" href="#has_attribute%3F%28name%3AString%29%3ABool-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/ef750792cac0587e9fdff652493d47af478cc200/src/hdf5/group.cr#L293" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="keys:Array(String)-instance-method">
+      <div class="signature">
+        
+        def <strong>keys</strong> : Array(String)
+
+        <a class="method-permalink" href="#keys%3AArray%28String%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/ef750792cac0587e9fdff652493d47af478cc200/src/hdf5/group.cr#L224" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="link_exists?(path:String):Bool-instance-method">
+      <div class="signature">
+        
+        def <strong>link_exists?</strong>(path : String) : Bool
+
+        <a class="method-permalink" href="#link_exists%3F%28path%3AString%29%3ABool-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>Backward-compat alias</p>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/ef750792cac0587e9fdff652493d47af478cc200/src/hdf5/group.cr#L210" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="nlinks:UInt64-instance-method">
+      <div class="signature">
+        
+        def <strong>nlinks</strong> : UInt64
+
+        <a class="method-permalink" href="#nlinks%3AUInt64-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/ef750792cac0587e9fdff652493d47af478cc200/src/hdf5/group.cr#L248" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="open_dataset(path:String):Dataset-instance-method">
+      <div class="signature">
+        
+        def <strong>open_dataset</strong>(path : String) : <a href="../HDF5/Dataset.html">Dataset</a>
+
+        <a class="method-permalink" href="#open_dataset%28path%3AString%29%3ADataset-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/ef750792cac0587e9fdff652493d47af478cc200/src/hdf5/group.cr#L162" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="open_group(path:String):Group-instance-method">
+      <div class="signature">
+        
+        def <strong>open_group</strong>(path : String) : <a href="../HDF5/Group.html">Group</a>
+
+        <a class="method-permalink" href="#open_group%28path%3AString%29%3AGroup-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/ef750792cac0587e9fdff652493d47af478cc200/src/hdf5/group.cr#L25" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="open_group(path:String,&amp;block:Group-&gt;):Nil-instance-method">
+      <div class="signature">
+        
+        def <strong>open_group</strong>(path : String, &block : <a href="../HDF5/Group.html">Group</a> -> ) : Nil
+
+        <a class="method-permalink" href="#open_group%28path%3AString%2C%26block%3AGroup-%3E%29%3ANil-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/ef750792cac0587e9fdff652493d47af478cc200/src/hdf5/group.cr#L31" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="read_dataset(path:String,type:T.class):Array(T)forallT-instance-method">
+      <div class="signature">
+        
+        def <strong>read_dataset</strong>(path : String, type : <span class="t">T</span>.<span class="k">class</span>) : Array(T) forall T
+
+        <a class="method-permalink" href="#read_dataset%28path%3AString%2Ctype%3AT.class%29%3AArray%28T%29forallT-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/ef750792cac0587e9fdff652493d47af478cc200/src/hdf5/group.cr#L272" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="read_string_dataset(path:String):Array(String)-instance-method">
+      <div class="signature">
+        
+        def <strong>read_string_dataset</strong>(path : String) : Array(String)
+
+        <a class="method-permalink" href="#read_string_dataset%28path%3AString%29%3AArray%28String%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/ef750792cac0587e9fdff652493d47af478cc200/src/hdf5/group.cr#L280" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="require_group(path:String):Group-instance-method">
+      <div class="signature">
+        
+        def <strong>require_group</strong>(path : String) : <a href="../HDF5/Group.html">Group</a>
+
+        <a class="method-permalink" href="#require_group%28path%3AString%29%3AGroup-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/ef750792cac0587e9fdff652493d47af478cc200/src/hdf5/group.cr#L40" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="require_group(path:String,&amp;block:Group-&gt;):Nil-instance-method">
+      <div class="signature">
+        
+        def <strong>require_group</strong>(path : String, &block : <a href="../HDF5/Group.html">Group</a> -> ) : Nil
+
+        <a class="method-permalink" href="#require_group%28path%3AString%2C%26block%3AGroup-%3E%29%3ANil-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/ef750792cac0587e9fdff652493d47af478cc200/src/hdf5/group.cr#L48" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="set_attribute(name:String,value:T)forallT-instance-method">
+      <div class="signature">
+        
+        def <strong>set_attribute</strong>(name : String, value : T) forall T
+
+        <a class="method-permalink" href="#set_attribute%28name%3AString%2Cvalue%3AT%29forallT-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>Backward-compat attribute helpers</p>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/ef750792cac0587e9fdff652493d47af478cc200/src/hdf5/group.cr#L285" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="write_dataset(path:String,data:Array(T))forallT-instance-method">
+      <div class="signature">
+        
+        def <strong>write_dataset</strong>(path : String, data : Array(T)) forall T
+
+        <a class="method-permalink" href="#write_dataset%28path%3AString%2Cdata%3AArray%28T%29%29forallT-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/ef750792cac0587e9fdff652493d47af478cc200/src/hdf5/group.cr#L261" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="write_dataset(path:String,data:Array(T),*shape:Int)forallT-instance-method">
+      <div class="signature">
+        
+        def <strong>write_dataset</strong>(path : String, data : Array(T), *shape : Int) forall T
+
+        <a class="method-permalink" href="#write_dataset%28path%3AString%2Cdata%3AArray%28T%29%2C%2Ashape%3AInt%29forallT-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/ef750792cac0587e9fdff652493d47af478cc200/src/hdf5/group.cr#L265" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="write_string_dataset(path:String,data:Array(String))-instance-method">
+      <div class="signature">
+        
+        def <strong>write_string_dataset</strong>(path : String, data : Array(String))
+
+        <a class="method-permalink" href="#write_string_dataset%28path%3AString%2Cdata%3AArray%28String%29%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/ef750792cac0587e9fdff652493d47af478cc200/src/hdf5/group.cr#L276" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+
+
+
+</div>
+
+</body>
+</html>

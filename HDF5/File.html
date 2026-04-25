@@ -62,13 +62,53 @@
       
         <ul>
   
+  <li class=" " data-id="hdf5/HDF5/AlreadyExistsError" data-name="hdf5::alreadyexistserror">
+      <a href="../HDF5/AlreadyExistsError.html">AlreadyExistsError</a>
+      
+    </li>
+  
   <li class=" " data-id="hdf5/HDF5/Attribute" data-name="hdf5::attribute">
       <a href="../HDF5/Attribute.html">Attribute</a>
       
     </li>
   
+  <li class=" " data-id="hdf5/HDF5/Attributes" data-name="hdf5::attributes">
+      <a href="../HDF5/Attributes.html">Attributes</a>
+      
+    </li>
+  
+  <li class=" " data-id="hdf5/HDF5/ClosedObjectError" data-name="hdf5::closedobjecterror">
+      <a href="../HDF5/ClosedObjectError.html">ClosedObjectError</a>
+      
+    </li>
+  
+  <li class="parent " data-id="hdf5/HDF5/Compression" data-name="hdf5::compression">
+      <a href="../HDF5/Compression.html">Compression</a>
+      
+        <ul>
+  
+  <li class=" " data-id="hdf5/HDF5/Compression/Filter" data-name="hdf5::compression::filter">
+      <a href="../HDF5/Compression/Filter.html">Filter</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class=" " data-id="hdf5/HDF5/Container" data-name="hdf5::container">
+      <a href="../HDF5/Container.html">Container</a>
+      
+    </li>
+  
   <li class=" " data-id="hdf5/HDF5/Dataset" data-name="hdf5::dataset">
       <a href="../HDF5/Dataset.html">Dataset</a>
+      
+    </li>
+  
+  <li class=" " data-id="hdf5/HDF5/DatasetCreateOptions" data-name="hdf5::datasetcreateoptions">
+      <a href="../HDF5/DatasetCreateOptions.html">DatasetCreateOptions</a>
       
     </li>
   
@@ -87,18 +127,58 @@
       
     </li>
   
+  <li class=" " data-id="hdf5/HDF5/FileError" data-name="hdf5::fileerror">
+      <a href="../HDF5/FileError.html">FileError</a>
+      
+    </li>
+  
   <li class=" " data-id="hdf5/HDF5/Group" data-name="hdf5::group">
       <a href="../HDF5/Group.html">Group</a>
       
     </li>
   
-  <li class=" " data-id="hdf5/HDF5/GroupMethods" data-name="hdf5::groupmethods">
-      <a href="../HDF5/GroupMethods.html">GroupMethods</a>
+  <li class=" " data-id="hdf5/HDF5/NativeType" data-name="hdf5::nativetype">
+      <a href="../HDF5/NativeType.html">NativeType</a>
       
     </li>
   
-  <li class=" " data-id="hdf5/HDF5/NativeType" data-name="hdf5::nativetype">
-      <a href="../HDF5/NativeType.html">NativeType</a>
+  <li class=" " data-id="hdf5/HDF5/ObjectNotFoundError" data-name="hdf5::objectnotfounderror">
+      <a href="../HDF5/ObjectNotFoundError.html">ObjectNotFoundError</a>
+      
+    </li>
+  
+  <li class="parent " data-id="hdf5/HDF5/Selection" data-name="hdf5::selection">
+      <a href="../HDF5/Selection.html">Selection</a>
+      
+        <ul>
+  
+  <li class=" " data-id="hdf5/HDF5/Selection/Slice" data-name="hdf5::selection::slice">
+      <a href="../HDF5/Selection/Slice.html">Slice</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class=" " data-id="hdf5/HDF5/SelectionProxy" data-name="hdf5::selectionproxy">
+      <a href="../HDF5/SelectionProxy.html">SelectionProxy</a>
+      
+    </li>
+  
+  <li class=" " data-id="hdf5/HDF5/ShapeMismatchError" data-name="hdf5::shapemismatcherror">
+      <a href="../HDF5/ShapeMismatchError.html">ShapeMismatchError</a>
+      
+    </li>
+  
+  <li class=" " data-id="hdf5/HDF5/TypedDataset" data-name="hdf5::typeddataset(t)">
+      <a href="../HDF5/TypedDataset.html">TypedDataset</a>
+      
+    </li>
+  
+  <li class=" " data-id="hdf5/HDF5/TypeMismatchError" data-name="hdf5::typemismatcherror">
+      <a href="../HDF5/TypeMismatchError.html">TypeMismatchError</a>
       
     </li>
   
@@ -144,7 +224,7 @@
   </h2>
   <ul class="other-types-list">
     
-      <li class="other-type"><a href="../HDF5/GroupMethods.html">HDF5::GroupMethods</a></li>
+      <li class="other-type"><a href="../HDF5/Container.html">HDF5::Container</a></li>
     
   </ul>
 
@@ -167,7 +247,7 @@
   </h2>
   
     
-      <a href="https://github.com/kojix2/hdf5.cr/blob/41bce963d0d47b0cff69bcc44802ba1a7a25cc30/src/hdf5/file.cr#L2" target="_blank">
+      <a href="https://github.com/kojix2/hdf5.cr/blob/ef750792cac0587e9fdff652493d47af478cc200/src/hdf5/file.cr#L2" target="_blank">
         hdf5/file.cr
       </a>
     
@@ -321,86 +401,126 @@
     
       
 
-  <h3>Instance methods inherited from module <code><a href="../HDF5/GroupMethods.html">HDF5::GroupMethods</a></code></h3>
+  <h3>Instance methods inherited from module <code><a href="../HDF5/Container.html">HDF5::Container</a></code></h3>
   
   
-    <a href="../HDF5/GroupMethods.html#create_dataset%28name%3AString%2Ctype%3AT.class%2Cdims%3AArray%28UInt64%29%2Cmax_dims%3AArray%28UInt64%29%7CNil%3Dnil%2Cchunk_dims%3AArray%28UInt64%29%7CNil%3Dnil%2Ccompress%3AInt32%3D0%29%3ADatasetforallT-instance-method" class="tooltip">
-      <span>create_dataset(name : String, type : <span class="t">T</span>.<span class="k">class</span>, dims : Array(UInt64), max_dims : Array(UInt64) | Nil = <span class="n">nil</span>, chunk_dims : Array(UInt64) | Nil = <span class="n">nil</span>, compress : Int32 = <span class="n">0</span>) : Dataset forall T<br/>create_dataset(name : String, type : <span class="t">T</span>.<span class="k">class</span>, *dims : Int, compress : Int32 = <span class="n">0</span>) : Dataset forall T</span>
+    <a href="../HDF5/Container.html#%5B%5D%28path%3AString%29%3AGroup%7CDataset-instance-method" class="tooltip">
+      <span>[](path : String) : Group | Dataset</span>
+    []</a>, 
+    
+  
+    <a href="../HDF5/Container.html#%5B%5D%3D%28path%3AString%2Cdata%3AArray%28T%29%29forallT-instance-method" class="tooltip">
+      <span>[]=(path : String, data : Array(T)) forall T</span>
+    []=</a>, 
+    
+  
+    <a href="../HDF5/Container.html#attrs%3AAttributes-instance-method" class="tooltip">
+      <span>attrs : Attributes</span>
+    attrs</a>, 
+    
+  
+    <a href="../HDF5/Container.html#create_dataset%28path%3AString%2Ctype%3AT.class%2Cdims%3AArray%28UInt64%29%2Cmax_dims%3AArray%28UInt64%29%7CNil%3Dnil%2Cchunk_dims%3AArray%28UInt64%29%7CNil%3Dnil%2Ccompress%3AInt32%3D0%29%3ATypedDataset%28T%29forallT-instance-method" class="tooltip">
+      <span>create_dataset(path : String, type : <span class="t">T</span>.<span class="k">class</span>, dims : Array(UInt64), max_dims : Array(UInt64) | Nil = <span class="n">nil</span>, chunk_dims : Array(UInt64) | Nil = <span class="n">nil</span>, compress : Int32 = <span class="n">0</span>) : TypedDataset(T) forall T<br/>create_dataset(path : String, data : Array(T)) : TypedDataset(T) forall T<br/>create_dataset(path : String, data : Array(T), &block : TypedDataset(T) -> ) : Nil forall T<br/>create_dataset(path : String, type : <span class="t">T</span>.<span class="k">class</span>, *dims : Int, compress : Int32 = <span class="n">0</span>) : TypedDataset(T) forall T<br/>create_dataset(path : String, type : <span class="t">T</span>.<span class="k">class</span>, *, shape : Indexable, max_shape : Indexable | Nil = <span class="n">nil</span>, chunk : Indexable | Nil = <span class="n">nil</span>, compression : Compression | Symbol | Nil = <span class="n">nil</span>, compression_level : Int32 = <span class="n">6</span>, shuffle : Bool = <span class="n">false</span>, fletcher32 : Bool = <span class="n">false</span>, options : DatasetCreateOptions | Nil = <span class="n">nil</span>) : TypedDataset(T) forall T<br/>create_dataset(path : String, type : <span class="t">T</span>.<span class="k">class</span>, *, shape : Indexable, max_shape : Indexable | Nil = <span class="n">nil</span>, chunk : Indexable | Nil = <span class="n">nil</span>, compression : Compression | Symbol | Nil = <span class="n">nil</span>, compression_level : Int32 = <span class="n">6</span>, shuffle : Bool = <span class="n">false</span>, fletcher32 : Bool = <span class="n">false</span>, options : DatasetCreateOptions | Nil = <span class="n">nil</span>, &block : TypedDataset(T) -> ) : Nil forall T</span>
     create_dataset</a>, 
     
   
-    <a href="../HDF5/GroupMethods.html#create_group%28name%3AString%29%3AGroup-instance-method" class="tooltip">
-      <span>create_group(name : String) : Group</span>
+    <a href="../HDF5/Container.html#create_group%28path%3AString%29%3AGroup-instance-method" class="tooltip">
+      <span>create_group(path : String) : Group<br/>create_group(path : String, &block : Group -> ) : Nil</span>
     create_group</a>, 
     
   
-    <a href="../HDF5/GroupMethods.html#delete_link%28name%3AString%29-instance-method" class="tooltip">
-      <span>delete_link(name : String)</span>
+    <a href="../HDF5/Container.html#dataset%28path%3AString%2Ctype%3AT.class%29%3ATypedDataset%28T%29forallT-instance-method" class="tooltip">
+      <span>dataset(path : String, type : <span class="t">T</span>.<span class="k">class</span>) : TypedDataset(T) forall T<br/>dataset(path : String, type : <span class="t">T</span>.<span class="k">class</span>, &block : TypedDataset(T) -> ) : Nil forall T</span>
+    dataset</a>, 
+    
+  
+    <a href="../HDF5/Container.html#delete%28path%3AString%29%3ANil-instance-method" class="tooltip">
+      <span>delete(path : String) : Nil</span>
+    delete</a>, 
+    
+  
+    <a href="../HDF5/Container.html#delete_link%28path%3AString%29%3ANil-instance-method" class="tooltip">
+      <span>delete_link(path : String) : Nil</span>
     delete_link</a>, 
     
   
-    <a href="../HDF5/GroupMethods.html#get_attribute%28name%3AString%2Ctype%3AT.class%29%3ATforallT-instance-method" class="tooltip">
+    <a href="../HDF5/Container.html#each%28%26%3AString-%3E%29%3ANil-instance-method" class="tooltip">
+      <span>each(& : String -> ) : Nil</span>
+    each</a>, 
+    
+  
+    <a href="../HDF5/Container.html#exists%3F%28path%3AString%29%3ABool-instance-method" class="tooltip">
+      <span>exists?(path : String) : Bool</span>
+    exists?</a>, 
+    
+  
+    <a href="../HDF5/Container.html#get_attribute%28name%3AString%2Ctype%3AT.class%29%3ATforallT-instance-method" class="tooltip">
       <span>get_attribute(name : String, type : <span class="t">T</span>.<span class="k">class</span>) : T forall T</span>
     get_attribute</a>, 
     
   
-    <a href="../HDF5/GroupMethods.html#group%28name%3AString%29%3AGroup-instance-method" class="tooltip">
-      <span>group(name : String) : Group</span>
+    <a href="../HDF5/Container.html#group%28path%3AString%29%3AGroup-instance-method" class="tooltip">
+      <span>group(path : String) : Group</span>
     group</a>, 
     
   
-    <a href="../HDF5/GroupMethods.html#has_attribute%3F%28name%3AString%29%3ABool-instance-method" class="tooltip">
+    <a href="../HDF5/Container.html#has_attribute%3F%28name%3AString%29%3ABool-instance-method" class="tooltip">
       <span>has_attribute?(name : String) : Bool</span>
     has_attribute?</a>, 
     
   
-    <a href="../HDF5/GroupMethods.html#keys%3AArray%28String%29-instance-method" class="tooltip">
+    <a href="../HDF5/Container.html#keys%3AArray%28String%29-instance-method" class="tooltip">
       <span>keys : Array(String)</span>
     keys</a>, 
     
   
-    <a href="../HDF5/GroupMethods.html#link_exists%3F%28name%3AString%29%3ABool-instance-method" class="tooltip">
-      <span>link_exists?(name : String) : Bool</span>
+    <a href="../HDF5/Container.html#link_exists%3F%28path%3AString%29%3ABool-instance-method" class="tooltip">
+      <span>link_exists?(path : String) : Bool</span>
     link_exists?</a>, 
     
   
-    <a href="../HDF5/GroupMethods.html#nlinks%3AUInt64-instance-method" class="tooltip">
+    <a href="../HDF5/Container.html#nlinks%3AUInt64-instance-method" class="tooltip">
       <span>nlinks : UInt64</span>
     nlinks</a>, 
     
   
-    <a href="../HDF5/GroupMethods.html#open_dataset%28name%3AString%29%3ADataset-instance-method" class="tooltip">
-      <span>open_dataset(name : String) : Dataset</span>
+    <a href="../HDF5/Container.html#open_dataset%28path%3AString%29%3ADataset-instance-method" class="tooltip">
+      <span>open_dataset(path : String) : Dataset</span>
     open_dataset</a>, 
     
   
-    <a href="../HDF5/GroupMethods.html#open_group%28name%3AString%29%3AGroup-instance-method" class="tooltip">
-      <span>open_group(name : String) : Group</span>
+    <a href="../HDF5/Container.html#open_group%28path%3AString%29%3AGroup-instance-method" class="tooltip">
+      <span>open_group(path : String) : Group<br/>open_group(path : String, &block : Group -> ) : Nil</span>
     open_group</a>, 
     
   
-    <a href="../HDF5/GroupMethods.html#read_dataset%28name%3AString%2Ctype%3AT.class%29%3AArray%28T%29forallT-instance-method" class="tooltip">
-      <span>read_dataset(name : String, type : <span class="t">T</span>.<span class="k">class</span>) : Array(T) forall T</span>
+    <a href="../HDF5/Container.html#read_dataset%28path%3AString%2Ctype%3AT.class%29%3AArray%28T%29forallT-instance-method" class="tooltip">
+      <span>read_dataset(path : String, type : <span class="t">T</span>.<span class="k">class</span>) : Array(T) forall T</span>
     read_dataset</a>, 
     
   
-    <a href="../HDF5/GroupMethods.html#read_string_dataset%28name%3AString%29%3AArray%28String%29-instance-method" class="tooltip">
-      <span>read_string_dataset(name : String) : Array(String)</span>
+    <a href="../HDF5/Container.html#read_string_dataset%28path%3AString%29%3AArray%28String%29-instance-method" class="tooltip">
+      <span>read_string_dataset(path : String) : Array(String)</span>
     read_string_dataset</a>, 
     
   
-    <a href="../HDF5/GroupMethods.html#set_attribute%28name%3AString%2Cvalue%3AT%29forallT-instance-method" class="tooltip">
+    <a href="../HDF5/Container.html#require_group%28path%3AString%29%3AGroup-instance-method" class="tooltip">
+      <span>require_group(path : String) : Group<br/>require_group(path : String, &block : Group -> ) : Nil</span>
+    require_group</a>, 
+    
+  
+    <a href="../HDF5/Container.html#set_attribute%28name%3AString%2Cvalue%3AT%29forallT-instance-method" class="tooltip">
       <span>set_attribute(name : String, value : T) forall T</span>
     set_attribute</a>, 
     
   
-    <a href="../HDF5/GroupMethods.html#write_dataset%28name%3AString%2Cdata%3AArray%28T%29%29forallT-instance-method" class="tooltip">
-      <span>write_dataset(name : String, data : Array(T)) forall T<br/>write_dataset(name : String, data : Array(T), *shape : Int) forall T</span>
+    <a href="../HDF5/Container.html#write_dataset%28path%3AString%2Cdata%3AArray%28T%29%29forallT-instance-method" class="tooltip">
+      <span>write_dataset(path : String, data : Array(T)) forall T<br/>write_dataset(path : String, data : Array(T), *shape : Int) forall T</span>
     write_dataset</a>, 
     
   
-    <a href="../HDF5/GroupMethods.html#write_string_dataset%28name%3AString%2Cdata%3AArray%28String%29%29-instance-method" class="tooltip">
-      <span>write_string_dataset(name : String, data : Array(String))</span>
+    <a href="../HDF5/Container.html#write_string_dataset%28path%3AString%2Cdata%3AArray%28String%29%29-instance-method" class="tooltip">
+      <span>write_string_dataset(path : String, data : Array(String))</span>
     write_string_dataset</a>
     
   
@@ -465,7 +585,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/hdf5.cr/blob/41bce963d0d47b0cff69bcc44802ba1a7a25cc30/src/hdf5/file.cr#L28" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/ef750792cac0587e9fdff652493d47af478cc200/src/hdf5/file.cr#L28" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -481,7 +601,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/hdf5.cr/blob/41bce963d0d47b0cff69bcc44802ba1a7a25cc30/src/hdf5/file.cr#L15" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/ef750792cac0587e9fdff652493d47af478cc200/src/hdf5/file.cr#L15" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -509,7 +629,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/hdf5.cr/blob/41bce963d0d47b0cff69bcc44802ba1a7a25cc30/src/hdf5/file.cr#L68" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/ef750792cac0587e9fdff652493d47af478cc200/src/hdf5/file.cr#L68" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -525,7 +645,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/hdf5.cr/blob/41bce963d0d47b0cff69bcc44802ba1a7a25cc30/src/hdf5/file.cr#L19" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/ef750792cac0587e9fdff652493d47af478cc200/src/hdf5/file.cr#L19" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -555,7 +675,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/hdf5.cr/blob/41bce963d0d47b0cff69bcc44802ba1a7a25cc30/src/hdf5/file.cr#L59" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/ef750792cac0587e9fdff652493d47af478cc200/src/hdf5/file.cr#L59" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -571,7 +691,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/hdf5.cr/blob/41bce963d0d47b0cff69bcc44802ba1a7a25cc30/src/hdf5/file.cr#L12" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/ef750792cac0587e9fdff652493d47af478cc200/src/hdf5/file.cr#L12" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -587,7 +707,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/hdf5.cr/blob/41bce963d0d47b0cff69bcc44802ba1a7a25cc30/src/hdf5/file.cr#L64" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/ef750792cac0587e9fdff652493d47af478cc200/src/hdf5/file.cr#L64" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -603,7 +723,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/hdf5.cr/blob/41bce963d0d47b0cff69bcc44802ba1a7a25cc30/src/hdf5/file.cr#L55" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/ef750792cac0587e9fdff652493d47af478cc200/src/hdf5/file.cr#L55" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -619,7 +739,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/hdf5.cr/blob/41bce963d0d47b0cff69bcc44802ba1a7a25cc30/src/hdf5/file.cr#L51" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/ef750792cac0587e9fdff652493d47af478cc200/src/hdf5/file.cr#L51" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -635,7 +755,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/hdf5.cr/blob/41bce963d0d47b0cff69bcc44802ba1a7a25cc30/src/hdf5/file.cr#L11" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/ef750792cac0587e9fdff652493d47af478cc200/src/hdf5/file.cr#L11" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -651,7 +771,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/hdf5.cr/blob/41bce963d0d47b0cff69bcc44802ba1a7a25cc30/src/hdf5/file.cr#L13" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/ef750792cac0587e9fdff652493d47af478cc200/src/hdf5/file.cr#L13" target="_blank">View source</a>]
         
       </div>
     </div>
