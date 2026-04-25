@@ -1,0 +1,38 @@
+name: CI
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
+
+jobs:
+  test:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Crystal
+        uses: crystal-lang/install-crystal@v1
+
+      - name: Install HDF5 (Ubuntu)
+        if: runner.os == 'Linux'
+        run: sudo apt-get install -y libhdf5-dev
+
+      - name: Install HDF5 (macOS)
+        if: runner.os == 'macOS'
+        run: brew install hdf5
+
+      - name: Install shards
+        run: shards install
+
+      - name: Run ameba
+        run: bin/ameba
+
+      - name: Run specs
+        run: crystal spec
