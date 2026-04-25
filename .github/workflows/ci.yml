@@ -21,7 +21,7 @@ jobs:
 
       - name: Setup Miniconda (Ubuntu)
         if: runner.os == 'Linux'
-        uses: conda-incubator/setup-miniconda@v3
+        uses: conda-incubator/setup-miniconda@v4
         with:
           activate-environment: test
           auto-activate-base: false
