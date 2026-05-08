@@ -64,7 +64,7 @@ module HDF5
     # Create from data (infer type and shape from array)
     def create_dataset(path : String, data : Array(T)) : TypedDataset(T) forall T
       {% if T == String %}
-        ds = build_string_dataset(path, data.size.to_u64)
+        ds = build_string_dataset(path, data.size.to_u64, string_type: StringType.variable)
         ds.write_strings(data)
         TypedDataset(String).new(ds)
       {% else %}
@@ -75,8 +75,31 @@ module HDF5
       {% end %}
     end
 
+    def create_dataset(path : String, data : Array(String),
+                       *,
+                       string_type : StringType = StringType.variable,
+                       encoding : (Symbol | StringEncoding)? = nil) : TypedDataset(String)
+      resolved_type = encoding ? string_type.with_encoding(encoding) : string_type
+      ds = build_string_dataset(path, data.size.to_u64, string_type: resolved_type)
+      ds.write_strings(data)
+      TypedDataset(String).new(ds)
+    end
+
     def create_dataset(path : String, data : Array(T), &block : TypedDataset(T) ->) : Nil forall T
       tds = create_dataset(path, data)
+      begin
+        block.call(tds)
+      ensure
+        tds.close
+      end
+    end
+
+    def create_dataset(path : String, data : Array(String),
+                       *,
+                       string_type : StringType = StringType.variable,
+                       encoding : (Symbol | StringEncoding)? = nil,
+                       &block : TypedDataset(String) ->) : Nil
+      tds = create_dataset(path, data, string_type: string_type, encoding: encoding)
       begin
         block.call(tds)
       ensure
@@ -102,12 +125,35 @@ module HDF5
       resolved_opts = options || build_options(chunk, compression, compression_level,
         shuffle, fletcher32, max_shape)
       {% if T == String %}
-        ds = build_string_dataset(path, dims, resolved_opts)
+        ds = build_string_dataset(path, dims, resolved_opts, string_type: StringType.variable)
         TypedDataset(String).new(ds)
       {% else %}
         ds = build_numeric_dataset(path, T, dims, resolved_opts)
         TypedDataset(T).new(ds)
       {% end %}
+    end
+
+    def create_dataset(
+      path : String,
+      type : String.class,
+      *,
+      shape : Indexable,
+      max_shape : Indexable? = nil,
+      chunk : Indexable? = nil,
+      compression : Compression | Symbol? = nil,
+      compression_level : Int32 = 6,
+      shuffle : Bool = false,
+      fletcher32 : Bool = false,
+      options : DatasetCreateOptions? = nil,
+      string_type : StringType = StringType.variable,
+      encoding : (Symbol | StringEncoding)? = nil,
+    ) : TypedDataset(String)
+      dims = shape.map(&.to_u64).to_a
+      resolved_opts = options || build_options(chunk, compression, compression_level,
+        shuffle, fletcher32, max_shape)
+      resolved_type = encoding ? string_type.with_encoding(encoding) : string_type
+      ds = build_string_dataset(path, dims, resolved_opts, string_type: resolved_type)
+      TypedDataset(String).new(ds)
     end
 
     def create_dataset(
@@ -127,6 +173,33 @@ module HDF5
       tds = create_dataset(path, T, shape: shape, max_shape: max_shape, chunk: chunk,
         compression: compression, compression_level: compression_level,
         shuffle: shuffle, fletcher32: fletcher32, options: options)
+      begin
+        block.call(tds)
+      ensure
+        tds.close
+      end
+    end
+
+    def create_dataset(
+      path : String,
+      type : String.class,
+      *,
+      shape : Indexable,
+      max_shape : Indexable? = nil,
+      chunk : Indexable? = nil,
+      compression : Compression | Symbol? = nil,
+      compression_level : Int32 = 6,
+      shuffle : Bool = false,
+      fletcher32 : Bool = false,
+      options : DatasetCreateOptions? = nil,
+      string_type : StringType = StringType.variable,
+      encoding : (Symbol | StringEncoding)? = nil,
+      &block : TypedDataset(String) ->
+    ) : Nil
+      tds = create_dataset(path, String, shape: shape, max_shape: max_shape, chunk: chunk,
+        compression: compression, compression_level: compression_level,
+        shuffle: shuffle, fletcher32: fletcher32, options: options,
+        string_type: string_type, encoding: encoding)
       begin
         block.call(tds)
       ensure
@@ -319,13 +392,15 @@ module HDF5
     end
 
     private def build_string_dataset(path : String, n : UInt64,
-                                     opts : DatasetCreateOptions? = nil) : Dataset
-      build_string_dataset(path, [n], opts)
+                                     opts : DatasetCreateOptions? = nil,
+                                     string_type : StringType = StringType.variable) : Dataset
+      build_string_dataset(path, [n], opts, string_type: string_type)
     end
 
     private def build_string_dataset(path : String, dims : Array(UInt64),
-                                     opts : DatasetCreateOptions? = nil) : Dataset
-      type_id = NativeType.variable_length_string
+                                     opts : DatasetCreateOptions? = nil,
+                                     string_type : StringType = StringType.variable) : Dataset
+      type_id = string_type.to_hdf5_type_id
       opts_max = opts.try(&.max_shape)
       space = Dataspace.simple(dims, opts_max)
       dcpl_id = LibHDF5::H5P_DEFAULT

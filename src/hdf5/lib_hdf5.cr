@@ -32,6 +32,19 @@ lib LibHDF5
     Two   =  1
   end
 
+  enum CharSet : Int32
+    Error = -1
+    Ascii =  0
+    Utf8  =  1
+  end
+
+  enum StrPad : Int32
+    Error    = -1
+    NullTerm =  0
+    NullPad  =  1
+    SpacePad =  2
+  end
+
   enum SpaceClass : Int32
     NoClass = -1
     Scalar  =  0
@@ -140,7 +153,10 @@ lib LibHDF5
   fun H5Tget_member_type(type_id : Hid, membno : UInt32) : Hid
   fun H5Tget_array_ndims(type_id : Hid) : Int32
   fun H5Tget_array_dims2(type_id : Hid, dims : Hsize*) : Int32
+  fun H5Tget_cset(type_id : Hid) : CharSet
+  fun H5Tget_strpad(type_id : Hid) : StrPad
   fun H5Tset_size(type_id : Hid, size : LibC::SizeT) : Herr
+  fun H5Tset_cset(type_id : Hid, cset : CharSet) : Herr
   fun H5Tset_strpad(type_id : Hid, strpad : Int32) : Herr
   fun H5Tis_variable_str(type_id : Hid) : Htri
   fun H5Tarray_create2(base_id : Hid, ndims : UInt32, dims : Hsize*) : Hid
@@ -148,6 +164,7 @@ lib LibHDF5
   fun H5Tcreate(type : TypeClass, size : LibC::SizeT) : Hid
   fun H5Tinsert(parent_id : Hid, name : UInt8*, offset : LibC::SizeT, field_id : Hid) : Herr
   fun H5free_memory(mem : Void*) : Herr
+  fun H5Dvlen_reclaim(type_id : Hid, space_id : Hid, plist_id : Hid, buf : Void*) : Herr
 
   # Attribute operations
   fun H5Acreate2(loc_id : Hid, attr_name : UInt8*, type_id : Hid, space_id : Hid,

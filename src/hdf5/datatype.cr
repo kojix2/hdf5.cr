@@ -1,4 +1,131 @@
 module HDF5
+  enum StringEncoding
+    Ascii
+    Utf8
+
+    def self.parse(value : Symbol | StringEncoding) : StringEncoding
+      case value
+      in StringEncoding
+        value
+      in Symbol
+        case value
+        when :ascii then Ascii
+        when :utf8  then Utf8
+        else
+          raise Error.new("Unsupported string encoding: #{value}")
+        end
+      end
+    end
+
+    def self.from_lib(value : LibHDF5::CharSet) : StringEncoding
+      case value
+      when LibHDF5::CharSet::Ascii then Ascii
+      when LibHDF5::CharSet::Utf8  then Utf8
+      else
+        raise Error.new("Unknown HDF5 string character set: #{value}")
+      end
+    end
+  end
+
+  enum StringPadding
+    NullTerm
+    NullPad
+    SpacePad
+
+    def self.from_lib(value : LibHDF5::StrPad) : StringPadding
+      case value
+      when LibHDF5::StrPad::NullTerm then NullTerm
+      when LibHDF5::StrPad::NullPad  then NullPad
+      when LibHDF5::StrPad::SpacePad then SpacePad
+      else
+        raise Error.new("Unknown HDF5 string padding mode: #{value}")
+      end
+    end
+  end
+
+  struct StringType
+    getter size : Int32?
+    getter encoding : StringEncoding
+    getter padding : StringPadding
+
+    def initialize(@size : Int32?, @encoding : StringEncoding, @padding : StringPadding)
+      # Validation for fixed sizes is performed when constructing HDF5 type ids.
+    end
+
+    def self.variable(encoding : Symbol | StringEncoding = StringEncoding::Utf8,
+                      padding : StringPadding = StringPadding::NullTerm) : StringType
+      new(nil, StringEncoding.parse(encoding), padding)
+    end
+
+    def self.fixed(size : Int,
+                   encoding : Symbol | StringEncoding = StringEncoding::Utf8,
+                   padding : StringPadding = StringPadding::NullPad) : StringType
+      new(size.to_i32, StringEncoding.parse(encoding), padding)
+    end
+
+    def variable? : Bool
+      @size.nil?
+    end
+
+    def fixed? : Bool
+      !variable?
+    end
+
+    def with_encoding(encoding : Symbol | StringEncoding) : StringType
+      self.class.new(@size, StringEncoding.parse(encoding), @padding)
+    end
+
+    def to_hdf5_type_id : LibHDF5::Hid
+      type_id = LibHDF5.H5Tcopy(LibHDF5.h5t_c_s1_g)
+      raise Error.new("Failed to copy string type") if type_id == LibHDF5::H5_INVALID_HID
+
+      size_value = if variable?
+                     LibC::SizeT::MAX
+                   else
+                     fixed_size = (@size || raise Error.new("Fixed string type requires size")).as(Int32)
+                     fixed_size.to_u64
+                   end
+      ret = LibHDF5.H5Tset_size(type_id, size_value)
+      if ret < 0
+        LibHDF5.H5Tclose(type_id)
+        raise Error.new("Failed to set string size")
+      end
+
+      ret = LibHDF5.H5Tset_cset(type_id, string_encoding_to_lib(@encoding))
+      if ret < 0
+        LibHDF5.H5Tclose(type_id)
+        raise Error.new("Failed to set string encoding")
+      end
+
+      ret = LibHDF5.H5Tset_strpad(type_id, string_padding_to_lib(@padding).value)
+      if ret < 0
+        LibHDF5.H5Tclose(type_id)
+        raise Error.new("Failed to set string padding")
+      end
+
+      type_id
+    end
+
+    private def string_encoding_to_lib(encoding : StringEncoding) : LibHDF5::CharSet
+      case encoding.value
+      when 0 then LibHDF5::CharSet::Ascii
+      when 1 then LibHDF5::CharSet::Utf8
+      else
+        raise Error.new("Unsupported string encoding: #{encoding}")
+      end
+    end
+
+    private def string_padding_to_lib(padding : StringPadding) : LibHDF5::StrPad
+      case padding.value
+      when 0 then LibHDF5::StrPad::NullTerm
+      when 1 then LibHDF5::StrPad::NullPad
+      when 2 then LibHDF5::StrPad::SpacePad
+      else
+        raise Error.new("Unsupported string padding: #{padding}")
+      end
+    end
+  end
+
   record CompoundMember, name : String, offset : UInt64, datatype : Datatype
 
   class Datatype
@@ -34,6 +161,20 @@ module HDF5
 
     def fixed_length_string? : Bool
       string? && !variable_length_string?
+    end
+
+    def string_encoding : StringEncoding
+      raise Error.new("Datatype is not string") unless string?
+      cset = LibHDF5.H5Tget_cset(@id)
+      raise Error.new("Failed to get string encoding") if cset == LibHDF5::CharSet::Error
+      StringEncoding.from_lib(cset)
+    end
+
+    def string_padding : StringPadding
+      raise Error.new("Datatype is not string") unless string?
+      strpad = LibHDF5.H5Tget_strpad(@id)
+      raise Error.new("Failed to get string padding") if strpad == LibHDF5::StrPad::Error
+      StringPadding.from_lib(strpad)
     end
 
     def variable_length_string? : Bool
@@ -189,19 +330,11 @@ module HDF5
     end
 
     def self.variable_length_string : LibHDF5::Hid
-      tid = LibHDF5.H5Tcopy(LibHDF5.h5t_c_s1_g)
-      raise Error.new("Failed to copy string type") if tid == LibHDF5::H5_INVALID_HID
-      ret = LibHDF5.H5Tset_size(tid, LibC::SizeT::MAX)
-      raise Error.new("Failed to set string size") if ret < 0
-      tid
+      StringType.variable.to_hdf5_type_id
     end
 
     def self.fixed_length_string(size : Int) : LibHDF5::Hid
-      tid = LibHDF5.H5Tcopy(LibHDF5.h5t_c_s1_g)
-      raise Error.new("Failed to copy string type") if tid == LibHDF5::H5_INVALID_HID
-      ret = LibHDF5.H5Tset_size(tid, LibC::SizeT.new(size))
-      raise Error.new("Failed to set string size") if ret < 0
-      tid
+      StringType.fixed(size).to_hdf5_type_id
     end
   end
 end

@@ -71,14 +71,34 @@ module HDF5
       type_id = LibHDF5.H5Aget_type(@id)
       raise Error.new("Failed to get attribute type") if type_id == LibHDF5::H5_INVALID_HID
       is_vlen = LibHDF5.H5Tis_variable_str(type_id)
+      if is_vlen < 0
+        LibHDF5.H5Tclose(type_id)
+        raise Error.new("Failed to inspect attribute string storage")
+      end
       size = LibHDF5.H5Tget_size(type_id)
       if is_vlen > 0
         # For variable-length strings, read into a char** and wrap the pointed string
+        space_id = LibHDF5.H5Aget_space(@id)
+        if space_id == LibHDF5::H5_INVALID_HID
+          LibHDF5.H5Tclose(type_id)
+          raise Error.new("Failed to get attribute dataspace")
+        end
         ptr = Pointer(UInt8).null
         ret = LibHDF5.H5Aread(@id, type_id, pointerof(ptr).as(Void*))
-        LibHDF5.H5Tclose(type_id)
-        raise Error.new("Failed to read string attribute") if ret < 0
-        ptr.null? ? "" : String.new(ptr)
+        if ret < 0
+          LibHDF5.H5Sclose(space_id)
+          LibHDF5.H5Tclose(type_id)
+          raise Error.new("Failed to read string attribute")
+        end
+
+        begin
+          ptr.null? ? "" : String.new(ptr)
+        ensure
+          reclaim = LibHDF5.H5Dvlen_reclaim(type_id, space_id, LibHDF5::H5P_DEFAULT, pointerof(ptr).as(Void*))
+          LibHDF5.H5Sclose(space_id)
+          LibHDF5.H5Tclose(type_id)
+          raise Error.new("Failed to reclaim variable-length attribute string memory") if reclaim < 0
+        end
       else
         buf = Bytes.new(size + 1)
         ret = LibHDF5.H5Aread(@id, type_id, buf.to_unsafe.as(Void*))

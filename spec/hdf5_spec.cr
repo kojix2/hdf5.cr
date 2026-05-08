@@ -544,6 +544,44 @@ describe HDF5 do
         file.dataset("genes", String).read.should eq(["TP53", "CTNNB1", "TERT"])
       end
     end
+
+    it "supports explicit encoding for string datasets" do
+      data = ["こんにちは", "世界"]
+      HDF5.open(TMP_FILE, :w) do |file|
+        file.create_dataset("utf8_names", data, encoding: :utf8).close
+      end
+
+      HDF5.open(TMP_FILE, :r) do |file|
+        ds = file.dataset("utf8_names", String)
+        ds.read.should eq(data)
+        dtype = ds.datatype
+        dtype.string_encoding.should eq(HDF5::StringEncoding::Utf8)
+        dtype.string_padding.should eq(HDF5::StringPadding::NullTerm)
+        dtype.close
+      end
+    end
+
+    it "supports fixed-length string datasets via StringType" do
+      HDF5.open(TMP_FILE, :w) do |file|
+        ds = file.create_dataset(
+          "fixed_codes",
+          String,
+          shape: {2},
+          string_type: HDF5::StringType.fixed(8, encoding: :ascii)
+        )
+        ds.write(["ABC", "XYZ"])
+        ds.close
+      end
+
+      HDF5.open(TMP_FILE, :r) do |file|
+        dtype = file.open_dataset("fixed_codes").datatype
+        dtype.fixed_length_string?.should be_true
+        dtype.size.should eq(8)
+        dtype.string_encoding.should eq(HDF5::StringEncoding::Ascii)
+        dtype.string_padding.should eq(HDF5::StringPadding::NullPad)
+        dtype.close
+      end
+    end
   end
 
   # ── Datatype introspection ───────────────────────────────────────────────
@@ -616,6 +654,8 @@ describe HDF5 do
         dtype.string?.should be_true
         dtype.fixed_length_string?.should be_false
         dtype.variable_length_string?.should be_true
+        dtype.string_encoding.should eq(HDF5::StringEncoding::Utf8)
+        dtype.string_padding.should eq(HDF5::StringPadding::NullTerm)
         dtype.integer?.should be_false
         dtype.float?.should be_false
         dtype.reference?.should be_false
@@ -643,6 +683,8 @@ describe HDF5 do
         dtype.string?.should be_true
         dtype.fixed_length_string?.should be_true
         dtype.variable_length_string?.should be_false
+        dtype.string_encoding.should eq(HDF5::StringEncoding::Utf8)
+        dtype.string_padding.should eq(HDF5::StringPadding::NullPad)
         dtype.close
       end
     end

@@ -115,26 +115,100 @@ module HDF5
     end
 
     def write_strings(data : Array(String))
-      type_id = NativeType.variable_length_string
-      ptrs = data.map(&.to_unsafe)
-      ret = LibHDF5.H5Dwrite(@id, type_id, LibHDF5::H5S_ALL, LibHDF5::H5S_ALL,
-        LibHDF5::H5P_DEFAULT, ptrs.to_unsafe.as(Void*))
-      LibHDF5.H5Tclose(type_id)
-      raise Error.new("Failed to write string dataset") if ret < 0
+      file_type = datatype
+      raise Error.new("Dataset is not string type") unless file_type.string?
+
+      if file_type.variable_length_string?
+        write_type = StringType.variable(encoding: file_type.string_encoding,
+          padding: file_type.string_padding).to_hdf5_type_id
+        ptrs = data.map(&.to_unsafe)
+        ret = LibHDF5.H5Dwrite(@id, write_type, LibHDF5::H5S_ALL, LibHDF5::H5S_ALL,
+          LibHDF5::H5P_DEFAULT, ptrs.to_unsafe.as(Void*))
+        LibHDF5.H5Tclose(write_type)
+        file_type.close
+        raise Error.new("Failed to write string dataset") if ret < 0
+        return
+      end
+
+      unless file_type.fixed_length_string?
+        file_type.close
+        raise Error.new("Unsupported string dataset storage")
+      end
+
+      element_size = file_type.size
+      write_type = StringType.fixed(element_size,
+        encoding: file_type.string_encoding,
+        padding: file_type.string_padding).to_hdf5_type_id
+
+      fixed = fixed_length_buffer(data, element_size, file_type.string_padding)
+      ret = LibHDF5.H5Dwrite(@id, write_type, LibHDF5::H5S_ALL, LibHDF5::H5S_ALL,
+        LibHDF5::H5P_DEFAULT, fixed.to_unsafe.as(Void*))
+      LibHDF5.H5Tclose(write_type)
+      file_type.close
+      raise Error.new("Failed to write fixed-length string dataset") if ret < 0
     end
 
     def read_strings : Array(String)
-      type_id = NativeType.variable_length_string
+      file_type = datatype
+      raise Error.new("Dataset is not string type") unless file_type.string?
+
+      if file_type.variable_length_string?
+        type_id = StringType.variable(encoding: file_type.string_encoding,
+          padding: file_type.string_padding).to_hdf5_type_id
+        space = dataspace
+        n = space.npoints
+        if n < 0
+          space.close
+          LibHDF5.H5Tclose(type_id)
+          file_type.close
+          raise Error.new("Invalid dataspace")
+        end
+        ptrs = Array(Pointer(UInt8)).new(n.to_i, Pointer(UInt8).null)
+        ret = LibHDF5.H5Dread(@id, type_id, LibHDF5::H5S_ALL, LibHDF5::H5S_ALL,
+          LibHDF5::H5P_DEFAULT, ptrs.to_unsafe.as(Void*))
+        if ret < 0
+          space.close
+          LibHDF5.H5Tclose(type_id)
+          file_type.close
+          raise Error.new("Failed to read string dataset")
+        end
+
+        begin
+          return ptrs.map { |ptr| ptr.null? ? "" : String.new(ptr) }
+        ensure
+          reclaim = LibHDF5.H5Dvlen_reclaim(type_id, space.id, LibHDF5::H5P_DEFAULT, ptrs.to_unsafe.as(Void*))
+          space.close
+          LibHDF5.H5Tclose(type_id)
+          file_type.close
+          raise Error.new("Failed to reclaim variable-length string memory") if reclaim < 0
+        end
+      end
+
+      unless file_type.fixed_length_string?
+        file_type.close
+        raise Error.new("Unsupported string dataset storage")
+      end
+
       space = dataspace
       n = space.npoints
+      if n < 0
+        space.close
+        file_type.close
+        raise Error.new("Invalid dataspace")
+      end
+
+      element_size = file_type.size
+      read_type = StringType.fixed(element_size,
+        encoding: file_type.string_encoding,
+        padding: file_type.string_padding).to_hdf5_type_id
+      buf = Bytes.new(n.to_i * element_size, 0_u8)
+      ret = LibHDF5.H5Dread(@id, read_type, LibHDF5::H5S_ALL, LibHDF5::H5S_ALL,
+        LibHDF5::H5P_DEFAULT, buf.to_unsafe.as(Void*))
+      LibHDF5.H5Tclose(read_type)
       space.close
-      raise Error.new("Invalid dataspace") if n < 0
-      ptrs = Array(Pointer(UInt8)).new(n.to_i, Pointer(UInt8).null)
-      ret = LibHDF5.H5Dread(@id, type_id, LibHDF5::H5S_ALL, LibHDF5::H5S_ALL,
-        LibHDF5::H5P_DEFAULT, ptrs.to_unsafe.as(Void*))
-      LibHDF5.H5Tclose(type_id)
-      raise Error.new("Failed to read string dataset") if ret < 0
-      ptrs.map { |ptr| ptr.null? ? "" : String.new(ptr) }
+      file_type.close
+      raise Error.new("Failed to read fixed-length string dataset") if ret < 0
+      decode_fixed_length_strings(buf, n.to_i, element_size)
     end
 
     def resize(new_shape : Indexable) : Nil
@@ -167,6 +241,45 @@ module HDF5
 
     def finalize
       close
+    end
+
+    private def fixed_length_buffer(data : Array(String), element_size : Int32,
+                                    padding : StringPadding) : Bytes
+      fill = padding == StringPadding::SpacePad ? ' '.ord.to_u8 : 0_u8
+      buf = Bytes.new(data.size * element_size, fill)
+      data.each_with_index do |value, index|
+        max_len = padding == StringPadding::NullTerm ? element_size - 1 : element_size
+        next if max_len <= 0
+        bytes = value.to_slice
+        copy_len = bytes.size < max_len ? bytes.size : max_len
+        start = index * element_size
+        copy_len.times do |offset|
+          buf[start + offset] = bytes[offset]
+        end
+      end
+      buf
+    end
+
+    private def decode_fixed_length_strings(buf : Bytes, count : Int32, element_size : Int32) : Array(String)
+      Array(String).new(count) do |index|
+        start = index * element_size
+        slice = buf[start, element_size]
+        String.new(trim_fixed_string_slice(slice))
+      end
+    end
+
+    private def trim_fixed_string_slice(slice : Bytes) : Bytes
+      terminator = slice.index(0_u8)
+      if terminator
+        return slice[0, terminator]
+      end
+
+      last = slice.size - 1
+      while last >= 0 && (slice[last] == 0_u8 || slice[last] == ' '.ord.to_u8)
+        last -= 1
+      end
+      return Bytes.new(0) if last < 0
+      slice[0, last + 1]
     end
   end
 end
