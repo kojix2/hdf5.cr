@@ -533,6 +533,68 @@ describe HDF5 do
     end
   end
 
+  # ── Datatype introspection ───────────────────────────────────────────────
+
+  describe "Datatype introspection" do
+    it "reports integer dataset metadata" do
+      HDF5.open(TMP_FILE, :w) do |file|
+        file["ints"] = [1_i32, 2_i32, 3_i32]
+      end
+
+      HDF5.open(TMP_FILE, :r) do |file|
+        dtype = file.open_dataset("ints").datatype
+        dtype.type_class.should eq(LibHDF5::TypeClass::Integer)
+        dtype.size.should eq(sizeof(Int32))
+        dtype.integer?.should be_true
+        dtype.float?.should be_false
+        dtype.string?.should be_false
+        dtype.variable_length_string?.should be_false
+        dtype.reference?.should be_false
+        dtype.vlen?.should be_false
+        dtype.compound?.should be_false
+        dtype.array?.should be_false
+        dtype.close
+      end
+    end
+
+    it "reports float dataset metadata through TypedDataset" do
+      HDF5.open(TMP_FILE, :w) do |file|
+        file["floats"] = [1.5_f64, 2.5_f64, 3.5_f64]
+      end
+
+      HDF5.open(TMP_FILE, :r) do |file|
+        dtype = file.dataset("floats", Float64).datatype
+        dtype.type_class.should eq(LibHDF5::TypeClass::Float)
+        dtype.size.should eq(sizeof(Float64))
+        dtype.integer?.should be_false
+        dtype.float?.should be_true
+        dtype.string?.should be_false
+        dtype.variable_length_string?.should be_false
+        dtype.close
+      end
+    end
+
+    it "reports variable-length string metadata" do
+      HDF5.open(TMP_FILE, :w) do |file|
+        file.create_dataset("strs", ["alpha", "beta"]).close
+      end
+
+      HDF5.open(TMP_FILE, :r) do |file|
+        dtype = file.dataset("strs", String).datatype
+        dtype.type_class.should eq(LibHDF5::TypeClass::String)
+        dtype.string?.should be_true
+        dtype.variable_length_string?.should be_true
+        dtype.integer?.should be_false
+        dtype.float?.should be_false
+        dtype.reference?.should be_false
+        dtype.vlen?.should be_false
+        dtype.compound?.should be_false
+        dtype.array?.should be_false
+        dtype.close
+      end
+    end
+  end
+
   # ── Partial I/O with Selection ────────────────────────────────────────────
 
   describe "Selection partial I/O" do

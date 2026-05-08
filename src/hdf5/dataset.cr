@@ -11,6 +11,12 @@ module HDF5
       Dataspace.new(space_id)
     end
 
+    def datatype : Datatype
+      type_id = LibHDF5.H5Dget_type(@id)
+      raise Error.new("Failed to get dataset datatype") if type_id == LibHDF5::H5_INVALID_HID
+      Datatype.new(type_id)
+    end
+
     # Crystal-native shape API
     def shape : Array(UInt64)
       dataspace.dims
