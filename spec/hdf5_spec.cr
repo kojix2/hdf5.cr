@@ -711,6 +711,49 @@ describe HDF5 do
     end
   end
 
+  # ── TypedDataset – variable-length numeric arrays ────────────────────────
+
+  describe "TypedDataset - variable-length numeric arrays" do
+    it "writes and reads Int32 ragged arrays" do
+      data = [[1_i32, 2_i32, 3_i32], [] of Int32, [4_i32]]
+      HDF5.open(TMP_FILE, :w) do |file|
+        file.create_dataset("ragged", data).close
+      end
+
+      HDF5.open(TMP_FILE, :r) do |file|
+        ds = file.dataset("ragged", Array(Int32))
+        ds.read.should eq(data)
+
+        dtype = ds.datatype
+        dtype.vlen?.should be_true
+        base = dtype.base_type
+        base.should_not be_nil
+        if base
+          base.integer?.should be_true
+          base.size.should eq(sizeof(Int32))
+        end
+        dtype.close
+        ds.close
+      end
+    end
+
+    it "supports explicit shape and selection I/O" do
+      HDF5.open(TMP_FILE, :w) do |file|
+        ds = file.create_dataset("ragged", Array(Float64), shape: {4})
+        ds.write([[1.5_f64], [2.0_f64, 3.0_f64], [] of Float64, [4.25_f64]])
+        ds.write([[9.0_f64, 10.0_f64], [11.0_f64]], HDF5.s[1...3])
+        ds.close
+      end
+
+      HDF5.open(TMP_FILE, :r) do |file|
+        ds = file.dataset("ragged", Array(Float64))
+        ds.read.should eq([[1.5_f64], [9.0_f64, 10.0_f64], [11.0_f64], [4.25_f64]])
+        ds[HDF5.s[1...3]].should eq([[9.0_f64, 10.0_f64], [11.0_f64]])
+        ds.close
+      end
+    end
+  end
+
   # ── Object references ─────────────────────────────────────────────────────
 
   describe "Reference" do
@@ -739,6 +782,25 @@ describe HDF5 do
         obj.should be_a(HDF5::Dataset)
         obj.as(HDF5::Dataset).read(Int32).should eq([1, 2, 3])
         obj.close
+      end
+    end
+
+    it "supports selection I/O for reference datasets" do
+      HDF5.open(TMP_FILE, :w) do |file|
+        file.create_group("a").close
+        file.create_group("b").close
+        file.create_group("c").close
+
+        ds = file.create_dataset("refs", HDF5::Reference, shape: {3})
+        ds.write([file.reference("/a"), file.reference("/b"), file.reference("/c")])
+        ds.write([file.reference("/c")], HDF5.s[1...2])
+        ds.close
+      end
+
+      HDF5.open(TMP_FILE, :r) do |file|
+        ds = file.dataset("refs", HDF5::Reference)
+        ds[HDF5.s[1...3]].map(&.target_path).should eq(["/c", "/c"])
+        ds.close
       end
     end
 

@@ -343,4 +343,12 @@ module HDF5
       StringType.fixed(size).to_hdf5_type_id
     end
   end
+
+  module VLenType
+    def self.for(type : T.class) : LibHDF5::Hid forall T
+      type_id = LibHDF5.H5Tvlen_create(NativeType.for(T))
+      raise Error.new("Failed to create variable-length datatype") if type_id == LibHDF5::H5_INVALID_HID
+      type_id
+    end
+  end
 end

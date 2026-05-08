@@ -58,21 +58,7 @@ module HDF5
       n = space.npoints
       space.close
       raise Error.new("Invalid dataspace") if n < 0
-      {% if T == HDF5::Reference %}
-        refs = Array(LibHDF5::Reference).new(n.to_i) { LibHDF5::Reference.new }
-        dtype = NativeType.for(Reference)
-        ret = LibHDF5.H5Dread(@id, dtype, LibHDF5::H5S_ALL, LibHDF5::H5S_ALL,
-          LibHDF5::H5P_DEFAULT, refs.to_unsafe.as(Void*))
-        raise Error.new("Failed to read object reference dataset") if ret < 0
-        refs.map { |ref| Reference.new(ref) }
-      {% else %}
-        buf = Array(T).new(n.to_i) { T.zero }
-        dtype = NativeType.for(T)
-        ret = LibHDF5.H5Dread(@id, dtype, LibHDF5::H5S_ALL, LibHDF5::H5S_ALL,
-          LibHDF5::H5P_DEFAULT, buf.to_unsafe.as(Void*))
-        raise Error.new("Failed to read dataset") if ret < 0
-        buf
-      {% end %}
+      DatasetStorage.read_all(@id, T, n.to_i)
     end
 
     def read(type : T.class, selection : Selection) : Array(T) forall T
@@ -82,23 +68,11 @@ module HDF5
         n = LibHDF5.H5Sget_select_npoints(file_space.id)
         raise Error.new("Invalid selection") if n <= 0
         mem_space = Dataspace.simple([n.to_u64])
-        {% if T == HDF5::Reference %}
-          refs = Array(LibHDF5::Reference).new(n.to_i) { LibHDF5::Reference.new }
-          dtype = NativeType.for(Reference)
-          ret = LibHDF5.H5Dread(@id, dtype, mem_space.id, file_space.id,
-            LibHDF5::H5P_DEFAULT, refs.to_unsafe.as(Void*))
+        begin
+          DatasetStorage.read_selection(@id, T, mem_space.id, file_space.id, n.to_i)
+        ensure
           mem_space.close
-          raise Error.new("Failed to read dataset with selection") if ret < 0
-          refs.map { |ref| Reference.new(ref) }
-        {% else %}
-          buf = Array(T).new(n.to_i) { T.zero }
-          dtype = NativeType.for(T)
-          ret = LibHDF5.H5Dread(@id, dtype, mem_space.id, file_space.id,
-            LibHDF5::H5P_DEFAULT, buf.to_unsafe.as(Void*))
-          mem_space.close
-          raise Error.new("Failed to read dataset with selection") if ret < 0
-          buf
-        {% end %}
+        end
       ensure
         file_space.close
       end
@@ -114,18 +88,7 @@ module HDF5
 
     def write(data : Array(T)) forall T
       ensure_open
-      {% if T == HDF5::Reference %}
-        dtype = NativeType.for(Reference)
-        refs = data.map(&.to_hdf5_reference)
-        ret = LibHDF5.H5Dwrite(@id, dtype, LibHDF5::H5S_ALL, LibHDF5::H5S_ALL,
-          LibHDF5::H5P_DEFAULT, refs.to_unsafe.as(Void*))
-        raise Error.new("Failed to write dataset") if ret < 0
-      {% else %}
-        dtype = NativeType.for(T)
-        ret = LibHDF5.H5Dwrite(@id, dtype, LibHDF5::H5S_ALL, LibHDF5::H5S_ALL,
-          LibHDF5::H5P_DEFAULT, data.to_unsafe.as(Void*))
-        raise Error.new("Failed to write dataset") if ret < 0
-      {% end %}
+      DatasetStorage.write_all(@id, data)
     end
 
     def write(data : Slice(T)) forall T
@@ -145,20 +108,11 @@ module HDF5
           "Selection covers #{n} points but data has #{data.size} elements"
         ) if data.size != n
         mem_space = Dataspace.simple([n.to_u64])
-        {% if T == HDF5::Reference %}
-          dtype = NativeType.for(Reference)
-          refs = data.map(&.to_hdf5_reference)
-          ret = LibHDF5.H5Dwrite(@id, dtype, mem_space.id, file_space.id,
-            LibHDF5::H5P_DEFAULT, refs.to_unsafe.as(Void*))
+        begin
+          DatasetStorage.write_selection(@id, data, mem_space.id, file_space.id)
+        ensure
           mem_space.close
-          raise Error.new("Failed to write dataset with selection") if ret < 0
-        {% else %}
-          dtype = NativeType.for(T)
-          ret = LibHDF5.H5Dwrite(@id, dtype, mem_space.id, file_space.id,
-            LibHDF5::H5P_DEFAULT, data.to_unsafe.as(Void*))
-          mem_space.close
-          raise Error.new("Failed to write dataset with selection") if ret < 0
-        {% end %}
+        end
       ensure
         file_space.close
       end

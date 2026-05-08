@@ -192,6 +192,11 @@ lib LibHDF5
   fun H5free_memory(mem : Void*) : Herr
   fun H5Dvlen_reclaim(type_id : Hid, space_id : Hid, plist_id : Hid, buf : Void*) : Herr
 
+  struct VLen
+    len : LibC::SizeT
+    p : Void*
+  end
+
   # Reference operations
   struct Reference
     data : UInt8[64]

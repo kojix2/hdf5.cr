@@ -64,7 +64,7 @@ module HDF5
         TypedDataset(String).new(ds)
       {% else %}
         dims = [data.size.to_u64]
-        ds = build_numeric_dataset(path, T, dims)
+        ds = build_typed_dataset(path, T, dims)
         ds.write(data)
         TypedDataset(T).new(ds)
       {% end %}
@@ -126,7 +126,7 @@ module HDF5
         ds = build_string_dataset(path, dims, resolved_opts, string_type: StringType.variable)
         TypedDataset(String).new(ds)
       {% else %}
-        ds = build_numeric_dataset(path, T, dims, resolved_opts)
+        ds = build_typed_dataset(path, T, dims, resolved_opts)
         TypedDataset(T).new(ds)
       {% end %}
     end
@@ -358,7 +358,7 @@ module HDF5
 
     # ── Private helpers ───────────────────────────────────────────────────────
 
-    private def build_numeric_dataset(
+    private def build_typed_dataset(
       path : String,
       type : T.class,
       dims : Array(UInt64),
@@ -376,6 +376,29 @@ module HDF5
         LibHDF5::H5P_DEFAULT, dcpl_id, LibHDF5::H5P_DEFAULT)
       LibHDF5.H5Pclose(dcpl_id) if dcpl_id != LibHDF5::H5P_DEFAULT
       space.close
+      raise Error.new("Failed to create dataset '#{path}'") if did == LibHDF5::H5_INVALID_HID
+      Dataset.new(did)
+    end
+
+    private def build_typed_dataset(
+      path : String,
+      type : Array(T).class,
+      dims : Array(UInt64),
+      opts : DatasetCreateOptions? = nil,
+    ) : Dataset forall T
+      dtype = VLenType.for(T)
+      opts_max = opts.try(&.max_shape)
+      space = Dataspace.simple(dims, opts_max)
+      dcpl_id = LibHDF5::H5P_DEFAULT
+      if opts && (opts.chunk || (opts.compression && !opts.compression.try(&.none?)) || opts.shuffle? || opts.fletcher32?)
+        dcpl_id = LibHDF5.H5Pcreate(LibHDF5.h5p_cls_dataset_create_id_g)
+        opts.apply_to(dcpl_id, dims)
+      end
+      did = LibHDF5.H5Dcreate2(hid, path, dtype, space.id,
+        LibHDF5::H5P_DEFAULT, dcpl_id, LibHDF5::H5P_DEFAULT)
+      LibHDF5.H5Pclose(dcpl_id) if dcpl_id != LibHDF5::H5P_DEFAULT
+      space.close
+      LibHDF5.H5Tclose(dtype)
       raise Error.new("Failed to create dataset '#{path}'") if did == LibHDF5::H5_INVALID_HID
       Dataset.new(did)
     end
