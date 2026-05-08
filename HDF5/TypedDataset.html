@@ -263,7 +263,7 @@
   </h2>
   
     
-      <a href="https://github.com/kojix2/hdf5.cr/blob/004533ebec083d8d8b9c98cd35d6be29e96699fc/src/hdf5/typed_dataset.cr#L2" target="_blank">
+      <a href="https://github.com/kojix2/hdf5.cr/blob/75ac21c29e5575962209d68704ae2a1219b43ef4/src/hdf5/typed_dataset.cr#L2" target="_blank">
         hdf5/typed_dataset.cr
       </a>
     
@@ -296,23 +296,6 @@
   
 
   
-  <h2>
-    <a id="macro-summary" class="anchor" href="#macro-summary">
-  <svg class="octicon-link" aria-hidden="true">
-    <use href="#octicon-link"/>
-  </svg>
-</a>
-    Macro Summary
-  </h2>
-  <ul class="list-summary">
-    
-      <li class="entry-summary">
-        <a href="#method_missing%28call%29-macro" class="signature"><strong>method_missing</strong>(call)</a>
-        
-      </li>
-    
-  </ul>
-
 
   
   <h2>
@@ -342,6 +325,16 @@
     
       <li class="entry-summary">
         <a href="#close%3ANil-instance-method" class="signature"><strong>#close</strong> : Nil</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#dataspace%3ADataspace-instance-method" class="signature"><strong>#dataspace</strong> : Dataspace</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#datatype%3ADatatype-instance-method" class="signature"><strong>#datatype</strong> : Datatype</a>
         
       </li>
     
@@ -382,6 +375,11 @@
     
       <li class="entry-summary">
         <a href="#size%3AUInt64-instance-method" class="signature"><strong>#size</strong> : UInt64</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#storage_size%3AUInt64-instance-method" class="signature"><strong>#storage_size</strong> : UInt64</a>
         
       </li>
     
@@ -455,7 +453,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/hdf5.cr/blob/004533ebec083d8d8b9c98cd35d6be29e96699fc/src/hdf5/typed_dataset.cr#L5" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/75ac21c29e5575962209d68704ae2a1219b43ef4/src/hdf5/typed_dataset.cr#L3" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -465,32 +463,6 @@
   
 
   
-  <h2>
-    <a id="macro-detail" class="anchor" href="#macro-detail">
-  <svg class="octicon-link" aria-hidden="true">
-    <use href="#octicon-link"/>
-  </svg>
-</a>
-    Macro Detail
-  </h2>
-  
-    <div class="entry-detail" id="method_missing(call)-macro">
-      <div class="signature">
-        
-        macro <strong>method_missing</strong>(call)
-
-        <a class="method-permalink" href="#method_missing%28call%29-macro">#</a>
-      </div>
-      
-      <br/>
-      <div>
-        
-          [<a href="https://github.com/kojix2/hdf5.cr/blob/004533ebec083d8d8b9c98cd35d6be29e96699fc/src/hdf5/typed_dataset.cr#L3" target="_blank">View source</a>]
-        
-      </div>
-    </div>
-  
-
 
   
   <h2>
@@ -513,7 +485,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/hdf5.cr/blob/004533ebec083d8d8b9c98cd35d6be29e96699fc/src/hdf5/typed_dataset.cr#L72" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/75ac21c29e5575962209d68704ae2a1219b43ef4/src/hdf5/typed_dataset.cr#L82" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -529,7 +501,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/hdf5.cr/blob/004533ebec083d8d8b9c98cd35d6be29e96699fc/src/hdf5/typed_dataset.cr#L76" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/75ac21c29e5575962209d68704ae2a1219b43ef4/src/hdf5/typed_dataset.cr#L86" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -545,7 +517,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/hdf5.cr/blob/004533ebec083d8d8b9c98cd35d6be29e96699fc/src/hdf5/typed_dataset.cr#L20" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/75ac21c29e5575962209d68704ae2a1219b43ef4/src/hdf5/typed_dataset.cr#L30" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -561,7 +533,39 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/hdf5.cr/blob/004533ebec083d8d8b9c98cd35d6be29e96699fc/src/hdf5/typed_dataset.cr#L80" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/75ac21c29e5575962209d68704ae2a1219b43ef4/src/hdf5/typed_dataset.cr#L90" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="dataspace:Dataspace-instance-method">
+      <div class="signature">
+        
+        def <strong>dataspace</strong> : <a href="../HDF5/Dataspace.html">Dataspace</a>
+
+        <a class="method-permalink" href="#dataspace%3ADataspace-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/75ac21c29e5575962209d68704ae2a1219b43ef4/src/hdf5/typed_dataset.cr#L22" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="datatype:Datatype-instance-method">
+      <div class="signature">
+        
+        def <strong>datatype</strong> : <a href="../HDF5/Datatype.html">Datatype</a>
+
+        <a class="method-permalink" href="#datatype%3ADatatype-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/75ac21c29e5575962209d68704ae2a1219b43ef4/src/hdf5/typed_dataset.cr#L18" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -577,7 +581,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/hdf5.cr/blob/004533ebec083d8d8b9c98cd35d6be29e96699fc/src/hdf5/typed_dataset.cr#L84" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/75ac21c29e5575962209d68704ae2a1219b43ef4/src/hdf5/typed_dataset.cr#L94" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -593,7 +597,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/hdf5.cr/blob/004533ebec083d8d8b9c98cd35d6be29e96699fc/src/hdf5/typed_dataset.cr#L12" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/75ac21c29e5575962209d68704ae2a1219b43ef4/src/hdf5/typed_dataset.cr#L10" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -609,7 +613,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/hdf5.cr/blob/004533ebec083d8d8b9c98cd35d6be29e96699fc/src/hdf5/typed_dataset.cr#L32" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/75ac21c29e5575962209d68704ae2a1219b43ef4/src/hdf5/typed_dataset.cr#L42" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -625,7 +629,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/hdf5.cr/blob/004533ebec083d8d8b9c98cd35d6be29e96699fc/src/hdf5/typed_dataset.cr#L24" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/75ac21c29e5575962209d68704ae2a1219b43ef4/src/hdf5/typed_dataset.cr#L34" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -641,7 +645,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/hdf5.cr/blob/004533ebec083d8d8b9c98cd35d6be29e96699fc/src/hdf5/typed_dataset.cr#L40" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/75ac21c29e5575962209d68704ae2a1219b43ef4/src/hdf5/typed_dataset.cr#L50" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -657,7 +661,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/hdf5.cr/blob/004533ebec083d8d8b9c98cd35d6be29e96699fc/src/hdf5/typed_dataset.cr#L68" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/75ac21c29e5575962209d68704ae2a1219b43ef4/src/hdf5/typed_dataset.cr#L78" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -673,7 +677,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/hdf5.cr/blob/004533ebec083d8d8b9c98cd35d6be29e96699fc/src/hdf5/typed_dataset.cr#L8" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/75ac21c29e5575962209d68704ae2a1219b43ef4/src/hdf5/typed_dataset.cr#L6" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -689,7 +693,23 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/hdf5.cr/blob/004533ebec083d8d8b9c98cd35d6be29e96699fc/src/hdf5/typed_dataset.cr#L16" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/75ac21c29e5575962209d68704ae2a1219b43ef4/src/hdf5/typed_dataset.cr#L14" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="storage_size:UInt64-instance-method">
+      <div class="signature">
+        
+        def <strong>storage_size</strong> : UInt64
+
+        <a class="method-permalink" href="#storage_size%3AUInt64-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/75ac21c29e5575962209d68704ae2a1219b43ef4/src/hdf5/typed_dataset.cr#L26" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -705,7 +725,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/hdf5.cr/blob/004533ebec083d8d8b9c98cd35d6be29e96699fc/src/hdf5/typed_dataset.cr#L60" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/75ac21c29e5575962209d68704ae2a1219b43ef4/src/hdf5/typed_dataset.cr#L70" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -721,7 +741,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/hdf5.cr/blob/004533ebec083d8d8b9c98cd35d6be29e96699fc/src/hdf5/typed_dataset.cr#L44" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/75ac21c29e5575962209d68704ae2a1219b43ef4/src/hdf5/typed_dataset.cr#L54" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -737,7 +757,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/hdf5.cr/blob/004533ebec083d8d8b9c98cd35d6be29e96699fc/src/hdf5/typed_dataset.cr#L52" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/75ac21c29e5575962209d68704ae2a1219b43ef4/src/hdf5/typed_dataset.cr#L62" target="_blank">View source</a>]
         
       </div>
     </div>
