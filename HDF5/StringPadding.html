@@ -14,7 +14,7 @@
 <script type="text/javascript" src="../js/doc.js"></script>
 
   <meta name="repository-name" content="hdf5">
-  <title>HDF5::NativeType - hdf5 main</title>
+  <title>HDF5::StringPadding - hdf5 main</title>
   <script type="text/javascript">
     CrystalDocs.base_path = "../";
   </script>
@@ -147,7 +147,7 @@
       
     </li>
   
-  <li class=" current" data-id="hdf5/HDF5/NativeType" data-name="hdf5::nativetype">
+  <li class=" " data-id="hdf5/HDF5/NativeType" data-name="hdf5::nativetype">
       <a href="../HDF5/NativeType.html">NativeType</a>
       
     </li>
@@ -187,7 +187,7 @@
       
     </li>
   
-  <li class=" " data-id="hdf5/HDF5/StringPadding" data-name="hdf5::stringpadding">
+  <li class=" current" data-id="hdf5/HDF5/StringPadding" data-name="hdf5::stringpadding">
       <a href="../HDF5/StringPadding.html">StringPadding</a>
       
     </li>
@@ -222,8 +222,8 @@
 <h1 class="type-name">
 
   <span class="kind">
-    module
-  </span> HDF5::<wbr>NativeType
+    enum
+  </span> HDF5::<wbr>StringPadding
 
 </h1>
 
@@ -256,7 +256,7 @@
   </h2>
   
     
-      <a href="https://github.com/kojix2/hdf5.cr/blob/211f0b1f88ede478ce5b86cc481ca7adbb1ea4f3/src/hdf5/datatype.cr#L305" target="_blank">
+      <a href="https://github.com/kojix2/hdf5.cr/blob/211f0b1f88ede478ce5b86cc481ca7adbb1ea4f3/src/hdf5/datatype.cr#L30" target="_blank">
         hdf5/datatype.cr
       </a>
     
@@ -265,33 +265,50 @@
 
 
 
-
-
   
-
-  
-  <h2>
-    <a id="class-method-summary" class="anchor" href="#class-method-summary">
+    <h2>
+      <a id="enum-members" class="anchor" href="#enum-members">
   <svg class="octicon-link" aria-hidden="true">
     <use href="#octicon-link"/>
   </svg>
 </a>
-    Class Method Summary
+      Enum Members
+    </h2>
+  
+  <dl>
+    
+      <dt class="entry-const" id="NullTerm">
+        <strong>NullTerm</strong> = <code><span class="n">0</span></code>
+      </dt>
+      
+    
+      <dt class="entry-const" id="NullPad">
+        <strong>NullPad</strong> = <code><span class="n">1</span></code>
+      </dt>
+      
+    
+      <dt class="entry-const" id="SpacePad">
+        <strong>SpacePad</strong> = <code><span class="n">2</span></code>
+      </dt>
+      
+    
+  </dl>
+
+
+
+  
+  <h2>
+    <a id="constructors" class="anchor" href="#constructors">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Constructors
   </h2>
   <ul class="list-summary">
     
       <li class="entry-summary">
-        <a href="#fixed_length_string%28size%3AInt%29%3ALibHDF5%3A%3AHid-class-method" class="signature"><strong>.fixed_length_string</strong>(size : Int) : LibHDF5::Hid</a>
-        
-      </li>
-    
-      <li class="entry-summary">
-        <a href="#for%28type%3AT.class%29forallT-class-method" class="signature"><strong>.for</strong>(type : <span class="t">T</span>.<span class="k">class</span>) forall T</a>
-        
-      </li>
-    
-      <li class="entry-summary">
-        <a href="#variable_length_string%3ALibHDF5%3A%3AHid-class-method" class="signature"><strong>.variable_length_string</strong> : LibHDF5::Hid</a>
+        <a href="#from_lib%28value%3ALibHDF5%3A%3AStrPad%29%3AStringPadding-class-method" class="signature"><strong>.from_lib</strong>(value : LibHDF5::StrPad) : StringPadding</a>
         
       </li>
     
@@ -302,76 +319,204 @@
 
   
 
+  
+  <h2>
+    <a id="instance-method-summary" class="anchor" href="#instance-method-summary">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Instance Method Summary
+  </h2>
+  <ul class="list-summary">
+    
+      <li class="entry-summary">
+        <a href="#null_pad%3F-instance-method" class="signature"><strong>#null_pad?</strong></a>
+        
+          <div class="summary"><p>Returns <code>true</code> if this enum value equals <code><a href="../HDF5/StringPadding.html#NullPad">NullPad</a></code></p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#null_term%3F-instance-method" class="signature"><strong>#null_term?</strong></a>
+        
+          <div class="summary"><p>Returns <code>true</code> if this enum value equals <code><a href="../HDF5/StringPadding.html#NullTerm">NullTerm</a></code></p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#space_pad%3F-instance-method" class="signature"><strong>#space_pad?</strong></a>
+        
+          <div class="summary"><p>Returns <code>true</code> if this enum value equals <code><a href="../HDF5/StringPadding.html#SpacePad">SpacePad</a></code></p></div>
+        
+      </li>
+    
+  </ul>
+
+
 
   <div class="methods-inherited">
     
+      
+
+
+      
+
+
+      
+
+
+      
+
+
+    
+      
+
+
+      
+
+
+      
+
+
+      
+
+
+    
+      
+
+
+      
+
+
+      
+
+
+      
+
+
+    
+      
+
+
+      
+
+
+      
+
+
+      
+
+
+    
   </div>
+
+  
+  <h2>
+    <a id="constructor-detail" class="anchor" href="#constructor-detail">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Constructor Detail
+  </h2>
+  
+    <div class="entry-detail" id="from_lib(value:LibHDF5::StrPad):StringPadding-class-method">
+      <div class="signature">
+        
+        def self.<strong>from_lib</strong>(value : LibHDF5::StrPad) : <a href="../HDF5/StringPadding.html">StringPadding</a>
+
+        <a class="method-permalink" href="#from_lib%28value%3ALibHDF5%3A%3AStrPad%29%3AStringPadding-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/211f0b1f88ede478ce5b86cc481ca7adbb1ea4f3/src/hdf5/datatype.cr#L35" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+
+
+  
 
   
 
   
   <h2>
-    <a id="class-method-detail" class="anchor" href="#class-method-detail">
+    <a id="instance-method-detail" class="anchor" href="#instance-method-detail">
   <svg class="octicon-link" aria-hidden="true">
     <use href="#octicon-link"/>
   </svg>
 </a>
-    Class Method Detail
+    Instance Method Detail
   </h2>
   
-    <div class="entry-detail" id="fixed_length_string(size:Int):LibHDF5::Hid-class-method">
+    <div class="entry-detail" id="null_pad?-instance-method">
       <div class="signature">
         
-        def self.<strong>fixed_length_string</strong>(size : Int) : LibHDF5::Hid
+        def <strong>null_pad?</strong>
 
-        <a class="method-permalink" href="#fixed_length_string%28size%3AInt%29%3ALibHDF5%3A%3AHid-class-method">#</a>
+        <a class="method-permalink" href="#null_pad%3F-instance-method">#</a>
       </div>
+      
+        <div class="doc">
+          
+          <p>Returns <code>true</code> if this enum value equals <code><a href="../HDF5/StringPadding.html#NullPad">NullPad</a></code></p>
+        </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/hdf5.cr/blob/211f0b1f88ede478ce5b86cc481ca7adbb1ea4f3/src/hdf5/datatype.cr#L336" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/211f0b1f88ede478ce5b86cc481ca7adbb1ea4f3/src/hdf5/datatype.cr#L32" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="for(type:T.class)forallT-class-method">
+    <div class="entry-detail" id="null_term?-instance-method">
       <div class="signature">
         
-        def self.<strong>for</strong>(type : <span class="t">T</span>.<span class="k">class</span>) forall T
+        def <strong>null_term?</strong>
 
-        <a class="method-permalink" href="#for%28type%3AT.class%29forallT-class-method">#</a>
+        <a class="method-permalink" href="#null_term%3F-instance-method">#</a>
       </div>
+      
+        <div class="doc">
+          
+          <p>Returns <code>true</code> if this enum value equals <code><a href="../HDF5/StringPadding.html#NullTerm">NullTerm</a></code></p>
+        </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/hdf5.cr/blob/211f0b1f88ede478ce5b86cc481ca7adbb1ea4f3/src/hdf5/datatype.cr#L306" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/211f0b1f88ede478ce5b86cc481ca7adbb1ea4f3/src/hdf5/datatype.cr#L31" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="variable_length_string:LibHDF5::Hid-class-method">
+    <div class="entry-detail" id="space_pad?-instance-method">
       <div class="signature">
         
-        def self.<strong>variable_length_string</strong> : LibHDF5::Hid
+        def <strong>space_pad?</strong>
 
-        <a class="method-permalink" href="#variable_length_string%3ALibHDF5%3A%3AHid-class-method">#</a>
+        <a class="method-permalink" href="#space_pad%3F-instance-method">#</a>
       </div>
+      
+        <div class="doc">
+          
+          <p>Returns <code>true</code> if this enum value equals <code><a href="../HDF5/StringPadding.html#SpacePad">SpacePad</a></code></p>
+        </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/hdf5.cr/blob/211f0b1f88ede478ce5b86cc481ca7adbb1ea4f3/src/hdf5/datatype.cr#L332" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/211f0b1f88ede478ce5b86cc481ca7adbb1ea4f3/src/hdf5/datatype.cr#L33" target="_blank">View source</a>]
         
       </div>
     </div>
   
 
-
-  
-
-  
 
 
 </div>

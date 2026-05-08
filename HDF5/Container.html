@@ -182,6 +182,21 @@
       
     </li>
   
+  <li class=" " data-id="hdf5/HDF5/StringEncoding" data-name="hdf5::stringencoding">
+      <a href="../HDF5/StringEncoding.html">StringEncoding</a>
+      
+    </li>
+  
+  <li class=" " data-id="hdf5/HDF5/StringPadding" data-name="hdf5::stringpadding">
+      <a href="../HDF5/StringPadding.html">StringPadding</a>
+      
+    </li>
+  
+  <li class=" " data-id="hdf5/HDF5/StringType" data-name="hdf5::stringtype">
+      <a href="../HDF5/StringType.html">StringType</a>
+      
+    </li>
+  
   <li class=" " data-id="hdf5/HDF5/TypedDataset" data-name="hdf5::typeddataset(t)">
       <a href="../HDF5/TypedDataset.html">TypedDataset</a>
       
@@ -257,7 +272,7 @@
   </h2>
   
     
-      <a href="https://github.com/kojix2/hdf5.cr/blob/b9411b0ea48020d9dcba998994487050f2049b65/src/hdf5/group.cr#L2" target="_blank">
+      <a href="https://github.com/kojix2/hdf5.cr/blob/211f0b1f88ede478ce5b86cc481ca7adbb1ea4f3/src/hdf5/group.cr#L2" target="_blank">
         hdf5/group.cr
       </a>
     
@@ -315,7 +330,22 @@
       </li>
     
       <li class="entry-summary">
+        <a href="#create_dataset%28path%3AString%2Cdata%3AArray%28String%29%2C%2A%2Cstring_type%3AStringType%3DStringType.variable%2Cencoding%3ASymbol%7CStringEncoding%7CNil%3Dnil%29%3ATypedDataset%28String%29-instance-method" class="signature"><strong>#create_dataset</strong>(path : String, data : Array(String), *, string_type : StringType = <span class="t">StringType</span>.variable, encoding : Symbol | StringEncoding | Nil = <span class="n">nil</span>) : TypedDataset(String)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
         <a href="#create_dataset%28path%3AString%2Cdata%3AArray%28T%29%2C%26block%3ATypedDataset%28T%29-%3E%29%3ANilforallT-instance-method" class="signature"><strong>#create_dataset</strong>(path : String, data : Array(T), &block : TypedDataset(T) -> ) : Nil forall T</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#create_dataset%28path%3AString%2Cdata%3AArray%28String%29%2C%2A%2Cstring_type%3AStringType%3DStringType.variable%2Cencoding%3ASymbol%7CStringEncoding%7CNil%3Dnil%2C%26block%3ATypedDataset%28String%29-%3E%29%3ANil-instance-method" class="signature"><strong>#create_dataset</strong>(path : String, data : Array(String), *, string_type : StringType = <span class="t">StringType</span>.variable, encoding : Symbol | StringEncoding | Nil = <span class="n">nil</span>, &block : TypedDataset(String) -> ) : Nil</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#create_dataset%28path%3AString%2Ctype%3AString.class%2C%2A%2Cshape%3AIndexable%2Cmax_shape%3AIndexable%7CNil%3Dnil%2Cchunk%3AIndexable%7CNil%3Dnil%2Ccompression%3ACompression%7CSymbol%7CNil%3Dnil%2Ccompression_level%3AInt32%3D6%2Cshuffle%3ABool%3Dfalse%2Cfletcher32%3ABool%3Dfalse%2Coptions%3ADatasetCreateOptions%7CNil%3Dnil%2Cstring_type%3AStringType%3DStringType.variable%2Cencoding%3ASymbol%7CStringEncoding%7CNil%3Dnil%29%3ATypedDataset%28String%29-instance-method" class="signature"><strong>#create_dataset</strong>(path : String, type : <span class="t">String</span>.<span class="k">class</span>, *, shape : Indexable, max_shape : Indexable | Nil = <span class="n">nil</span>, chunk : Indexable | Nil = <span class="n">nil</span>, compression : Compression | Symbol | Nil = <span class="n">nil</span>, compression_level : Int32 = <span class="n">6</span>, shuffle : Bool = <span class="n">false</span>, fletcher32 : Bool = <span class="n">false</span>, options : DatasetCreateOptions | Nil = <span class="n">nil</span>, string_type : StringType = <span class="t">StringType</span>.variable, encoding : Symbol | StringEncoding | Nil = <span class="n">nil</span>) : TypedDataset(String)</a>
         
       </li>
     
@@ -328,6 +358,11 @@
         <a href="#create_dataset%28path%3AString%2Ctype%3AT.class%2C%2A%2Cshape%3AIndexable%2Cmax_shape%3AIndexable%7CNil%3Dnil%2Cchunk%3AIndexable%7CNil%3Dnil%2Ccompression%3ACompression%7CSymbol%7CNil%3Dnil%2Ccompression_level%3AInt32%3D6%2Cshuffle%3ABool%3Dfalse%2Cfletcher32%3ABool%3Dfalse%2Coptions%3ADatasetCreateOptions%7CNil%3Dnil%29%3ATypedDataset%28T%29forallT-instance-method" class="signature"><strong>#create_dataset</strong>(path : String, type : <span class="t">T</span>.<span class="k">class</span>, *, shape : Indexable, max_shape : Indexable | Nil = <span class="n">nil</span>, chunk : Indexable | Nil = <span class="n">nil</span>, compression : Compression | Symbol | Nil = <span class="n">nil</span>, compression_level : Int32 = <span class="n">6</span>, shuffle : Bool = <span class="n">false</span>, fletcher32 : Bool = <span class="n">false</span>, options : DatasetCreateOptions | Nil = <span class="n">nil</span>) : TypedDataset(T) forall T</a>
         
           <div class="summary"><p>Create from type + explicit shape (named params)</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#create_dataset%28path%3AString%2Ctype%3AString.class%2C%2A%2Cshape%3AIndexable%2Cmax_shape%3AIndexable%7CNil%3Dnil%2Cchunk%3AIndexable%7CNil%3Dnil%2Ccompression%3ACompression%7CSymbol%7CNil%3Dnil%2Ccompression_level%3AInt32%3D6%2Cshuffle%3ABool%3Dfalse%2Cfletcher32%3ABool%3Dfalse%2Coptions%3ADatasetCreateOptions%7CNil%3Dnil%2Cstring_type%3AStringType%3DStringType.variable%2Cencoding%3ASymbol%7CStringEncoding%7CNil%3Dnil%2C%26block%3ATypedDataset%28String%29-%3E%29%3ANil-instance-method" class="signature"><strong>#create_dataset</strong>(path : String, type : <span class="t">String</span>.<span class="k">class</span>, *, shape : Indexable, max_shape : Indexable | Nil = <span class="n">nil</span>, chunk : Indexable | Nil = <span class="n">nil</span>, compression : Compression | Symbol | Nil = <span class="n">nil</span>, compression_level : Int32 = <span class="n">6</span>, shuffle : Bool = <span class="n">false</span>, fletcher32 : Bool = <span class="n">false</span>, options : DatasetCreateOptions | Nil = <span class="n">nil</span>, string_type : StringType = <span class="t">StringType</span>.variable, encoding : Symbol | StringEncoding | Nil = <span class="n">nil</span>, &block : TypedDataset(String) -> ) : Nil</a>
         
       </li>
     
@@ -504,7 +539,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/hdf5.cr/blob/b9411b0ea48020d9dcba998994487050f2049b65/src/hdf5/group.cr#L183" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/211f0b1f88ede478ce5b86cc481ca7adbb1ea4f3/src/hdf5/group.cr#L256" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -520,7 +555,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/hdf5.cr/blob/b9411b0ea48020d9dcba998994487050f2049b65/src/hdf5/group.cr#L198" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/211f0b1f88ede478ce5b86cc481ca7adbb1ea4f3/src/hdf5/group.cr#L271" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -536,7 +571,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/hdf5.cr/blob/b9411b0ea48020d9dcba998994487050f2049b65/src/hdf5/group.cr#L255" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/211f0b1f88ede478ce5b86cc481ca7adbb1ea4f3/src/hdf5/group.cr#L328" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -557,7 +592,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/hdf5.cr/blob/b9411b0ea48020d9dcba998994487050f2049b65/src/hdf5/group.cr#L138" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/211f0b1f88ede478ce5b86cc481ca7adbb1ea4f3/src/hdf5/group.cr#L211" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -578,7 +613,23 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/hdf5.cr/blob/b9411b0ea48020d9dcba998994487050f2049b65/src/hdf5/group.cr#L65" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/211f0b1f88ede478ce5b86cc481ca7adbb1ea4f3/src/hdf5/group.cr#L65" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="create_dataset(path:String,data:Array(String),*,string_type:StringType=StringType.variable,encoding:Symbol|StringEncoding|Nil=nil):TypedDataset(String)-instance-method">
+      <div class="signature">
+        
+        def <strong>create_dataset</strong>(path : String, data : Array(String), *, string_type : <a href="../HDF5/StringType.html">StringType</a> = <span class="t">StringType</span>.variable, encoding : Symbol | <a href="../HDF5/StringEncoding.html">StringEncoding</a> | Nil = <span class="n">nil</span>) : <a href="../HDF5/TypedDataset.html">TypedDataset</a>(String)
+
+        <a class="method-permalink" href="#create_dataset%28path%3AString%2Cdata%3AArray%28String%29%2C%2A%2Cstring_type%3AStringType%3DStringType.variable%2Cencoding%3ASymbol%7CStringEncoding%7CNil%3Dnil%29%3ATypedDataset%28String%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/211f0b1f88ede478ce5b86cc481ca7adbb1ea4f3/src/hdf5/group.cr#L78" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -594,7 +645,39 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/hdf5.cr/blob/b9411b0ea48020d9dcba998994487050f2049b65/src/hdf5/group.cr#L78" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/211f0b1f88ede478ce5b86cc481ca7adbb1ea4f3/src/hdf5/group.cr#L88" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="create_dataset(path:String,data:Array(String),*,string_type:StringType=StringType.variable,encoding:Symbol|StringEncoding|Nil=nil,&amp;block:TypedDataset(String)-&gt;):Nil-instance-method">
+      <div class="signature">
+        
+        def <strong>create_dataset</strong>(path : String, data : Array(String), *, string_type : <a href="../HDF5/StringType.html">StringType</a> = <span class="t">StringType</span>.variable, encoding : Symbol | <a href="../HDF5/StringEncoding.html">StringEncoding</a> | Nil = <span class="n">nil</span>, &block : <a href="../HDF5/TypedDataset.html">TypedDataset</a>(String) -> ) : Nil
+
+        <a class="method-permalink" href="#create_dataset%28path%3AString%2Cdata%3AArray%28String%29%2C%2A%2Cstring_type%3AStringType%3DStringType.variable%2Cencoding%3ASymbol%7CStringEncoding%7CNil%3Dnil%2C%26block%3ATypedDataset%28String%29-%3E%29%3ANil-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/211f0b1f88ede478ce5b86cc481ca7adbb1ea4f3/src/hdf5/group.cr#L97" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="create_dataset(path:String,type:String.class,*,shape:Indexable,max_shape:Indexable|Nil=nil,chunk:Indexable|Nil=nil,compression:Compression|Symbol|Nil=nil,compression_level:Int32=6,shuffle:Bool=false,fletcher32:Bool=false,options:DatasetCreateOptions|Nil=nil,string_type:StringType=StringType.variable,encoding:Symbol|StringEncoding|Nil=nil):TypedDataset(String)-instance-method">
+      <div class="signature">
+        
+        def <strong>create_dataset</strong>(path : String, type : <span class="t">String</span>.<span class="k">class</span>, *, shape : Indexable, max_shape : Indexable | Nil = <span class="n">nil</span>, chunk : Indexable | Nil = <span class="n">nil</span>, compression : <a href="../HDF5/Compression.html">Compression</a> | Symbol | Nil = <span class="n">nil</span>, compression_level : Int32 = <span class="n">6</span>, shuffle : Bool = <span class="n">false</span>, fletcher32 : Bool = <span class="n">false</span>, options : <a href="../HDF5/DatasetCreateOptions.html">DatasetCreateOptions</a> | Nil = <span class="n">nil</span>, string_type : <a href="../HDF5/StringType.html">StringType</a> = <span class="t">StringType</span>.variable, encoding : Symbol | <a href="../HDF5/StringEncoding.html">StringEncoding</a> | Nil = <span class="n">nil</span>) : <a href="../HDF5/TypedDataset.html">TypedDataset</a>(String)
+
+        <a class="method-permalink" href="#create_dataset%28path%3AString%2Ctype%3AString.class%2C%2A%2Cshape%3AIndexable%2Cmax_shape%3AIndexable%7CNil%3Dnil%2Cchunk%3AIndexable%7CNil%3Dnil%2Ccompression%3ACompression%7CSymbol%7CNil%3Dnil%2Ccompression_level%3AInt32%3D6%2Cshuffle%3ABool%3Dfalse%2Cfletcher32%3ABool%3Dfalse%2Coptions%3ADatasetCreateOptions%7CNil%3Dnil%2Cstring_type%3AStringType%3DStringType.variable%2Cencoding%3ASymbol%7CStringEncoding%7CNil%3Dnil%29%3ATypedDataset%28String%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/211f0b1f88ede478ce5b86cc481ca7adbb1ea4f3/src/hdf5/group.cr#L136" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -610,7 +693,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/hdf5.cr/blob/b9411b0ea48020d9dcba998994487050f2049b65/src/hdf5/group.cr#L155" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/211f0b1f88ede478ce5b86cc481ca7adbb1ea4f3/src/hdf5/group.cr#L228" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -631,7 +714,23 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/hdf5.cr/blob/b9411b0ea48020d9dcba998994487050f2049b65/src/hdf5/group.cr#L88" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/211f0b1f88ede478ce5b86cc481ca7adbb1ea4f3/src/hdf5/group.cr#L111" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="create_dataset(path:String,type:String.class,*,shape:Indexable,max_shape:Indexable|Nil=nil,chunk:Indexable|Nil=nil,compression:Compression|Symbol|Nil=nil,compression_level:Int32=6,shuffle:Bool=false,fletcher32:Bool=false,options:DatasetCreateOptions|Nil=nil,string_type:StringType=StringType.variable,encoding:Symbol|StringEncoding|Nil=nil,&amp;block:TypedDataset(String)-&gt;):Nil-instance-method">
+      <div class="signature">
+        
+        def <strong>create_dataset</strong>(path : String, type : <span class="t">String</span>.<span class="k">class</span>, *, shape : Indexable, max_shape : Indexable | Nil = <span class="n">nil</span>, chunk : Indexable | Nil = <span class="n">nil</span>, compression : <a href="../HDF5/Compression.html">Compression</a> | Symbol | Nil = <span class="n">nil</span>, compression_level : Int32 = <span class="n">6</span>, shuffle : Bool = <span class="n">false</span>, fletcher32 : Bool = <span class="n">false</span>, options : <a href="../HDF5/DatasetCreateOptions.html">DatasetCreateOptions</a> | Nil = <span class="n">nil</span>, string_type : <a href="../HDF5/StringType.html">StringType</a> = <span class="t">StringType</span>.variable, encoding : Symbol | <a href="../HDF5/StringEncoding.html">StringEncoding</a> | Nil = <span class="n">nil</span>, &block : <a href="../HDF5/TypedDataset.html">TypedDataset</a>(String) -> ) : Nil
+
+        <a class="method-permalink" href="#create_dataset%28path%3AString%2Ctype%3AString.class%2C%2A%2Cshape%3AIndexable%2Cmax_shape%3AIndexable%7CNil%3Dnil%2Cchunk%3AIndexable%7CNil%3Dnil%2Ccompression%3ACompression%7CSymbol%7CNil%3Dnil%2Ccompression_level%3AInt32%3D6%2Cshuffle%3ABool%3Dfalse%2Cfletcher32%3ABool%3Dfalse%2Coptions%3ADatasetCreateOptions%7CNil%3Dnil%2Cstring_type%3AStringType%3DStringType.variable%2Cencoding%3ASymbol%7CStringEncoding%7CNil%3Dnil%2C%26block%3ATypedDataset%28String%29-%3E%29%3ANil-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/211f0b1f88ede478ce5b86cc481ca7adbb1ea4f3/src/hdf5/group.cr#L183" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -647,7 +746,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/hdf5.cr/blob/b9411b0ea48020d9dcba998994487050f2049b65/src/hdf5/group.cr#L113" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/211f0b1f88ede478ce5b86cc481ca7adbb1ea4f3/src/hdf5/group.cr#L159" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -663,7 +762,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/hdf5.cr/blob/b9411b0ea48020d9dcba998994487050f2049b65/src/hdf5/group.cr#L5" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/211f0b1f88ede478ce5b86cc481ca7adbb1ea4f3/src/hdf5/group.cr#L5" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -679,7 +778,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/hdf5.cr/blob/b9411b0ea48020d9dcba998994487050f2049b65/src/hdf5/group.cr#L16" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/211f0b1f88ede478ce5b86cc481ca7adbb1ea4f3/src/hdf5/group.cr#L16" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -695,7 +794,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/hdf5.cr/blob/b9411b0ea48020d9dcba998994487050f2049b65/src/hdf5/group.cr#L168" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/211f0b1f88ede478ce5b86cc481ca7adbb1ea4f3/src/hdf5/group.cr#L241" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -711,7 +810,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/hdf5.cr/blob/b9411b0ea48020d9dcba998994487050f2049b65/src/hdf5/group.cr#L172" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/211f0b1f88ede478ce5b86cc481ca7adbb1ea4f3/src/hdf5/group.cr#L245" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -727,7 +826,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/hdf5.cr/blob/b9411b0ea48020d9dcba998994487050f2049b65/src/hdf5/group.cr#L214" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/211f0b1f88ede478ce5b86cc481ca7adbb1ea4f3/src/hdf5/group.cr#L287" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -748,7 +847,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/hdf5.cr/blob/b9411b0ea48020d9dcba998994487050f2049b65/src/hdf5/group.cr#L220" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/211f0b1f88ede478ce5b86cc481ca7adbb1ea4f3/src/hdf5/group.cr#L293" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -764,7 +863,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/hdf5.cr/blob/b9411b0ea48020d9dcba998994487050f2049b65/src/hdf5/group.cr#L244" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/211f0b1f88ede478ce5b86cc481ca7adbb1ea4f3/src/hdf5/group.cr#L317" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -780,7 +879,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/hdf5.cr/blob/b9411b0ea48020d9dcba998994487050f2049b65/src/hdf5/group.cr#L205" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/211f0b1f88ede478ce5b86cc481ca7adbb1ea4f3/src/hdf5/group.cr#L278" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -796,7 +895,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/hdf5.cr/blob/b9411b0ea48020d9dcba998994487050f2049b65/src/hdf5/group.cr#L289" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/211f0b1f88ede478ce5b86cc481ca7adbb1ea4f3/src/hdf5/group.cr#L362" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -817,7 +916,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/hdf5.cr/blob/b9411b0ea48020d9dcba998994487050f2049b65/src/hdf5/group.cr#L58" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/211f0b1f88ede478ce5b86cc481ca7adbb1ea4f3/src/hdf5/group.cr#L58" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -833,7 +932,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/hdf5.cr/blob/b9411b0ea48020d9dcba998994487050f2049b65/src/hdf5/group.cr#L293" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/211f0b1f88ede478ce5b86cc481ca7adbb1ea4f3/src/hdf5/group.cr#L366" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -849,7 +948,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/hdf5.cr/blob/b9411b0ea48020d9dcba998994487050f2049b65/src/hdf5/group.cr#L224" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/211f0b1f88ede478ce5b86cc481ca7adbb1ea4f3/src/hdf5/group.cr#L297" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -870,7 +969,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/hdf5.cr/blob/b9411b0ea48020d9dcba998994487050f2049b65/src/hdf5/group.cr#L210" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/211f0b1f88ede478ce5b86cc481ca7adbb1ea4f3/src/hdf5/group.cr#L283" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -886,7 +985,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/hdf5.cr/blob/b9411b0ea48020d9dcba998994487050f2049b65/src/hdf5/group.cr#L248" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/211f0b1f88ede478ce5b86cc481ca7adbb1ea4f3/src/hdf5/group.cr#L321" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -902,7 +1001,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/hdf5.cr/blob/b9411b0ea48020d9dcba998994487050f2049b65/src/hdf5/group.cr#L162" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/211f0b1f88ede478ce5b86cc481ca7adbb1ea4f3/src/hdf5/group.cr#L235" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -918,7 +1017,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/hdf5.cr/blob/b9411b0ea48020d9dcba998994487050f2049b65/src/hdf5/group.cr#L25" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/211f0b1f88ede478ce5b86cc481ca7adbb1ea4f3/src/hdf5/group.cr#L25" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -934,7 +1033,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/hdf5.cr/blob/b9411b0ea48020d9dcba998994487050f2049b65/src/hdf5/group.cr#L31" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/211f0b1f88ede478ce5b86cc481ca7adbb1ea4f3/src/hdf5/group.cr#L31" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -950,7 +1049,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/hdf5.cr/blob/b9411b0ea48020d9dcba998994487050f2049b65/src/hdf5/group.cr#L272" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/211f0b1f88ede478ce5b86cc481ca7adbb1ea4f3/src/hdf5/group.cr#L345" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -966,7 +1065,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/hdf5.cr/blob/b9411b0ea48020d9dcba998994487050f2049b65/src/hdf5/group.cr#L280" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/211f0b1f88ede478ce5b86cc481ca7adbb1ea4f3/src/hdf5/group.cr#L353" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -982,7 +1081,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/hdf5.cr/blob/b9411b0ea48020d9dcba998994487050f2049b65/src/hdf5/group.cr#L40" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/211f0b1f88ede478ce5b86cc481ca7adbb1ea4f3/src/hdf5/group.cr#L40" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -998,7 +1097,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/hdf5.cr/blob/b9411b0ea48020d9dcba998994487050f2049b65/src/hdf5/group.cr#L48" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/211f0b1f88ede478ce5b86cc481ca7adbb1ea4f3/src/hdf5/group.cr#L48" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -1019,7 +1118,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/hdf5.cr/blob/b9411b0ea48020d9dcba998994487050f2049b65/src/hdf5/group.cr#L285" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/211f0b1f88ede478ce5b86cc481ca7adbb1ea4f3/src/hdf5/group.cr#L358" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -1035,7 +1134,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/hdf5.cr/blob/b9411b0ea48020d9dcba998994487050f2049b65/src/hdf5/group.cr#L261" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/211f0b1f88ede478ce5b86cc481ca7adbb1ea4f3/src/hdf5/group.cr#L334" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -1051,7 +1150,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/hdf5.cr/blob/b9411b0ea48020d9dcba998994487050f2049b65/src/hdf5/group.cr#L265" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/211f0b1f88ede478ce5b86cc481ca7adbb1ea4f3/src/hdf5/group.cr#L338" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -1067,7 +1166,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/hdf5.cr/blob/b9411b0ea48020d9dcba998994487050f2049b65/src/hdf5/group.cr#L276" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/211f0b1f88ede478ce5b86cc481ca7adbb1ea4f3/src/hdf5/group.cr#L349" target="_blank">View source</a>]
         
       </div>
     </div>

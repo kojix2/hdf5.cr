@@ -14,7 +14,7 @@
 <script type="text/javascript" src="../js/doc.js"></script>
 
   <meta name="repository-name" content="hdf5">
-  <title>HDF5::Compression - hdf5 main</title>
+  <title>HDF5::StringType - hdf5 main</title>
   <script type="text/javascript">
     CrystalDocs.base_path = "../";
   </script>
@@ -87,7 +87,7 @@
       
     </li>
   
-  <li class="parent open current" data-id="hdf5/HDF5/Compression" data-name="hdf5::compression">
+  <li class="parent " data-id="hdf5/HDF5/Compression" data-name="hdf5::compression">
       <a href="../HDF5/Compression.html">Compression</a>
       
         <ul>
@@ -192,7 +192,7 @@
       
     </li>
   
-  <li class=" " data-id="hdf5/HDF5/StringType" data-name="hdf5::stringtype">
+  <li class=" current" data-id="hdf5/HDF5/StringType" data-name="hdf5::stringtype">
       <a href="../HDF5/StringType.html">StringType</a>
       
     </li>
@@ -222,13 +222,13 @@
 <h1 class="type-name">
 
   <span class="kind">
-    class
-  </span> HDF5::<wbr>Compression
+    struct
+  </span> HDF5::<wbr>StringType
 
 </h1>
 
 
-  <ul class="superclass-hierarchy"><li class="superclass"><a href="../HDF5/Compression.html">HDF5::Compression</a></li><li class="superclass">Reference</li><li class="superclass">Object</li></ul>
+  <ul class="superclass-hierarchy"><li class="superclass"><a href="../HDF5/StringType.html">HDF5::StringType</a></li><li class="superclass">Struct</li><li class="superclass">Value</li><li class="superclass">Object</li></ul>
 
 
 
@@ -258,8 +258,8 @@
   </h2>
   
     
-      <a href="https://github.com/kojix2/hdf5.cr/blob/211f0b1f88ede478ce5b86cc481ca7adbb1ea4f3/src/hdf5/compression.cr#L2" target="_blank">
-        hdf5/compression.cr
+      <a href="https://github.com/kojix2/hdf5.cr/blob/211f0b1f88ede478ce5b86cc481ca7adbb1ea4f3/src/hdf5/datatype.cr#L46" target="_blank">
+        hdf5/datatype.cr
       </a>
     
     <br/>
@@ -281,17 +281,17 @@
   <ul class="list-summary">
     
       <li class="entry-summary">
-        <a href="#gzip%28level%3AInt32%3D6%29%3ACompression-class-method" class="signature"><strong>.gzip</strong>(level : Int32 = <span class="n">6</span>) : Compression</a>
+        <a href="#fixed%28size%3AInt%2Cencoding%3ASymbol%7CStringEncoding%3DStringEncoding%3A%3AUtf8%2Cpadding%3AStringPadding%3DStringPadding%3A%3ANullPad%29%3AStringType-class-method" class="signature"><strong>.fixed</strong>(size : Int, encoding : Symbol | StringEncoding = <span class="t">StringEncoding</span><span class="t">::</span><span class="t">Utf8</span>, padding : StringPadding = <span class="t">StringPadding</span><span class="t">::</span><span class="t">NullPad</span>) : StringType</a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#new%28filter%3AFilter%2Clevel%3AInt32%3D1%29-class-method" class="signature"><strong>.new</strong>(filter : Filter, level : Int32 = <span class="n">1</span>)</a>
+        <a href="#new%28size%3AInt32%7CNil%2Cencoding%3AStringEncoding%2Cpadding%3AStringPadding%29-class-method" class="signature"><strong>.new</strong>(size : Int32 | Nil, encoding : StringEncoding, padding : StringPadding)</a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#none%3ACompression-class-method" class="signature"><strong>.none</strong> : Compression</a>
+        <a href="#variable%28encoding%3ASymbol%7CStringEncoding%3DStringEncoding%3A%3AUtf8%2Cpadding%3AStringPadding%3DStringPadding%3A%3ANullTerm%29%3AStringType-class-method" class="signature"><strong>.variable</strong>(encoding : Symbol | StringEncoding = <span class="t">StringEncoding</span><span class="t">::</span><span class="t">Utf8</span>, padding : StringPadding = <span class="t">StringPadding</span><span class="t">::</span><span class="t">NullTerm</span>) : StringType</a>
         
       </li>
     
@@ -314,17 +314,37 @@
   <ul class="list-summary">
     
       <li class="entry-summary">
-        <a href="#filter%3AFilter-instance-method" class="signature"><strong>#filter</strong> : Filter</a>
+        <a href="#encoding%3AStringEncoding-instance-method" class="signature"><strong>#encoding</strong> : StringEncoding</a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#level%3AInt32-instance-method" class="signature"><strong>#level</strong> : Int32</a>
+        <a href="#fixed%3F%3ABool-instance-method" class="signature"><strong>#fixed?</strong> : Bool</a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#none%3F%3ABool-instance-method" class="signature"><strong>#none?</strong> : Bool</a>
+        <a href="#padding%3AStringPadding-instance-method" class="signature"><strong>#padding</strong> : StringPadding</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#size%3AInt32%7CNil-instance-method" class="signature"><strong>#size</strong> : Int32 | Nil</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#to_hdf5_type_id%3ALibHDF5%3A%3AHid-instance-method" class="signature"><strong>#to_hdf5_type_id</strong> : LibHDF5::Hid</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#variable%3F%3ABool-instance-method" class="signature"><strong>#variable?</strong> : Bool</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#with_encoding%28encoding%3ASymbol%7CStringEncoding%29%3AStringType-instance-method" class="signature"><strong>#with_encoding</strong>(encoding : Symbol | StringEncoding) : StringType</a>
         
       </li>
     
@@ -333,6 +353,19 @@
 
 
   <div class="methods-inherited">
+    
+      
+
+
+      
+
+
+      
+
+
+      
+
+
     
       
 
@@ -372,50 +405,50 @@
     Constructor Detail
   </h2>
   
-    <div class="entry-detail" id="gzip(level:Int32=6):Compression-class-method">
+    <div class="entry-detail" id="fixed(size:Int,encoding:Symbol|StringEncoding=StringEncoding::Utf8,padding:StringPadding=StringPadding::NullPad):StringType-class-method">
       <div class="signature">
         
-        def self.<strong>gzip</strong>(level : Int32 = <span class="n">6</span>) : <a href="../HDF5/Compression.html">Compression</a>
+        def self.<strong>fixed</strong>(size : Int, encoding : Symbol | <a href="../HDF5/StringEncoding.html">StringEncoding</a> = <span class="t">StringEncoding</span><span class="t">::</span><span class="t">Utf8</span>, padding : <a href="../HDF5/StringPadding.html">StringPadding</a> = <span class="t">StringPadding</span><span class="t">::</span><span class="t">NullPad</span>) : <a href="../HDF5/StringType.html">StringType</a>
 
-        <a class="method-permalink" href="#gzip%28level%3AInt32%3D6%29%3ACompression-class-method">#</a>
+        <a class="method-permalink" href="#fixed%28size%3AInt%2Cencoding%3ASymbol%7CStringEncoding%3DStringEncoding%3A%3AUtf8%2Cpadding%3AStringPadding%3DStringPadding%3A%3ANullPad%29%3AStringType-class-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/hdf5.cr/blob/211f0b1f88ede478ce5b86cc481ca7adbb1ea4f3/src/hdf5/compression.cr#L14" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/211f0b1f88ede478ce5b86cc481ca7adbb1ea4f3/src/hdf5/datatype.cr#L60" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="new(filter:Filter,level:Int32=1)-class-method">
+    <div class="entry-detail" id="new(size:Int32|Nil,encoding:StringEncoding,padding:StringPadding)-class-method">
       <div class="signature">
         
-        def self.<strong>new</strong>(filter : <a href="../HDF5/Compression/Filter.html">Filter</a>, level : Int32 = <span class="n">1</span>)
+        def self.<strong>new</strong>(size : Int32 | Nil, encoding : <a href="../HDF5/StringEncoding.html">StringEncoding</a>, padding : <a href="../HDF5/StringPadding.html">StringPadding</a>)
 
-        <a class="method-permalink" href="#new%28filter%3AFilter%2Clevel%3AInt32%3D1%29-class-method">#</a>
+        <a class="method-permalink" href="#new%28size%3AInt32%7CNil%2Cencoding%3AStringEncoding%2Cpadding%3AStringPadding%29-class-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/hdf5.cr/blob/211f0b1f88ede478ce5b86cc481ca7adbb1ea4f3/src/hdf5/compression.cr#L11" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/211f0b1f88ede478ce5b86cc481ca7adbb1ea4f3/src/hdf5/datatype.cr#L51" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="none:Compression-class-method">
+    <div class="entry-detail" id="variable(encoding:Symbol|StringEncoding=StringEncoding::Utf8,padding:StringPadding=StringPadding::NullTerm):StringType-class-method">
       <div class="signature">
         
-        def self.<strong>none</strong> : <a href="../HDF5/Compression.html">Compression</a>
+        def self.<strong>variable</strong>(encoding : Symbol | <a href="../HDF5/StringEncoding.html">StringEncoding</a> = <span class="t">StringEncoding</span><span class="t">::</span><span class="t">Utf8</span>, padding : <a href="../HDF5/StringPadding.html">StringPadding</a> = <span class="t">StringPadding</span><span class="t">::</span><span class="t">NullTerm</span>) : <a href="../HDF5/StringType.html">StringType</a>
 
-        <a class="method-permalink" href="#none%3ACompression-class-method">#</a>
+        <a class="method-permalink" href="#variable%28encoding%3ASymbol%7CStringEncoding%3DStringEncoding%3A%3AUtf8%2Cpadding%3AStringPadding%3DStringPadding%3A%3ANullTerm%29%3AStringType-class-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/hdf5.cr/blob/211f0b1f88ede478ce5b86cc481ca7adbb1ea4f3/src/hdf5/compression.cr#L18" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/211f0b1f88ede478ce5b86cc481ca7adbb1ea4f3/src/hdf5/datatype.cr#L55" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -436,50 +469,114 @@
     Instance Method Detail
   </h2>
   
-    <div class="entry-detail" id="filter:Filter-instance-method">
+    <div class="entry-detail" id="encoding:StringEncoding-instance-method">
       <div class="signature">
         
-        def <strong>filter</strong> : <a href="../HDF5/Compression/Filter.html">Filter</a>
+        def <strong>encoding</strong> : <a href="../HDF5/StringEncoding.html">StringEncoding</a>
 
-        <a class="method-permalink" href="#filter%3AFilter-instance-method">#</a>
+        <a class="method-permalink" href="#encoding%3AStringEncoding-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/hdf5.cr/blob/211f0b1f88ede478ce5b86cc481ca7adbb1ea4f3/src/hdf5/compression.cr#L8" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/211f0b1f88ede478ce5b86cc481ca7adbb1ea4f3/src/hdf5/datatype.cr#L48" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="level:Int32-instance-method">
+    <div class="entry-detail" id="fixed?:Bool-instance-method">
       <div class="signature">
         
-        def <strong>level</strong> : Int32
+        def <strong>fixed?</strong> : Bool
 
-        <a class="method-permalink" href="#level%3AInt32-instance-method">#</a>
+        <a class="method-permalink" href="#fixed%3F%3ABool-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/hdf5.cr/blob/211f0b1f88ede478ce5b86cc481ca7adbb1ea4f3/src/hdf5/compression.cr#L9" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/211f0b1f88ede478ce5b86cc481ca7adbb1ea4f3/src/hdf5/datatype.cr#L70" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="none?:Bool-instance-method">
+    <div class="entry-detail" id="padding:StringPadding-instance-method">
       <div class="signature">
         
-        def <strong>none?</strong> : Bool
+        def <strong>padding</strong> : <a href="../HDF5/StringPadding.html">StringPadding</a>
 
-        <a class="method-permalink" href="#none%3F%3ABool-instance-method">#</a>
+        <a class="method-permalink" href="#padding%3AStringPadding-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/hdf5.cr/blob/211f0b1f88ede478ce5b86cc481ca7adbb1ea4f3/src/hdf5/compression.cr#L22" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/211f0b1f88ede478ce5b86cc481ca7adbb1ea4f3/src/hdf5/datatype.cr#L49" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="size:Int32|Nil-instance-method">
+      <div class="signature">
+        
+        def <strong>size</strong> : Int32 | Nil
+
+        <a class="method-permalink" href="#size%3AInt32%7CNil-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/211f0b1f88ede478ce5b86cc481ca7adbb1ea4f3/src/hdf5/datatype.cr#L47" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="to_hdf5_type_id:LibHDF5::Hid-instance-method">
+      <div class="signature">
+        
+        def <strong>to_hdf5_type_id</strong> : LibHDF5::Hid
+
+        <a class="method-permalink" href="#to_hdf5_type_id%3ALibHDF5%3A%3AHid-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/211f0b1f88ede478ce5b86cc481ca7adbb1ea4f3/src/hdf5/datatype.cr#L78" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="variable?:Bool-instance-method">
+      <div class="signature">
+        
+        def <strong>variable?</strong> : Bool
+
+        <a class="method-permalink" href="#variable%3F%3ABool-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/211f0b1f88ede478ce5b86cc481ca7adbb1ea4f3/src/hdf5/datatype.cr#L66" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="with_encoding(encoding:Symbol|StringEncoding):StringType-instance-method">
+      <div class="signature">
+        
+        def <strong>with_encoding</strong>(encoding : Symbol | <a href="../HDF5/StringEncoding.html">StringEncoding</a>) : <a href="../HDF5/StringType.html">StringType</a>
+
+        <a class="method-permalink" href="#with_encoding%28encoding%3ASymbol%7CStringEncoding%29%3AStringType-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/211f0b1f88ede478ce5b86cc481ca7adbb1ea4f3/src/hdf5/datatype.cr#L74" target="_blank">View source</a>]
         
       </div>
     </div>

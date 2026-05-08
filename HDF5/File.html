@@ -182,6 +182,21 @@
       
     </li>
   
+  <li class=" " data-id="hdf5/HDF5/StringEncoding" data-name="hdf5::stringencoding">
+      <a href="../HDF5/StringEncoding.html">StringEncoding</a>
+      
+    </li>
+  
+  <li class=" " data-id="hdf5/HDF5/StringPadding" data-name="hdf5::stringpadding">
+      <a href="../HDF5/StringPadding.html">StringPadding</a>
+      
+    </li>
+  
+  <li class=" " data-id="hdf5/HDF5/StringType" data-name="hdf5::stringtype">
+      <a href="../HDF5/StringType.html">StringType</a>
+      
+    </li>
+  
   <li class=" " data-id="hdf5/HDF5/TypedDataset" data-name="hdf5::typeddataset(t)">
       <a href="../HDF5/TypedDataset.html">TypedDataset</a>
       
@@ -257,7 +272,7 @@
   </h2>
   
     
-      <a href="https://github.com/kojix2/hdf5.cr/blob/b9411b0ea48020d9dcba998994487050f2049b65/src/hdf5/file.cr#L2" target="_blank">
+      <a href="https://github.com/kojix2/hdf5.cr/blob/211f0b1f88ede478ce5b86cc481ca7adbb1ea4f3/src/hdf5/file.cr#L2" target="_blank">
         hdf5/file.cr
       </a>
     
@@ -430,7 +445,7 @@
     
   
     <a href="../HDF5/Container.html#create_dataset%28path%3AString%2Ctype%3AT.class%2Cdims%3AArray%28UInt64%29%2Cmax_dims%3AArray%28UInt64%29%7CNil%3Dnil%2Cchunk_dims%3AArray%28UInt64%29%7CNil%3Dnil%2Ccompress%3AInt32%3D0%29%3ATypedDataset%28T%29forallT-instance-method" class="tooltip">
-      <span>create_dataset(path : String, type : <span class="t">T</span>.<span class="k">class</span>, dims : Array(UInt64), max_dims : Array(UInt64) | Nil = <span class="n">nil</span>, chunk_dims : Array(UInt64) | Nil = <span class="n">nil</span>, compress : Int32 = <span class="n">0</span>) : TypedDataset(T) forall T<br/>create_dataset(path : String, data : Array(T)) : TypedDataset(T) forall T<br/>create_dataset(path : String, data : Array(T), &block : TypedDataset(T) -> ) : Nil forall T<br/>create_dataset(path : String, type : <span class="t">T</span>.<span class="k">class</span>, *dims : Int, compress : Int32 = <span class="n">0</span>) : TypedDataset(T) forall T<br/>create_dataset(path : String, type : <span class="t">T</span>.<span class="k">class</span>, *, shape : Indexable, max_shape : Indexable | Nil = <span class="n">nil</span>, chunk : Indexable | Nil = <span class="n">nil</span>, compression : Compression | Symbol | Nil = <span class="n">nil</span>, compression_level : Int32 = <span class="n">6</span>, shuffle : Bool = <span class="n">false</span>, fletcher32 : Bool = <span class="n">false</span>, options : DatasetCreateOptions | Nil = <span class="n">nil</span>) : TypedDataset(T) forall T<br/>create_dataset(path : String, type : <span class="t">T</span>.<span class="k">class</span>, *, shape : Indexable, max_shape : Indexable | Nil = <span class="n">nil</span>, chunk : Indexable | Nil = <span class="n">nil</span>, compression : Compression | Symbol | Nil = <span class="n">nil</span>, compression_level : Int32 = <span class="n">6</span>, shuffle : Bool = <span class="n">false</span>, fletcher32 : Bool = <span class="n">false</span>, options : DatasetCreateOptions | Nil = <span class="n">nil</span>, &block : TypedDataset(T) -> ) : Nil forall T</span>
+      <span>create_dataset(path : String, type : <span class="t">T</span>.<span class="k">class</span>, dims : Array(UInt64), max_dims : Array(UInt64) | Nil = <span class="n">nil</span>, chunk_dims : Array(UInt64) | Nil = <span class="n">nil</span>, compress : Int32 = <span class="n">0</span>) : TypedDataset(T) forall T<br/>create_dataset(path : String, data : Array(T)) : TypedDataset(T) forall T<br/>create_dataset(path : String, data : Array(String), *, string_type : StringType = <span class="t">StringType</span>.variable, encoding : Symbol | StringEncoding | Nil = <span class="n">nil</span>) : TypedDataset(String)<br/>create_dataset(path : String, data : Array(T), &block : TypedDataset(T) -> ) : Nil forall T<br/>create_dataset(path : String, data : Array(String), *, string_type : StringType = <span class="t">StringType</span>.variable, encoding : Symbol | StringEncoding | Nil = <span class="n">nil</span>, &block : TypedDataset(String) -> ) : Nil<br/>create_dataset(path : String, type : <span class="t">String</span>.<span class="k">class</span>, *, shape : Indexable, max_shape : Indexable | Nil = <span class="n">nil</span>, chunk : Indexable | Nil = <span class="n">nil</span>, compression : Compression | Symbol | Nil = <span class="n">nil</span>, compression_level : Int32 = <span class="n">6</span>, shuffle : Bool = <span class="n">false</span>, fletcher32 : Bool = <span class="n">false</span>, options : DatasetCreateOptions | Nil = <span class="n">nil</span>, string_type : StringType = <span class="t">StringType</span>.variable, encoding : Symbol | StringEncoding | Nil = <span class="n">nil</span>) : TypedDataset(String)<br/>create_dataset(path : String, type : <span class="t">T</span>.<span class="k">class</span>, *dims : Int, compress : Int32 = <span class="n">0</span>) : TypedDataset(T) forall T<br/>create_dataset(path : String, type : <span class="t">T</span>.<span class="k">class</span>, *, shape : Indexable, max_shape : Indexable | Nil = <span class="n">nil</span>, chunk : Indexable | Nil = <span class="n">nil</span>, compression : Compression | Symbol | Nil = <span class="n">nil</span>, compression_level : Int32 = <span class="n">6</span>, shuffle : Bool = <span class="n">false</span>, fletcher32 : Bool = <span class="n">false</span>, options : DatasetCreateOptions | Nil = <span class="n">nil</span>) : TypedDataset(T) forall T<br/>create_dataset(path : String, type : <span class="t">String</span>.<span class="k">class</span>, *, shape : Indexable, max_shape : Indexable | Nil = <span class="n">nil</span>, chunk : Indexable | Nil = <span class="n">nil</span>, compression : Compression | Symbol | Nil = <span class="n">nil</span>, compression_level : Int32 = <span class="n">6</span>, shuffle : Bool = <span class="n">false</span>, fletcher32 : Bool = <span class="n">false</span>, options : DatasetCreateOptions | Nil = <span class="n">nil</span>, string_type : StringType = <span class="t">StringType</span>.variable, encoding : Symbol | StringEncoding | Nil = <span class="n">nil</span>, &block : TypedDataset(String) -> ) : Nil<br/>create_dataset(path : String, type : <span class="t">T</span>.<span class="k">class</span>, *, shape : Indexable, max_shape : Indexable | Nil = <span class="n">nil</span>, chunk : Indexable | Nil = <span class="n">nil</span>, compression : Compression | Symbol | Nil = <span class="n">nil</span>, compression_level : Int32 = <span class="n">6</span>, shuffle : Bool = <span class="n">false</span>, fletcher32 : Bool = <span class="n">false</span>, options : DatasetCreateOptions | Nil = <span class="n">nil</span>, &block : TypedDataset(T) -> ) : Nil forall T</span>
     create_dataset</a>, 
     
   
@@ -595,7 +610,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/hdf5.cr/blob/b9411b0ea48020d9dcba998994487050f2049b65/src/hdf5/file.cr#L28" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/211f0b1f88ede478ce5b86cc481ca7adbb1ea4f3/src/hdf5/file.cr#L28" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -611,7 +626,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/hdf5.cr/blob/b9411b0ea48020d9dcba998994487050f2049b65/src/hdf5/file.cr#L15" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/211f0b1f88ede478ce5b86cc481ca7adbb1ea4f3/src/hdf5/file.cr#L15" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -639,7 +654,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/hdf5.cr/blob/b9411b0ea48020d9dcba998994487050f2049b65/src/hdf5/file.cr#L68" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/211f0b1f88ede478ce5b86cc481ca7adbb1ea4f3/src/hdf5/file.cr#L68" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -655,7 +670,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/hdf5.cr/blob/b9411b0ea48020d9dcba998994487050f2049b65/src/hdf5/file.cr#L19" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/211f0b1f88ede478ce5b86cc481ca7adbb1ea4f3/src/hdf5/file.cr#L19" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -685,7 +700,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/hdf5.cr/blob/b9411b0ea48020d9dcba998994487050f2049b65/src/hdf5/file.cr#L59" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/211f0b1f88ede478ce5b86cc481ca7adbb1ea4f3/src/hdf5/file.cr#L59" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -701,7 +716,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/hdf5.cr/blob/b9411b0ea48020d9dcba998994487050f2049b65/src/hdf5/file.cr#L12" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/211f0b1f88ede478ce5b86cc481ca7adbb1ea4f3/src/hdf5/file.cr#L12" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -717,7 +732,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/hdf5.cr/blob/b9411b0ea48020d9dcba998994487050f2049b65/src/hdf5/file.cr#L64" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/211f0b1f88ede478ce5b86cc481ca7adbb1ea4f3/src/hdf5/file.cr#L64" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -733,7 +748,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/hdf5.cr/blob/b9411b0ea48020d9dcba998994487050f2049b65/src/hdf5/file.cr#L55" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/211f0b1f88ede478ce5b86cc481ca7adbb1ea4f3/src/hdf5/file.cr#L55" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -749,7 +764,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/hdf5.cr/blob/b9411b0ea48020d9dcba998994487050f2049b65/src/hdf5/file.cr#L51" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/211f0b1f88ede478ce5b86cc481ca7adbb1ea4f3/src/hdf5/file.cr#L51" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -765,7 +780,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/hdf5.cr/blob/b9411b0ea48020d9dcba998994487050f2049b65/src/hdf5/file.cr#L11" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/211f0b1f88ede478ce5b86cc481ca7adbb1ea4f3/src/hdf5/file.cr#L11" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -781,7 +796,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/hdf5.cr/blob/b9411b0ea48020d9dcba998994487050f2049b65/src/hdf5/file.cr#L13" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/211f0b1f88ede478ce5b86cc481ca7adbb1ea4f3/src/hdf5/file.cr#L13" target="_blank">View source</a>]
         
       </div>
     </div>
