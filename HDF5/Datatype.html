@@ -14,7 +14,7 @@
 <script type="text/javascript" src="../js/doc.js"></script>
 
   <meta name="repository-name" content="hdf5">
-  <title>HDF5::DatasetCreateOptions - hdf5 main</title>
+  <title>HDF5::Datatype - hdf5 main</title>
   <script type="text/javascript">
     CrystalDocs.base_path = "../";
   </script>
@@ -107,7 +107,7 @@
       
     </li>
   
-  <li class=" current" data-id="hdf5/HDF5/DatasetCreateOptions" data-name="hdf5::datasetcreateoptions">
+  <li class=" " data-id="hdf5/HDF5/DatasetCreateOptions" data-name="hdf5::datasetcreateoptions">
       <a href="../HDF5/DatasetCreateOptions.html">DatasetCreateOptions</a>
       
     </li>
@@ -117,7 +117,7 @@
       
     </li>
   
-  <li class=" " data-id="hdf5/HDF5/Datatype" data-name="hdf5::datatype">
+  <li class=" current" data-id="hdf5/HDF5/Datatype" data-name="hdf5::datatype">
       <a href="../HDF5/Datatype.html">Datatype</a>
       
     </li>
@@ -203,12 +203,12 @@
 
   <span class="kind">
     class
-  </span> HDF5::<wbr>DatasetCreateOptions
+  </span> HDF5::<wbr>Datatype
 
 </h1>
 
 
-  <ul class="superclass-hierarchy"><li class="superclass"><a href="../HDF5/DatasetCreateOptions.html">HDF5::DatasetCreateOptions</a></li><li class="superclass">Reference</li><li class="superclass">Object</li></ul>
+  <ul class="superclass-hierarchy"><li class="superclass"><a href="../HDF5/Datatype.html">HDF5::Datatype</a></li><li class="superclass">Reference</li><li class="superclass">Object</li></ul>
 
 
 
@@ -238,8 +238,8 @@
   </h2>
   
     
-      <a href="https://github.com/kojix2/hdf5.cr/blob/0c907d4f5dfbbebcef7972dc4ebd2ae67ede8300/src/hdf5/dataset_create_options.cr#L2" target="_blank">
-        hdf5/dataset_create_options.cr
+      <a href="https://github.com/kojix2/hdf5.cr/blob/0c907d4f5dfbbebcef7972dc4ebd2ae67ede8300/src/hdf5/datatype.cr#L2" target="_blank">
+        hdf5/datatype.cr
       </a>
     
     <br/>
@@ -261,7 +261,7 @@
   <ul class="list-summary">
     
       <li class="entry-summary">
-        <a href="#new%28chunk%3AArray%28UInt64%29%7CNil%3Dnil%2Ccompression%3ACompression%7CNil%3Dnil%2Cshuffle%3ABool%3Dfalse%2Cfletcher32%3ABool%3Dfalse%2Cmax_shape%3AArray%28UInt64%29%7CNil%3Dnil%29-class-method" class="signature"><strong>.new</strong>(chunk : Array(UInt64) | Nil = <span class="n">nil</span>, compression : Compression | Nil = <span class="n">nil</span>, shuffle : Bool = <span class="n">false</span>, fletcher32 : Bool = <span class="n">false</span>, max_shape : Array(UInt64) | Nil = <span class="n">nil</span>)</a>
+        <a href="#new%28id%3ALibHDF5%3A%3AHid%29-class-method" class="signature"><strong>.new</strong>(id : LibHDF5::Hid)</a>
         
       </li>
     
@@ -284,57 +284,67 @@
   <ul class="list-summary">
     
       <li class="entry-summary">
-        <a href="#apply_to%28dcpl_id%3ALibHDF5%3A%3AHid%2Cshape%3AArray%28UInt64%29%29%3ANil-instance-method" class="signature"><strong>#apply_to</strong>(dcpl_id : LibHDF5::Hid, shape : Array(UInt64)) : Nil</a>
+        <a href="#array%3F%3ABool-instance-method" class="signature"><strong>#array?</strong> : Bool</a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#chunk%3AArray%28UInt64%29%7CNil-instance-method" class="signature"><strong>#chunk</strong> : Array(UInt64) | Nil</a>
+        <a href="#close-instance-method" class="signature"><strong>#close</strong></a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#chunk%3D%28chunk%3AArray%28UInt64%29%7CNil%29-instance-method" class="signature"><strong>#chunk=</strong>(chunk : Array(UInt64) | Nil)</a>
+        <a href="#compound%3F%3ABool-instance-method" class="signature"><strong>#compound?</strong> : Bool</a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#compression%3ACompression%7CNil-instance-method" class="signature"><strong>#compression</strong> : Compression | Nil</a>
+        <a href="#finalize-instance-method" class="signature"><strong>#finalize</strong></a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#compression%3D%28compression%3ACompression%7CNil%29-instance-method" class="signature"><strong>#compression=</strong>(compression : Compression | Nil)</a>
+        <a href="#float%3F%3ABool-instance-method" class="signature"><strong>#float?</strong> : Bool</a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#fletcher32%3D%28fletcher32%3ABool%29-instance-method" class="signature"><strong>#fletcher32=</strong>(fletcher32 : Bool)</a>
+        <a href="#id%3ALibHDF5%3A%3AHid-instance-method" class="signature"><strong>#id</strong> : LibHDF5::Hid</a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#fletcher32%3F%3ABool-instance-method" class="signature"><strong>#fletcher32?</strong> : Bool</a>
+        <a href="#integer%3F%3ABool-instance-method" class="signature"><strong>#integer?</strong> : Bool</a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#max_shape%3AArray%28UInt64%29%7CNil-instance-method" class="signature"><strong>#max_shape</strong> : Array(UInt64) | Nil</a>
+        <a href="#reference%3F%3ABool-instance-method" class="signature"><strong>#reference?</strong> : Bool</a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#max_shape%3D%28max_shape%3AArray%28UInt64%29%7CNil%29-instance-method" class="signature"><strong>#max_shape=</strong>(max_shape : Array(UInt64) | Nil)</a>
+        <a href="#size%3AInt32-instance-method" class="signature"><strong>#size</strong> : Int32</a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#shuffle%3D%28shuffle%3ABool%29-instance-method" class="signature"><strong>#shuffle=</strong>(shuffle : Bool)</a>
+        <a href="#string%3F%3ABool-instance-method" class="signature"><strong>#string?</strong> : Bool</a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#shuffle%3F%3ABool-instance-method" class="signature"><strong>#shuffle?</strong> : Bool</a>
+        <a href="#type_class%3ALibHDF5%3A%3ATypeClass-instance-method" class="signature"><strong>#type_class</strong> : LibHDF5::TypeClass</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#variable_length_string%3F%3ABool-instance-method" class="signature"><strong>#variable_length_string?</strong> : Bool</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#vlen%3F%3ABool-instance-method" class="signature"><strong>#vlen?</strong> : Bool</a>
         
       </li>
     
@@ -382,18 +392,18 @@
     Constructor Detail
   </h2>
   
-    <div class="entry-detail" id="new(chunk:Array(UInt64)|Nil=nil,compression:Compression|Nil=nil,shuffle:Bool=false,fletcher32:Bool=false,max_shape:Array(UInt64)|Nil=nil)-class-method">
+    <div class="entry-detail" id="new(id:LibHDF5::Hid)-class-method">
       <div class="signature">
         
-        def self.<strong>new</strong>(chunk : Array(UInt64) | Nil = <span class="n">nil</span>, compression : <a href="../HDF5/Compression.html">Compression</a> | Nil = <span class="n">nil</span>, shuffle : Bool = <span class="n">false</span>, fletcher32 : Bool = <span class="n">false</span>, max_shape : Array(UInt64) | Nil = <span class="n">nil</span>)
+        def self.<strong>new</strong>(id : LibHDF5::Hid)
 
-        <a class="method-permalink" href="#new%28chunk%3AArray%28UInt64%29%7CNil%3Dnil%2Ccompression%3ACompression%7CNil%3Dnil%2Cshuffle%3ABool%3Dfalse%2Cfletcher32%3ABool%3Dfalse%2Cmax_shape%3AArray%28UInt64%29%7CNil%3Dnil%29-class-method">#</a>
+        <a class="method-permalink" href="#new%28id%3ALibHDF5%3A%3AHid%29-class-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/hdf5.cr/blob/0c907d4f5dfbbebcef7972dc4ebd2ae67ede8300/src/hdf5/dataset_create_options.cr#L9" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/0c907d4f5dfbbebcef7972dc4ebd2ae67ede8300/src/hdf5/datatype.cr#L5" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -414,178 +424,210 @@
     Instance Method Detail
   </h2>
   
-    <div class="entry-detail" id="apply_to(dcpl_id:LibHDF5::Hid,shape:Array(UInt64)):Nil-instance-method">
+    <div class="entry-detail" id="array?:Bool-instance-method">
       <div class="signature">
         
-        def <strong>apply_to</strong>(dcpl_id : LibHDF5::Hid, shape : Array(UInt64)) : Nil
+        def <strong>array?</strong> : Bool
 
-        <a class="method-permalink" href="#apply_to%28dcpl_id%3ALibHDF5%3A%3AHid%2Cshape%3AArray%28UInt64%29%29%3ANil-instance-method">#</a>
+        <a class="method-permalink" href="#array%3F%3ABool-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/hdf5.cr/blob/0c907d4f5dfbbebcef7972dc4ebd2ae67ede8300/src/hdf5/dataset_create_options.cr#L18" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/0c907d4f5dfbbebcef7972dc4ebd2ae67ede8300/src/hdf5/datatype.cr#L44" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="chunk:Array(UInt64)|Nil-instance-method">
+    <div class="entry-detail" id="close-instance-method">
       <div class="signature">
         
-        def <strong>chunk</strong> : Array(UInt64) | Nil
+        def <strong>close</strong>
 
-        <a class="method-permalink" href="#chunk%3AArray%28UInt64%29%7CNil-instance-method">#</a>
+        <a class="method-permalink" href="#close-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/hdf5.cr/blob/0c907d4f5dfbbebcef7972dc4ebd2ae67ede8300/src/hdf5/dataset_create_options.cr#L3" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/0c907d4f5dfbbebcef7972dc4ebd2ae67ede8300/src/hdf5/datatype.cr#L48" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="chunk=(chunk:Array(UInt64)|Nil)-instance-method">
+    <div class="entry-detail" id="compound?:Bool-instance-method">
       <div class="signature">
         
-        def <strong>chunk=</strong>(chunk : Array(UInt64) | Nil)
+        def <strong>compound?</strong> : Bool
 
-        <a class="method-permalink" href="#chunk%3D%28chunk%3AArray%28UInt64%29%7CNil%29-instance-method">#</a>
+        <a class="method-permalink" href="#compound%3F%3ABool-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/hdf5.cr/blob/0c907d4f5dfbbebcef7972dc4ebd2ae67ede8300/src/hdf5/dataset_create_options.cr#L3" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/0c907d4f5dfbbebcef7972dc4ebd2ae67ede8300/src/hdf5/datatype.cr#L40" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="compression:Compression|Nil-instance-method">
+    <div class="entry-detail" id="finalize-instance-method">
       <div class="signature">
         
-        def <strong>compression</strong> : <a href="../HDF5/Compression.html">Compression</a> | Nil
+        def <strong>finalize</strong>
 
-        <a class="method-permalink" href="#compression%3ACompression%7CNil-instance-method">#</a>
+        <a class="method-permalink" href="#finalize-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/hdf5.cr/blob/0c907d4f5dfbbebcef7972dc4ebd2ae67ede8300/src/hdf5/dataset_create_options.cr#L4" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/0c907d4f5dfbbebcef7972dc4ebd2ae67ede8300/src/hdf5/datatype.cr#L53" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="compression=(compression:Compression|Nil)-instance-method">
+    <div class="entry-detail" id="float?:Bool-instance-method">
       <div class="signature">
         
-        def <strong>compression=</strong>(compression : <a href="../HDF5/Compression.html">Compression</a> | Nil)
+        def <strong>float?</strong> : Bool
 
-        <a class="method-permalink" href="#compression%3D%28compression%3ACompression%7CNil%29-instance-method">#</a>
+        <a class="method-permalink" href="#float%3F%3ABool-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/hdf5.cr/blob/0c907d4f5dfbbebcef7972dc4ebd2ae67ede8300/src/hdf5/dataset_create_options.cr#L4" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/0c907d4f5dfbbebcef7972dc4ebd2ae67ede8300/src/hdf5/datatype.cr#L20" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="fletcher32=(fletcher32:Bool)-instance-method">
+    <div class="entry-detail" id="id:LibHDF5::Hid-instance-method">
       <div class="signature">
         
-        def <strong>fletcher32=</strong>(fletcher32 : Bool)
+        def <strong>id</strong> : LibHDF5::Hid
 
-        <a class="method-permalink" href="#fletcher32%3D%28fletcher32%3ABool%29-instance-method">#</a>
+        <a class="method-permalink" href="#id%3ALibHDF5%3A%3AHid-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/hdf5.cr/blob/0c907d4f5dfbbebcef7972dc4ebd2ae67ede8300/src/hdf5/dataset_create_options.cr#L6" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/0c907d4f5dfbbebcef7972dc4ebd2ae67ede8300/src/hdf5/datatype.cr#L3" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="fletcher32?:Bool-instance-method">
+    <div class="entry-detail" id="integer?:Bool-instance-method">
       <div class="signature">
         
-        def <strong>fletcher32?</strong> : Bool
+        def <strong>integer?</strong> : Bool
 
-        <a class="method-permalink" href="#fletcher32%3F%3ABool-instance-method">#</a>
+        <a class="method-permalink" href="#integer%3F%3ABool-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/hdf5.cr/blob/0c907d4f5dfbbebcef7972dc4ebd2ae67ede8300/src/hdf5/dataset_create_options.cr#L6" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/0c907d4f5dfbbebcef7972dc4ebd2ae67ede8300/src/hdf5/datatype.cr#L16" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="max_shape:Array(UInt64)|Nil-instance-method">
+    <div class="entry-detail" id="reference?:Bool-instance-method">
       <div class="signature">
         
-        def <strong>max_shape</strong> : Array(UInt64) | Nil
+        def <strong>reference?</strong> : Bool
 
-        <a class="method-permalink" href="#max_shape%3AArray%28UInt64%29%7CNil-instance-method">#</a>
+        <a class="method-permalink" href="#reference%3F%3ABool-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/hdf5.cr/blob/0c907d4f5dfbbebcef7972dc4ebd2ae67ede8300/src/hdf5/dataset_create_options.cr#L7" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/0c907d4f5dfbbebcef7972dc4ebd2ae67ede8300/src/hdf5/datatype.cr#L32" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="max_shape=(max_shape:Array(UInt64)|Nil)-instance-method">
+    <div class="entry-detail" id="size:Int32-instance-method">
       <div class="signature">
         
-        def <strong>max_shape=</strong>(max_shape : Array(UInt64) | Nil)
+        def <strong>size</strong> : Int32
 
-        <a class="method-permalink" href="#max_shape%3D%28max_shape%3AArray%28UInt64%29%7CNil%29-instance-method">#</a>
+        <a class="method-permalink" href="#size%3AInt32-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/hdf5.cr/blob/0c907d4f5dfbbebcef7972dc4ebd2ae67ede8300/src/hdf5/dataset_create_options.cr#L7" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/0c907d4f5dfbbebcef7972dc4ebd2ae67ede8300/src/hdf5/datatype.cr#L12" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="shuffle=(shuffle:Bool)-instance-method">
+    <div class="entry-detail" id="string?:Bool-instance-method">
       <div class="signature">
         
-        def <strong>shuffle=</strong>(shuffle : Bool)
+        def <strong>string?</strong> : Bool
 
-        <a class="method-permalink" href="#shuffle%3D%28shuffle%3ABool%29-instance-method">#</a>
+        <a class="method-permalink" href="#string%3F%3ABool-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/hdf5.cr/blob/0c907d4f5dfbbebcef7972dc4ebd2ae67ede8300/src/hdf5/dataset_create_options.cr#L5" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/0c907d4f5dfbbebcef7972dc4ebd2ae67ede8300/src/hdf5/datatype.cr#L24" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="shuffle?:Bool-instance-method">
+    <div class="entry-detail" id="type_class:LibHDF5::TypeClass-instance-method">
       <div class="signature">
         
-        def <strong>shuffle?</strong> : Bool
+        def <strong>type_class</strong> : LibHDF5::TypeClass
 
-        <a class="method-permalink" href="#shuffle%3F%3ABool-instance-method">#</a>
+        <a class="method-permalink" href="#type_class%3ALibHDF5%3A%3ATypeClass-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/hdf5.cr/blob/0c907d4f5dfbbebcef7972dc4ebd2ae67ede8300/src/hdf5/dataset_create_options.cr#L5" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/0c907d4f5dfbbebcef7972dc4ebd2ae67ede8300/src/hdf5/datatype.cr#L8" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="variable_length_string?:Bool-instance-method">
+      <div class="signature">
+        
+        def <strong>variable_length_string?</strong> : Bool
+
+        <a class="method-permalink" href="#variable_length_string%3F%3ABool-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/0c907d4f5dfbbebcef7972dc4ebd2ae67ede8300/src/hdf5/datatype.cr#L28" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="vlen?:Bool-instance-method">
+      <div class="signature">
+        
+        def <strong>vlen?</strong> : Bool
+
+        <a class="method-permalink" href="#vlen%3F%3ABool-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/0c907d4f5dfbbebcef7972dc4ebd2ae67ede8300/src/hdf5/datatype.cr#L36" target="_blank">View source</a>]
         
       </div>
     </div>
