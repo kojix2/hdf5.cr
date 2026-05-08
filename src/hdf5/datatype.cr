@@ -328,7 +328,7 @@ module HDF5
         LibHDF5.h5t_native_float_g
       {% elsif T == Float64 %}
         LibHDF5.h5t_native_double_g
-      {% elsif T == HDF5::ObjectReference %}
+      {% elsif T == HDF5::Reference %}
         LibHDF5.h5t_std_ref_g
       {% else %}
         {% raise "Unsupported HDF5 type: #{T}" %}

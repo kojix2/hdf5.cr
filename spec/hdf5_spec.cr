@@ -713,14 +713,14 @@ describe HDF5 do
 
   # ── Object references ─────────────────────────────────────────────────────
 
-  describe "ObjectReference" do
+  describe "Reference" do
     it "writes and reads object references in a dataset" do
       HDF5.open(TMP_FILE, :w) do |file|
         file.create_group("targets").close
         file.create_dataset("targets/values", [1_i32, 2_i32, 3_i32]).close
 
-        group_ref = HDF5::ObjectReference.create(file, "/targets")
-        dataset_ref = HDF5::ObjectReference.create(file, "/targets/values")
+        group_ref = file.reference("/targets")
+        dataset_ref = file.reference("/targets/values")
         ds = file.create_dataset("refs", [group_ref, dataset_ref])
         dtype = ds.datatype
         dtype.reference?.should be_true
@@ -730,10 +730,10 @@ describe HDF5 do
       end
 
       HDF5.open(TMP_FILE, :r) do |file|
-        refs = file.dataset("refs", HDF5::ObjectReference).read
-        refs.map(&.name).should eq(["/targets", "/targets/values"])
-        refs[0].object_type.should eq(:group)
-        refs[1].object_type.should eq(:dataset)
+        refs = file.dataset("refs", HDF5::Reference).read
+        refs.map(&.target_path).should eq(["/targets", "/targets/values"])
+        refs[0].target_type.should eq(:group)
+        refs[1].target_type.should eq(:dataset)
 
         obj = refs[1].open
         obj.should be_a(HDF5::Dataset)
@@ -745,13 +745,13 @@ describe HDF5 do
     it "writes and reads object references in attributes" do
       HDF5.open(TMP_FILE, :w) do |file|
         file.create_group("sample").close
-        file.attrs["sample_ref"] = HDF5::ObjectReference.create(file, "/sample")
+        file.attrs["sample_ref"] = file.reference("/sample")
       end
 
       HDF5.open(TMP_FILE, :r) do |file|
-        ref = file.attrs.get("sample_ref", HDF5::ObjectReference)
-        ref.name.should eq("/sample")
-        ref.object_type.should eq(:group)
+        ref = file.attrs.get("sample_ref", HDF5::Reference)
+        ref.target_path.should eq("/sample")
+        ref.target_type.should eq(:group)
         obj = ref.open
         obj.should be_a(HDF5::Group)
         obj.close
@@ -761,7 +761,7 @@ describe HDF5 do
     it "raises when creating a reference to a missing object" do
       HDF5.open(TMP_FILE, :w) do |file|
         expect_raises(HDF5::Error) do
-          HDF5::ObjectReference.create(file, "/missing")
+          file.reference("/missing")
         end
       end
     end

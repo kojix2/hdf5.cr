@@ -239,6 +239,10 @@ module HDF5
       end
     end
 
+    def reference(path : String) : Reference
+      Reference.object(self, path)
+    end
+
     # ── [] / []= convenience ──────────────────────────────────────────────────
 
     def [](path : String) : Group | Dataset

@@ -34,14 +34,14 @@ module HDF5
       write_string_array_attr(name, value)
     end
 
-    def []=(name : String, value : ObjectReference)
+    def []=(name : String, value : Reference)
       LibHDF5.H5Adelete(@loc_id, name) if has_key?(name)
-      write_object_reference_attr(name, value)
+      write_reference_attr(name, value)
     end
 
-    def []=(name : String, value : Array(ObjectReference))
+    def []=(name : String, value : Array(Reference))
       LibHDF5.H5Adelete(@loc_id, name) if has_key?(name)
-      write_object_reference_array_attr(name, value)
+      write_reference_array_attr(name, value)
     end
 
     {% for type in NUMERIC_TYPES %}
@@ -173,27 +173,27 @@ module HDF5
       raise Error.new("Failed to write string array attribute '#{name}'") if ret < 0
     end
 
-    private def write_object_reference_attr(name : String, value : ObjectReference)
-      dtype = NativeType.for(ObjectReference)
+    private def write_reference_attr(name : String, value : Reference)
+      dtype = NativeType.for(Reference)
       space = Dataspace.scalar
       attr_id = LibHDF5.H5Acreate2(@loc_id, name, dtype, space.id,
         LibHDF5::H5P_DEFAULT, LibHDF5::H5P_DEFAULT)
       space.close
       raise Error.new("Failed to create attribute '#{name}'") if attr_id == LibHDF5::H5_INVALID_HID
-      ref = value.ref
+      ref = value.to_hdf5_reference
       ret = LibHDF5.H5Awrite(attr_id, dtype, pointerof(ref).as(Void*))
       LibHDF5.H5Aclose(attr_id)
       raise Error.new("Failed to write object reference attribute '#{name}'") if ret < 0
     end
 
-    private def write_object_reference_array_attr(name : String, data : Array(ObjectReference))
-      dtype = NativeType.for(ObjectReference)
+    private def write_reference_array_attr(name : String, data : Array(Reference))
+      dtype = NativeType.for(Reference)
       space = Dataspace.simple([data.size.to_u64])
       attr_id = LibHDF5.H5Acreate2(@loc_id, name, dtype, space.id,
         LibHDF5::H5P_DEFAULT, LibHDF5::H5P_DEFAULT)
       space.close
       raise Error.new("Failed to create array attribute '#{name}'") if attr_id == LibHDF5::H5_INVALID_HID
-      refs = data.map(&.ref)
+      refs = data.map(&.to_hdf5_reference)
       ret = LibHDF5.H5Awrite(attr_id, dtype, refs.to_unsafe.as(Void*))
       LibHDF5.H5Aclose(attr_id)
       raise Error.new("Failed to write object reference array attribute '#{name}'") if ret < 0

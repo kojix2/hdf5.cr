@@ -52,8 +52,8 @@ module HDF5
     def read(type : T.class) : T forall T
       {% if T == String %}
         read_string
-      {% elsif T == HDF5::ObjectReference %}
-        read_object_reference
+      {% elsif T == HDF5::Reference %}
+        read_reference
       {% elsif T < Number %}
         buf = uninitialized T
         dtype = NativeType.for(T)
@@ -70,10 +70,10 @@ module HDF5
       npoints = LibHDF5.H5Sget_simple_extent_npoints(space_id)
       LibHDF5.H5Sclose(space_id)
       raise Error.new("Invalid npoints") if npoints < 0
-      {% if T == HDF5::ObjectReference %}
+      {% if T == HDF5::Reference %}
         refs = Array(LibHDF5::Reference).new(npoints.to_i) { LibHDF5::Reference.new }
-        read_raw(NativeType.for(ObjectReference), refs.to_unsafe)
-        refs.map { |ref| ObjectReference.new(ref) }
+        read_raw(NativeType.for(Reference), refs.to_unsafe)
+        refs.map { |ref| Reference.new(ref) }
       {% else %}
         buf = Array(T).new(npoints.to_i, T.zero)
         dtype = NativeType.for(T)
@@ -85,8 +85,8 @@ module HDF5
     def write(value : T) forall T
       {% if T == String %}
         write_string(value)
-      {% elsif T == HDF5::ObjectReference %}
-        write_object_reference(value)
+      {% elsif T == HDF5::Reference %}
+        write_reference(value)
       {% elsif T < Number %}
         dtype = NativeType.for(T)
         write_raw(dtype, pointerof(value))
@@ -189,15 +189,15 @@ module HDF5
       LibHDF5.H5Tclose(type_id)
     end
 
-    private def read_object_reference : ObjectReference
+    private def read_reference : Reference
       ref = uninitialized LibHDF5::Reference
-      read_raw(NativeType.for(ObjectReference), pointerof(ref))
-      ObjectReference.new(ref)
+      read_raw(NativeType.for(Reference), pointerof(ref))
+      Reference.new(ref)
     end
 
-    private def write_object_reference(value : ObjectReference)
-      ref = value.ref
-      write_raw(NativeType.for(ObjectReference), pointerof(ref))
+    private def write_reference(value : Reference)
+      ref = value.to_hdf5_reference
+      write_raw(NativeType.for(Reference), pointerof(ref))
     end
 
     private def with_dataspace(& : Dataspace -> T) : T forall T
