@@ -14,7 +14,7 @@
 <script type="text/javascript" src="../js/doc.js"></script>
 
   <meta name="repository-name" content="hdf5">
-  <title>HDF5::AlreadyExistsError - hdf5 main</title>
+  <title>HDF5::VLenStorage - hdf5 main</title>
   <script type="text/javascript">
     CrystalDocs.base_path = "../";
   </script>
@@ -62,7 +62,7 @@
       
         <ul>
   
-  <li class=" current" data-id="hdf5/HDF5/AlreadyExistsError" data-name="hdf5::alreadyexistserror">
+  <li class=" " data-id="hdf5/HDF5/AlreadyExistsError" data-name="hdf5::alreadyexistserror">
       <a href="../HDF5/AlreadyExistsError.html">AlreadyExistsError</a>
       
     </li>
@@ -222,7 +222,7 @@
       
     </li>
   
-  <li class=" " data-id="hdf5/HDF5/VLenStorage" data-name="hdf5::vlenstorage">
+  <li class=" current" data-id="hdf5/HDF5/VLenStorage" data-name="hdf5::vlenstorage">
       <a href="../HDF5/VLenStorage.html">VLenStorage</a>
       
     </li>
@@ -247,13 +247,11 @@
 <h1 class="type-name">
 
   <span class="kind">
-    class
-  </span> HDF5::<wbr>AlreadyExistsError
+    module
+  </span> HDF5::<wbr>VLenStorage
 
 </h1>
 
-
-  <ul class="superclass-hierarchy"><li class="superclass"><a href="../HDF5/AlreadyExistsError.html">HDF5::AlreadyExistsError</a></li><li class="superclass"><a href="../HDF5/Error.html">HDF5::Error</a></li><li class="superclass">Exception</li><li class="superclass">Reference</li><li class="superclass">Object</li></ul>
 
 
 
@@ -283,8 +281,8 @@
   </h2>
   
     
-      <a href="https://github.com/kojix2/hdf5.cr/blob/02db5a33d46d2ebb1b2a5dc1929b05de216ca4fb/src/hdf5/error.cr#L11" target="_blank">
-        hdf5/error.cr
+      <a href="https://github.com/kojix2/hdf5.cr/blob/02db5a33d46d2ebb1b2a5dc1929b05de216ca4fb/src/hdf5/vlen_storage.cr#L2" target="_blank">
+        hdf5/vlen_storage.cr
       </a>
     
     <br/>
@@ -297,6 +295,28 @@
   
 
   
+  <h2>
+    <a id="class-method-summary" class="anchor" href="#class-method-summary">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Class Method Summary
+  </h2>
+  <ul class="list-summary">
+    
+      <li class="entry-summary">
+        <a href="#descriptors%28data%3AArray%28Array%28T%29%29%29%3AArray%28LibHDF5%3A%3AVLen%29forallT-class-method" class="signature"><strong>.descriptors</strong>(data : Array(Array(T))) : Array(LibHDF5::VLen) forall T</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#read%28type%3AArray%28T%29.class%2Ctype_id%3ALibHDF5%3A%3AHid%2Cspace_id%3ALibHDF5%3A%3AHid%2Ccount%3AInt%2Cbuffer%3AArray%28LibHDF5%3A%3AVLen%29%29%3AArray%28Array%28T%29%29forallT-class-method" class="signature"><strong>.read</strong>(type : <span class="t">Array</span>(<span class="t">T</span>).<span class="k">class</span>, type_id : LibHDF5::Hid, space_id : LibHDF5::Hid, count : Int, buffer : Array(LibHDF5::VLen)) : Array(Array(T)) forall T</a>
+        
+      </li>
+    
+  </ul>
+
 
   
 
@@ -305,63 +325,53 @@
 
   <div class="methods-inherited">
     
-      
-
-
-      
-
-
-      
-
-
-      
-
-
-    
-      
-
-
-      
-
-
-      
-
-
-      
-
-
-    
-      
-
-
-      
-
-
-      
-
-
-      
-
-
-    
-      
-
-
-      
-
-
-      
-
-
-      
-
-
-    
   </div>
 
   
 
   
+  <h2>
+    <a id="class-method-detail" class="anchor" href="#class-method-detail">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Class Method Detail
+  </h2>
+  
+    <div class="entry-detail" id="descriptors(data:Array(Array(T))):Array(LibHDF5::VLen)forallT-class-method">
+      <div class="signature">
+        
+        def self.<strong>descriptors</strong>(data : Array(Array(T))) : Array(LibHDF5::VLen) forall T
+
+        <a class="method-permalink" href="#descriptors%28data%3AArray%28Array%28T%29%29%29%3AArray%28LibHDF5%3A%3AVLen%29forallT-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/02db5a33d46d2ebb1b2a5dc1929b05de216ca4fb/src/hdf5/vlen_storage.cr#L25" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="read(type:Array(T).class,type_id:LibHDF5::Hid,space_id:LibHDF5::Hid,count:Int,buffer:Array(LibHDF5::VLen)):Array(Array(T))forallT-class-method">
+      <div class="signature">
+        
+        def self.<strong>read</strong>(type : <span class="t">Array</span>(<span class="t">T</span>).<span class="k">class</span>, type_id : LibHDF5::Hid, space_id : LibHDF5::Hid, count : Int, buffer : Array(LibHDF5::VLen)) : Array(Array(T)) forall T
+
+        <a class="method-permalink" href="#read%28type%3AArray%28T%29.class%2Ctype_id%3ALibHDF5%3A%3AHid%2Cspace_id%3ALibHDF5%3A%3AHid%2Ccount%3AInt%2Cbuffer%3AArray%28LibHDF5%3A%3AVLen%29%29%3AArray%28Array%28T%29%29forallT-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/02db5a33d46d2ebb1b2a5dc1929b05de216ca4fb/src/hdf5/vlen_storage.cr#L3" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+
 
   
 
