@@ -5,6 +5,39 @@ module HDF5
     def initialize(@id : LibHDF5::Hid)
     end
 
+    def datatype : Datatype
+      type_id = LibHDF5.H5Aget_type(@id)
+      raise Error.new("Failed to get attribute datatype") if type_id == LibHDF5::H5_INVALID_HID
+      Datatype.new(type_id)
+    end
+
+    def dataspace : Dataspace
+      space_id = LibHDF5.H5Aget_space(@id)
+      raise Error.new("Failed to get attribute dataspace") if space_id == LibHDF5::H5_INVALID_HID
+      Dataspace.new(space_id)
+    end
+
+    def shape : Array(UInt64)
+      with_dataspace(&.dims)
+    end
+
+    def rank : Int32
+      with_dataspace(&.ndims)
+    end
+
+    def size : UInt64
+      npoints = with_dataspace(&.npoints)
+      npoints < 0 ? 0_u64 : npoints.to_u64
+    end
+
+    def scalar? : Bool
+      with_dataspace(&.type) == LibHDF5::SpaceClass::Scalar
+    end
+
+    def array? : Bool
+      with_dataspace(&.type) == LibHDF5::SpaceClass::Simple
+    end
+
     def name : String
       size = LibHDF5.H5Aget_name(@id, 0, nil)
       raise Error.new("Failed to get attribute name size") if size < 0
@@ -19,8 +52,7 @@ module HDF5
       {% elsif T < Number %}
         buf = uninitialized T
         dtype = NativeType.for(T)
-        ret = LibHDF5.H5Aread(@id, dtype, pointerof(buf).as(Void*))
-        raise Error.new("Failed to read attribute") if ret < 0
+        read_raw(dtype, pointerof(buf))
         buf
       {% else %}
         {% raise "Unsupported attribute type: #{T}" %}
@@ -35,8 +67,7 @@ module HDF5
       raise Error.new("Invalid npoints") if npoints < 0
       buf = Array(T).new(npoints.to_i, T.zero)
       dtype = NativeType.for(T)
-      ret = LibHDF5.H5Aread(@id, dtype, buf.to_unsafe.as(Void*))
-      raise Error.new("Failed to read attribute array") if ret < 0
+      read_raw(dtype, buf.to_unsafe)
       buf
     end
 
@@ -45,8 +76,7 @@ module HDF5
         write_string(value)
       {% elsif T < Number %}
         dtype = NativeType.for(T)
-        ret = LibHDF5.H5Awrite(@id, dtype, pointerof(value).as(Void*))
-        raise Error.new("Failed to write attribute") if ret < 0
+        write_raw(dtype, pointerof(value))
       {% else %}
         {% raise "Unsupported attribute type: #{T}" %}
       {% end %}
@@ -54,8 +84,33 @@ module HDF5
 
     def write_array(data : Array(T)) forall T
       dtype = NativeType.for(T)
-      ret = LibHDF5.H5Awrite(@id, dtype, data.to_unsafe.as(Void*))
-      raise Error.new("Failed to write attribute array") if ret < 0
+      write_raw(dtype, data.to_unsafe)
+    end
+
+    def read_raw(type_id : LibHDF5::Hid, buf : Pointer(T)) : Nil forall T
+      read_raw_impl(type_id, buf.as(Void*))
+    end
+
+    def read_raw(type_id : LibHDF5::Hid, buf : Void*) : Nil
+      read_raw_impl(type_id, buf)
+    end
+
+    def write_raw(type_id : LibHDF5::Hid, buf : Pointer(T)) : Nil forall T
+      write_raw_impl(type_id, buf.as(Void*))
+    end
+
+    def write_raw(type_id : LibHDF5::Hid, buf : Void*) : Nil
+      write_raw_impl(type_id, buf)
+    end
+
+    private def read_raw_impl(type_id : LibHDF5::Hid, buf : Void*) : Nil
+      ret = LibHDF5.H5Aread(@id, type_id, buf)
+      raise Error.new("Failed to read attribute") if ret < 0
+    end
+
+    private def write_raw_impl(type_id : LibHDF5::Hid, buf : Void*) : Nil
+      ret = LibHDF5.H5Awrite(@id, type_id, buf)
+      raise Error.new("Failed to write attribute") if ret < 0
     end
 
     def close
@@ -84,8 +139,9 @@ module HDF5
           raise Error.new("Failed to get attribute dataspace")
         end
         ptr = Pointer(UInt8).null
-        ret = LibHDF5.H5Aread(@id, type_id, pointerof(ptr).as(Void*))
-        if ret < 0
+        begin
+          read_raw(type_id, pointerof(ptr))
+        rescue Error
           LibHDF5.H5Sclose(space_id)
           LibHDF5.H5Tclose(type_id)
           raise Error.new("Failed to read string attribute")
@@ -101,9 +157,8 @@ module HDF5
         end
       else
         buf = Bytes.new(size + 1)
-        ret = LibHDF5.H5Aread(@id, type_id, buf.to_unsafe.as(Void*))
+        read_raw(type_id, buf.to_unsafe)
         LibHDF5.H5Tclose(type_id)
-        raise Error.new("Failed to read string attribute") if ret < 0
         String.new(buf.to_unsafe)
       end
     end
@@ -111,9 +166,17 @@ module HDF5
     private def write_string(value : String)
       type_id = NativeType.variable_length_string
       ptr = value.to_unsafe
-      ret = LibHDF5.H5Awrite(@id, type_id, pointerof(ptr).as(Void*))
+      write_raw(type_id, pointerof(ptr))
       LibHDF5.H5Tclose(type_id)
-      raise Error.new("Failed to write string attribute") if ret < 0
+    end
+
+    private def with_dataspace(& : Dataspace -> T) : T forall T
+      space = dataspace
+      begin
+        yield space
+      ensure
+        space.close
+      end
     end
   end
 end

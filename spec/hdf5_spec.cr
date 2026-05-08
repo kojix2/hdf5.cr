@@ -385,6 +385,69 @@ describe HDF5 do
         end
       end
     end
+
+    it "opens an attribute via attrs[]" do
+      HDF5.open(TMP_FILE, :w) do |file|
+        file.attrs["title"] = "experiment"
+        attr = file.attrs["title"]
+        attr.name.should eq("title")
+        attr.read(String).should eq("experiment")
+        attr.close
+      end
+    end
+
+    it "exposes scalar attribute datatype and shape" do
+      HDF5.open(TMP_FILE, :w) do |file|
+        file.attrs["answer"] = 42_i32
+        attr = file.attrs["answer"]
+        attr.scalar?.should be_true
+        attr.array?.should be_false
+        attr.shape.should eq([] of UInt64)
+        attr.rank.should eq(0)
+        attr.size.should eq(1_u64)
+
+        dtype = attr.datatype
+        dtype.integer?.should be_true
+        dtype.size.should eq(sizeof(Int32))
+        dtype.close
+        attr.close
+      end
+    end
+
+    it "exposes array attribute datatype and shape" do
+      HDF5.open(TMP_FILE, :w) do |file|
+        file.attrs["values"] = [1_i32, 2_i32, 3_i32]
+        attr = file.attrs["values"]
+        attr.scalar?.should be_false
+        attr.array?.should be_true
+        attr.shape.should eq([3_u64])
+        attr.rank.should eq(1)
+        attr.size.should eq(3_u64)
+
+        dtype = attr.datatype
+        dtype.integer?.should be_true
+        dtype.size.should eq(sizeof(Int32))
+        dtype.close
+        attr.close
+      end
+    end
+
+    it "supports raw attribute read and write" do
+      HDF5.open(TMP_FILE, :w) do |file|
+        file.attrs["answer"] = 42_i32
+        attr = file.attrs["answer"]
+        type_id = HDF5::NativeType.for(Int32)
+
+        value = uninitialized Int32
+        attr.read_raw(type_id, pointerof(value))
+        value.should eq(42)
+
+        updated = 99_i32
+        attr.write_raw(type_id, pointerof(updated))
+        attr.read(Int32).should eq(99)
+        attr.close
+      end
+    end
   end
 
   # ── Dataset – numeric ──────────────────────────────────────────────────────
