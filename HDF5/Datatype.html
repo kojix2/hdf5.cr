@@ -82,6 +82,11 @@
       
     </li>
   
+  <li class=" " data-id="hdf5/HDF5/CompoundMember" data-name="hdf5::compoundmember">
+      <a href="../HDF5/CompoundMember.html">CompoundMember</a>
+      
+    </li>
+  
   <li class="parent " data-id="hdf5/HDF5/Compression" data-name="hdf5::compression">
       <a href="../HDF5/Compression.html">Compression</a>
       
@@ -238,7 +243,7 @@
   </h2>
   
     
-      <a href="https://github.com/kojix2/hdf5.cr/blob/0c907d4f5dfbbebcef7972dc4ebd2ae67ede8300/src/hdf5/datatype.cr#L2" target="_blank">
+      <a href="https://github.com/kojix2/hdf5.cr/blob/5a2d58672fce63cef386d3ce688923600ad6dec0/src/hdf5/datatype.cr#L4" target="_blank">
         hdf5/datatype.cr
       </a>
     
@@ -289,7 +294,32 @@
       </li>
     
       <li class="entry-summary">
+        <a href="#array_dims%3AArray%28UInt64%29-instance-method" class="signature"><strong>#array_dims</strong> : Array(UInt64)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#array_rank%3AInt32-instance-method" class="signature"><strong>#array_rank</strong> : Int32</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#base_type%3ADatatype%7CNil-instance-method" class="signature"><strong>#base_type</strong> : Datatype | Nil</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#bitfield%3F%3ABool-instance-method" class="signature"><strong>#bitfield?</strong> : Bool</a>
+        
+      </li>
+    
+      <li class="entry-summary">
         <a href="#close-instance-method" class="signature"><strong>#close</strong></a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#complex%3F%3ABool-instance-method" class="signature"><strong>#complex?</strong> : Bool</a>
         
       </li>
     
@@ -299,7 +329,17 @@
       </li>
     
       <li class="entry-summary">
+        <a href="#enum%3F%3ABool-instance-method" class="signature"><strong>#enum?</strong> : Bool</a>
+        
+      </li>
+    
+      <li class="entry-summary">
         <a href="#finalize-instance-method" class="signature"><strong>#finalize</strong></a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#fixed_length_string%3F%3ABool-instance-method" class="signature"><strong>#fixed_length_string?</strong> : Bool</a>
         
       </li>
     
@@ -319,7 +359,32 @@
       </li>
     
       <li class="entry-summary">
+        <a href="#member%28index%3AInt%29%3ACompoundMember-instance-method" class="signature"><strong>#member</strong>(index : Int) : CompoundMember</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#member_count%3AInt32-instance-method" class="signature"><strong>#member_count</strong> : Int32</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#members%3AArray%28CompoundMember%29-instance-method" class="signature"><strong>#members</strong> : Array(CompoundMember)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#opaque%3F%3ABool-instance-method" class="signature"><strong>#opaque?</strong> : Bool</a>
+        
+      </li>
+    
+      <li class="entry-summary">
         <a href="#reference%3F%3ABool-instance-method" class="signature"><strong>#reference?</strong> : Bool</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#signed%3F%3ABool-instance-method" class="signature"><strong>#signed?</strong> : Bool</a>
         
       </li>
     
@@ -334,7 +399,17 @@
       </li>
     
       <li class="entry-summary">
+        <a href="#time%3F%3ABool-instance-method" class="signature"><strong>#time?</strong> : Bool</a>
+        
+      </li>
+    
+      <li class="entry-summary">
         <a href="#type_class%3ALibHDF5%3A%3ATypeClass-instance-method" class="signature"><strong>#type_class</strong> : LibHDF5::TypeClass</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#unsigned%3F%3ABool-instance-method" class="signature"><strong>#unsigned?</strong> : Bool</a>
         
       </li>
     
@@ -403,7 +478,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/hdf5.cr/blob/0c907d4f5dfbbebcef7972dc4ebd2ae67ede8300/src/hdf5/datatype.cr#L5" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/5a2d58672fce63cef386d3ce688923600ad6dec0/src/hdf5/datatype.cr#L7" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -435,7 +510,71 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/hdf5.cr/blob/0c907d4f5dfbbebcef7972dc4ebd2ae67ede8300/src/hdf5/datatype.cr#L44" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/5a2d58672fce63cef386d3ce688923600ad6dec0/src/hdf5/datatype.cr#L66" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="array_dims:Array(UInt64)-instance-method">
+      <div class="signature">
+        
+        def <strong>array_dims</strong> : Array(UInt64)
+
+        <a class="method-permalink" href="#array_dims%3AArray%28UInt64%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/5a2d58672fce63cef386d3ce688923600ad6dec0/src/hdf5/datatype.cr#L94" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="array_rank:Int32-instance-method">
+      <div class="signature">
+        
+        def <strong>array_rank</strong> : Int32
+
+        <a class="method-permalink" href="#array_rank%3AInt32-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/5a2d58672fce63cef386d3ce688923600ad6dec0/src/hdf5/datatype.cr#L89" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="base_type:Datatype|Nil-instance-method">
+      <div class="signature">
+        
+        def <strong>base_type</strong> : <a href="../HDF5/Datatype.html">Datatype</a> | Nil
+
+        <a class="method-permalink" href="#base_type%3ADatatype%7CNil-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/5a2d58672fce63cef386d3ce688923600ad6dec0/src/hdf5/datatype.cr#L82" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="bitfield?:Bool-instance-method">
+      <div class="signature">
+        
+        def <strong>bitfield?</strong> : Bool
+
+        <a class="method-permalink" href="#bitfield%3F%3ABool-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/5a2d58672fce63cef386d3ce688923600ad6dec0/src/hdf5/datatype.cr#L42" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -451,7 +590,23 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/hdf5.cr/blob/0c907d4f5dfbbebcef7972dc4ebd2ae67ede8300/src/hdf5/datatype.cr#L48" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/5a2d58672fce63cef386d3ce688923600ad6dec0/src/hdf5/datatype.cr#L132" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="complex?:Bool-instance-method">
+      <div class="signature">
+        
+        def <strong>complex?</strong> : Bool
+
+        <a class="method-permalink" href="#complex%3F%3ABool-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/5a2d58672fce63cef386d3ce688923600ad6dec0/src/hdf5/datatype.cr#L70" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -467,7 +622,23 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/hdf5.cr/blob/0c907d4f5dfbbebcef7972dc4ebd2ae67ede8300/src/hdf5/datatype.cr#L40" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/5a2d58672fce63cef386d3ce688923600ad6dec0/src/hdf5/datatype.cr#L62" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="enum?:Bool-instance-method">
+      <div class="signature">
+        
+        def <strong>enum?</strong> : Bool
+
+        <a class="method-permalink" href="#enum%3F%3ABool-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/5a2d58672fce63cef386d3ce688923600ad6dec0/src/hdf5/datatype.cr#L54" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -483,7 +654,23 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/hdf5.cr/blob/0c907d4f5dfbbebcef7972dc4ebd2ae67ede8300/src/hdf5/datatype.cr#L53" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/5a2d58672fce63cef386d3ce688923600ad6dec0/src/hdf5/datatype.cr#L137" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="fixed_length_string?:Bool-instance-method">
+      <div class="signature">
+        
+        def <strong>fixed_length_string?</strong> : Bool
+
+        <a class="method-permalink" href="#fixed_length_string%3F%3ABool-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/5a2d58672fce63cef386d3ce688923600ad6dec0/src/hdf5/datatype.cr#L30" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -499,7 +686,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/hdf5.cr/blob/0c907d4f5dfbbebcef7972dc4ebd2ae67ede8300/src/hdf5/datatype.cr#L20" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/5a2d58672fce63cef386d3ce688923600ad6dec0/src/hdf5/datatype.cr#L22" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -515,7 +702,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/hdf5.cr/blob/0c907d4f5dfbbebcef7972dc4ebd2ae67ede8300/src/hdf5/datatype.cr#L3" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/5a2d58672fce63cef386d3ce688923600ad6dec0/src/hdf5/datatype.cr#L5" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -531,7 +718,71 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/hdf5.cr/blob/0c907d4f5dfbbebcef7972dc4ebd2ae67ede8300/src/hdf5/datatype.cr#L16" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/5a2d58672fce63cef386d3ce688923600ad6dec0/src/hdf5/datatype.cr#L18" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="member(index:Int):CompoundMember-instance-method">
+      <div class="signature">
+        
+        def <strong>member</strong>(index : Int) : <a href="../HDF5/CompoundMember.html">CompoundMember</a>
+
+        <a class="method-permalink" href="#member%28index%3AInt%29%3ACompoundMember-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/5a2d58672fce63cef386d3ce688923600ad6dec0/src/hdf5/datatype.cr#L108" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="member_count:Int32-instance-method">
+      <div class="signature">
+        
+        def <strong>member_count</strong> : Int32
+
+        <a class="method-permalink" href="#member_count%3AInt32-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/5a2d58672fce63cef386d3ce688923600ad6dec0/src/hdf5/datatype.cr#L103" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="members:Array(CompoundMember)-instance-method">
+      <div class="signature">
+        
+        def <strong>members</strong> : Array(<a href="../HDF5/CompoundMember.html">CompoundMember</a>)
+
+        <a class="method-permalink" href="#members%3AArray%28CompoundMember%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/5a2d58672fce63cef386d3ce688923600ad6dec0/src/hdf5/datatype.cr#L128" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="opaque?:Bool-instance-method">
+      <div class="signature">
+        
+        def <strong>opaque?</strong> : Bool
+
+        <a class="method-permalink" href="#opaque%3F%3ABool-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/5a2d58672fce63cef386d3ce688923600ad6dec0/src/hdf5/datatype.cr#L46" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -547,7 +798,23 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/hdf5.cr/blob/0c907d4f5dfbbebcef7972dc4ebd2ae67ede8300/src/hdf5/datatype.cr#L32" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/5a2d58672fce63cef386d3ce688923600ad6dec0/src/hdf5/datatype.cr#L50" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="signed?:Bool-instance-method">
+      <div class="signature">
+        
+        def <strong>signed?</strong> : Bool
+
+        <a class="method-permalink" href="#signed%3F%3ABool-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/5a2d58672fce63cef386d3ce688923600ad6dec0/src/hdf5/datatype.cr#L74" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -563,7 +830,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/hdf5.cr/blob/0c907d4f5dfbbebcef7972dc4ebd2ae67ede8300/src/hdf5/datatype.cr#L12" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/5a2d58672fce63cef386d3ce688923600ad6dec0/src/hdf5/datatype.cr#L14" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -579,7 +846,23 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/hdf5.cr/blob/0c907d4f5dfbbebcef7972dc4ebd2ae67ede8300/src/hdf5/datatype.cr#L24" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/5a2d58672fce63cef386d3ce688923600ad6dec0/src/hdf5/datatype.cr#L26" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="time?:Bool-instance-method">
+      <div class="signature">
+        
+        def <strong>time?</strong> : Bool
+
+        <a class="method-permalink" href="#time%3F%3ABool-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/5a2d58672fce63cef386d3ce688923600ad6dec0/src/hdf5/datatype.cr#L38" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -595,7 +878,23 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/hdf5.cr/blob/0c907d4f5dfbbebcef7972dc4ebd2ae67ede8300/src/hdf5/datatype.cr#L8" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/5a2d58672fce63cef386d3ce688923600ad6dec0/src/hdf5/datatype.cr#L10" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="unsigned?:Bool-instance-method">
+      <div class="signature">
+        
+        def <strong>unsigned?</strong> : Bool
+
+        <a class="method-permalink" href="#unsigned%3F%3ABool-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/5a2d58672fce63cef386d3ce688923600ad6dec0/src/hdf5/datatype.cr#L78" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -611,7 +910,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/hdf5.cr/blob/0c907d4f5dfbbebcef7972dc4ebd2ae67ede8300/src/hdf5/datatype.cr#L28" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/5a2d58672fce63cef386d3ce688923600ad6dec0/src/hdf5/datatype.cr#L34" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -627,7 +926,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/hdf5.cr/blob/0c907d4f5dfbbebcef7972dc4ebd2ae67ede8300/src/hdf5/datatype.cr#L36" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/5a2d58672fce63cef386d3ce688923600ad6dec0/src/hdf5/datatype.cr#L58" target="_blank">View source</a>]
         
       </div>
     </div>
