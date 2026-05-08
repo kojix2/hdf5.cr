@@ -512,6 +512,31 @@ describe HDF5 do
         attr.close
       end
     end
+
+    it "writes and reads variable-length numeric array attributes" do
+      data = [[1_i32, 2_i32], [] of Int32, [3_i32, 4_i32, 5_i32]]
+      HDF5.open(TMP_FILE, :w) do |file|
+        file.attrs["ragged"] = data
+      end
+
+      HDF5.open(TMP_FILE, :r) do |file|
+        attr = file.attrs["ragged"]
+        attr.array?.should be_true
+        attr.shape.should eq([3_u64])
+        attr.read_array(Array(Int32)).should eq(data)
+
+        dtype = attr.datatype
+        dtype.vlen?.should be_true
+        base = dtype.base_type
+        base.should_not be_nil
+        if base
+          base.integer?.should be_true
+          base.size.should eq(sizeof(Int32))
+        end
+        dtype.close
+        attr.close
+      end
+    end
   end
 
   # ── Dataset – numeric ──────────────────────────────────────────────────────

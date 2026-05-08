@@ -44,6 +44,11 @@ module HDF5
       write_reference_array_attr(name, value)
     end
 
+    def []=(name : String, value : Array(Array(T))) forall T
+      LibHDF5.H5Adelete(@loc_id, name) if has_key?(name)
+      write_vlen_array_attr(name, value)
+    end
+
     {% for type in NUMERIC_TYPES %}
       def []=(name : String, value : {{ type }})
         LibHDF5.H5Adelete(@loc_id, name) if has_key?(name)
@@ -197,6 +202,23 @@ module HDF5
       ret = LibHDF5.H5Awrite(attr_id, dtype, refs.to_unsafe.as(Void*))
       LibHDF5.H5Aclose(attr_id)
       raise Error.new("Failed to write object reference array attribute '#{name}'") if ret < 0
+    end
+
+    private def write_vlen_array_attr(name : String, data : Array(Array(T))) forall T
+      dtype = VLenType.for(T)
+      space = Dataspace.simple([data.size.to_u64])
+      attr_id = LibHDF5.H5Acreate2(@loc_id, name, dtype, space.id,
+        LibHDF5::H5P_DEFAULT, LibHDF5::H5P_DEFAULT)
+      space.close
+      if attr_id == LibHDF5::H5_INVALID_HID
+        LibHDF5.H5Tclose(dtype)
+        raise Error.new("Failed to create array attribute '#{name}'")
+      end
+      vlens = VLenStorage.descriptors(data)
+      ret = LibHDF5.H5Awrite(attr_id, dtype, vlens.to_unsafe.as(Void*))
+      LibHDF5.H5Tclose(dtype)
+      LibHDF5.H5Aclose(attr_id)
+      raise Error.new("Failed to write variable-length array attribute '#{name}'") if ret < 0
     end
   end
 end

@@ -346,9 +346,13 @@ module HDF5
 
   module VLenType
     def self.for(type : T.class) : LibHDF5::Hid forall T
-      type_id = LibHDF5.H5Tvlen_create(NativeType.for(T))
-      raise Error.new("Failed to create variable-length datatype") if type_id == LibHDF5::H5_INVALID_HID
-      type_id
+      {% if T < Number %}
+        type_id = LibHDF5.H5Tvlen_create(NativeType.for(T))
+        raise Error.new("Failed to create variable-length datatype") if type_id == LibHDF5::H5_INVALID_HID
+        type_id
+      {% else %}
+        {% raise "Unsupported variable-length base type: #{T}" %}
+      {% end %}
     end
   end
 end

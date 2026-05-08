@@ -68,18 +68,23 @@ module HDF5
       space_id = LibHDF5.H5Aget_space(@id)
       raise Error.new("Failed to get attribute space") if space_id == LibHDF5::H5_INVALID_HID
       npoints = LibHDF5.H5Sget_simple_extent_npoints(space_id)
-      LibHDF5.H5Sclose(space_id)
       raise Error.new("Invalid npoints") if npoints < 0
-      {% if T == HDF5::Reference %}
-        refs = Array(LibHDF5::Reference).new(npoints.to_i) { LibHDF5::Reference.new }
-        read_raw(NativeType.for(Reference), refs.to_unsafe)
-        refs.map { |ref| Reference.new(ref) }
-      {% else %}
-        buf = Array(T).new(npoints.to_i, T.zero)
-        dtype = NativeType.for(T)
-        read_raw(dtype, buf.to_unsafe)
-        buf
-      {% end %}
+      begin
+        {% if T == HDF5::Reference %}
+          refs = Array(LibHDF5::Reference).new(npoints.to_i) { LibHDF5::Reference.new }
+          read_raw(NativeType.for(Reference), refs.to_unsafe)
+          refs.map { |ref| Reference.new(ref) }
+        {% elsif T < Array %}
+          read_vlen_array(T, space_id, npoints.to_i)
+        {% else %}
+          buf = Array(T).new(npoints.to_i, T.zero)
+          dtype = NativeType.for(T)
+          read_raw(dtype, buf.to_unsafe)
+          buf
+        {% end %}
+      ensure
+        LibHDF5.H5Sclose(space_id)
+      end
     end
 
     def write(value : T) forall T
@@ -198,6 +203,17 @@ module HDF5
     private def write_reference(value : Reference)
       ref = value.to_hdf5_reference
       write_raw(NativeType.for(Reference), pointerof(ref))
+    end
+
+    private def read_vlen_array(type : Array(T).class, space_id : LibHDF5::Hid, count : Int) : Array(Array(T)) forall T
+      type_id = VLenType.for(T)
+      vlens = Array(LibHDF5::VLen).new(count) { LibHDF5::VLen.new }
+      begin
+        read_raw(type_id, vlens.to_unsafe)
+        VLenStorage.read(Array(T), type_id, space_id, count, vlens)
+      ensure
+        LibHDF5.H5Tclose(type_id)
+      end
     end
 
     private def with_dataspace(& : Dataspace -> T) : T forall T

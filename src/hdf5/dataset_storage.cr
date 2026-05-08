@@ -107,18 +107,9 @@ module HDF5
       end
 
       begin
-        Array(Array(T)).new(count) do |index|
-          vlen = vlens[index]
-          row = Array(T).new(vlen.len.to_i)
-          ptr = vlen.p.as(T*)
-          vlen.len.to_i.times { |offset| row << ptr[offset] }
-          row
-        end
+        VLenStorage.read(Array(T), type_id, mem_space_id, count, vlens)
       ensure
-        reclaim = LibHDF5.H5Dvlen_reclaim(type_id, mem_space_id, LibHDF5::H5P_DEFAULT,
-          vlens.to_unsafe.as(Void*))
         LibHDF5.H5Tclose(type_id)
-        raise Error.new("Failed to reclaim variable-length dataset memory") if reclaim < 0
       end
     end
 
@@ -130,12 +121,7 @@ module HDF5
       error_message : String,
     ) : Nil forall T
       type_id = VLenType.for(T)
-      vlens = data.map do |row|
-        LibHDF5::VLen.new(
-          len: LibC::SizeT.new(row.size),
-          p: row.empty? ? Pointer(Void).null : row.to_unsafe.as(Void*)
-        )
-      end
+      vlens = VLenStorage.descriptors(data)
       ret = LibHDF5.H5Dwrite(dataset_id, type_id, mem_space_id, file_space_id,
         LibHDF5::H5P_DEFAULT, vlens.to_unsafe.as(Void*))
       LibHDF5.H5Tclose(type_id)
