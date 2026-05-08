@@ -6,12 +6,14 @@ module HDF5
     end
 
     def datatype : Datatype
+      ensure_open
       type_id = LibHDF5.H5Aget_type(@id)
       InternalChecks.ensure_hid(type_id, "Failed to get attribute datatype")
       Datatype.new(type_id)
     end
 
     def dataspace : Dataspace
+      ensure_open
       space_id = LibHDF5.H5Aget_space(@id)
       InternalChecks.ensure_hid(space_id, "Failed to get attribute dataspace")
       Dataspace.new(space_id)
@@ -39,6 +41,7 @@ module HDF5
     end
 
     def name : String
+      ensure_open
       size = LibHDF5.H5Aget_name(@id, 0, nil)
       raise Error.new("Failed to get attribute name size") if size < 0
       buf = Bytes.new(size + 1)
@@ -104,11 +107,13 @@ module HDF5
     end
 
     private def read_raw_impl(type_id : LibHDF5::Hid, buf : Void*) : Nil
+      ensure_open
       ret = LibHDF5.H5Aread(@id, type_id, buf)
       raise Error.new("Failed to read attribute") if ret < 0
     end
 
     private def write_raw_impl(type_id : LibHDF5::Hid, buf : Void*) : Nil
+      ensure_open
       ret = LibHDF5.H5Awrite(@id, type_id, buf)
       raise Error.new("Failed to write attribute") if ret < 0
     end
@@ -120,6 +125,10 @@ module HDF5
 
     def finalize
       close
+    end
+
+    private def ensure_open : Nil
+      raise ClosedObjectError.new("Attribute is closed") if @id == LibHDF5::H5_INVALID_HID
     end
 
     private def read_string : String

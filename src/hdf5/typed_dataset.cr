@@ -1,7 +1,5 @@
 module HDF5
   class TypedDataset(T)
-    forward_missing_to @dataset
-
     def initialize(@dataset : Dataset)
     end
 
@@ -15,6 +13,18 @@ module HDF5
 
     def size : UInt64
       @dataset.size
+    end
+
+    def datatype : Datatype
+      @dataset.datatype
+    end
+
+    def dataspace : Dataspace
+      @dataset.dataspace
+    end
+
+    def storage_size : UInt64
+      @dataset.storage_size
     end
 
     def attrs : Attributes

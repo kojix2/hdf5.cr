@@ -6,12 +6,14 @@ module HDF5
     end
 
     def dataspace : Dataspace
+      ensure_open
       space_id = LibHDF5.H5Dget_space(@id)
       InternalChecks.ensure_hid(space_id, "Failed to get dataset dataspace")
       Dataspace.new(space_id)
     end
 
     def datatype : Datatype
+      ensure_open
       type_id = LibHDF5.H5Dget_type(@id)
       InternalChecks.ensure_hid(type_id, "Failed to get dataset datatype")
       Datatype.new(type_id)
@@ -46,25 +48,8 @@ module HDF5
       end
     end
 
-    # HDF5-style aliases
-    def dims : Array(UInt64)
-      shape
-    end
-
-    def ndims : Int32
-      rank
-    end
-
-    def npoints : Int64
-      space = dataspace
-      begin
-        space.npoints
-      ensure
-        space.close
-      end
-    end
-
     def attrs : Attributes
+      ensure_open
       Attributes.new(@id)
     end
 
@@ -101,6 +86,7 @@ module HDF5
     end
 
     def read_to(buf : Pointer(T), type : T.class) forall T
+      ensure_open
       dtype = NativeType.for(T)
       ret = LibHDF5.H5Dread(@id, dtype, LibHDF5::H5S_ALL, LibHDF5::H5S_ALL,
         LibHDF5::H5P_DEFAULT, buf.as(Void*))
@@ -108,6 +94,7 @@ module HDF5
     end
 
     def write(data : Array(T)) forall T
+      ensure_open
       dtype = NativeType.for(T)
       ret = LibHDF5.H5Dwrite(@id, dtype, LibHDF5::H5S_ALL, LibHDF5::H5S_ALL,
         LibHDF5::H5P_DEFAULT, data.to_unsafe.as(Void*))
@@ -115,6 +102,7 @@ module HDF5
     end
 
     def write(data : Slice(T)) forall T
+      ensure_open
       dtype = NativeType.for(T)
       ret = LibHDF5.H5Dwrite(@id, dtype, LibHDF5::H5S_ALL, LibHDF5::H5S_ALL,
         LibHDF5::H5P_DEFAULT, data.to_unsafe.as(Void*))
@@ -238,12 +226,14 @@ module HDF5
     end
 
     def resize(new_shape : Indexable) : Nil
+      ensure_open
       udims = new_shape.map(&.to_u64).to_a
       ret = LibHDF5.H5Dset_extent(@id, udims.to_unsafe)
       raise Error.new("Failed to resize dataset") if ret < 0
     end
 
     def storage_size : UInt64
+      ensure_open
       LibHDF5.H5Dget_storage_size(@id)
     end
 
@@ -254,6 +244,10 @@ module HDF5
 
     def finalize
       close
+    end
+
+    private def ensure_open : Nil
+      raise ClosedObjectError.new("Dataset is closed") if @id == LibHDF5::H5_INVALID_HID
     end
 
     private def fixed_length_buffer(data : Array(String), element_size : Int32,

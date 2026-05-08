@@ -449,6 +449,7 @@ module HDF5
     end
 
     def hid : LibHDF5::Hid
+      raise ClosedObjectError.new("Group is closed") if @id == LibHDF5::H5_INVALID_HID
       @id
     end
 
