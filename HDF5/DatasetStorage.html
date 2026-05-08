@@ -14,7 +14,7 @@
 <script type="text/javascript" src="../js/doc.js"></script>
 
   <meta name="repository-name" content="hdf5">
-  <title>HDF5::NativeType - hdf5 main</title>
+  <title>HDF5::DatasetStorage - hdf5 main</title>
   <script type="text/javascript">
     CrystalDocs.base_path = "../";
   </script>
@@ -117,7 +117,7 @@
       
     </li>
   
-  <li class=" " data-id="hdf5/HDF5/DatasetStorage" data-name="hdf5::datasetstorage">
+  <li class=" current" data-id="hdf5/HDF5/DatasetStorage" data-name="hdf5::datasetstorage">
       <a href="../HDF5/DatasetStorage.html">DatasetStorage</a>
       
     </li>
@@ -157,7 +157,7 @@
       
     </li>
   
-  <li class=" current" data-id="hdf5/HDF5/NativeType" data-name="hdf5::nativetype">
+  <li class=" " data-id="hdf5/HDF5/NativeType" data-name="hdf5::nativetype">
       <a href="../HDF5/NativeType.html">NativeType</a>
       
     </li>
@@ -243,7 +243,7 @@
 
   <span class="kind">
     module
-  </span> HDF5::<wbr>NativeType
+  </span> HDF5::<wbr>DatasetStorage
 
 </h1>
 
@@ -276,8 +276,8 @@
   </h2>
   
     
-      <a href="https://github.com/kojix2/hdf5.cr/blob/5181f93a8debba48774041b64aa757e670f5a8aa/src/hdf5/datatype.cr#L309" target="_blank">
-        hdf5/datatype.cr
+      <a href="https://github.com/kojix2/hdf5.cr/blob/5181f93a8debba48774041b64aa757e670f5a8aa/src/hdf5/dataset_storage.cr#L2" target="_blank">
+        hdf5/dataset_storage.cr
       </a>
     
     <br/>
@@ -301,17 +301,22 @@
   <ul class="list-summary">
     
       <li class="entry-summary">
-        <a href="#fixed_length_string%28size%3AInt%29%3ALibHDF5%3A%3AHid-class-method" class="signature"><strong>.fixed_length_string</strong>(size : Int) : LibHDF5::Hid</a>
+        <a href="#read_all%28dataset_id%3ALibHDF5%3A%3AHid%2Ctype%3AT.class%2Ccount%3AInt%29%3AArray%28T%29forallT-class-method" class="signature"><strong>.read_all</strong>(dataset_id : LibHDF5::Hid, type : <span class="t">T</span>.<span class="k">class</span>, count : Int) : Array(T) forall T</a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#for%28type%3AT.class%29forallT-class-method" class="signature"><strong>.for</strong>(type : <span class="t">T</span>.<span class="k">class</span>) forall T</a>
+        <a href="#read_selection%28dataset_id%3ALibHDF5%3A%3AHid%2Ctype%3AT.class%2Cmem_space_id%3ALibHDF5%3A%3AHid%2Cfile_space_id%3ALibHDF5%3A%3AHid%2Ccount%3AInt%29%3AArray%28T%29forallT-class-method" class="signature"><strong>.read_selection</strong>(dataset_id : LibHDF5::Hid, type : <span class="t">T</span>.<span class="k">class</span>, mem_space_id : LibHDF5::Hid, file_space_id : LibHDF5::Hid, count : Int) : Array(T) forall T</a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#variable_length_string%3ALibHDF5%3A%3AHid-class-method" class="signature"><strong>.variable_length_string</strong> : LibHDF5::Hid</a>
+        <a href="#write_all%28dataset_id%3ALibHDF5%3A%3AHid%2Cdata%3AArray%28T%29%29%3ANilforallT-class-method" class="signature"><strong>.write_all</strong>(dataset_id : LibHDF5::Hid, data : Array(T)) : Nil forall T</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#write_selection%28dataset_id%3ALibHDF5%3A%3AHid%2Cdata%3AArray%28T%29%2Cmem_space_id%3ALibHDF5%3A%3AHid%2Cfile_space_id%3ALibHDF5%3A%3AHid%29%3ANilforallT-class-method" class="signature"><strong>.write_selection</strong>(dataset_id : LibHDF5::Hid, data : Array(T), mem_space_id : LibHDF5::Hid, file_space_id : LibHDF5::Hid) : Nil forall T</a>
         
       </li>
     
@@ -339,50 +344,66 @@
     Class Method Detail
   </h2>
   
-    <div class="entry-detail" id="fixed_length_string(size:Int):LibHDF5::Hid-class-method">
+    <div class="entry-detail" id="read_all(dataset_id:LibHDF5::Hid,type:T.class,count:Int):Array(T)forallT-class-method">
       <div class="signature">
         
-        def self.<strong>fixed_length_string</strong>(size : Int) : LibHDF5::Hid
+        def self.<strong>read_all</strong>(dataset_id : LibHDF5::Hid, type : <span class="t">T</span>.<span class="k">class</span>, count : Int) : Array(T) forall T
 
-        <a class="method-permalink" href="#fixed_length_string%28size%3AInt%29%3ALibHDF5%3A%3AHid-class-method">#</a>
+        <a class="method-permalink" href="#read_all%28dataset_id%3ALibHDF5%3A%3AHid%2Ctype%3AT.class%2Ccount%3AInt%29%3AArray%28T%29forallT-class-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/hdf5.cr/blob/5181f93a8debba48774041b64aa757e670f5a8aa/src/hdf5/datatype.cr#L342" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/5181f93a8debba48774041b64aa757e670f5a8aa/src/hdf5/dataset_storage.cr#L3" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="for(type:T.class)forallT-class-method">
+    <div class="entry-detail" id="read_selection(dataset_id:LibHDF5::Hid,type:T.class,mem_space_id:LibHDF5::Hid,file_space_id:LibHDF5::Hid,count:Int):Array(T)forallT-class-method">
       <div class="signature">
         
-        def self.<strong>for</strong>(type : <span class="t">T</span>.<span class="k">class</span>) forall T
+        def self.<strong>read_selection</strong>(dataset_id : LibHDF5::Hid, type : <span class="t">T</span>.<span class="k">class</span>, mem_space_id : LibHDF5::Hid, file_space_id : LibHDF5::Hid, count : Int) : Array(T) forall T
 
-        <a class="method-permalink" href="#for%28type%3AT.class%29forallT-class-method">#</a>
+        <a class="method-permalink" href="#read_selection%28dataset_id%3ALibHDF5%3A%3AHid%2Ctype%3AT.class%2Cmem_space_id%3ALibHDF5%3A%3AHid%2Cfile_space_id%3ALibHDF5%3A%3AHid%2Ccount%3AInt%29%3AArray%28T%29forallT-class-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/hdf5.cr/blob/5181f93a8debba48774041b64aa757e670f5a8aa/src/hdf5/datatype.cr#L310" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/5181f93a8debba48774041b64aa757e670f5a8aa/src/hdf5/dataset_storage.cr#L28" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="variable_length_string:LibHDF5::Hid-class-method">
+    <div class="entry-detail" id="write_all(dataset_id:LibHDF5::Hid,data:Array(T)):NilforallT-class-method">
       <div class="signature">
         
-        def self.<strong>variable_length_string</strong> : LibHDF5::Hid
+        def self.<strong>write_all</strong>(dataset_id : LibHDF5::Hid, data : Array(T)) : Nil forall T
 
-        <a class="method-permalink" href="#variable_length_string%3ALibHDF5%3A%3AHid-class-method">#</a>
+        <a class="method-permalink" href="#write_all%28dataset_id%3ALibHDF5%3A%3AHid%2Cdata%3AArray%28T%29%29%3ANilforallT-class-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/hdf5.cr/blob/5181f93a8debba48774041b64aa757e670f5a8aa/src/hdf5/datatype.cr#L338" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/5181f93a8debba48774041b64aa757e670f5a8aa/src/hdf5/dataset_storage.cr#L54" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="write_selection(dataset_id:LibHDF5::Hid,data:Array(T),mem_space_id:LibHDF5::Hid,file_space_id:LibHDF5::Hid):NilforallT-class-method">
+      <div class="signature">
+        
+        def self.<strong>write_selection</strong>(dataset_id : LibHDF5::Hid, data : Array(T), mem_space_id : LibHDF5::Hid, file_space_id : LibHDF5::Hid) : Nil forall T
+
+        <a class="method-permalink" href="#write_selection%28dataset_id%3ALibHDF5%3A%3AHid%2Cdata%3AArray%28T%29%2Cmem_space_id%3ALibHDF5%3A%3AHid%2Cfile_space_id%3ALibHDF5%3A%3AHid%29%3ANilforallT-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/5181f93a8debba48774041b64aa757e670f5a8aa/src/hdf5/dataset_storage.cr#L71" target="_blank">View source</a>]
         
       </div>
     </div>
