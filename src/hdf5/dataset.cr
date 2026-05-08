@@ -19,16 +19,31 @@ module HDF5
 
     # Crystal-native shape API
     def shape : Array(UInt64)
-      dataspace.dims
+      space = dataspace
+      begin
+        space.dims
+      ensure
+        space.close
+      end
     end
 
     def rank : Int32
-      dataspace.ndims
+      space = dataspace
+      begin
+        space.ndims
+      ensure
+        space.close
+      end
     end
 
     def size : UInt64
-      n = dataspace.npoints
-      n < 0 ? 0_u64 : n.to_u64
+      space = dataspace
+      begin
+        n = space.npoints
+        n < 0 ? 0_u64 : n.to_u64
+      ensure
+        space.close
+      end
     end
 
     # HDF5-style aliases
@@ -41,7 +56,12 @@ module HDF5
     end
 
     def npoints : Int64
-      dataspace.npoints
+      space = dataspace
+      begin
+        space.npoints
+      ensure
+        space.close
+      end
     end
 
     def attrs : Attributes
@@ -63,18 +83,21 @@ module HDF5
 
     def read(type : T.class, selection : Selection) : Array(T) forall T
       file_space = dataspace
-      selection.apply_to(file_space.id)
-      n = LibHDF5.H5Sget_select_npoints(file_space.id)
-      raise Error.new("Invalid selection") if n <= 0
-      mem_space = Dataspace.simple([n.to_u64])
-      buf = Array(T).new(n.to_i) { T.zero }
-      dtype = NativeType.for(T)
-      ret = LibHDF5.H5Dread(@id, dtype, mem_space.id, file_space.id,
-        LibHDF5::H5P_DEFAULT, buf.to_unsafe.as(Void*))
-      mem_space.close
-      file_space.close
-      raise Error.new("Failed to read dataset with selection") if ret < 0
-      buf
+      begin
+        selection.apply_to(file_space.id)
+        n = LibHDF5.H5Sget_select_npoints(file_space.id)
+        raise Error.new("Invalid selection") if n <= 0
+        mem_space = Dataspace.simple([n.to_u64])
+        buf = Array(T).new(n.to_i) { T.zero }
+        dtype = NativeType.for(T)
+        ret = LibHDF5.H5Dread(@id, dtype, mem_space.id, file_space.id,
+          LibHDF5::H5P_DEFAULT, buf.to_unsafe.as(Void*))
+        mem_space.close
+        raise Error.new("Failed to read dataset with selection") if ret < 0
+        buf
+      ensure
+        file_space.close
+      end
     end
 
     def read_to(buf : Pointer(T), type : T.class) forall T
@@ -100,18 +123,21 @@ module HDF5
 
     def write(data : Array(T), selection : Selection) forall T
       file_space = dataspace
-      selection.apply_to(file_space.id)
-      n = LibHDF5.H5Sget_select_npoints(file_space.id)
-      raise ShapeMismatchError.new(
-        "Selection covers #{n} points but data has #{data.size} elements"
-      ) if data.size != n
-      mem_space = Dataspace.simple([n.to_u64])
-      dtype = NativeType.for(T)
-      ret = LibHDF5.H5Dwrite(@id, dtype, mem_space.id, file_space.id,
-        LibHDF5::H5P_DEFAULT, data.to_unsafe.as(Void*))
-      mem_space.close
-      file_space.close
-      raise Error.new("Failed to write dataset with selection") if ret < 0
+      begin
+        selection.apply_to(file_space.id)
+        n = LibHDF5.H5Sget_select_npoints(file_space.id)
+        raise ShapeMismatchError.new(
+          "Selection covers #{n} points but data has #{data.size} elements"
+        ) if data.size != n
+        mem_space = Dataspace.simple([n.to_u64])
+        dtype = NativeType.for(T)
+        ret = LibHDF5.H5Dwrite(@id, dtype, mem_space.id, file_space.id,
+          LibHDF5::H5P_DEFAULT, data.to_unsafe.as(Void*))
+        mem_space.close
+        raise Error.new("Failed to write dataset with selection") if ret < 0
+      ensure
+        file_space.close
+      end
     end
 
     def write_strings(data : Array(String))
