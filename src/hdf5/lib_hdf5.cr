@@ -65,6 +65,14 @@ lib LibHDF5
     Native  =  2
   end
 
+  enum ObjType : Int32
+    Unknown       = -1
+    Group         =  0
+    Dataset       =  1
+    NamedDatatype =  2
+    Map           =  3
+  end
+
   # Native type global variables (initialized after H5open())
   $h5t_native_int8_g = H5T_NATIVE_INT8_g : Hid
   $h5t_native_uint8_g = H5T_NATIVE_UINT8_g : Hid
@@ -108,6 +116,12 @@ lib LibHDF5
 
   # Link operations (for iterating groups)
   fun H5Lexists(loc_id : Hid, name : UInt8*, lapl_id : Hid) : Htri
+  fun H5Lcreate_hard(cur_loc_id : Hid, cur_name : UInt8*, dst_loc_id : Hid, dst_name : UInt8*,
+                     lcpl_id : Hid, lapl_id : Hid) : Herr
+  fun H5Lcreate_soft(link_target : UInt8*, link_loc_id : Hid, link_name : UInt8*,
+                     lcpl_id : Hid, lapl_id : Hid) : Herr
+  fun H5Lcreate_external(file_name : UInt8*, obj_name : UInt8*, link_loc_id : Hid,
+                         link_name : UInt8*, lcpl_id : Hid, lapl_id : Hid) : Herr
   fun H5Lget_name_by_idx(loc_id : Hid, group_name : UInt8*, idx_type : IndexType,
                          order : IterOrder, n : Hsize, name : UInt8*, size : LibC::SizeT,
                          lapl_id : Hid) : LibC::SSizeT
@@ -193,7 +207,7 @@ lib LibHDF5
   struct ObjInfo
     fileno : UInt64
     token : ObjToken
-    type : Int32
+    type : ObjType
     rc : UInt32
     atime : LibC::TimeT
     mtime : LibC::TimeT

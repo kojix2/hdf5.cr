@@ -94,11 +94,14 @@ module HDF5
       end
     end
 
-    def create_dataset(path : String, data : Array(String),
-                       *,
-                       string_type : StringType = StringType.variable,
-                       encoding : (Symbol | StringEncoding)? = nil,
-                       &block : TypedDataset(String) ->) : Nil
+    def create_dataset(
+      path : String,
+      data : Array(String),
+      *,
+      string_type : StringType = StringType.variable,
+      encoding : (Symbol | StringEncoding)? = nil,
+      &block
+    ) : Nil
       tds = create_dataset(path, data, string_type: string_type, encoding: encoding)
       begin
         block.call(tds)
@@ -279,6 +282,27 @@ module HDF5
       LibHDF5.H5Lexists(hid, path, LibHDF5::H5P_DEFAULT) > 0
     end
 
+    def object_type(path : String) : Symbol
+      oid = LibHDF5.H5Oopen(hid, path, LibHDF5::H5P_DEFAULT)
+      raise ObjectNotFoundError.new("Object not found: '#{path}'") if oid == LibHDF5::H5_INVALID_HID
+
+      info = uninitialized LibHDF5::ObjInfo
+      ret = LibHDF5.H5Oget_info3(oid, pointerof(info), LibHDF5::H5O_INFO_BASIC)
+      LibHDF5.H5Oclose(oid)
+      raise Error.new("Failed to get object info for '#{path}'") if ret < 0
+
+      case info.type
+      when LibHDF5::ObjType::Group
+        :group
+      when LibHDF5::ObjType::Dataset
+        :dataset
+      when LibHDF5::ObjType::NamedDatatype
+        :named_datatype
+      else
+        :unknown
+      end
+    end
+
     # Backward-compat alias
     def link_exists?(path : String) : Bool
       exists?(path)
@@ -292,6 +316,30 @@ module HDF5
     # Backward-compat alias
     def delete_link(path : String) : Nil
       delete(path)
+    end
+
+    def link(source_path : String, destination_path : String) : Nil
+      with_link_create_plist do |lcpl_id|
+        ret = LibHDF5.H5Lcreate_hard(hid, source_path, hid, destination_path,
+          lcpl_id, LibHDF5::H5P_DEFAULT)
+        raise Error.new("Failed to create hard link from '#{source_path}' to '#{destination_path}'") if ret < 0
+      end
+    end
+
+    def soft_link(target_path : String, link_path : String) : Nil
+      with_link_create_plist do |lcpl_id|
+        ret = LibHDF5.H5Lcreate_soft(target_path, hid, link_path,
+          lcpl_id, LibHDF5::H5P_DEFAULT)
+        raise Error.new("Failed to create soft link '#{link_path}' -> '#{target_path}'") if ret < 0
+      end
+    end
+
+    def external_link(filename : String, target_path : String, link_path : String) : Nil
+      with_link_create_plist do |lcpl_id|
+        ret = LibHDF5.H5Lcreate_external(filename, target_path, hid, link_path,
+          lcpl_id, LibHDF5::H5P_DEFAULT)
+        raise Error.new("Failed to create external link '#{link_path}' -> '#{filename}:#{target_path}'") if ret < 0
+      end
     end
 
     def keys : Array(String)
@@ -441,6 +489,17 @@ module HDF5
         fletcher32: fletcher32,
         max_shape: max_shape.try(&.map(&.to_u64).to_a)
       )
+    end
+
+    private def with_link_create_plist(& : LibHDF5::Hid -> T) : T forall T
+      lcpl_id = LibHDF5.H5Pcreate(LibHDF5.h5p_cls_link_create_id_g)
+      raise Error.new("Failed to create link creation property list") if lcpl_id == LibHDF5::H5_INVALID_HID
+      LibHDF5.H5Pset_create_intermediate_group(lcpl_id, 1)
+      begin
+        yield lcpl_id
+      ensure
+        LibHDF5.H5Pclose(lcpl_id)
+      end
     end
   end
 

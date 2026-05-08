@@ -1,6 +1,7 @@
 require "./spec_helper"
 
 TMP_FILE = File.join(Dir.tempdir, "hdf5_spec_#{Process.pid}.h5")
+EXT_FILE = File.join(Dir.tempdir, "hdf5_ext_spec_#{Process.pid}.h5")
 
 private def create_raw_dataset(file : HDF5::File, name : String, type_id : LibHDF5::Hid,
                                dims : Array(UInt64) = [1_u64]) : Nil
@@ -18,6 +19,7 @@ end
 describe HDF5 do
   after_each do
     File.delete(TMP_FILE) if File.exists?(TMP_FILE)
+    File.delete(EXT_FILE) if File.exists?(EXT_FILE)
   end
 
   # ── Top-level module API ───────────────────────────────────────────────────
@@ -237,11 +239,59 @@ describe HDF5 do
       end
     end
 
+    it "reports object types" do
+      HDF5::File.open(TMP_FILE, :w) do |file|
+        file.create_group("grp").close
+        file["nums"] = [1, 2, 3]
+
+        file.object_type("grp").should eq(:group)
+        file.object_type("nums").should eq(:dataset)
+      end
+    end
+
     it "deletes a link" do
       HDF5::File.open(TMP_FILE, :w) do |file|
         file.create_group("removeme").close
         file.delete("removeme")
         file.exists?("removeme").should be_false
+      end
+    end
+
+    it "creates a hard link" do
+      HDF5::File.open(TMP_FILE, :w) do |file|
+        file.create_group("trees").close
+        file["trees/tree_0"] = [1, 2, 3]
+        file.link("trees/tree_0", "trace/chains/chain_0/trees/tree_0")
+
+        file.exists?("trace/chains/chain_0/trees/tree_0").should be_true
+        file.object_type("trace/chains/chain_0/trees/tree_0").should eq(:dataset)
+        file.dataset("trace/chains/chain_0/trees/tree_0", Int32).read.should eq([1, 2, 3])
+      end
+    end
+
+    it "creates a soft link" do
+      HDF5::File.open(TMP_FILE, :w) do |file|
+        file.create_group("trees").close
+        file["trees/tree_0"] = [1, 2, 3]
+        file.soft_link("/trees/tree_0", "/some/path")
+
+        file.exists?("/some/path").should be_true
+        file.object_type("/some/path").should eq(:dataset)
+        file.dataset("/some/path", Int32).read.should eq([1, 2, 3])
+      end
+    end
+
+    it "creates an external link" do
+      HDF5::File.open(EXT_FILE, :w) do |external|
+        external["target"] = [7, 8, 9]
+      end
+
+      HDF5::File.open(TMP_FILE, :w) do |file|
+        file.external_link(EXT_FILE, "/target", "/external/target")
+
+        file.exists?("/external/target").should be_true
+        file.object_type("/external/target").should eq(:dataset)
+        file.dataset("/external/target", Int32).read.should eq([7, 8, 9])
       end
     end
 
