@@ -711,6 +711,62 @@ describe HDF5 do
     end
   end
 
+  # ── Object references ─────────────────────────────────────────────────────
+
+  describe "ObjectReference" do
+    it "writes and reads object references in a dataset" do
+      HDF5.open(TMP_FILE, :w) do |file|
+        file.create_group("targets").close
+        file.create_dataset("targets/values", [1_i32, 2_i32, 3_i32]).close
+
+        group_ref = HDF5::ObjectReference.create(file, "/targets")
+        dataset_ref = HDF5::ObjectReference.create(file, "/targets/values")
+        ds = file.create_dataset("refs", [group_ref, dataset_ref])
+        dtype = ds.datatype
+        dtype.reference?.should be_true
+        dtype.object_reference?.should be_true
+        dtype.close
+        ds.close
+      end
+
+      HDF5.open(TMP_FILE, :r) do |file|
+        refs = file.dataset("refs", HDF5::ObjectReference).read
+        refs.map(&.name).should eq(["/targets", "/targets/values"])
+        refs[0].object_type.should eq(:group)
+        refs[1].object_type.should eq(:dataset)
+
+        obj = refs[1].open
+        obj.should be_a(HDF5::Dataset)
+        obj.as(HDF5::Dataset).read(Int32).should eq([1, 2, 3])
+        obj.close
+      end
+    end
+
+    it "writes and reads object references in attributes" do
+      HDF5.open(TMP_FILE, :w) do |file|
+        file.create_group("sample").close
+        file.attrs["sample_ref"] = HDF5::ObjectReference.create(file, "/sample")
+      end
+
+      HDF5.open(TMP_FILE, :r) do |file|
+        ref = file.attrs.get("sample_ref", HDF5::ObjectReference)
+        ref.name.should eq("/sample")
+        ref.object_type.should eq(:group)
+        obj = ref.open
+        obj.should be_a(HDF5::Group)
+        obj.close
+      end
+    end
+
+    it "raises when creating a reference to a missing object" do
+      HDF5.open(TMP_FILE, :w) do |file|
+        expect_raises(HDF5::Error) do
+          HDF5::ObjectReference.create(file, "/missing")
+        end
+      end
+    end
+  end
+
   # ── Datatype introspection ───────────────────────────────────────────────
 
   describe "Datatype introspection" do

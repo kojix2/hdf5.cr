@@ -200,6 +200,10 @@ module HDF5
       type_class == LibHDF5::TypeClass::Reference
     end
 
+    def object_reference? : Bool
+      reference? && LibHDF5.H5Tequal(@id, LibHDF5.h5t_std_ref_g) > 0
+    end
+
     def enum? : Bool
       type_class == LibHDF5::TypeClass::Enum
     end
@@ -324,6 +328,8 @@ module HDF5
         LibHDF5.h5t_native_float_g
       {% elsif T == Float64 %}
         LibHDF5.h5t_native_double_g
+      {% elsif T == HDF5::ObjectReference %}
+        LibHDF5.h5t_std_ref_g
       {% else %}
         {% raise "Unsupported HDF5 type: #{T}" %}
       {% end %}

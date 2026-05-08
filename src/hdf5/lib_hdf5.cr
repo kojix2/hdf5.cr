@@ -73,6 +73,16 @@ lib LibHDF5
     Map           =  3
   end
 
+  enum RefType : Int32
+    BadType        = -1
+    Object1        =  0
+    DatasetRegion1 =  1
+    Object2        =  2
+    DatasetRegion2 =  3
+    Attribute      =  4
+    MaxType        =  5
+  end
+
   # Native type global variables (initialized after H5open())
   $h5t_native_int8_g = H5T_NATIVE_INT8_g : Hid
   $h5t_native_uint8_g = H5T_NATIVE_UINT8_g : Hid
@@ -85,6 +95,7 @@ lib LibHDF5
   $h5t_native_float_g = H5T_NATIVE_FLOAT_g : Hid
   $h5t_native_double_g = H5T_NATIVE_DOUBLE_g : Hid
   $h5t_c_s1_g = H5T_C_S1_g : Hid
+  $h5t_std_ref_g = H5T_STD_REF_g : Hid
 
   # Library management
   H5E_DEFAULT = 0_i64
@@ -169,6 +180,7 @@ lib LibHDF5
   fun H5Tget_array_dims2(type_id : Hid, dims : Hsize*) : Int32
   fun H5Tget_cset(type_id : Hid) : CharSet
   fun H5Tget_strpad(type_id : Hid) : StrPad
+  fun H5Tequal(type1_id : Hid, type2_id : Hid) : Htri
   fun H5Tset_size(type_id : Hid, size : LibC::SizeT) : Herr
   fun H5Tset_cset(type_id : Hid, cset : CharSet) : Herr
   fun H5Tset_strpad(type_id : Hid, strpad : Int32) : Herr
@@ -179,6 +191,18 @@ lib LibHDF5
   fun H5Tinsert(parent_id : Hid, name : UInt8*, offset : LibC::SizeT, field_id : Hid) : Herr
   fun H5free_memory(mem : Void*) : Herr
   fun H5Dvlen_reclaim(type_id : Hid, space_id : Hid, plist_id : Hid, buf : Void*) : Herr
+
+  # Reference operations
+  struct Reference
+    data : UInt8[64]
+  end
+
+  fun H5Rcreate_object(loc_id : Hid, name : UInt8*, oapl_id : Hid, ref_ptr : Reference*) : Herr
+  fun H5Rdestroy(ref_ptr : Reference*) : Herr
+  fun H5Ropen_object(ref_ptr : Reference*, rapl_id : Hid, oapl_id : Hid) : Hid
+  fun H5Rget_obj_name(ref_ptr : Reference*, rapl_id : Hid, name : UInt8*, size : LibC::SizeT) : LibC::SSizeT
+  fun H5Rget_file_name(ref_ptr : Reference*, name : UInt8*, size : LibC::SizeT) : LibC::SSizeT
+  fun H5Rget_obj_type3(ref_ptr : Reference*, rapl_id : Hid, obj_type : ObjType*) : Herr
 
   # Attribute operations
   fun H5Acreate2(loc_id : Hid, attr_name : UInt8*, type_id : Hid, space_id : Hid,

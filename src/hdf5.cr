@@ -1,6 +1,7 @@
 require "./hdf5/lib_hdf5"
 require "./hdf5/error"
 require "./hdf5/internal_checks"
+require "./hdf5/object_reference"
 require "./hdf5/datatype"
 require "./hdf5/dataspace"
 require "./hdf5/compression"

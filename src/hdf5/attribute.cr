@@ -52,6 +52,8 @@ module HDF5
     def read(type : T.class) : T forall T
       {% if T == String %}
         read_string
+      {% elsif T == HDF5::ObjectReference %}
+        read_object_reference
       {% elsif T < Number %}
         buf = uninitialized T
         dtype = NativeType.for(T)
@@ -68,15 +70,23 @@ module HDF5
       npoints = LibHDF5.H5Sget_simple_extent_npoints(space_id)
       LibHDF5.H5Sclose(space_id)
       raise Error.new("Invalid npoints") if npoints < 0
-      buf = Array(T).new(npoints.to_i, T.zero)
-      dtype = NativeType.for(T)
-      read_raw(dtype, buf.to_unsafe)
-      buf
+      {% if T == HDF5::ObjectReference %}
+        refs = Array(LibHDF5::Reference).new(npoints.to_i) { LibHDF5::Reference.new }
+        read_raw(NativeType.for(ObjectReference), refs.to_unsafe)
+        refs.map { |ref| ObjectReference.new(ref) }
+      {% else %}
+        buf = Array(T).new(npoints.to_i, T.zero)
+        dtype = NativeType.for(T)
+        read_raw(dtype, buf.to_unsafe)
+        buf
+      {% end %}
     end
 
     def write(value : T) forall T
       {% if T == String %}
         write_string(value)
+      {% elsif T == HDF5::ObjectReference %}
+        write_object_reference(value)
       {% elsif T < Number %}
         dtype = NativeType.for(T)
         write_raw(dtype, pointerof(value))
@@ -177,6 +187,17 @@ module HDF5
       ptr = value.to_unsafe
       write_raw(type_id, pointerof(ptr))
       LibHDF5.H5Tclose(type_id)
+    end
+
+    private def read_object_reference : ObjectReference
+      ref = uninitialized LibHDF5::Reference
+      read_raw(NativeType.for(ObjectReference), pointerof(ref))
+      ObjectReference.new(ref)
+    end
+
+    private def write_object_reference(value : ObjectReference)
+      ref = value.ref
+      write_raw(NativeType.for(ObjectReference), pointerof(ref))
     end
 
     private def with_dataspace(& : Dataspace -> T) : T forall T
