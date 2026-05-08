@@ -119,7 +119,11 @@ module HDF5
       attr_id = LibHDF5.H5Acreate2(@loc_id, name, type_id, space.id,
         LibHDF5::H5P_DEFAULT, LibHDF5::H5P_DEFAULT)
       space.close
-      write_type = NativeType.variable_length_string
+        if attr_id == LibHDF5::H5_INVALID_HID
+          LibHDF5.H5Tclose(type_id)
+          raise Error.new("Failed to create attribute '#{name}'")
+        end
+        write_type = NativeType.variable_length_string
       ptr = value.to_unsafe
       ret = LibHDF5.H5Awrite(attr_id, write_type, pointerof(ptr).as(Void*))
       LibHDF5.H5Tclose(write_type)
@@ -146,7 +150,11 @@ module HDF5
       attr_id = LibHDF5.H5Acreate2(@loc_id, name, type_id, space.id,
         LibHDF5::H5P_DEFAULT, LibHDF5::H5P_DEFAULT)
       space.close
-      write_type = NativeType.variable_length_string
+        if attr_id == LibHDF5::H5_INVALID_HID
+          LibHDF5.H5Tclose(type_id)
+          raise Error.new("Failed to create attribute '#{name}'")
+        end
+        write_type = NativeType.variable_length_string
       ptrs = data.map(&.to_unsafe)
       ret = LibHDF5.H5Awrite(attr_id, write_type, ptrs.to_unsafe.as(Void*))
       LibHDF5.H5Tclose(write_type)
