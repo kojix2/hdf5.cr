@@ -2,6 +2,19 @@ require "./spec_helper"
 
 TMP_FILE = File.join(Dir.tempdir, "hdf5_spec_#{Process.pid}.h5")
 
+private def create_raw_dataset(file : HDF5::File, name : String, type_id : LibHDF5::Hid,
+                               dims : Array(UInt64) = [1_u64]) : Nil
+  space_id = LibHDF5.H5Screate_simple(dims.size, dims.to_unsafe, nil)
+  raise "Failed to create dataspace for #{name}" if space_id == LibHDF5::H5_INVALID_HID
+
+  dataset_id = LibHDF5.H5Dcreate2(file.id, name, type_id, space_id,
+    LibHDF5::H5P_DEFAULT, LibHDF5::H5P_DEFAULT, LibHDF5::H5P_DEFAULT)
+  raise "Failed to create dataset #{name}" if dataset_id == LibHDF5::H5_INVALID_HID
+ensure
+  LibHDF5.H5Dclose(dataset_id) if dataset_id && dataset_id != LibHDF5::H5_INVALID_HID
+  LibHDF5.H5Sclose(space_id) if space_id && space_id != LibHDF5::H5_INVALID_HID
+end
+
 describe HDF5 do
   after_each do
     File.delete(TMP_FILE) if File.exists?(TMP_FILE)
@@ -546,6 +559,8 @@ describe HDF5 do
         dtype.type_class.should eq(LibHDF5::TypeClass::Integer)
         dtype.size.should eq(sizeof(Int32))
         dtype.integer?.should be_true
+        dtype.signed?.should be_true
+        dtype.unsigned?.should be_false
         dtype.float?.should be_false
         dtype.string?.should be_false
         dtype.variable_length_string?.should be_false
@@ -553,6 +568,22 @@ describe HDF5 do
         dtype.vlen?.should be_false
         dtype.compound?.should be_false
         dtype.array?.should be_false
+        dtype.close
+      end
+    end
+
+    it "reports unsigned integer dataset metadata" do
+      HDF5.open(TMP_FILE, :w) do |file|
+        file["uints"] = [1_u16, 2_u16, 3_u16]
+      end
+
+      HDF5.open(TMP_FILE, :r) do |file|
+        dtype = file.open_dataset("uints").datatype
+        dtype.type_class.should eq(LibHDF5::TypeClass::Integer)
+        dtype.size.should eq(sizeof(UInt16))
+        dtype.integer?.should be_true
+        dtype.signed?.should be_false
+        dtype.unsigned?.should be_true
         dtype.close
       end
     end
@@ -583,6 +614,7 @@ describe HDF5 do
         dtype = file.dataset("strs", String).datatype
         dtype.type_class.should eq(LibHDF5::TypeClass::String)
         dtype.string?.should be_true
+        dtype.fixed_length_string?.should be_false
         dtype.variable_length_string?.should be_true
         dtype.integer?.should be_false
         dtype.float?.should be_false
@@ -590,6 +622,116 @@ describe HDF5 do
         dtype.vlen?.should be_false
         dtype.compound?.should be_false
         dtype.array?.should be_false
+        dtype.close
+      end
+    end
+
+    it "reports fixed-length string metadata" do
+      HDF5.open(TMP_FILE, :w) do |file|
+        type_id = HDF5::NativeType.fixed_length_string(12)
+        begin
+          create_raw_dataset(file, "fixed_str", type_id)
+        ensure
+          LibHDF5.H5Tclose(type_id)
+        end
+      end
+
+      HDF5.open(TMP_FILE, :r) do |file|
+        dtype = file.open_dataset("fixed_str").datatype
+        dtype.type_class.should eq(LibHDF5::TypeClass::String)
+        dtype.size.should eq(12)
+        dtype.string?.should be_true
+        dtype.fixed_length_string?.should be_true
+        dtype.variable_length_string?.should be_false
+        dtype.close
+      end
+    end
+
+    it "reports compound members" do
+      HDF5.open(TMP_FILE, :w) do |file|
+        type_id = LibHDF5.H5Tcreate(LibHDF5::TypeClass::Compound, LibC::SizeT.new(12))
+        raise "Failed to create compound datatype" if type_id == LibHDF5::H5_INVALID_HID
+        begin
+          LibHDF5.H5Tinsert(type_id, "id", LibC::SizeT.new(0), LibHDF5.h5t_native_int32_g).should eq(0)
+          LibHDF5.H5Tinsert(type_id, "score", LibC::SizeT.new(4), LibHDF5.h5t_native_double_g).should eq(0)
+          create_raw_dataset(file, "compound", type_id)
+        ensure
+          LibHDF5.H5Tclose(type_id)
+        end
+      end
+
+      HDF5.open(TMP_FILE, :r) do |file|
+        dtype = file.open_dataset("compound").datatype
+        dtype.compound?.should be_true
+        dtype.member_count.should eq(2)
+
+        members = dtype.members
+        members.map(&.name).should eq(["id", "score"])
+        members.map(&.offset).should eq([0_u64, 4_u64])
+        members[0].datatype.integer?.should be_true
+        members[0].datatype.size.should eq(sizeof(Int32))
+        members[1].datatype.float?.should be_true
+        members[1].datatype.size.should eq(sizeof(Float64))
+
+        members.each(&.datatype.close)
+        dtype.close
+      end
+    end
+
+    it "reports array datatype dimensions and base type" do
+      HDF5.open(TMP_FILE, :w) do |file|
+        dims = [2_u64, 3_u64]
+        type_id = LibHDF5.H5Tarray_create2(LibHDF5.h5t_native_int16_g, dims.size.to_u32, dims.to_unsafe)
+        raise "Failed to create array datatype" if type_id == LibHDF5::H5_INVALID_HID
+        begin
+          create_raw_dataset(file, "array_type", type_id)
+        ensure
+          LibHDF5.H5Tclose(type_id)
+        end
+      end
+
+      HDF5.open(TMP_FILE, :r) do |file|
+        dtype = file.open_dataset("array_type").datatype
+        dtype.array?.should be_true
+        dtype.array_rank.should eq(2)
+        dtype.array_dims.should eq([2_u64, 3_u64])
+
+        base_type = dtype.base_type
+        base_type.should_not be_nil
+        if base_type
+          base_type.integer?.should be_true
+          base_type.size.should eq(sizeof(Int16))
+          base_type.close
+        end
+
+        dtype.close
+      end
+    end
+
+    it "reports variable-length non-string base type" do
+      HDF5.open(TMP_FILE, :w) do |file|
+        type_id = LibHDF5.H5Tvlen_create(LibHDF5.h5t_native_int32_g)
+        raise "Failed to create vlen datatype" if type_id == LibHDF5::H5_INVALID_HID
+        begin
+          create_raw_dataset(file, "vlen_ints", type_id)
+        ensure
+          LibHDF5.H5Tclose(type_id)
+        end
+      end
+
+      HDF5.open(TMP_FILE, :r) do |file|
+        dtype = file.open_dataset("vlen_ints").datatype
+        dtype.vlen?.should be_true
+        dtype.string?.should be_false
+
+        base_type = dtype.base_type
+        base_type.should_not be_nil
+        if base_type
+          base_type.integer?.should be_true
+          base_type.size.should eq(sizeof(Int32))
+          base_type.close
+        end
+
         dtype.close
       end
     end

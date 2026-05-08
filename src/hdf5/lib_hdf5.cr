@@ -26,6 +26,12 @@ lib LibHDF5
     Complex   = 11
   end
 
+  enum Sign : Int32
+    Error = -1
+    None  =  0
+    Two   =  1
+  end
+
   enum SpaceClass : Int32
     NoClass = -1
     Scalar  =  0
@@ -126,11 +132,22 @@ lib LibHDF5
   fun H5Tclose(type_id : Hid) : Herr
   fun H5Tget_class(type_id : Hid) : TypeClass
   fun H5Tget_size(type_id : Hid) : LibC::SizeT
+  fun H5Tget_sign(type_id : Hid) : Sign
+  fun H5Tget_super(type_id : Hid) : Hid
+  fun H5Tget_nmembers(type_id : Hid) : Int32
+  fun H5Tget_member_name(type_id : Hid, membno : UInt32) : UInt8*
+  fun H5Tget_member_offset(type_id : Hid, membno : UInt32) : LibC::SizeT
+  fun H5Tget_member_type(type_id : Hid, membno : UInt32) : Hid
+  fun H5Tget_array_ndims(type_id : Hid) : Int32
+  fun H5Tget_array_dims2(type_id : Hid, dims : Hsize*) : Int32
   fun H5Tset_size(type_id : Hid, size : LibC::SizeT) : Herr
   fun H5Tset_strpad(type_id : Hid, strpad : Int32) : Herr
   fun H5Tis_variable_str(type_id : Hid) : Htri
+  fun H5Tarray_create2(base_id : Hid, ndims : UInt32, dims : Hsize*) : Hid
+  fun H5Tvlen_create(base_id : Hid) : Hid
   fun H5Tcreate(type : TypeClass, size : LibC::SizeT) : Hid
   fun H5Tinsert(parent_id : Hid, name : UInt8*, offset : LibC::SizeT, field_id : Hid) : Herr
+  fun H5free_memory(mem : Void*) : Herr
 
   # Attribute operations
   fun H5Acreate2(loc_id : Hid, attr_name : UInt8*, type_id : Hid, space_id : Hid,
