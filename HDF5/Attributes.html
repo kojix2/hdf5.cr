@@ -272,7 +272,7 @@
   </h2>
   
     
-      <a href="https://github.com/kojix2/hdf5.cr/blob/211f0b1f88ede478ce5b86cc481ca7adbb1ea4f3/src/hdf5/attributes.cr#L2" target="_blank">
+      <a href="https://github.com/kojix2/hdf5.cr/blob/e6ae471c04e2977db5dd073b1df3944892d53652/src/hdf5/attributes.cr#L2" target="_blank">
         hdf5/attributes.cr
       </a>
     
@@ -280,6 +280,25 @@
   
 
 
+
+  
+    <h2>
+      <a id="constant-summary" class="anchor" href="#constant-summary">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+      Constant Summary
+    </h2>
+  
+  <dl>
+    
+      <dt class="entry-const" id="NUMERIC_TYPES">
+        <strong>NUMERIC_TYPES</strong> = <code>{<span class="t">Int8</span>, <span class="t">UInt8</span>, <span class="t">Int16</span>, <span class="t">UInt16</span>, <span class="t">Int32</span>, <span class="t">UInt32</span>, <span class="t">Int64</span>, <span class="t">UInt64</span>, <span class="t">Float32</span>, <span class="t">Float64</span>}</code>
+      </dt>
+      
+    
+  </dl>
 
 
 
@@ -318,12 +337,117 @@
   <ul class="list-summary">
     
       <li class="entry-summary">
-        <a href="#%5B%5D%3D%28name%3AString%2Cvalue%3A%7BString%2CHDF5%3A%3AAttribute%7D%29forallT-instance-method" class="signature"><strong>#[]=</strong>(name : String, value : {String, HDF5::Attribute}) forall T</a>
+        <a href="#%5B%5D%28name%3AString%29%3AAttribute-instance-method" class="signature"><strong>#[]</strong>(name : String) : Attribute</a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#%5B%5D%3D%28name%3AString%2Cvalue%3AArray%28%7BString%2CHDF5%3A%3AAttribute%7D%29%29forallT-instance-method" class="signature"><strong>#[]=</strong>(name : String, value : Array({String, HDF5::Attribute})) forall T</a>
+        <a href="#%5B%5D%3D%28name%3AString%2Cvalue%3AString%29-instance-method" class="signature"><strong>#[]=</strong>(name : String, value : String)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#%5B%5D%3D%28name%3AString%2Cvalue%3AArray%28String%29%29-instance-method" class="signature"><strong>#[]=</strong>(name : String, value : Array(String))</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#%5B%5D%3D%28name%3AString%2Cvalue%3AInt8%29-instance-method" class="signature"><strong>#[]=</strong>(name : String, value : Int8)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#%5B%5D%3D%28name%3AString%2Cvalue%3AArray%28Int8%29%29-instance-method" class="signature"><strong>#[]=</strong>(name : String, value : Array(Int8))</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#%5B%5D%3D%28name%3AString%2Cvalue%3AUInt8%29-instance-method" class="signature"><strong>#[]=</strong>(name : String, value : UInt8)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#%5B%5D%3D%28name%3AString%2Cvalue%3AArray%28UInt8%29%29-instance-method" class="signature"><strong>#[]=</strong>(name : String, value : Array(UInt8))</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#%5B%5D%3D%28name%3AString%2Cvalue%3AInt16%29-instance-method" class="signature"><strong>#[]=</strong>(name : String, value : Int16)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#%5B%5D%3D%28name%3AString%2Cvalue%3AArray%28Int16%29%29-instance-method" class="signature"><strong>#[]=</strong>(name : String, value : Array(Int16))</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#%5B%5D%3D%28name%3AString%2Cvalue%3AUInt16%29-instance-method" class="signature"><strong>#[]=</strong>(name : String, value : UInt16)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#%5B%5D%3D%28name%3AString%2Cvalue%3AArray%28UInt16%29%29-instance-method" class="signature"><strong>#[]=</strong>(name : String, value : Array(UInt16))</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#%5B%5D%3D%28name%3AString%2Cvalue%3AInt32%29-instance-method" class="signature"><strong>#[]=</strong>(name : String, value : Int32)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#%5B%5D%3D%28name%3AString%2Cvalue%3AArray%28Int32%29%29-instance-method" class="signature"><strong>#[]=</strong>(name : String, value : Array(Int32))</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#%5B%5D%3D%28name%3AString%2Cvalue%3AUInt32%29-instance-method" class="signature"><strong>#[]=</strong>(name : String, value : UInt32)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#%5B%5D%3D%28name%3AString%2Cvalue%3AArray%28UInt32%29%29-instance-method" class="signature"><strong>#[]=</strong>(name : String, value : Array(UInt32))</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#%5B%5D%3D%28name%3AString%2Cvalue%3AInt64%29-instance-method" class="signature"><strong>#[]=</strong>(name : String, value : Int64)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#%5B%5D%3D%28name%3AString%2Cvalue%3AArray%28Int64%29%29-instance-method" class="signature"><strong>#[]=</strong>(name : String, value : Array(Int64))</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#%5B%5D%3D%28name%3AString%2Cvalue%3AUInt64%29-instance-method" class="signature"><strong>#[]=</strong>(name : String, value : UInt64)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#%5B%5D%3D%28name%3AString%2Cvalue%3AArray%28UInt64%29%29-instance-method" class="signature"><strong>#[]=</strong>(name : String, value : Array(UInt64))</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#%5B%5D%3D%28name%3AString%2Cvalue%3AFloat32%29-instance-method" class="signature"><strong>#[]=</strong>(name : String, value : Float32)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#%5B%5D%3D%28name%3AString%2Cvalue%3AArray%28Float32%29%29-instance-method" class="signature"><strong>#[]=</strong>(name : String, value : Array(Float32))</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#%5B%5D%3D%28name%3AString%2Cvalue%3AFloat64%29-instance-method" class="signature"><strong>#[]=</strong>(name : String, value : Float64)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#%5B%5D%3D%28name%3AString%2Cvalue%3AArray%28Float64%29%29-instance-method" class="signature"><strong>#[]=</strong>(name : String, value : Array(Float64))</a>
         
       </li>
     
@@ -427,7 +551,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/hdf5.cr/blob/211f0b1f88ede478ce5b86cc481ca7adbb1ea4f3/src/hdf5/attributes.cr#L5" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/e6ae471c04e2977db5dd073b1df3944892d53652/src/hdf5/attributes.cr#L18" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -448,34 +572,370 @@
     Instance Method Detail
   </h2>
   
-    <div class="entry-detail" id="[]=(name:String,value:{String,HDF5::Attribute})forallT-instance-method">
+    <div class="entry-detail" id="[](name:String):Attribute-instance-method">
       <div class="signature">
         
-        def <strong>[]=</strong>(name : String, value : {String, <a href="../HDF5/Attribute.html">HDF5::Attribute</a>}) forall T
+        def <strong>[]</strong>(name : String) : <a href="../HDF5/Attribute.html">Attribute</a>
 
-        <a class="method-permalink" href="#%5B%5D%3D%28name%3AString%2Cvalue%3A%7BString%2CHDF5%3A%3AAttribute%7D%29forallT-instance-method">#</a>
+        <a class="method-permalink" href="#%5B%5D%28name%3AString%29%3AAttribute-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/hdf5.cr/blob/211f0b1f88ede478ce5b86cc481ca7adbb1ea4f3/src/hdf5/attributes.cr#L8" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/e6ae471c04e2977db5dd073b1df3944892d53652/src/hdf5/attributes.cr#L21" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="[]=(name:String,value:Array({String,HDF5::Attribute}))forallT-instance-method">
+    <div class="entry-detail" id="[]=(name:String,value:String)-instance-method">
       <div class="signature">
         
-        def <strong>[]=</strong>(name : String, value : Array({String, <a href="../HDF5/Attribute.html">HDF5::Attribute</a>})) forall T
+        def <strong>[]=</strong>(name : String, value : String)
 
-        <a class="method-permalink" href="#%5B%5D%3D%28name%3AString%2Cvalue%3AArray%28%7BString%2CHDF5%3A%3AAttribute%7D%29%29forallT-instance-method">#</a>
+        <a class="method-permalink" href="#%5B%5D%3D%28name%3AString%2Cvalue%3AString%29-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/hdf5.cr/blob/211f0b1f88ede478ce5b86cc481ca7adbb1ea4f3/src/hdf5/attributes.cr#L19" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/e6ae471c04e2977db5dd073b1df3944892d53652/src/hdf5/attributes.cr#L27" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="[]=(name:String,value:Array(String))-instance-method">
+      <div class="signature">
+        
+        def <strong>[]=</strong>(name : String, value : Array(String))
+
+        <a class="method-permalink" href="#%5B%5D%3D%28name%3AString%2Cvalue%3AArray%28String%29%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/e6ae471c04e2977db5dd073b1df3944892d53652/src/hdf5/attributes.cr#L32" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="[]=(name:String,value:Int8)-instance-method">
+      <div class="signature">
+        
+        def <strong>[]=</strong>(name : String, value : Int8)
+
+        <a class="method-permalink" href="#%5B%5D%3D%28name%3AString%2Cvalue%3AInt8%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/e6ae471c04e2977db5dd073b1df3944892d53652/src/hdf5/attributes.cr#L37" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="[]=(name:String,value:Array(Int8))-instance-method">
+      <div class="signature">
+        
+        def <strong>[]=</strong>(name : String, value : Array(Int8))
+
+        <a class="method-permalink" href="#%5B%5D%3D%28name%3AString%2Cvalue%3AArray%28Int8%29%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/e6ae471c04e2977db5dd073b1df3944892d53652/src/hdf5/attributes.cr#L37" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="[]=(name:String,value:UInt8)-instance-method">
+      <div class="signature">
+        
+        def <strong>[]=</strong>(name : String, value : UInt8)
+
+        <a class="method-permalink" href="#%5B%5D%3D%28name%3AString%2Cvalue%3AUInt8%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/e6ae471c04e2977db5dd073b1df3944892d53652/src/hdf5/attributes.cr#L37" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="[]=(name:String,value:Array(UInt8))-instance-method">
+      <div class="signature">
+        
+        def <strong>[]=</strong>(name : String, value : Array(UInt8))
+
+        <a class="method-permalink" href="#%5B%5D%3D%28name%3AString%2Cvalue%3AArray%28UInt8%29%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/e6ae471c04e2977db5dd073b1df3944892d53652/src/hdf5/attributes.cr#L37" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="[]=(name:String,value:Int16)-instance-method">
+      <div class="signature">
+        
+        def <strong>[]=</strong>(name : String, value : Int16)
+
+        <a class="method-permalink" href="#%5B%5D%3D%28name%3AString%2Cvalue%3AInt16%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/e6ae471c04e2977db5dd073b1df3944892d53652/src/hdf5/attributes.cr#L37" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="[]=(name:String,value:Array(Int16))-instance-method">
+      <div class="signature">
+        
+        def <strong>[]=</strong>(name : String, value : Array(Int16))
+
+        <a class="method-permalink" href="#%5B%5D%3D%28name%3AString%2Cvalue%3AArray%28Int16%29%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/e6ae471c04e2977db5dd073b1df3944892d53652/src/hdf5/attributes.cr#L37" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="[]=(name:String,value:UInt16)-instance-method">
+      <div class="signature">
+        
+        def <strong>[]=</strong>(name : String, value : UInt16)
+
+        <a class="method-permalink" href="#%5B%5D%3D%28name%3AString%2Cvalue%3AUInt16%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/e6ae471c04e2977db5dd073b1df3944892d53652/src/hdf5/attributes.cr#L37" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="[]=(name:String,value:Array(UInt16))-instance-method">
+      <div class="signature">
+        
+        def <strong>[]=</strong>(name : String, value : Array(UInt16))
+
+        <a class="method-permalink" href="#%5B%5D%3D%28name%3AString%2Cvalue%3AArray%28UInt16%29%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/e6ae471c04e2977db5dd073b1df3944892d53652/src/hdf5/attributes.cr#L37" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="[]=(name:String,value:Int32)-instance-method">
+      <div class="signature">
+        
+        def <strong>[]=</strong>(name : String, value : Int32)
+
+        <a class="method-permalink" href="#%5B%5D%3D%28name%3AString%2Cvalue%3AInt32%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/e6ae471c04e2977db5dd073b1df3944892d53652/src/hdf5/attributes.cr#L37" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="[]=(name:String,value:Array(Int32))-instance-method">
+      <div class="signature">
+        
+        def <strong>[]=</strong>(name : String, value : Array(Int32))
+
+        <a class="method-permalink" href="#%5B%5D%3D%28name%3AString%2Cvalue%3AArray%28Int32%29%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/e6ae471c04e2977db5dd073b1df3944892d53652/src/hdf5/attributes.cr#L37" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="[]=(name:String,value:UInt32)-instance-method">
+      <div class="signature">
+        
+        def <strong>[]=</strong>(name : String, value : UInt32)
+
+        <a class="method-permalink" href="#%5B%5D%3D%28name%3AString%2Cvalue%3AUInt32%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/e6ae471c04e2977db5dd073b1df3944892d53652/src/hdf5/attributes.cr#L37" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="[]=(name:String,value:Array(UInt32))-instance-method">
+      <div class="signature">
+        
+        def <strong>[]=</strong>(name : String, value : Array(UInt32))
+
+        <a class="method-permalink" href="#%5B%5D%3D%28name%3AString%2Cvalue%3AArray%28UInt32%29%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/e6ae471c04e2977db5dd073b1df3944892d53652/src/hdf5/attributes.cr#L37" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="[]=(name:String,value:Int64)-instance-method">
+      <div class="signature">
+        
+        def <strong>[]=</strong>(name : String, value : Int64)
+
+        <a class="method-permalink" href="#%5B%5D%3D%28name%3AString%2Cvalue%3AInt64%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/e6ae471c04e2977db5dd073b1df3944892d53652/src/hdf5/attributes.cr#L37" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="[]=(name:String,value:Array(Int64))-instance-method">
+      <div class="signature">
+        
+        def <strong>[]=</strong>(name : String, value : Array(Int64))
+
+        <a class="method-permalink" href="#%5B%5D%3D%28name%3AString%2Cvalue%3AArray%28Int64%29%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/e6ae471c04e2977db5dd073b1df3944892d53652/src/hdf5/attributes.cr#L37" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="[]=(name:String,value:UInt64)-instance-method">
+      <div class="signature">
+        
+        def <strong>[]=</strong>(name : String, value : UInt64)
+
+        <a class="method-permalink" href="#%5B%5D%3D%28name%3AString%2Cvalue%3AUInt64%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/e6ae471c04e2977db5dd073b1df3944892d53652/src/hdf5/attributes.cr#L37" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="[]=(name:String,value:Array(UInt64))-instance-method">
+      <div class="signature">
+        
+        def <strong>[]=</strong>(name : String, value : Array(UInt64))
+
+        <a class="method-permalink" href="#%5B%5D%3D%28name%3AString%2Cvalue%3AArray%28UInt64%29%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/e6ae471c04e2977db5dd073b1df3944892d53652/src/hdf5/attributes.cr#L37" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="[]=(name:String,value:Float32)-instance-method">
+      <div class="signature">
+        
+        def <strong>[]=</strong>(name : String, value : Float32)
+
+        <a class="method-permalink" href="#%5B%5D%3D%28name%3AString%2Cvalue%3AFloat32%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/e6ae471c04e2977db5dd073b1df3944892d53652/src/hdf5/attributes.cr#L37" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="[]=(name:String,value:Array(Float32))-instance-method">
+      <div class="signature">
+        
+        def <strong>[]=</strong>(name : String, value : Array(Float32))
+
+        <a class="method-permalink" href="#%5B%5D%3D%28name%3AString%2Cvalue%3AArray%28Float32%29%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/e6ae471c04e2977db5dd073b1df3944892d53652/src/hdf5/attributes.cr#L37" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="[]=(name:String,value:Float64)-instance-method">
+      <div class="signature">
+        
+        def <strong>[]=</strong>(name : String, value : Float64)
+
+        <a class="method-permalink" href="#%5B%5D%3D%28name%3AString%2Cvalue%3AFloat64%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/e6ae471c04e2977db5dd073b1df3944892d53652/src/hdf5/attributes.cr#L37" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="[]=(name:String,value:Array(Float64))-instance-method">
+      <div class="signature">
+        
+        def <strong>[]=</strong>(name : String, value : Array(Float64))
+
+        <a class="method-permalink" href="#%5B%5D%3D%28name%3AString%2Cvalue%3AArray%28Float64%29%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/e6ae471c04e2977db5dd073b1df3944892d53652/src/hdf5/attributes.cr#L37" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -491,7 +951,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/hdf5.cr/blob/211f0b1f88ede478ce5b86cc481ca7adbb1ea4f3/src/hdf5/attributes.cr#L48" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/e6ae471c04e2977db5dd073b1df3944892d53652/src/hdf5/attributes.cr#L67" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -516,7 +976,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/hdf5.cr/blob/211f0b1f88ede478ce5b86cc481ca7adbb1ea4f3/src/hdf5/attributes.cr#L75" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/e6ae471c04e2977db5dd073b1df3944892d53652/src/hdf5/attributes.cr#L94" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -532,7 +992,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/hdf5.cr/blob/211f0b1f88ede478ce5b86cc481ca7adbb1ea4f3/src/hdf5/attributes.cr#L30" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/e6ae471c04e2977db5dd073b1df3944892d53652/src/hdf5/attributes.cr#L49" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -548,7 +1008,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/hdf5.cr/blob/211f0b1f88ede478ce5b86cc481ca7adbb1ea4f3/src/hdf5/attributes.cr#L39" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/e6ae471c04e2977db5dd073b1df3944892d53652/src/hdf5/attributes.cr#L58" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -564,7 +1024,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/hdf5.cr/blob/211f0b1f88ede478ce5b86cc481ca7adbb1ea4f3/src/hdf5/attributes.cr#L44" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/e6ae471c04e2977db5dd073b1df3944892d53652/src/hdf5/attributes.cr#L63" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -580,7 +1040,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/hdf5.cr/blob/211f0b1f88ede478ce5b86cc481ca7adbb1ea4f3/src/hdf5/attributes.cr#L53" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/e6ae471c04e2977db5dd073b1df3944892d53652/src/hdf5/attributes.cr#L72" target="_blank">View source</a>]
         
       </div>
     </div>

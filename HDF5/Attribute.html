@@ -258,7 +258,7 @@
   </h2>
   
     
-      <a href="https://github.com/kojix2/hdf5.cr/blob/211f0b1f88ede478ce5b86cc481ca7adbb1ea4f3/src/hdf5/attribute.cr#L2" target="_blank">
+      <a href="https://github.com/kojix2/hdf5.cr/blob/e6ae471c04e2977db5dd073b1df3944892d53652/src/hdf5/attribute.cr#L2" target="_blank">
         hdf5/attribute.cr
       </a>
     
@@ -304,7 +304,22 @@
   <ul class="list-summary">
     
       <li class="entry-summary">
+        <a href="#array%3F%3ABool-instance-method" class="signature"><strong>#array?</strong> : Bool</a>
+        
+      </li>
+    
+      <li class="entry-summary">
         <a href="#close-instance-method" class="signature"><strong>#close</strong></a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#dataspace%3ADataspace-instance-method" class="signature"><strong>#dataspace</strong> : Dataspace</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#datatype%3ADatatype-instance-method" class="signature"><strong>#datatype</strong> : Datatype</a>
         
       </li>
     
@@ -324,6 +339,11 @@
       </li>
     
       <li class="entry-summary">
+        <a href="#rank%3AInt32-instance-method" class="signature"><strong>#rank</strong> : Int32</a>
+        
+      </li>
+    
+      <li class="entry-summary">
         <a href="#read%28type%3AT.class%29%3ATforallT-instance-method" class="signature"><strong>#read</strong>(type : <span class="t">T</span>.<span class="k">class</span>) : T forall T</a>
         
       </li>
@@ -334,12 +354,47 @@
       </li>
     
       <li class="entry-summary">
+        <a href="#read_raw%28type_id%3ALibHDF5%3A%3AHid%2Cbuf%3APointer%28T%29%29%3ANilforallT-instance-method" class="signature"><strong>#read_raw</strong>(type_id : LibHDF5::Hid, buf : Pointer(T)) : Nil forall T</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#read_raw%28type_id%3ALibHDF5%3A%3AHid%2Cbuf%3APointer%28Void%29%29%3ANil-instance-method" class="signature"><strong>#read_raw</strong>(type_id : LibHDF5::Hid, buf : Pointer(Void)) : Nil</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#scalar%3F%3ABool-instance-method" class="signature"><strong>#scalar?</strong> : Bool</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#shape%3AArray%28UInt64%29-instance-method" class="signature"><strong>#shape</strong> : Array(UInt64)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#size%3AUInt64-instance-method" class="signature"><strong>#size</strong> : UInt64</a>
+        
+      </li>
+    
+      <li class="entry-summary">
         <a href="#write%28value%3AT%29forallT-instance-method" class="signature"><strong>#write</strong>(value : T) forall T</a>
         
       </li>
     
       <li class="entry-summary">
         <a href="#write_array%28data%3AArray%28T%29%29forallT-instance-method" class="signature"><strong>#write_array</strong>(data : Array(T)) forall T</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#write_raw%28type_id%3ALibHDF5%3A%3AHid%2Cbuf%3APointer%28T%29%29%3ANilforallT-instance-method" class="signature"><strong>#write_raw</strong>(type_id : LibHDF5::Hid, buf : Pointer(T)) : Nil forall T</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#write_raw%28type_id%3ALibHDF5%3A%3AHid%2Cbuf%3APointer%28Void%29%29%3ANil-instance-method" class="signature"><strong>#write_raw</strong>(type_id : LibHDF5::Hid, buf : Pointer(Void)) : Nil</a>
         
       </li>
     
@@ -398,7 +453,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/hdf5.cr/blob/211f0b1f88ede478ce5b86cc481ca7adbb1ea4f3/src/hdf5/attribute.cr#L5" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/e6ae471c04e2977db5dd073b1df3944892d53652/src/hdf5/attribute.cr#L5" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -419,6 +474,22 @@
     Instance Method Detail
   </h2>
   
+    <div class="entry-detail" id="array?:Bool-instance-method">
+      <div class="signature">
+        
+        def <strong>array?</strong> : Bool
+
+        <a class="method-permalink" href="#array%3F%3ABool-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/e6ae471c04e2977db5dd073b1df3944892d53652/src/hdf5/attribute.cr#L37" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
     <div class="entry-detail" id="close-instance-method">
       <div class="signature">
         
@@ -430,7 +501,39 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/hdf5.cr/blob/211f0b1f88ede478ce5b86cc481ca7adbb1ea4f3/src/hdf5/attribute.cr#L61" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/e6ae471c04e2977db5dd073b1df3944892d53652/src/hdf5/attribute.cr#L116" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="dataspace:Dataspace-instance-method">
+      <div class="signature">
+        
+        def <strong>dataspace</strong> : <a href="../HDF5/Dataspace.html">Dataspace</a>
+
+        <a class="method-permalink" href="#dataspace%3ADataspace-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/e6ae471c04e2977db5dd073b1df3944892d53652/src/hdf5/attribute.cr#L14" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="datatype:Datatype-instance-method">
+      <div class="signature">
+        
+        def <strong>datatype</strong> : <a href="../HDF5/Datatype.html">Datatype</a>
+
+        <a class="method-permalink" href="#datatype%3ADatatype-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/e6ae471c04e2977db5dd073b1df3944892d53652/src/hdf5/attribute.cr#L8" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -446,7 +549,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/hdf5.cr/blob/211f0b1f88ede478ce5b86cc481ca7adbb1ea4f3/src/hdf5/attribute.cr#L66" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/e6ae471c04e2977db5dd073b1df3944892d53652/src/hdf5/attribute.cr#L121" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -462,7 +565,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/hdf5.cr/blob/211f0b1f88ede478ce5b86cc481ca7adbb1ea4f3/src/hdf5/attribute.cr#L3" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/e6ae471c04e2977db5dd073b1df3944892d53652/src/hdf5/attribute.cr#L3" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -478,7 +581,23 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/hdf5.cr/blob/211f0b1f88ede478ce5b86cc481ca7adbb1ea4f3/src/hdf5/attribute.cr#L8" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/e6ae471c04e2977db5dd073b1df3944892d53652/src/hdf5/attribute.cr#L41" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="rank:Int32-instance-method">
+      <div class="signature">
+        
+        def <strong>rank</strong> : Int32
+
+        <a class="method-permalink" href="#rank%3AInt32-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/e6ae471c04e2977db5dd073b1df3944892d53652/src/hdf5/attribute.cr#L24" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -494,7 +613,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/hdf5.cr/blob/211f0b1f88ede478ce5b86cc481ca7adbb1ea4f3/src/hdf5/attribute.cr#L16" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/e6ae471c04e2977db5dd073b1df3944892d53652/src/hdf5/attribute.cr#L49" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -510,7 +629,87 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/hdf5.cr/blob/211f0b1f88ede478ce5b86cc481ca7adbb1ea4f3/src/hdf5/attribute.cr#L30" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/e6ae471c04e2977db5dd073b1df3944892d53652/src/hdf5/attribute.cr#L62" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="read_raw(type_id:LibHDF5::Hid,buf:Pointer(T)):NilforallT-instance-method">
+      <div class="signature">
+        
+        def <strong>read_raw</strong>(type_id : LibHDF5::Hid, buf : Pointer(T)) : Nil forall T
+
+        <a class="method-permalink" href="#read_raw%28type_id%3ALibHDF5%3A%3AHid%2Cbuf%3APointer%28T%29%29%3ANilforallT-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/e6ae471c04e2977db5dd073b1df3944892d53652/src/hdf5/attribute.cr#L90" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="read_raw(type_id:LibHDF5::Hid,buf:Pointer(Void)):Nil-instance-method">
+      <div class="signature">
+        
+        def <strong>read_raw</strong>(type_id : LibHDF5::Hid, buf : Pointer(Void)) : Nil
+
+        <a class="method-permalink" href="#read_raw%28type_id%3ALibHDF5%3A%3AHid%2Cbuf%3APointer%28Void%29%29%3ANil-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/e6ae471c04e2977db5dd073b1df3944892d53652/src/hdf5/attribute.cr#L94" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="scalar?:Bool-instance-method">
+      <div class="signature">
+        
+        def <strong>scalar?</strong> : Bool
+
+        <a class="method-permalink" href="#scalar%3F%3ABool-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/e6ae471c04e2977db5dd073b1df3944892d53652/src/hdf5/attribute.cr#L33" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="shape:Array(UInt64)-instance-method">
+      <div class="signature">
+        
+        def <strong>shape</strong> : Array(UInt64)
+
+        <a class="method-permalink" href="#shape%3AArray%28UInt64%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/e6ae471c04e2977db5dd073b1df3944892d53652/src/hdf5/attribute.cr#L20" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="size:UInt64-instance-method">
+      <div class="signature">
+        
+        def <strong>size</strong> : UInt64
+
+        <a class="method-permalink" href="#size%3AUInt64-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/e6ae471c04e2977db5dd073b1df3944892d53652/src/hdf5/attribute.cr#L28" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -526,7 +725,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/hdf5.cr/blob/211f0b1f88ede478ce5b86cc481ca7adbb1ea4f3/src/hdf5/attribute.cr#L43" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/e6ae471c04e2977db5dd073b1df3944892d53652/src/hdf5/attribute.cr#L74" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -542,7 +741,39 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/hdf5.cr/blob/211f0b1f88ede478ce5b86cc481ca7adbb1ea4f3/src/hdf5/attribute.cr#L55" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/e6ae471c04e2977db5dd073b1df3944892d53652/src/hdf5/attribute.cr#L85" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="write_raw(type_id:LibHDF5::Hid,buf:Pointer(T)):NilforallT-instance-method">
+      <div class="signature">
+        
+        def <strong>write_raw</strong>(type_id : LibHDF5::Hid, buf : Pointer(T)) : Nil forall T
+
+        <a class="method-permalink" href="#write_raw%28type_id%3ALibHDF5%3A%3AHid%2Cbuf%3APointer%28T%29%29%3ANilforallT-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/e6ae471c04e2977db5dd073b1df3944892d53652/src/hdf5/attribute.cr#L98" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="write_raw(type_id:LibHDF5::Hid,buf:Pointer(Void)):Nil-instance-method">
+      <div class="signature">
+        
+        def <strong>write_raw</strong>(type_id : LibHDF5::Hid, buf : Pointer(Void)) : Nil
+
+        <a class="method-permalink" href="#write_raw%28type_id%3ALibHDF5%3A%3AHid%2Cbuf%3APointer%28Void%29%29%3ANil-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/e6ae471c04e2977db5dd073b1df3944892d53652/src/hdf5/attribute.cr#L102" target="_blank">View source</a>]
         
       </div>
     </div>
