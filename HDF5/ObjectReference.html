@@ -14,7 +14,7 @@
 <script type="text/javascript" src="../js/doc.js"></script>
 
   <meta name="repository-name" content="hdf5">
-  <title>HDF5::CompoundMember - hdf5 main</title>
+  <title>HDF5::ObjectReference - hdf5 main</title>
   <script type="text/javascript">
     CrystalDocs.base_path = "../";
   </script>
@@ -82,7 +82,7 @@
       
     </li>
   
-  <li class=" current" data-id="hdf5/HDF5/CompoundMember" data-name="hdf5::compoundmember">
+  <li class=" " data-id="hdf5/HDF5/CompoundMember" data-name="hdf5::compoundmember">
       <a href="../HDF5/CompoundMember.html">CompoundMember</a>
       
     </li>
@@ -162,7 +162,7 @@
       
     </li>
   
-  <li class=" " data-id="hdf5/HDF5/ObjectReference" data-name="hdf5::objectreference">
+  <li class=" current" data-id="hdf5/HDF5/ObjectReference" data-name="hdf5::objectreference">
       <a href="../HDF5/ObjectReference.html">ObjectReference</a>
       
     </li>
@@ -232,13 +232,13 @@
 <h1 class="type-name">
 
   <span class="kind">
-    struct
-  </span> HDF5::<wbr>CompoundMember
+    class
+  </span> HDF5::<wbr>ObjectReference
 
 </h1>
 
 
-  <ul class="superclass-hierarchy"><li class="superclass"><a href="../HDF5/CompoundMember.html">HDF5::CompoundMember</a></li><li class="superclass">Struct</li><li class="superclass">Value</li><li class="superclass">Object</li></ul>
+  <ul class="superclass-hierarchy"><li class="superclass"><a href="../HDF5/ObjectReference.html">HDF5::ObjectReference</a></li><li class="superclass">Reference</li><li class="superclass">Object</li></ul>
 
 
 
@@ -268,8 +268,8 @@
   </h2>
   
     
-      <a href="https://github.com/kojix2/hdf5.cr/blob/de220868e9697af6d4da75a18bc8b7f9a7d2a6ee/src/hdf5/datatype.cr#L129" target="_blank">
-        hdf5/datatype.cr
+      <a href="https://github.com/kojix2/hdf5.cr/blob/de220868e9697af6d4da75a18bc8b7f9a7d2a6ee/src/hdf5/object_reference.cr#L2" target="_blank">
+        hdf5/object_reference.cr
       </a>
     
     <br/>
@@ -291,7 +291,12 @@
   <ul class="list-summary">
     
       <li class="entry-summary">
-        <a href="#new%28name%3AString%2Coffset%3AUInt64%2Cdatatype%3ADatatype%29-class-method" class="signature"><strong>.new</strong>(name : String, offset : UInt64, datatype : Datatype)</a>
+        <a href="#create%28location%2Cpath%3AString%29%3AObjectReference-class-method" class="signature"><strong>.create</strong>(location, path : String) : ObjectReference</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#new%28ref%3ALibHDF5%3A%3AReference%29-class-method" class="signature"><strong>.new</strong>(ref : LibHDF5::Reference)</a>
         
       </li>
     
@@ -314,17 +319,17 @@
   <ul class="list-summary">
     
       <li class="entry-summary">
-        <a href="#clone-instance-method" class="signature"><strong>#clone</strong></a>
+        <a href="#close%3ANil-instance-method" class="signature"><strong>#close</strong> : Nil</a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#copy_with%28name_name%3D%40name%2Coffset_offset%3D%40offset%2Cdatatype_datatype%3D%40datatype%29-instance-method" class="signature"><strong>#copy_with</strong>(name _name = @name, offset _offset = @offset, datatype _datatype = @datatype)</a>
+        <a href="#file_name%3AString-instance-method" class="signature"><strong>#file_name</strong> : String</a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#datatype%3ADatatype-instance-method" class="signature"><strong>#datatype</strong> : Datatype</a>
+        <a href="#finalize-instance-method" class="signature"><strong>#finalize</strong></a>
         
       </li>
     
@@ -334,7 +339,17 @@
       </li>
     
       <li class="entry-summary">
-        <a href="#offset%3AUInt64-instance-method" class="signature"><strong>#offset</strong> : UInt64</a>
+        <a href="#object_type%3ASymbol-instance-method" class="signature"><strong>#object_type</strong> : Symbol</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#open%3AGroup%7CDataset-instance-method" class="signature"><strong>#open</strong> : Group | Dataset</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#ref%3ALibHDF5%3A%3AReference-instance-method" class="signature"><strong>#ref</strong> : LibHDF5::Reference</a>
         
       </li>
     
@@ -343,19 +358,6 @@
 
 
   <div class="methods-inherited">
-    
-      
-
-
-      
-
-
-      
-
-
-      
-
-
     
       
 
@@ -395,18 +397,34 @@
     Constructor Detail
   </h2>
   
-    <div class="entry-detail" id="new(name:String,offset:UInt64,datatype:Datatype)-class-method">
+    <div class="entry-detail" id="create(location,path:String):ObjectReference-class-method">
       <div class="signature">
         
-        def self.<strong>new</strong>(name : String, offset : UInt64, datatype : <a href="../HDF5/Datatype.html">Datatype</a>)
+        def self.<strong>create</strong>(location, path : String) : <a href="../HDF5/ObjectReference.html">ObjectReference</a>
 
-        <a class="method-permalink" href="#new%28name%3AString%2Coffset%3AUInt64%2Cdatatype%3ADatatype%29-class-method">#</a>
+        <a class="method-permalink" href="#create%28location%2Cpath%3AString%29%3AObjectReference-class-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/hdf5.cr/blob/de220868e9697af6d4da75a18bc8b7f9a7d2a6ee/src/hdf5/datatype.cr#L129" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/de220868e9697af6d4da75a18bc8b7f9a7d2a6ee/src/hdf5/object_reference.cr#L5" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="new(ref:LibHDF5::Reference)-class-method">
+      <div class="signature">
+        
+        def self.<strong>new</strong>(ref : LibHDF5::Reference)
+
+        <a class="method-permalink" href="#new%28ref%3ALibHDF5%3A%3AReference%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/de220868e9697af6d4da75a18bc8b7f9a7d2a6ee/src/hdf5/object_reference.cr#L12" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -427,48 +445,50 @@
     Instance Method Detail
   </h2>
   
-    <div class="entry-detail" id="clone-instance-method">
+    <div class="entry-detail" id="close:Nil-instance-method">
       <div class="signature">
         
-        def <strong>clone</strong>
+        def <strong>close</strong> : Nil
 
-        <a class="method-permalink" href="#clone-instance-method">#</a>
+        <a class="method-permalink" href="#close%3ANil-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/hdf5.cr/blob/de220868e9697af6d4da75a18bc8b7f9a7d2a6ee/src/hdf5/datatype.cr#L129" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/de220868e9697af6d4da75a18bc8b7f9a7d2a6ee/src/hdf5/object_reference.cr#L73" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="copy_with(name_name=@name,offset_offset=@offset,datatype_datatype=@datatype)-instance-method">
+    <div class="entry-detail" id="file_name:String-instance-method">
       <div class="signature">
         
-        def <strong>copy_with</strong>(name _name = @name, offset _offset = @offset, datatype _datatype = @datatype)
+        def <strong>file_name</strong> : String
 
-        <a class="method-permalink" href="#copy_with%28name_name%3D%40name%2Coffset_offset%3D%40offset%2Cdatatype_datatype%3D%40datatype%29-instance-method">#</a>
+        <a class="method-permalink" href="#file_name%3AString-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/hdf5.cr/blob/de220868e9697af6d4da75a18bc8b7f9a7d2a6ee/src/hdf5/datatype.cr#L129" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/de220868e9697af6d4da75a18bc8b7f9a7d2a6ee/src/hdf5/object_reference.cr#L27" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="datatype:Datatype-instance-method">
+    <div class="entry-detail" id="finalize-instance-method">
       <div class="signature">
         
-        def <strong>datatype</strong> : <a href="../HDF5/Datatype.html">Datatype</a>
+        def <strong>finalize</strong>
 
-        <a class="method-permalink" href="#datatype%3ADatatype-instance-method">#</a>
+        <a class="method-permalink" href="#finalize-instance-method">#</a>
       </div>
       
       <br/>
       <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/de220868e9697af6d4da75a18bc8b7f9a7d2a6ee/src/hdf5/object_reference.cr#L79" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -484,19 +504,55 @@
       <br/>
       <div>
         
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/de220868e9697af6d4da75a18bc8b7f9a7d2a6ee/src/hdf5/object_reference.cr#L16" target="_blank">View source</a>]
+        
       </div>
     </div>
   
-    <div class="entry-detail" id="offset:UInt64-instance-method">
+    <div class="entry-detail" id="object_type:Symbol-instance-method">
       <div class="signature">
         
-        def <strong>offset</strong> : UInt64
+        def <strong>object_type</strong> : Symbol
 
-        <a class="method-permalink" href="#offset%3AUInt64-instance-method">#</a>
+        <a class="method-permalink" href="#object_type%3ASymbol-instance-method">#</a>
       </div>
       
       <br/>
       <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/de220868e9697af6d4da75a18bc8b7f9a7d2a6ee/src/hdf5/object_reference.cr#L38" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="open:Group|Dataset-instance-method">
+      <div class="signature">
+        
+        def <strong>open</strong> : <a href="../HDF5/Group.html">Group</a> | <a href="../HDF5/Dataset.html">Dataset</a>
+
+        <a class="method-permalink" href="#open%3AGroup%7CDataset-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/de220868e9697af6d4da75a18bc8b7f9a7d2a6ee/src/hdf5/object_reference.cr#L56" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="ref:LibHDF5::Reference-instance-method">
+      <div class="signature">
+        
+        def <strong>ref</strong> : LibHDF5::Reference
+
+        <a class="method-permalink" href="#ref%3ALibHDF5%3A%3AReference-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/de220868e9697af6d4da75a18bc8b7f9a7d2a6ee/src/hdf5/object_reference.cr#L3" target="_blank">View source</a>]
         
       </div>
     </div>
