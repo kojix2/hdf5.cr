@@ -45,7 +45,11 @@ module HDF5
       else
         raise Error.new("Unknown file mode: #{mode}")
       end
-      raise FileError.new("Failed to open/create HDF5 file '#{filename}' (mode=#{mode})") if @id == LibHDF5::H5_INVALID_HID
+      begin
+        InternalChecks.ensure_hid(@id, "Failed to open/create HDF5 file '#{filename}' (mode=#{mode})")
+      rescue Error
+        raise FileError.new("Failed to open/create HDF5 file '#{filename}' (mode=#{mode})")
+      end
     end
 
     def hid : LibHDF5::Hid

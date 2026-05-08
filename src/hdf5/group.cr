@@ -54,11 +54,6 @@ module HDF5
       end
     end
 
-    # Backward-compat alias
-    def group(path : String) : Group
-      require_group(path)
-    end
-
     # ── Dataset creation ──────────────────────────────────────────────────────
 
     # Create from data (infer type and shape from array)
@@ -210,29 +205,6 @@ module HDF5
       end
     end
 
-    # Old-style positional dims (backward compat) — returns TypedDataset(T)
-    def create_dataset(
-      path : String,
-      type : T.class,
-      dims : Array(UInt64),
-      max_dims : Array(UInt64)? = nil,
-      chunk_dims : Array(UInt64)? = nil,
-      compress : Int32 = 0,
-    ) : TypedDataset(T) forall T
-      opts = DatasetCreateOptions.new(
-        chunk: chunk_dims,
-        compression: compress > 0 ? Compression.gzip(level: compress) : nil,
-        max_shape: max_dims
-      )
-      ds = build_numeric_dataset(path, T, dims, opts)
-      TypedDataset(T).new(ds)
-    end
-
-    def create_dataset(path : String, type : T.class, *dims : Int,
-                       compress : Int32 = 0) : TypedDataset(T) forall T
-      create_dataset(path, T, dims.map(&.to_u64).to_a, compress: compress)
-    end
-
     # ── Dataset open / access ─────────────────────────────────────────────────
 
     def open_dataset(path : String) : Dataset
@@ -251,6 +223,19 @@ module HDF5
         block.call(tds)
       ensure
         tds.close
+      end
+    end
+
+    def open_object(path : String) : Group | Dataset
+      self[path]
+    end
+
+    def open_object(path : String, &block : (Group | Dataset) ->) : Nil
+      obj = open_object(path)
+      begin
+        block.call(obj)
+      ensure
+        obj.close
       end
     end
 
@@ -303,19 +288,9 @@ module HDF5
       end
     end
 
-    # Backward-compat alias
-    def link_exists?(path : String) : Bool
-      exists?(path)
-    end
-
     def delete(path : String) : Nil
       ret = LibHDF5.H5Ldelete(hid, path, LibHDF5::H5P_DEFAULT)
       raise ObjectNotFoundError.new("Link not found: '#{path}'") if ret < 0
-    end
-
-    # Backward-compat alias
-    def delete_link(path : String) : Nil
-      delete(path)
     end
 
     def link(source_path : String, destination_path : String) : Nil
@@ -375,44 +350,6 @@ module HDF5
 
     def attrs : Attributes
       Attributes.new(hid)
-    end
-
-    # ── Convenience dataset I/O (backward compat) ─────────────────────────────
-
-    def write_dataset(path : String, data : Array(T)) forall T
-      create_dataset(path, data)
-    end
-
-    def write_dataset(path : String, data : Array(T), *shape : Int) forall T
-      dims = shape.map(&.to_u64).to_a
-      ds = build_numeric_dataset(path, T, dims)
-      ds.write(data)
-      ds.close
-    end
-
-    def read_dataset(path : String, type : T.class) : Array(T) forall T
-      dataset(path, T).read
-    end
-
-    def write_string_dataset(path : String, data : Array(String))
-      create_dataset(path, data)
-    end
-
-    def read_string_dataset(path : String) : Array(String)
-      dataset(path, String).read
-    end
-
-    # Backward-compat attribute helpers
-    def set_attribute(name : String, value : T) forall T
-      attrs[name] = value
-    end
-
-    def get_attribute(name : String, type : T.class) : T forall T
-      attrs.get(name, T)
-    end
-
-    def has_attribute?(name : String) : Bool
-      attrs.has_key?(name)
     end
 
     # ── Private helpers ───────────────────────────────────────────────────────

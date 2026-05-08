@@ -7,13 +7,13 @@ module HDF5
 
     def dataspace : Dataspace
       space_id = LibHDF5.H5Dget_space(@id)
-      raise Error.new("Failed to get dataset dataspace") if space_id == LibHDF5::H5_INVALID_HID
+      InternalChecks.ensure_hid(space_id, "Failed to get dataset dataspace")
       Dataspace.new(space_id)
     end
 
     def datatype : Datatype
       type_id = LibHDF5.H5Dget_type(@id)
-      raise Error.new("Failed to get dataset datatype") if type_id == LibHDF5::H5_INVALID_HID
+      InternalChecks.ensure_hid(type_id, "Failed to get dataset datatype")
       Datatype.new(type_id)
     end
 
@@ -219,19 +219,6 @@ module HDF5
 
     def storage_size : UInt64
       LibHDF5.H5Dget_storage_size(@id)
-    end
-
-    # Backward-compat attribute helpers (delegate to attrs proxy)
-    def set_attribute(name : String, value : T) forall T
-      attrs[name] = value
-    end
-
-    def get_attribute(name : String, type : T.class) : T forall T
-      attrs.get(name, T)
-    end
-
-    def has_attribute?(name : String) : Bool
-      attrs.has_key?(name)
     end
 
     def close

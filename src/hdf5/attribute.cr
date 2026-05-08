@@ -7,13 +7,13 @@ module HDF5
 
     def datatype : Datatype
       type_id = LibHDF5.H5Aget_type(@id)
-      raise Error.new("Failed to get attribute datatype") if type_id == LibHDF5::H5_INVALID_HID
+      InternalChecks.ensure_hid(type_id, "Failed to get attribute datatype")
       Datatype.new(type_id)
     end
 
     def dataspace : Dataspace
       space_id = LibHDF5.H5Aget_space(@id)
-      raise Error.new("Failed to get attribute dataspace") if space_id == LibHDF5::H5_INVALID_HID
+      InternalChecks.ensure_hid(space_id, "Failed to get attribute dataspace")
       Dataspace.new(space_id)
     end
 

@@ -155,7 +155,7 @@ describe HDF5 do
     it "create_group supports block form" do
       HDF5::File.open(TMP_FILE, :w) do |file|
         file.create_group("grp") do |grp|
-          grp.set_attribute("x", 1_i32)
+          grp.attrs["x"] = 1_i32
         end
         file.exists?("grp").should be_true
       end
@@ -167,6 +167,20 @@ describe HDF5 do
         accessed = false
         file.open_group("grp") { accessed = true }
         accessed.should be_true
+      end
+    end
+
+    it "open_object supports block form and closes handle" do
+      HDF5::File.open(TMP_FILE, :w) do |file|
+        file.create_group("grp").close
+        captured_id = LibHDF5::H5_INVALID_HID
+
+        file.open_object("grp") do |obj|
+          captured_id = obj.id
+          obj.id.should_not eq(LibHDF5::H5_INVALID_HID)
+        end
+
+        captured_id.should_not eq(LibHDF5::H5_INVALID_HID)
       end
     end
 
@@ -506,20 +520,20 @@ describe HDF5 do
     it "writes and reads Int32 array" do
       data = [1, 2, 3, 4, 5]
       HDF5.open(TMP_FILE, :w) do |file|
-        file.write_dataset("ints", data)
+        file["ints"] = data
       end
       HDF5.open(TMP_FILE, :r) do |file|
-        file.read_dataset("ints", Int32).should eq(data)
+        file.dataset("ints", Int32).read.should eq(data)
       end
     end
 
     it "writes and reads Float64 array" do
       data = [1.1, 2.2, 3.3, 4.4]
       HDF5.open(TMP_FILE, :w) do |file|
-        file.write_dataset("floats", data)
+        file["floats"] = data
       end
       HDF5.open(TMP_FILE, :r) do |file|
-        result = file.read_dataset("floats", Float64)
+        result = file.dataset("floats", Float64).read
         result.each_with_index { |val, idx| val.should be_close(data[idx], 1e-12) }
       end
     end
@@ -527,10 +541,10 @@ describe HDF5 do
     it "writes and reads Float32 array" do
       data = [1.0_f32, 2.5_f32, -3.14_f32]
       HDF5.open(TMP_FILE, :w) do |file|
-        file.write_dataset("f32", data)
+        file["f32"] = data
       end
       HDF5.open(TMP_FILE, :r) do |file|
-        result = file.read_dataset("f32", Float32)
+        result = file.dataset("f32", Float32).read
         result.each_with_index { |val, idx| val.should be_close(data[idx], 1e-6_f32) }
       end
     end
@@ -538,20 +552,20 @@ describe HDF5 do
     it "writes and reads Int8 array" do
       data = [-128_i8, 0_i8, 127_i8]
       HDF5.open(TMP_FILE, :w) do |file|
-        file.write_dataset("i8", data)
+        file["i8"] = data
       end
       HDF5.open(TMP_FILE, :r) do |file|
-        file.read_dataset("i8", Int8).should eq(data)
+        file.dataset("i8", Int8).read.should eq(data)
       end
     end
 
     it "writes and reads UInt64 array" do
       data = [0_u64, UInt64::MAX // 2, UInt64::MAX]
       HDF5.open(TMP_FILE, :w) do |file|
-        file.write_dataset("u64", data)
+        file["u64"] = data
       end
       HDF5.open(TMP_FILE, :r) do |file|
-        file.read_dataset("u64", UInt64).should eq(data)
+        file.dataset("u64", UInt64).read.should eq(data)
       end
     end
 
@@ -1063,19 +1077,6 @@ describe HDF5 do
       sp = HDF5::Dataspace.simple(5, 6)
       sp.dims.should eq([5_u64, 6_u64])
       sp.close
-    end
-  end
-
-  # ── Backward-compat attribute methods ────────────────────────────────────
-
-  describe "backward-compat attribute methods" do
-    it "set_attribute / get_attribute / has_attribute? still work" do
-      HDF5.open(TMP_FILE, :w) do |file|
-        file.set_attribute("answer", 42_i32)
-        file.get_attribute("answer", Int32).should eq(42)
-        file.has_attribute?("answer").should be_true
-        file.has_attribute?("missing").should be_false
-      end
     end
   end
 
