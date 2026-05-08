@@ -5,14 +5,19 @@ module HDF5
     getter id : LibHDF5::Hid
 
     def initialize(@id : LibHDF5::Hid)
+      @owned_children = [] of Datatype
     end
 
     def type_class : LibHDF5::TypeClass
-      LibHDF5.H5Tget_class(@id)
+      type_class = LibHDF5.H5Tget_class(@id)
+      raise Error.new("Failed to get datatype class") if type_class == LibHDF5::TypeClass::NoClass
+      type_class
     end
 
     def size : Int32
-      LibHDF5.H5Tget_size(@id).to_i32
+      bytes = LibHDF5.H5Tget_size(@id)
+      raise Error.new("Failed to get datatype size") if bytes == 0
+      bytes.to_i32
     end
 
     def integer? : Bool
@@ -32,7 +37,10 @@ module HDF5
     end
 
     def variable_length_string? : Bool
-      string? && LibHDF5.H5Tis_variable_str(@id) > 0
+      return false unless string?
+      result = LibHDF5.H5Tis_variable_str(@id)
+      raise Error.new("Failed to determine whether datatype is variable-length string") if result < 0
+      result > 0
     end
 
     def time? : Bool
@@ -72,7 +80,10 @@ module HDF5
     end
 
     def signed? : Bool
-      integer? && LibHDF5.H5Tget_sign(@id) == LibHDF5::Sign::Two
+      return false unless integer?
+      sign = LibHDF5.H5Tget_sign(@id)
+      raise Error.new("Failed to get integer datatype sign") if sign == LibHDF5::Sign::Error
+      sign == LibHDF5::Sign::Two
     end
 
     def unsigned? : Bool
@@ -82,13 +93,15 @@ module HDF5
     def base_type : Datatype?
       return unless enum? || vlen? || array?
       type_id = LibHDF5.H5Tget_super(@id)
-      return if type_id == LibHDF5::H5_INVALID_HID
-      Datatype.new(type_id)
+      raise Error.new("Failed to get base datatype") if type_id == LibHDF5::H5_INVALID_HID
+      own(Datatype.new(type_id))
     end
 
     def array_rank : Int32
       return 0 unless array?
-      LibHDF5.H5Tget_array_ndims(@id)
+      rank = LibHDF5.H5Tget_array_ndims(@id)
+      raise Error.new("Failed to get array datatype rank") if rank < 0
+      rank
     end
 
     def array_dims : Array(UInt64)
@@ -102,7 +115,9 @@ module HDF5
 
     def member_count : Int32
       return 0 unless compound?
-      LibHDF5.H5Tget_nmembers(@id)
+      count = LibHDF5.H5Tget_nmembers(@id)
+      raise Error.new("Failed to get compound member count") if count < 0
+      count
     end
 
     def member(index : Int) : CompoundMember
@@ -118,7 +133,7 @@ module HDF5
         CompoundMember.new(
           String.new(name_ptr),
           LibHDF5.H5Tget_member_offset(@id, index.to_u32).to_u64,
-          Datatype.new(type_id)
+          own(Datatype.new(type_id))
         )
       ensure
         LibHDF5.H5free_memory(name_ptr.as(Void*))
@@ -130,12 +145,19 @@ module HDF5
     end
 
     def close
+      @owned_children.reverse_each(&.close)
+      @owned_children.clear
       LibHDF5.H5Tclose(@id) if @id != LibHDF5::H5_INVALID_HID
       @id = LibHDF5::H5_INVALID_HID
     end
 
     def finalize
       close
+    end
+
+    private def own(datatype : Datatype) : Datatype
+      @owned_children << datatype
+      datatype
     end
   end
 

@@ -673,8 +673,8 @@ describe HDF5 do
         members[1].datatype.float?.should be_true
         members[1].datatype.size.should eq(sizeof(Float64))
 
-        members.each(&.datatype.close)
         dtype.close
+        members.each { |member| member.datatype.id.should eq(LibHDF5::H5_INVALID_HID) }
       end
     end
 
@@ -701,10 +701,10 @@ describe HDF5 do
         if base_type
           base_type.integer?.should be_true
           base_type.size.should eq(sizeof(Int16))
-          base_type.close
         end
 
         dtype.close
+        base_type.try(&.id.should eq(LibHDF5::H5_INVALID_HID))
       end
     end
 
@@ -729,10 +729,22 @@ describe HDF5 do
         if base_type
           base_type.integer?.should be_true
           base_type.size.should eq(sizeof(Int32))
-          base_type.close
         end
 
         dtype.close
+        base_type.try(&.id.should eq(LibHDF5::H5_INVALID_HID))
+      end
+    end
+
+    it "raises HDF5::Error for invalid datatype handles" do
+      dtype = HDF5::Datatype.new(LibHDF5::H5_INVALID_HID)
+
+      expect_raises(HDF5::Error, "Failed to get datatype class") do
+        dtype.type_class
+      end
+
+      expect_raises(HDF5::Error, "Failed to get datatype size") do
+        dtype.size
       end
     end
   end
