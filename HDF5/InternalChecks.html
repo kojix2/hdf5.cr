@@ -14,7 +14,7 @@
 <script type="text/javascript" src="../js/doc.js"></script>
 
   <meta name="repository-name" content="hdf5">
-  <title>HDF5::NativeType - hdf5 main</title>
+  <title>HDF5::InternalChecks - hdf5 main</title>
   <script type="text/javascript">
     CrystalDocs.base_path = "../";
   </script>
@@ -147,12 +147,12 @@
       
     </li>
   
-  <li class=" " data-id="hdf5/HDF5/InternalChecks" data-name="hdf5::internalchecks">
+  <li class=" current" data-id="hdf5/HDF5/InternalChecks" data-name="hdf5::internalchecks">
       <a href="../HDF5/InternalChecks.html">InternalChecks</a>
       
     </li>
   
-  <li class=" current" data-id="hdf5/HDF5/NativeType" data-name="hdf5::nativetype">
+  <li class=" " data-id="hdf5/HDF5/NativeType" data-name="hdf5::nativetype">
       <a href="../HDF5/NativeType.html">NativeType</a>
       
     </li>
@@ -228,7 +228,7 @@
 
   <span class="kind">
     module
-  </span> HDF5::<wbr>NativeType
+  </span> HDF5::<wbr>InternalChecks
 
 </h1>
 
@@ -261,8 +261,8 @@
   </h2>
   
     
-      <a href="https://github.com/kojix2/hdf5.cr/blob/091d593c668147a958ff7cee1d6443865225c215/src/hdf5/datatype.cr#L305" target="_blank">
-        hdf5/datatype.cr
+      <a href="https://github.com/kojix2/hdf5.cr/blob/091d593c668147a958ff7cee1d6443865225c215/src/hdf5/internal_checks.cr#L2" target="_blank">
+        hdf5/internal_checks.cr
       </a>
     
     <br/>
@@ -286,17 +286,17 @@
   <ul class="list-summary">
     
       <li class="entry-summary">
-        <a href="#fixed_length_string%28size%3AInt%29%3ALibHDF5%3A%3AHid-class-method" class="signature"><strong>.fixed_length_string</strong>(size : Int) : LibHDF5::Hid</a>
+        <a href="#ensure_herr%28ret%3ALibHDF5%3A%3AHerr%2Cmessage%3AString%29%3ANil-class-method" class="signature"><strong>.ensure_herr</strong>(ret : LibHDF5::Herr, message : String) : Nil</a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#for%28type%3AT.class%29forallT-class-method" class="signature"><strong>.for</strong>(type : <span class="t">T</span>.<span class="k">class</span>) forall T</a>
+        <a href="#ensure_hid%28id%3ALibHDF5%3A%3AHid%2Cmessage%3AString%29%3ALibHDF5%3A%3AHid-class-method" class="signature"><strong>.ensure_hid</strong>(id : LibHDF5::Hid, message : String) : LibHDF5::Hid</a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#variable_length_string%3ALibHDF5%3A%3AHid-class-method" class="signature"><strong>.variable_length_string</strong> : LibHDF5::Hid</a>
+        <a href="#ensure_htri%28ret%3ALibHDF5%3A%3AHtri%2Cmessage%3AString%29%3ABool-class-method" class="signature"><strong>.ensure_htri</strong>(ret : LibHDF5::Htri, message : String) : Bool</a>
         
       </li>
     
@@ -324,50 +324,50 @@
     Class Method Detail
   </h2>
   
-    <div class="entry-detail" id="fixed_length_string(size:Int):LibHDF5::Hid-class-method">
+    <div class="entry-detail" id="ensure_herr(ret:LibHDF5::Herr,message:String):Nil-class-method">
       <div class="signature">
         
-        def self.<strong>fixed_length_string</strong>(size : Int) : LibHDF5::Hid
+        def self.<strong>ensure_herr</strong>(ret : LibHDF5::Herr, message : String) : Nil
 
-        <a class="method-permalink" href="#fixed_length_string%28size%3AInt%29%3ALibHDF5%3A%3AHid-class-method">#</a>
+        <a class="method-permalink" href="#ensure_herr%28ret%3ALibHDF5%3A%3AHerr%2Cmessage%3AString%29%3ANil-class-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/hdf5.cr/blob/091d593c668147a958ff7cee1d6443865225c215/src/hdf5/datatype.cr#L336" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/091d593c668147a958ff7cee1d6443865225c215/src/hdf5/internal_checks.cr#L8" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="for(type:T.class)forallT-class-method">
+    <div class="entry-detail" id="ensure_hid(id:LibHDF5::Hid,message:String):LibHDF5::Hid-class-method">
       <div class="signature">
         
-        def self.<strong>for</strong>(type : <span class="t">T</span>.<span class="k">class</span>) forall T
+        def self.<strong>ensure_hid</strong>(id : LibHDF5::Hid, message : String) : LibHDF5::Hid
 
-        <a class="method-permalink" href="#for%28type%3AT.class%29forallT-class-method">#</a>
+        <a class="method-permalink" href="#ensure_hid%28id%3ALibHDF5%3A%3AHid%2Cmessage%3AString%29%3ALibHDF5%3A%3AHid-class-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/hdf5.cr/blob/091d593c668147a958ff7cee1d6443865225c215/src/hdf5/datatype.cr#L306" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/091d593c668147a958ff7cee1d6443865225c215/src/hdf5/internal_checks.cr#L3" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="variable_length_string:LibHDF5::Hid-class-method">
+    <div class="entry-detail" id="ensure_htri(ret:LibHDF5::Htri,message:String):Bool-class-method">
       <div class="signature">
         
-        def self.<strong>variable_length_string</strong> : LibHDF5::Hid
+        def self.<strong>ensure_htri</strong>(ret : LibHDF5::Htri, message : String) : Bool
 
-        <a class="method-permalink" href="#variable_length_string%3ALibHDF5%3A%3AHid-class-method">#</a>
+        <a class="method-permalink" href="#ensure_htri%28ret%3ALibHDF5%3A%3AHtri%2Cmessage%3AString%29%3ABool-class-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/hdf5.cr/blob/091d593c668147a958ff7cee1d6443865225c215/src/hdf5/datatype.cr#L332" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/091d593c668147a958ff7cee1d6443865225c215/src/hdf5/internal_checks.cr#L12" target="_blank">View source</a>]
         
       </div>
     </div>

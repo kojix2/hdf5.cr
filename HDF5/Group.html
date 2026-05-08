@@ -147,6 +147,11 @@
       
     </li>
   
+  <li class=" " data-id="hdf5/HDF5/InternalChecks" data-name="hdf5::internalchecks">
+      <a href="../HDF5/InternalChecks.html">InternalChecks</a>
+      
+    </li>
+  
   <li class=" " data-id="hdf5/HDF5/NativeType" data-name="hdf5::nativetype">
       <a href="../HDF5/NativeType.html">NativeType</a>
       
@@ -272,7 +277,7 @@
   </h2>
   
     
-      <a href="https://github.com/kojix2/hdf5.cr/blob/5cf59a4189528b4a2b313f9ae0eef1c53a526c20/src/hdf5/group.cr#L506" target="_blank">
+      <a href="https://github.com/kojix2/hdf5.cr/blob/091d593c668147a958ff7cee1d6443865225c215/src/hdf5/group.cr#L443" target="_blank">
         hdf5/group.cr
       </a>
     
@@ -363,8 +368,8 @@
     attrs</a>, 
     
   
-    <a href="../HDF5/Container.html#create_dataset%28path%3AString%2Ctype%3AT.class%2Cdims%3AArray%28UInt64%29%2Cmax_dims%3AArray%28UInt64%29%7CNil%3Dnil%2Cchunk_dims%3AArray%28UInt64%29%7CNil%3Dnil%2Ccompress%3AInt32%3D0%29%3ATypedDataset%28T%29forallT-instance-method" class="tooltip">
-      <span>create_dataset(path : String, type : <span class="t">T</span>.<span class="k">class</span>, dims : Array(UInt64), max_dims : Array(UInt64) | Nil = <span class="n">nil</span>, chunk_dims : Array(UInt64) | Nil = <span class="n">nil</span>, compress : Int32 = <span class="n">0</span>) : TypedDataset(T) forall T<br/>create_dataset(path : String, data : Array(T)) : TypedDataset(T) forall T<br/>create_dataset(path : String, data : Array(String), *, string_type : StringType = <span class="t">StringType</span>.variable, encoding : Symbol | StringEncoding | Nil = <span class="n">nil</span>) : TypedDataset(String)<br/>create_dataset(path : String, data : Array(T), &block : TypedDataset(T) -> ) : Nil forall T<br/>create_dataset(path : String, data : Array(String), *, string_type : StringType = <span class="t">StringType</span>.variable, encoding : Symbol | StringEncoding | Nil = <span class="n">nil</span>, &block) : Nil<br/>create_dataset(path : String, type : <span class="t">String</span>.<span class="k">class</span>, *, shape : Indexable, max_shape : Indexable | Nil = <span class="n">nil</span>, chunk : Indexable | Nil = <span class="n">nil</span>, compression : Compression | Symbol | Nil = <span class="n">nil</span>, compression_level : Int32 = <span class="n">6</span>, shuffle : Bool = <span class="n">false</span>, fletcher32 : Bool = <span class="n">false</span>, options : DatasetCreateOptions | Nil = <span class="n">nil</span>, string_type : StringType = <span class="t">StringType</span>.variable, encoding : Symbol | StringEncoding | Nil = <span class="n">nil</span>) : TypedDataset(String)<br/>create_dataset(path : String, type : <span class="t">T</span>.<span class="k">class</span>, *dims : Int, compress : Int32 = <span class="n">0</span>) : TypedDataset(T) forall T<br/>create_dataset(path : String, type : <span class="t">T</span>.<span class="k">class</span>, *, shape : Indexable, max_shape : Indexable | Nil = <span class="n">nil</span>, chunk : Indexable | Nil = <span class="n">nil</span>, compression : Compression | Symbol | Nil = <span class="n">nil</span>, compression_level : Int32 = <span class="n">6</span>, shuffle : Bool = <span class="n">false</span>, fletcher32 : Bool = <span class="n">false</span>, options : DatasetCreateOptions | Nil = <span class="n">nil</span>) : TypedDataset(T) forall T<br/>create_dataset(path : String, type : <span class="t">String</span>.<span class="k">class</span>, *, shape : Indexable, max_shape : Indexable | Nil = <span class="n">nil</span>, chunk : Indexable | Nil = <span class="n">nil</span>, compression : Compression | Symbol | Nil = <span class="n">nil</span>, compression_level : Int32 = <span class="n">6</span>, shuffle : Bool = <span class="n">false</span>, fletcher32 : Bool = <span class="n">false</span>, options : DatasetCreateOptions | Nil = <span class="n">nil</span>, string_type : StringType = <span class="t">StringType</span>.variable, encoding : Symbol | StringEncoding | Nil = <span class="n">nil</span>, &block : TypedDataset(String) -> ) : Nil<br/>create_dataset(path : String, type : <span class="t">T</span>.<span class="k">class</span>, *, shape : Indexable, max_shape : Indexable | Nil = <span class="n">nil</span>, chunk : Indexable | Nil = <span class="n">nil</span>, compression : Compression | Symbol | Nil = <span class="n">nil</span>, compression_level : Int32 = <span class="n">6</span>, shuffle : Bool = <span class="n">false</span>, fletcher32 : Bool = <span class="n">false</span>, options : DatasetCreateOptions | Nil = <span class="n">nil</span>, &block : TypedDataset(T) -> ) : Nil forall T</span>
+    <a href="../HDF5/Container.html#create_dataset%28path%3AString%2Cdata%3AArray%28T%29%29%3ATypedDataset%28T%29forallT-instance-method" class="tooltip">
+      <span>create_dataset(path : String, data : Array(T)) : TypedDataset(T) forall T<br/>create_dataset(path : String, data : Array(String), *, string_type : StringType = <span class="t">StringType</span>.variable, encoding : Symbol | StringEncoding | Nil = <span class="n">nil</span>) : TypedDataset(String)<br/>create_dataset(path : String, data : Array(T), &block : TypedDataset(T) -> ) : Nil forall T<br/>create_dataset(path : String, data : Array(String), *, string_type : StringType = <span class="t">StringType</span>.variable, encoding : Symbol | StringEncoding | Nil = <span class="n">nil</span>, &block) : Nil<br/>create_dataset(path : String, type : <span class="t">String</span>.<span class="k">class</span>, *, shape : Indexable, max_shape : Indexable | Nil = <span class="n">nil</span>, chunk : Indexable | Nil = <span class="n">nil</span>, compression : Compression | Symbol | Nil = <span class="n">nil</span>, compression_level : Int32 = <span class="n">6</span>, shuffle : Bool = <span class="n">false</span>, fletcher32 : Bool = <span class="n">false</span>, options : DatasetCreateOptions | Nil = <span class="n">nil</span>, string_type : StringType = <span class="t">StringType</span>.variable, encoding : Symbol | StringEncoding | Nil = <span class="n">nil</span>) : TypedDataset(String)<br/>create_dataset(path : String, type : <span class="t">T</span>.<span class="k">class</span>, *, shape : Indexable, max_shape : Indexable | Nil = <span class="n">nil</span>, chunk : Indexable | Nil = <span class="n">nil</span>, compression : Compression | Symbol | Nil = <span class="n">nil</span>, compression_level : Int32 = <span class="n">6</span>, shuffle : Bool = <span class="n">false</span>, fletcher32 : Bool = <span class="n">false</span>, options : DatasetCreateOptions | Nil = <span class="n">nil</span>) : TypedDataset(T) forall T<br/>create_dataset(path : String, type : <span class="t">String</span>.<span class="k">class</span>, *, shape : Indexable, max_shape : Indexable | Nil = <span class="n">nil</span>, chunk : Indexable | Nil = <span class="n">nil</span>, compression : Compression | Symbol | Nil = <span class="n">nil</span>, compression_level : Int32 = <span class="n">6</span>, shuffle : Bool = <span class="n">false</span>, fletcher32 : Bool = <span class="n">false</span>, options : DatasetCreateOptions | Nil = <span class="n">nil</span>, string_type : StringType = <span class="t">StringType</span>.variable, encoding : Symbol | StringEncoding | Nil = <span class="n">nil</span>, &block : TypedDataset(String) -> ) : Nil<br/>create_dataset(path : String, type : <span class="t">T</span>.<span class="k">class</span>, *, shape : Indexable, max_shape : Indexable | Nil = <span class="n">nil</span>, chunk : Indexable | Nil = <span class="n">nil</span>, compression : Compression | Symbol | Nil = <span class="n">nil</span>, compression_level : Int32 = <span class="n">6</span>, shuffle : Bool = <span class="n">false</span>, fletcher32 : Bool = <span class="n">false</span>, options : DatasetCreateOptions | Nil = <span class="n">nil</span>, &block : TypedDataset(T) -> ) : Nil forall T</span>
     create_dataset</a>, 
     
   
@@ -383,11 +388,6 @@
     delete</a>, 
     
   
-    <a href="../HDF5/Container.html#delete_link%28path%3AString%29%3ANil-instance-method" class="tooltip">
-      <span>delete_link(path : String) : Nil</span>
-    delete_link</a>, 
-    
-  
     <a href="../HDF5/Container.html#each%28%26%3AString-%3E%29%3ANil-instance-method" class="tooltip">
       <span>each(& : String -> ) : Nil</span>
     each</a>, 
@@ -403,21 +403,6 @@
     external_link</a>, 
     
   
-    <a href="../HDF5/Container.html#get_attribute%28name%3AString%2Ctype%3AT.class%29%3ATforallT-instance-method" class="tooltip">
-      <span>get_attribute(name : String, type : <span class="t">T</span>.<span class="k">class</span>) : T forall T</span>
-    get_attribute</a>, 
-    
-  
-    <a href="../HDF5/Container.html#group%28path%3AString%29%3AGroup-instance-method" class="tooltip">
-      <span>group(path : String) : Group</span>
-    group</a>, 
-    
-  
-    <a href="../HDF5/Container.html#has_attribute%3F%28name%3AString%29%3ABool-instance-method" class="tooltip">
-      <span>has_attribute?(name : String) : Bool</span>
-    has_attribute?</a>, 
-    
-  
     <a href="../HDF5/Container.html#keys%3AArray%28String%29-instance-method" class="tooltip">
       <span>keys : Array(String)</span>
     keys</a>, 
@@ -426,11 +411,6 @@
     <a href="../HDF5/Container.html#link%28source_path%3AString%2Cdestination_path%3AString%29%3ANil-instance-method" class="tooltip">
       <span>link(source_path : String, destination_path : String) : Nil</span>
     link</a>, 
-    
-  
-    <a href="../HDF5/Container.html#link_exists%3F%28path%3AString%29%3ABool-instance-method" class="tooltip">
-      <span>link_exists?(path : String) : Bool</span>
-    link_exists?</a>, 
     
   
     <a href="../HDF5/Container.html#nlinks%3AUInt64-instance-method" class="tooltip">
@@ -453,14 +433,9 @@
     open_group</a>, 
     
   
-    <a href="../HDF5/Container.html#read_dataset%28path%3AString%2Ctype%3AT.class%29%3AArray%28T%29forallT-instance-method" class="tooltip">
-      <span>read_dataset(path : String, type : <span class="t">T</span>.<span class="k">class</span>) : Array(T) forall T</span>
-    read_dataset</a>, 
-    
-  
-    <a href="../HDF5/Container.html#read_string_dataset%28path%3AString%29%3AArray%28String%29-instance-method" class="tooltip">
-      <span>read_string_dataset(path : String) : Array(String)</span>
-    read_string_dataset</a>, 
+    <a href="../HDF5/Container.html#open_object%28path%3AString%29%3AGroup%7CDataset-instance-method" class="tooltip">
+      <span>open_object(path : String) : Group | Dataset<br/>open_object(path : String, &block : Group | Dataset -> ) : Nil</span>
+    open_object</a>, 
     
   
     <a href="../HDF5/Container.html#require_group%28path%3AString%29%3AGroup-instance-method" class="tooltip">
@@ -468,24 +443,9 @@
     require_group</a>, 
     
   
-    <a href="../HDF5/Container.html#set_attribute%28name%3AString%2Cvalue%3AT%29forallT-instance-method" class="tooltip">
-      <span>set_attribute(name : String, value : T) forall T</span>
-    set_attribute</a>, 
-    
-  
     <a href="../HDF5/Container.html#soft_link%28target_path%3AString%2Clink_path%3AString%29%3ANil-instance-method" class="tooltip">
       <span>soft_link(target_path : String, link_path : String) : Nil</span>
-    soft_link</a>, 
-    
-  
-    <a href="../HDF5/Container.html#write_dataset%28path%3AString%2Cdata%3AArray%28T%29%29forallT-instance-method" class="tooltip">
-      <span>write_dataset(path : String, data : Array(T)) forall T<br/>write_dataset(path : String, data : Array(T), *shape : Int) forall T</span>
-    write_dataset</a>, 
-    
-  
-    <a href="../HDF5/Container.html#write_string_dataset%28path%3AString%2Cdata%3AArray%28String%29%29-instance-method" class="tooltip">
-      <span>write_string_dataset(path : String, data : Array(String))</span>
-    write_string_dataset</a>
+    soft_link</a>
     
   
 
@@ -549,7 +509,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/hdf5.cr/blob/5cf59a4189528b4a2b313f9ae0eef1c53a526c20/src/hdf5/group.cr#L511" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/091d593c668147a958ff7cee1d6443865225c215/src/hdf5/group.cr#L448" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -581,7 +541,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/hdf5.cr/blob/5cf59a4189528b4a2b313f9ae0eef1c53a526c20/src/hdf5/group.cr#L518" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/091d593c668147a958ff7cee1d6443865225c215/src/hdf5/group.cr#L455" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -597,7 +557,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/hdf5.cr/blob/5cf59a4189528b4a2b313f9ae0eef1c53a526c20/src/hdf5/group.cr#L523" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/091d593c668147a958ff7cee1d6443865225c215/src/hdf5/group.cr#L460" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -613,7 +573,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/hdf5.cr/blob/5cf59a4189528b4a2b313f9ae0eef1c53a526c20/src/hdf5/group.cr#L514" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/091d593c668147a958ff7cee1d6443865225c215/src/hdf5/group.cr#L451" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -629,7 +589,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/hdf5.cr/blob/5cf59a4189528b4a2b313f9ae0eef1c53a526c20/src/hdf5/group.cr#L509" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/091d593c668147a958ff7cee1d6443865225c215/src/hdf5/group.cr#L446" target="_blank">View source</a>]
         
       </div>
     </div>
