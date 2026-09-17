@@ -32,7 +32,7 @@ jobs:
         if: runner.os == 'Linux'
         shell: bash -el {0}
         run: |
-          conda install -n test hdf5 pkg-config
+          conda install -n test "hdf5>=2.0" pkg-config h5py numpy
 
           PREFIX="$CONDA/envs/test"
 
@@ -40,6 +40,7 @@ jobs:
           echo "LIBRARY_PATH=$PREFIX/lib" >> "$GITHUB_ENV"
           echo "LD_LIBRARY_PATH=$PREFIX/lib" >> "$GITHUB_ENV"
           echo "CPATH=$PREFIX/include" >> "$GITHUB_ENV"
+          echo "H5PY_PYTHON=$PREFIX/bin/python" >> "$GITHUB_ENV"
           echo "$PREFIX/bin" >> "$GITHUB_PATH"
 
           pkg-config --modversion hdf5
@@ -50,9 +51,20 @@ jobs:
         if: runner.os == 'macOS'
         run: |
           brew install hdf5 pkg-config
+          python3 -m venv "$RUNNER_TEMP/hdf5-h5py"
+          "$RUNNER_TEMP/hdf5-h5py/bin/python" -m pip install h5py numpy
+          echo "H5PY_PYTHON=$RUNNER_TEMP/hdf5-h5py/bin/python" >> "$GITHUB_ENV"
+
+      - name: Check HDF5 version
+        run: |
+          pkg-config --atleast-version=2.0 hdf5
+          pkg-config --modversion hdf5
 
       - name: Install shards
         run: shards install
+
+      - name: Check formatting
+        run: crystal tool format --check src spec examples
 
       - name: Run specs
         run: crystal spec
