@@ -2,223 +2,220 @@ module HDF5
   class Attributes
     include Enumerable({String, Attribute})
 
-    NUMERIC_TYPES = {
-      Int8,
-      UInt8,
-      Int16,
-      UInt16,
-      Int32,
-      UInt32,
-      Int64,
-      UInt64,
-      Float32,
-      Float64,
-    }
-
-    def initialize(@loc_id : LibHDF5::Hid)
+    def initialize(@loc_id : LibHDF5::Hid, @context : FileContext? = nil)
     end
 
     def [](name : String) : Attribute
-      attr_id = LibHDF5.H5Aopen(@loc_id, name, LibHDF5::H5P_DEFAULT)
-      raise ObjectNotFoundError.new("Attribute not found: '#{name}'") if attr_id == LibHDF5::H5_INVALID_HID
-      Attribute.new(attr_id)
-    end
-
-    def []=(name : String, value : String)
-      LibHDF5.H5Adelete(@loc_id, name) if has_key?(name)
-      write_string_attr(name, value)
-    end
-
-    def []=(name : String, value : Array(String))
-      LibHDF5.H5Adelete(@loc_id, name) if has_key?(name)
-      write_string_array_attr(name, value)
-    end
-
-    def []=(name : String, value : Reference)
-      LibHDF5.H5Adelete(@loc_id, name) if has_key?(name)
-      write_reference_attr(name, value)
-    end
-
-    def []=(name : String, value : Array(Reference))
-      LibHDF5.H5Adelete(@loc_id, name) if has_key?(name)
-      write_reference_array_attr(name, value)
-    end
-
-    def []=(name : String, value : Array(Array(T))) forall T
-      LibHDF5.H5Adelete(@loc_id, name) if has_key?(name)
-      write_vlen_array_attr(name, value)
-    end
-
-    {% for type in NUMERIC_TYPES %}
-      def []=(name : String, value : {{ type }})
-        LibHDF5.H5Adelete(@loc_id, name) if has_key?(name)
-        write_scalar_attr(name, value)
-      end
-
-      def []=(name : String, value : Array({{ type }}))
-        LibHDF5.H5Adelete(@loc_id, name) if has_key?(name)
-        write_array_attr(name, value)
-      end
-    {% end %}
-
-    def get(name : String, type : T.class) : T forall T
-      attr = self[name]
-      begin
-        attr.read(T)
-      ensure
-        attr.close
+      Native.synchronize do
+        ensure_open
+        raise ObjectNotFoundError.new("Attribute not found: '#{name}'") unless has_key?(name)
+        Attribute.new(InternalChecks.ensure_hid(Native.h5aopen(@loc_id, name, LibHDF5::H5P_DEFAULT), "Failed to open attribute"), @context)
       end
     end
 
-    def get?(name : String, type : T.class) : T? forall T
+    def []=(name : String, value) : Nil
+      write(name, value)
+    end
+
+    def get(name : String, type : T.class, *, casting : Casting = Casting::Unsafe) : T forall T
+      Cleanup.with(self[name], &.read(T, casting: casting))
+    end
+
+    def get?(name : String, type : T.class, *, casting : Casting = Casting::Unsafe) : T? forall T
       return unless has_key?(name)
-      get(name, T)
+      get(name, T, casting: casting)
+    end
+
+    def get_array(name : String, type : T.class, *, casting : Casting = Casting::Unsafe) : Array(T) forall T
+      Cleanup.with(self[name]) { |attribute| attribute.read_array(T, casting: casting) }
+    end
+
+    def get_null(name : String, type : T.class) : Empty(T) forall T
+      Cleanup.with(self[name], &.read_null(T))
     end
 
     def has_key?(name : String) : Bool
-      LibHDF5.H5Aexists(@loc_id, name) > 0
+      Native.synchronize do
+        ensure_open
+        InternalChecks.ensure_htri(Native.h5aexists(@loc_id, name), "Failed to check attribute existence")
+      end
     end
 
     def delete(name : String) : Nil
-      ret = LibHDF5.H5Adelete(@loc_id, name)
-      raise ObjectNotFoundError.new("Attribute not found: '#{name}'") if ret < 0
+      Native.synchronize do
+        ensure_open
+        raise ObjectNotFoundError.new("Attribute not found: '#{name}'") unless has_key?(name)
+        InternalChecks.ensure_herr(Native.h5adelete(@loc_id, name), "Failed to delete attribute")
+      end
     end
 
     def keys : Array(String)
-      info = uninitialized LibHDF5::ObjInfo
-      ret = LibHDF5.H5Oget_info3(@loc_id, pointerof(info), LibHDF5::H5O_INFO_NUM_ATTRS)
-      return [] of String if ret < 0
-      n = info.num_attrs.to_i
-      result = Array(String).new(n)
-      n.times do |idx|
-        attr_id = LibHDF5.H5Aopen_by_idx(@loc_id, ".", LibHDF5::IndexType::Name,
-          LibHDF5::IterOrder::Inc, idx.to_u64,
-          LibHDF5::H5P_DEFAULT, LibHDF5::H5P_DEFAULT)
-        next if attr_id == LibHDF5::H5_INVALID_HID
-        size = LibHDF5.H5Aget_name(attr_id, 0, nil)
-        if size > 0
-          buf = Bytes.new(size + 1)
-          LibHDF5.H5Aget_name(attr_id, LibC::SizeT.new(size + 1), buf.to_unsafe.as(UInt8*))
-          result << String.new(buf[0, size])
+      Native.synchronize do
+        ensure_open
+        info = LibHDF5::ObjInfo.new
+        InternalChecks.ensure_herr(Native.h5oget_info3(@loc_id, pointerof(info), LibHDF5::H5O_INFO_NUM_ATTRS), "Failed to list attributes")
+        Array(String).new(info.num_attrs.to_i) do |i|
+          id = InternalChecks.ensure_hid(Native.h5aopen_by_idx(@loc_id, ".", LibHDF5::IndexType::Name,
+            LibHDF5::IterOrder::Inc, i.to_u64, LibHDF5::H5P_DEFAULT, LibHDF5::H5P_DEFAULT), "Failed to open attribute by index")
+          Cleanup.with(Attribute.new(id, @context), &.name)
         end
-        LibHDF5.H5Aclose(attr_id)
       end
-      result
     end
 
     def each(& : {String, Attribute} ->) : Nil
       keys.each do |name|
-        attr_id = LibHDF5.H5Aopen(@loc_id, name, LibHDF5::H5P_DEFAULT)
-        next if attr_id == LibHDF5::H5_INVALID_HID
-        attr = Attribute.new(attr_id)
-        yield({name, attr})
-        attr.close
+        Cleanup.with(self[name]) { |attribute| yield({name, attribute}) }
       end
     end
 
-    private def write_scalar_attr(name : String, value : T) forall T
-      dtype = NativeType.for(T)
-      space = Dataspace.scalar
-      attr_id = LibHDF5.H5Acreate2(@loc_id, name, dtype, space.id,
-        LibHDF5::H5P_DEFAULT, LibHDF5::H5P_DEFAULT)
-      space.close
-      raise Error.new("Failed to create attribute '#{name}'") if attr_id == LibHDF5::H5_INVALID_HID
-      ret = LibHDF5.H5Awrite(attr_id, dtype, pointerof(value).as(Void*))
-      LibHDF5.H5Aclose(attr_id)
-      raise Error.new("Failed to write attribute '#{name}'") if ret < 0
+    def create(name : String, data : Slice(T), **options) : Nil forall T
+      create(name, data.to_a, **options)
     end
 
-    private def write_string_attr(name : String, value : String)
-      type_id = NativeType.variable_length_string
-      space = Dataspace.scalar
-      attr_id = LibHDF5.H5Acreate2(@loc_id, name, type_id, space.id,
-        LibHDF5::H5P_DEFAULT, LibHDF5::H5P_DEFAULT)
-      space.close
-      if attr_id == LibHDF5::H5_INVALID_HID
-        LibHDF5.H5Tclose(type_id)
-        raise Error.new("Failed to create attribute '#{name}'")
+    def modify(name : String, data : Slice(T), **options) : Nil forall T
+      modify(name, data.to_a, **options)
+    end
+
+    def create(name : String, data : Array(T), *, shape : Indexable? = nil,
+               **options) : Nil forall T
+      create_values(name, T, data, shape ? Shapes.normalize(shape) : [data.size.to_u64], **options)
+    end
+
+    {% for type in {Int8, UInt8, Int16, UInt16, Int32, UInt32, Int64, UInt64, Float32, Float64, Bool, String, Complex, Complex32, Reference} %}
+    def create(name : String, value : {{ type }}, **options) : Nil
+      create_values(name, {{ type }}, [value], [] of UInt64, **options, scalar_input: true)
+    end
+
+    {% end %}
+
+    def create(name : String, empty : Empty(T), *, string_type : StringType = StringType.variable,
+               encoding : Symbol | StringEncoding? = nil) : Nil forall T
+      Native.synchronize do
+        ensure_open
+        raise AlreadyExistsError.new("Attribute already exists: '#{name}'") if has_key?(name)
+        resolved = encoding ? string_type.with_encoding(encoding) : string_type
+        Cleanup.with(TypeFactory.build(T, storage: true, string_type: resolved)) do |dtype|
+          Cleanup.with(Dataspace.null) do |space|
+            id = InternalChecks.ensure_hid(Native.h5acreate2(@loc_id, name, dtype.id, space.id,
+              LibHDF5::H5P_DEFAULT, LibHDF5::H5P_DEFAULT), "Failed to create Null attribute")
+            Cleanup.with(Attribute.new(id, @context)) { }
+          end
+        end
       end
-      write_type = NativeType.variable_length_string
-      ptr = value.to_unsafe
-      ret = LibHDF5.H5Awrite(attr_id, write_type, pointerof(ptr).as(Void*))
-      LibHDF5.H5Tclose(write_type)
-      LibHDF5.H5Tclose(type_id)
-      LibHDF5.H5Aclose(attr_id)
-      raise Error.new("Failed to write string attribute '#{name}'") if ret < 0
     end
 
-    private def write_array_attr(name : String, data : Array(T)) forall T
-      dtype = NativeType.for(T)
-      space = Dataspace.simple([data.size.to_u64])
-      attr_id = LibHDF5.H5Acreate2(@loc_id, name, dtype, space.id,
-        LibHDF5::H5P_DEFAULT, LibHDF5::H5P_DEFAULT)
-      space.close
-      raise Error.new("Failed to create array attribute '#{name}'") if attr_id == LibHDF5::H5_INVALID_HID
-      ret = LibHDF5.H5Awrite(attr_id, dtype, data.to_unsafe.as(Void*))
-      LibHDF5.H5Aclose(attr_id)
-      raise Error.new("Failed to write array attribute '#{name}'") if ret < 0
+    def create(name : String, type : T.class, data : Array(U), *,
+               shape : Indexable? = nil, **options) : Nil forall T, U
+      create_values(name, T, data, shape ? Shapes.normalize(shape) : [data.size.to_u64], **options)
     end
 
-    private def write_string_array_attr(name : String, data : Array(String))
-      type_id = NativeType.variable_length_string
-      space = Dataspace.simple([data.size.to_u64])
-      attr_id = LibHDF5.H5Acreate2(@loc_id, name, type_id, space.id,
-        LibHDF5::H5P_DEFAULT, LibHDF5::H5P_DEFAULT)
-      space.close
-      if attr_id == LibHDF5::H5_INVALID_HID
-        LibHDF5.H5Tclose(type_id)
-        raise Error.new("Failed to create attribute '#{name}'")
+    def create(name : String, type : T.class, value : U, **options) : Nil forall T, U
+      create_values(name, T, [value], [] of UInt64, **options, scalar_input: true)
+    end
+
+    def write(name : String, value, **options) : Nil
+      replace(name) { |temporary| create(temporary, value, **options) }
+    end
+
+    def write(name : String, type : T.class, value, **options) : Nil forall T
+      replace(name) { |temporary| create(temporary, T, value, **options) }
+    end
+
+    def modify(name : String, data : Array(T), *, shape : Indexable? = nil,
+               casting : Casting = Casting::Unsafe) : Nil forall T
+      Native.synchronize do
+        Cleanup.with(self[name]) do |attribute|
+          raise ShapeMismatchError.new("Expected array attribute") unless attribute.array?
+          if shape && Shapes.normalize(shape) != attribute.shape
+            raise ShapeMismatchError.new("Attribute shape mismatch")
+          end
+          attribute.write_array(data, casting: casting)
+        end
       end
-      write_type = NativeType.variable_length_string
-      ptrs = data.map(&.to_unsafe)
-      ret = LibHDF5.H5Awrite(attr_id, write_type, ptrs.to_unsafe.as(Void*))
-      LibHDF5.H5Tclose(write_type)
-      LibHDF5.H5Tclose(type_id)
-      LibHDF5.H5Aclose(attr_id)
-      raise Error.new("Failed to write string array attribute '#{name}'") if ret < 0
     end
 
-    private def write_reference_attr(name : String, value : Reference)
-      dtype = NativeType.for(Reference)
-      space = Dataspace.scalar
-      attr_id = LibHDF5.H5Acreate2(@loc_id, name, dtype, space.id,
-        LibHDF5::H5P_DEFAULT, LibHDF5::H5P_DEFAULT)
-      space.close
-      raise Error.new("Failed to create attribute '#{name}'") if attr_id == LibHDF5::H5_INVALID_HID
-      ref = value.to_hdf5_reference
-      ret = LibHDF5.H5Awrite(attr_id, dtype, pointerof(ref).as(Void*))
-      LibHDF5.H5Aclose(attr_id)
-      raise Error.new("Failed to write object reference attribute '#{name}'") if ret < 0
-    end
-
-    private def write_reference_array_attr(name : String, data : Array(Reference))
-      dtype = NativeType.for(Reference)
-      space = Dataspace.simple([data.size.to_u64])
-      attr_id = LibHDF5.H5Acreate2(@loc_id, name, dtype, space.id,
-        LibHDF5::H5P_DEFAULT, LibHDF5::H5P_DEFAULT)
-      space.close
-      raise Error.new("Failed to create array attribute '#{name}'") if attr_id == LibHDF5::H5_INVALID_HID
-      refs = data.map(&.to_hdf5_reference)
-      ret = LibHDF5.H5Awrite(attr_id, dtype, refs.to_unsafe.as(Void*))
-      LibHDF5.H5Aclose(attr_id)
-      raise Error.new("Failed to write object reference array attribute '#{name}'") if ret < 0
-    end
-
-    private def write_vlen_array_attr(name : String, data : Array(Array(T))) forall T
-      dtype = VLenType.for(T)
-      space = Dataspace.simple([data.size.to_u64])
-      attr_id = LibHDF5.H5Acreate2(@loc_id, name, dtype, space.id,
-        LibHDF5::H5P_DEFAULT, LibHDF5::H5P_DEFAULT)
-      space.close
-      if attr_id == LibHDF5::H5_INVALID_HID
-        LibHDF5.H5Tclose(dtype)
-        raise Error.new("Failed to create array attribute '#{name}'")
+    def modify(name : String, value : Empty(T), *, casting : Casting = Casting::Unsafe) : Nil forall T
+      Native.synchronize do
+        Cleanup.with(self[name]) do |_|
+          raise ShapeMismatchError.new("Empty values are only supported when creating a Null attribute")
+        end
       end
-      vlens = VLenStorage.descriptors(data)
-      ret = LibHDF5.H5Awrite(attr_id, dtype, vlens.to_unsafe.as(Void*))
-      LibHDF5.H5Tclose(dtype)
-      LibHDF5.H5Aclose(attr_id)
-      raise Error.new("Failed to write variable-length array attribute '#{name}'") if ret < 0
+    end
+
+    def modify(name : String, value : T, *, casting : Casting = Casting::Unsafe) : Nil forall T
+      Native.synchronize { Cleanup.with(self[name], &.write(value, casting: casting)) }
+    end
+
+    private def create_values(name : String, type : T.class, data : Indexable(U), dims : Array(UInt64), *,
+                              string_type : StringType = StringType.variable,
+                              encoding : Symbol | StringEncoding? = nil,
+                              casting : Casting = Casting::Unsafe, scalar_input : Bool = false) : Nil forall T, U
+      Native.synchronize do
+        ensure_open
+        raise AlreadyExistsError.new("Attribute already exists: '#{name}'") if has_key?(name)
+        Shapes.validate_count(dims, data.size)
+        resolved = encoding ? string_type.with_encoding(encoding) : string_type
+        Cleanup.with(TypeFactory.build(T, storage: true, string_type: resolved)) do |dtype|
+          if scalar_input
+            CastingChecks.scalar(data.first, dtype, casting)
+          else
+            Cleanup.with(TypeFactory.build(U)) { |source| CastingChecks.check(source, dtype, casting) }
+          end
+          {% if U == String %}
+            Codec.validate_strings(data, dtype, casting)
+          {% end %}
+          Cleanup.with(Dataspace.simple(dims)) do |space|
+            id = InternalChecks.ensure_hid(Native.h5acreate2(@loc_id, name, dtype.id, space.id,
+              LibHDF5::H5P_DEFAULT, LibHDF5::H5P_DEFAULT), "Failed to create attribute '#{name}'")
+            begin
+              Cleanup.with(Attribute.new(id, @context)) do |attribute|
+                Codec.write(:attribute, attribute.hid, data, dtype, space.id, LibHDF5::H5S_ALL)
+              end
+            rescue exception
+              Native.h5adelete(@loc_id, name)
+              raise exception
+            end
+          end
+        end
+      end
+    end
+
+    private def replace(name : String, &)
+      Native.synchronize do
+        ensure_open
+        temporary = temporary_name
+        backup = temporary_name
+        backed_up = false
+        begin
+          yield temporary
+          if has_key?(name)
+            InternalChecks.ensure_herr(Native.h5arename(@loc_id, name, backup), "Failed to back up attribute")
+            backed_up = true
+          end
+          InternalChecks.ensure_herr(Native.h5arename(@loc_id, temporary, name), "Failed to replace attribute")
+          delete(backup) if backed_up
+        rescue exception
+          if backed_up && !has_key?(name)
+            rollback = Native.h5arename(@loc_id, backup, name)
+            raise Error.new("Attribute replacement rollback failed", cause: exception) if rollback < 0
+          end
+          raise exception
+        ensure
+          Native.h5adelete(@loc_id, temporary) if has_key?(temporary)
+        end
+      end
+    end
+
+    private def temporary_name : String
+      loop do
+        name = "__hdf5_cr_#{Random::Secure.hex(16)}"
+        return name unless has_key?(name)
+      end
+    end
+
+    private def ensure_open : Nil
+      @context.try(&.ensure_open(@loc_id))
+      raise ClosedObjectError.new("Attribute owner is closed") unless InternalChecks.ensure_htri(Native.h5iis_valid(@loc_id), "Failed to check owner")
     end
   end
 end

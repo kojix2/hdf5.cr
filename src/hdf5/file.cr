@@ -8,8 +8,10 @@ module HDF5
     H5F_ACC_EXCL   = 0x0004_u32
     H5F_ACC_CREAT  = 0x0010_u32
 
+    @id : LibHDF5::Hid = LibHDF5::H5_INVALID_HID
     getter id : LibHDF5::Hid
     getter filename : String
+    getter context : FileContext
     getter mode : Symbol
 
     def self.open(filename : String, mode : Symbol = :r) : File
@@ -17,31 +19,30 @@ module HDF5
     end
 
     def self.open(filename : String, mode : Symbol = :r, &block : File ->) : Nil
-      f = new(filename, mode)
-      begin
-        block.call(f)
-      ensure
-        f.close
-      end
+      Cleanup.with(new(filename, mode)) { |file| block.call(file) }
     end
 
     def initialize(@filename : String, @mode : Symbol = :r)
-      LibHDF5.H5open
+      InternalChecks.ensure_herr(Native.h5open, "Failed to initialize HDF5")
       case mode
       when :r
-        @id = LibHDF5.H5Fopen(filename, H5F_ACC_RDONLY, LibHDF5::H5P_DEFAULT)
+        @id = Native.h5fopen(filename, H5F_ACC_RDONLY, LibHDF5::H5P_DEFAULT)
       when :r_plus, :rw
-        @id = LibHDF5.H5Fopen(filename, H5F_ACC_RDWR, LibHDF5::H5P_DEFAULT)
+        @id = Native.h5fopen(filename, H5F_ACC_RDWR, LibHDF5::H5P_DEFAULT)
       when :w
-        @id = LibHDF5.H5Fcreate(filename, H5F_ACC_TRUNC, LibHDF5::H5P_DEFAULT, LibHDF5::H5P_DEFAULT)
+        @id = Native.h5fcreate(filename, H5F_ACC_TRUNC, LibHDF5::H5P_DEFAULT, LibHDF5::H5P_DEFAULT)
       when :a
         if ::File.exists?(filename)
-          @id = LibHDF5.H5Fopen(filename, H5F_ACC_RDWR, LibHDF5::H5P_DEFAULT)
+          @id = Native.h5fopen(filename, H5F_ACC_RDWR, LibHDF5::H5P_DEFAULT)
         else
-          @id = LibHDF5.H5Fcreate(filename, H5F_ACC_TRUNC, LibHDF5::H5P_DEFAULT, LibHDF5::H5P_DEFAULT)
+          @id = Native.h5fcreate(filename, H5F_ACC_EXCL, LibHDF5::H5P_DEFAULT, LibHDF5::H5P_DEFAULT)
+          # Another process may have created the file after the existence check.
+          if @id < 0 && ::File.exists?(filename)
+            @id = Native.h5fopen(filename, H5F_ACC_RDWR, LibHDF5::H5P_DEFAULT)
+          end
         end
-      when :excl
-        @id = LibHDF5.H5Fcreate(filename, H5F_ACC_EXCL, LibHDF5::H5P_DEFAULT, LibHDF5::H5P_DEFAULT)
+      when :excl, :x
+        @id = Native.h5fcreate(filename, H5F_ACC_EXCL, LibHDF5::H5P_DEFAULT, LibHDF5::H5P_DEFAULT)
       else
         raise Error.new("Unknown file mode: #{mode}")
       end
@@ -50,29 +51,37 @@ module HDF5
       rescue Error
         raise FileError.new("Failed to open/create HDF5 file '#{filename}' (mode=#{mode})")
       end
+      @context = FileContext.new(@id)
     end
 
     def hid : LibHDF5::Hid
       raise ClosedObjectError.new("File is closed") if @id == LibHDF5::H5_INVALID_HID
+      @context.ensure_open(@id)
       @id
     end
 
     def flush
-      LibHDF5.H5Fflush(@id, 0)
+      Native.synchronize { InternalChecks.ensure_herr(Native.h5fflush(hid, 0), "Failed to flush file") }
+    end
+
+    def closed? : Bool
+      @context.closed?
     end
 
     def close
-      LibHDF5.H5Fclose(@id) if @id != LibHDF5::H5_INVALID_HID
+      return if @id == LibHDF5::H5_INVALID_HID
+      @context.close_file
       @id = LibHDF5::H5_INVALID_HID
     end
 
     def finalize
       close
+    rescue
     end
 
     def self.accessible?(filename : String) : Bool
-      LibHDF5.H5open
-      LibHDF5.H5Fis_accessible(filename, LibHDF5::H5P_DEFAULT) > 0
+      InternalChecks.ensure_herr(Native.h5open, "Failed to initialize HDF5")
+      Native.h5fis_accessible(filename, LibHDF5::H5P_DEFAULT) > 0
     end
   end
 end

@@ -1,98 +1,60 @@
 module HDF5
   class TypedDataset(T)
+    getter dataset : Dataset
+
     def initialize(@dataset : Dataset)
     end
 
-    def shape : Array(UInt64)
-      @dataset.shape
+    delegate shape, rank, size, datatype, dataspace, storage_size, attrs, resize,
+      chunk, max_shape, space_class, null?, scalar?, closed?, close, to: @dataset
+
+    def read(selection : Selection? = nil, *, casting : Casting = Casting::Unsafe) : Array(T)
+      dataset.read(T, selection, casting: casting)
     end
 
-    def rank : Int32
-      @dataset.rank
+    def read_scalar(selection : Selection? = nil, *, casting : Casting = Casting::Unsafe) : T
+      dataset.read_scalar(T, selection, casting: casting)
     end
 
-    def size : UInt64
-      @dataset.size
+    def read_null : Empty(T)
+      dataset.read_null(T)
     end
 
-    def datatype : Datatype
-      @dataset.datatype
+    def read_into(buffer : Slice(T), selection : Selection? = nil, *, casting : Casting = Casting::Unsafe) : Nil
+      dataset.read_into(buffer, selection, casting: casting)
     end
 
-    def dataspace : Dataspace
-      @dataset.dataspace
+    def read_to(buffer : Slice(T), selection : Selection? = nil, *, casting : Casting = Casting::Unsafe) : Nil
+      read_into(buffer, selection, casting: casting)
     end
 
-    def storage_size : UInt64
-      @dataset.storage_size
+    def write(data, selection : Selection? = nil, *, casting : Casting = Casting::Unsafe) : Nil
+      dataset.write(data, selection, casting: casting)
     end
 
-    def attrs : Attributes
-      @dataset.attrs
+    def append(data, *, shape : Indexable? = nil, axis : Int = 0, casting : Casting = Casting::Unsafe) : Nil
+      dataset.append(data, shape: shape, axis: axis, casting: casting)
     end
 
-    def read : Array(T)
-      {% if T == String %}
-        @dataset.read_strings
-      {% else %}
-        @dataset.read(T)
-      {% end %}
+    def fill_value(*, casting : Casting = Casting::Unsafe) : T
+      dataset.fill_value(T, casting: casting)
     end
 
-    def read(selection : Selection) : Array(T)
-      {% if T == String %}
-        raise Error.new("Partial string I/O not supported")
-      {% else %}
-        @dataset.read(T, selection)
-      {% end %}
+    def each_block(*, max_bytes : Int, casting : Casting = Casting::Unsafe,
+                   &block : Selection, Array(T) ->) : Nil
+      dataset.each_block(T, max_bytes: max_bytes, casting: casting, &block)
     end
 
-    def read_to(buffer : Slice(T)) : Nil
-      @dataset.read_to(buffer.to_unsafe, T)
-    end
-
-    def write(data : Array(T)) : Nil
-      {% if T == String %}
-        @dataset.write_strings(data)
-      {% else %}
-        @dataset.write(data)
-      {% end %}
-    end
-
-    def write(data : Slice(T)) : Nil
-      {% if T == String %}
-        raise Error.new("Slice write not supported for String datasets")
-      {% else %}
-        @dataset.write(data)
-      {% end %}
-    end
-
-    def write(data : Array(T), selection : Selection) : Nil
-      {% if T == String %}
-        raise Error.new("Partial string I/O not supported")
-      {% else %}
-        @dataset.write(data, selection)
-      {% end %}
-    end
-
-    def resize(new_shape : Indexable) : Nil
-      @dataset.resize(new_shape)
+    def each_chunk(*, casting : Casting = Casting::Unsafe, &block : Selection, Array(T) ->) : Nil
+      dataset.each_chunk(T, casting: casting, &block)
     end
 
     def [](selection : Selection) : Array(T)
       read(selection)
     end
 
-    def []=(selection : Selection, data : Array(T)) : Nil
+    def []=(selection : Selection, data) : Nil
       write(data, selection)
-    end
-
-    def close : Nil
-      @dataset.close
-    end
-
-    def finalize
-      # Dataset finalizer handles cleanup
     end
   end
 end

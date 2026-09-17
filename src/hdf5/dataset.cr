@@ -1,282 +1,366 @@
 module HDF5
   class Dataset
     getter id : LibHDF5::Hid
+    getter context : FileContext?
 
-    def initialize(@id : LibHDF5::Hid)
+    def initialize(@id : LibHDF5::Hid, @context : FileContext? = nil)
+      @context.try(&.register(@id, :dataset))
+    end
+
+    def hid : LibHDF5::Hid
+      ensure_open
+      @id
+    end
+
+    def closed? : Bool
+      @id == LibHDF5::H5_INVALID_HID || !!@context.try(&.closed?)
     end
 
     def dataspace : Dataspace
-      ensure_open
-      space_id = LibHDF5.H5Dget_space(@id)
-      InternalChecks.ensure_hid(space_id, "Failed to get dataset dataspace")
-      Dataspace.new(space_id)
+      Native.synchronize do
+        ensure_open
+        Dataspace.new(InternalChecks.ensure_hid(Native.h5dget_space(@id), "Failed to get dataspace"), context)
+      end
     end
 
     def datatype : Datatype
-      ensure_open
-      type_id = LibHDF5.H5Dget_type(@id)
-      InternalChecks.ensure_hid(type_id, "Failed to get dataset datatype")
-      Datatype.new(type_id)
+      Native.synchronize do
+        ensure_open
+        Datatype.new(InternalChecks.ensure_hid(Native.h5dget_type(@id), "Failed to get datatype"), context)
+      end
     end
 
-    # Crystal-native shape API
     def shape : Array(UInt64)
-      space = dataspace
-      begin
-        space.dims
-      ensure
-        space.close
-      end
+      Cleanup.with(dataspace, &.dims)
     end
 
     def rank : Int32
-      space = dataspace
-      begin
-        space.ndims
-      ensure
-        space.close
-      end
+      Cleanup.with(dataspace, &.ndims)
     end
 
     def size : UInt64
-      space = dataspace
-      begin
-        n = space.npoints
-        n < 0 ? 0_u64 : n.to_u64
-      ensure
-        space.close
-      end
+      Cleanup.with(dataspace, &.npoints.to_u64)
+    end
+
+    def space_class : LibHDF5::SpaceClass
+      Cleanup.with(dataspace, &.type)
+    end
+
+    def null? : Bool
+      space_class.null?
+    end
+
+    def scalar? : Bool
+      space_class.scalar?
     end
 
     def attrs : Attributes
       ensure_open
-      Attributes.new(@id)
+      Attributes.new(@id, context)
     end
 
-    def read(type : T.class) : Array(T) forall T
-      space = dataspace
-      n = space.npoints
-      space.close
-      raise Error.new("Invalid dataspace") if n < 0
-      DatasetStorage.read_all(@id, T, n.to_i)
-    end
-
-    def read(type : T.class, selection : Selection) : Array(T) forall T
-      file_space = dataspace
-      begin
-        selection.apply_to(file_space.id)
-        n = LibHDF5.H5Sget_select_npoints(file_space.id)
-        raise Error.new("Invalid selection") if n <= 0
-        mem_space = Dataspace.simple([n.to_u64])
-        begin
-          DatasetStorage.read_selection(@id, T, mem_space.id, file_space.id, n.to_i)
-        ensure
-          mem_space.close
+    def read(type : T.class, selection : Selection? = nil, *,
+             casting : Casting = Casting::Unsafe) : Array(T) forall T
+      Native.synchronize do
+        with_selection(selection) do |file, memory, count|
+          Cleanup.with(datatype) do |dtype|
+            Codec.read(:dataset, @id, T, dtype, memory.id, file.id, count, context, casting)
+          end
         end
-      ensure
-        file_space.close
       end
     end
 
-    def read_to(buf : Pointer(T), type : T.class) forall T
-      ensure_open
-      dtype = NativeType.for(T)
-      ret = LibHDF5.H5Dread(@id, dtype, LibHDF5::H5S_ALL, LibHDF5::H5S_ALL,
-        LibHDF5::H5P_DEFAULT, buf.as(Void*))
-      raise Error.new("Failed to read dataset") if ret < 0
+    def read_scalar(type : T.class, selection : Selection? = nil, *,
+                    casting : Casting = Casting::Unsafe) : T forall T
+      Native.synchronize do
+        scalar = selection ? selection.result_shape(shape).empty? : scalar?
+        raise ShapeMismatchError.new("Expected a scalar dataspace or selection") unless scalar
+        read(T, selection, casting: casting).first
+      end
     end
 
-    def write(data : Array(T)) forall T
-      ensure_open
-      DatasetStorage.write_all(@id, data)
-    end
-
-    def write(data : Slice(T)) forall T
-      ensure_open
-      dtype = NativeType.for(T)
-      ret = LibHDF5.H5Dwrite(@id, dtype, LibHDF5::H5S_ALL, LibHDF5::H5S_ALL,
-        LibHDF5::H5P_DEFAULT, data.to_unsafe.as(Void*))
-      raise Error.new("Failed to write dataset") if ret < 0
-    end
-
-    def write(data : Array(T), selection : Selection) forall T
-      file_space = dataspace
-      begin
-        selection.apply_to(file_space.id)
-        n = LibHDF5.H5Sget_select_npoints(file_space.id)
-        raise ShapeMismatchError.new(
-          "Selection covers #{n} points but data has #{data.size} elements"
-        ) if data.size != n
-        mem_space = Dataspace.simple([n.to_u64])
-        begin
-          DatasetStorage.write_selection(@id, data, mem_space.id, file_space.id)
-        ensure
-          mem_space.close
+    def read_null(type : T.class) : Empty(T) forall T
+      raise ShapeMismatchError.new("Expected Null dataspace") unless null?
+      Cleanup.with(datatype) do |dtype|
+        Cleanup.with(TypeFactory.build(T)) do |expected|
+          CastingChecks.check(dtype, expected, Casting::Safe)
         end
-      ensure
-        file_space.close
+      end
+      Empty(T).new
+    end
+
+    def read_into(buffer : Slice(T), selection : Selection? = nil, *,
+                  casting : Casting = Casting::Unsafe) : Nil forall T
+      Native.synchronize do
+        with_selection(selection) do |file, memory, count|
+          raise ShapeMismatchError.new("Buffer length does not match selection") unless buffer.size == count
+          {% if T == String || T == Reference || T < Array || T == Bool || T == Complex || T == Complex32 %}
+            values = read(T, selection, casting: casting)
+            values.each_with_index { |value, i| buffer[i] = value }
+          {% else %}
+            Cleanup.with(datatype) do |stored|
+              Cleanup.with(TypeFactory.build(T)) do |dtype|
+                CastingChecks.check(stored, dtype, casting)
+                Codec.transfer(true, :dataset, @id, dtype.id, memory.id, file.id, buffer.to_unsafe.as(Void*)) unless count == 0
+              end
+            end
+          {% end %}
+        end
       end
     end
 
-    def write_strings(data : Array(String))
-      file_type = datatype
-      raise Error.new("Dataset is not string type") unless file_type.string?
+    # Compatibility name for the checked buffer API.
+    def read_to(buffer : Slice(T), selection : Selection? = nil, *, casting : Casting = Casting::Unsafe) : Nil forall T
+      read_into(buffer, selection, casting: casting)
+    end
 
-      if file_type.variable_length_string?
-        write_type = StringType.variable(encoding: file_type.string_encoding,
-          padding: file_type.string_padding).to_hdf5_type_id
-        ptrs = data.map(&.to_unsafe)
-        ret = LibHDF5.H5Dwrite(@id, write_type, LibHDF5::H5S_ALL, LibHDF5::H5S_ALL,
-          LibHDF5::H5P_DEFAULT, ptrs.to_unsafe.as(Void*))
-        LibHDF5.H5Tclose(write_type)
-        file_type.close
-        raise Error.new("Failed to write string dataset") if ret < 0
-        return
+    # Low-level API: the caller owns capacity and native representation checks.
+    def read_to(buffer : Pointer(T), type : T.class) : Nil forall T
+      Native.synchronize do
+        ensure_open
+        raise ShapeMismatchError.new("Cannot read a Null dataset into a buffer") if null?
+        Cleanup.with(TypeFactory.build(T)) do |dtype|
+          Codec.transfer(true, :dataset, @id, dtype.id, LibHDF5::H5S_ALL, LibHDF5::H5S_ALL, buffer.as(Void*))
+        end
       end
+    end
 
-      unless file_type.fixed_length_string?
-        file_type.close
-        raise Error.new("Unsupported string dataset storage")
+    def write(data : Slice(T), selection : Selection? = nil, *, casting : Casting = Casting::Unsafe) : Nil forall T
+      write_buffer(data, selection, casting)
+    end
+
+    def append(data : Slice(T), *, shape : Indexable? = nil, axis : Int = 0, casting : Casting = Casting::Unsafe) : Nil forall T
+      append(data.to_a, shape: shape, axis: axis, casting: casting)
+    end
+
+    def write(data : Array(T), selection : Selection? = nil, *, casting : Casting = Casting::Unsafe) : Nil forall T
+      write_buffer(data, selection, casting)
+    end
+
+    private def write_buffer(data : Array(T) | Slice(T), selection : Selection?, casting : Casting) : Nil forall T
+      Native.synchronize do
+        with_selection(selection) do |file, memory, count|
+          raise ShapeMismatchError.new("Data has #{data.size} elements; selection has #{count}") unless data.size == count
+          Cleanup.with(datatype) do |dtype|
+            Codec.write(:dataset, @id, data, dtype, memory.id, file.id, casting)
+          end
+        end
       end
+    end
 
-      element_size = file_type.size
-      write_type = StringType.fixed(element_size,
-        encoding: file_type.string_encoding,
-        padding: file_type.string_padding).to_hdf5_type_id
+    def write(value : T, selection : Selection? = nil, *,
+              casting : Casting = Casting::Unsafe) : Nil forall T
+      Native.synchronize do
+        ensure_open
+        raise ShapeMismatchError.new("Cannot write to a Null dataset") if null?
+        Cleanup.with(datatype) do |dtype|
+          CastingChecks.scalar(value, dtype, casting)
+          {% if T == String %}
+            Codec.validate_strings([value], dtype.string_encoding)
+          {% end %}
+          target = selection || HDF5.s[]
+          bytes = {% if T == String %} Math.max(value.bytesize + sizeof(Pointer(UInt8)), 1) {% else %} sizeof(T) {% end %}
+          dimensions = shape
+          total = Shapes.count(target.result_shape(dimensions))
+          return if total == 0
+          budget = Math.max(256 * 1024 // bytes, 1)
+          length = Math.min(total, budget.to_u64).to_i
+          buffer = Slice(T).new(length, value)
+          target.each_tile(dimensions, budget) do |tile|
+            count = Shapes.count(tile.result_shape(dimensions)).to_i
+            write(buffer[0, count], tile)
+          end
+        end
+      end
+    end
 
-      fixed = fixed_length_buffer(data, element_size, file_type.string_padding)
-      ret = LibHDF5.H5Dwrite(@id, write_type, LibHDF5::H5S_ALL, LibHDF5::H5S_ALL,
-        LibHDF5::H5P_DEFAULT, fixed.to_unsafe.as(Void*))
-      LibHDF5.H5Tclose(write_type)
-      file_type.close
-      raise Error.new("Failed to write fixed-length string dataset") if ret < 0
+    def write(value : Empty(T), selection : Selection? = nil, *, casting : Casting = Casting::Unsafe) : Nil forall T
+      ensure_open
+      raise ShapeMismatchError.new("Empty values are only supported when creating a Null dataset")
+    end
+
+    def write_strings(data : Array(String)) : Nil
+      write(data)
     end
 
     def read_strings : Array(String)
-      file_type = datatype
-      raise Error.new("Dataset is not string type") unless file_type.string?
+      read(String)
+    end
 
-      if file_type.variable_length_string?
-        type_id = StringType.variable(encoding: file_type.string_encoding,
-          padding: file_type.string_padding).to_hdf5_type_id
-        space = dataspace
-        n = space.npoints
-        if n < 0
-          space.close
-          LibHDF5.H5Tclose(type_id)
-          file_type.close
-          raise Error.new("Invalid dataspace")
-        end
-        ptrs = Array(Pointer(UInt8)).new(n.to_i, Pointer(UInt8).null)
-        ret = LibHDF5.H5Dread(@id, type_id, LibHDF5::H5S_ALL, LibHDF5::H5S_ALL,
-          LibHDF5::H5P_DEFAULT, ptrs.to_unsafe.as(Void*))
-        if ret < 0
-          space.close
-          LibHDF5.H5Tclose(type_id)
-          file_type.close
-          raise Error.new("Failed to read string dataset")
-        end
-
-        begin
-          return ptrs.map { |ptr| ptr.null? ? "" : String.new(ptr) }
-        ensure
-          reclaim = LibHDF5.H5Dvlen_reclaim(type_id, space.id, LibHDF5::H5P_DEFAULT, ptrs.to_unsafe.as(Void*))
-          space.close
-          LibHDF5.H5Tclose(type_id)
-          file_type.close
-          raise Error.new("Failed to reclaim variable-length string memory") if reclaim < 0
+    def chunk : Array(UInt64)?
+      Native.synchronize do
+        with_creation_properties do |properties|
+          layout = Native.h5pget_layout(properties)
+          raise Error.new("Failed to get storage layout") if layout < 0
+          if layout == 2
+            dims = Array(UInt64).new(rank, 0_u64)
+            InternalChecks.ensure_herr(Native.h5pget_chunk(properties, dims.size, dims.to_unsafe), "Failed to get chunks")
+            dims
+          end
         end
       end
+    end
 
-      unless file_type.fixed_length_string?
-        file_type.close
-        raise Error.new("Unsupported string dataset storage")
+    def max_shape : Array(UInt64?)
+      Native.synchronize do
+        Cleanup.with(dataspace) do |space|
+          dims = Array(UInt64).new(space.ndims, 0_u64)
+          maximum = Array(UInt64).new(space.ndims, 0_u64)
+          InternalChecks.ensure_herr(Native.h5sget_simple_extent_dims(space.id, dims.to_unsafe, maximum.to_unsafe), "Failed to get maximum shape")
+          maximum.map { |dim| dim == UInt64::MAX ? nil : dim }
+        end
       end
+    end
 
-      space = dataspace
-      n = space.npoints
-      if n < 0
-        space.close
-        file_type.close
-        raise Error.new("Invalid dataspace")
+    def fill_value(type : T.class, *, casting : Casting = Casting::Unsafe) : T forall T
+      Native.synchronize do
+        with_creation_properties do |properties|
+          Cleanup.with(datatype) do |dtype|
+            Cleanup.with(Dataspace.scalar) do |memory|
+              Codec.read(:fill, properties, T, dtype, memory.id, LibHDF5::H5S_ALL, 1, casting: casting).first
+            end
+          end
+        end
       end
-
-      element_size = file_type.size
-      read_type = StringType.fixed(element_size,
-        encoding: file_type.string_encoding,
-        padding: file_type.string_padding).to_hdf5_type_id
-      buf = Bytes.new(n.to_i * element_size, 0_u8)
-      ret = LibHDF5.H5Dread(@id, read_type, LibHDF5::H5S_ALL, LibHDF5::H5S_ALL,
-        LibHDF5::H5P_DEFAULT, buf.to_unsafe.as(Void*))
-      LibHDF5.H5Tclose(read_type)
-      space.close
-      file_type.close
-      raise Error.new("Failed to read fixed-length string dataset") if ret < 0
-      decode_fixed_length_strings(buf, n.to_i, element_size)
     end
 
     def resize(new_shape : Indexable) : Nil
+      Native.synchronize do
+        ensure_open
+        raise ShapeMismatchError.new("Only simple datasets can be resized") unless space_class.simple?
+        dims = Shapes.normalize(new_shape)
+        raise ShapeMismatchError.new("Resize rank mismatch") unless dims.size == rank
+        Shapes.count(dims)
+        max_shape.each_with_index do |limit, i|
+          raise ShapeMismatchError.new("Resize exceeds maximum dimension") if limit && dims[i] > limit
+        end
+        raise ShapeMismatchError.new("Resize requires chunked storage") unless chunk
+        InternalChecks.ensure_herr(Native.h5dset_extent(@id, dims.to_unsafe), "Failed to resize dataset")
+      end
+    end
+
+    def append(data : Array(T), *, shape : Indexable? = nil, axis : Int = 0,
+               casting : Casting = Casting::Unsafe) : Nil forall T
+      Native.synchronize do
+        raise ShapeMismatchError.new("Append requires a simple dataspace") unless space_class.simple?
+        original = self.shape
+        raise IndexError.new("Append axis out of bounds") unless 0 <= axis < original.size
+        incoming = if shape
+                     Shapes.normalize(shape)
+                   elsif original.size == 1
+                     [data.size.to_u64]
+                   else
+                     raise ShapeMismatchError.new("Multidimensional append requires shape")
+                   end
+        raise ShapeMismatchError.new("Append rank mismatch") unless incoming.size == original.size
+        incoming.each_with_index do |dim, i|
+          raise ShapeMismatchError.new("Append dimensions must match outside axis") if i != axis && dim != original[i]
+        end
+        Shapes.validate_count(incoming, data.size)
+        Cleanup.with(datatype) do |dtype|
+          Cleanup.with(TypeFactory.build(T)) { |source| CastingChecks.check(source, dtype, casting) }
+          {% if T == String %}
+            Codec.validate_strings(data, dtype, casting)
+          {% end %}
+        end
+        return if incoming[axis] == 0
+        extended = original.dup
+        extended[axis] += incoming[axis]
+        resize(extended)
+        start = Array(UInt64).new(original.size, 0_u64)
+        start[axis] = original[axis]
+        begin
+          write(data, Selection.hyperslab(start, incoming), casting: casting)
+        rescue exception
+          begin
+            resize(original)
+          rescue error
+            raise Error.new("Append write failed and extent rollback failed: #{error.message}", cause: exception)
+          end
+          raise exception
+        end
+      end
+    end
+
+    def each_block(type : T.class, *, max_bytes : Int, casting : Casting = Casting::Unsafe,
+                   &block : Selection, Array(T) ->) : Nil forall T
       ensure_open
-      udims = new_shape.map(&.to_u64).to_a
-      ret = LibHDF5.H5Dset_extent(@id, udims.to_unsafe)
-      raise Error.new("Failed to resize dataset") if ret < 0
+      raise ShapeMismatchError.new("Cannot iterate a Null dataset") if null?
+      callback = block
+      {% if T < Array %}
+        raise TypeMismatchError.new("Cannot bound variable-length data in bytes")
+      {% else %}
+        {% if T == String %}
+          bytes = Cleanup.with(datatype) do |dtype|
+            raise TypeMismatchError.new("Cannot bound variable-length strings in bytes") unless dtype.fixed_length_string?
+            dtype.size
+          end
+        {% else %}
+          bytes = sizeof(T)
+        {% end %}
+        raise ArgumentError.new("Byte budget is smaller than one element") if max_bytes < bytes
+        dimensions = shape
+        blocks = Selection.block_shape(dimensions, Math.min(max_bytes // bytes, Int32::MAX).to_i)
+        Selection.each_region(dimensions, blocks) do |selection|
+          callback.call(selection, read(T, selection, casting: casting))
+        end
+      {% end %}
+    end
+
+    def each_chunk(type : T.class, *, casting : Casting = Casting::Unsafe,
+                   &block : Selection, Array(T) ->) : Nil forall T
+      dimensions = shape
+      chunks = chunk || raise ShapeMismatchError.new("Chunk iteration requires chunked storage")
+      Selection.each_region(dimensions, chunks) do |selection|
+        block.call(selection, read(T, selection, casting: casting))
+      end
     end
 
     def storage_size : UInt64
-      ensure_open
-      LibHDF5.H5Dget_storage_size(@id)
+      Native.synchronize do
+        ensure_open
+        Native.h5dget_storage_size(@id)
+      end
     end
 
-    def close
-      LibHDF5.H5Dclose(@id) if @id != LibHDF5::H5_INVALID_HID
-      @id = LibHDF5::H5_INVALID_HID
+    def close : Nil
+      Native.synchronize do
+        if ctx = context
+          ctx.close(@id)
+        elsif @id != LibHDF5::H5_INVALID_HID
+          InternalChecks.ensure_herr(Native.h5dclose(@id), "Failed to close dataset")
+        end
+        @id = LibHDF5::H5_INVALID_HID
+      end
     end
 
     def finalize
       close
+    rescue
     end
 
     private def ensure_open : Nil
+      context.try(&.ensure_open(@id))
       raise ClosedObjectError.new("Dataset is closed") if @id == LibHDF5::H5_INVALID_HID
     end
 
-    private def fixed_length_buffer(data : Array(String), element_size : Int32,
-                                    padding : StringPadding) : Bytes
-      fill = padding == StringPadding::SpacePad ? ' '.ord.to_u8 : 0_u8
-      buf = Bytes.new(data.size * element_size, fill)
-      data.each_with_index do |value, index|
-        max_len = padding == StringPadding::NullTerm ? element_size - 1 : element_size
-        next if max_len <= 0
-        bytes = value.to_slice
-        copy_len = bytes.size < max_len ? bytes.size : max_len
-        start = index * element_size
-        copy_len.times do |offset|
-          buf[start + offset] = bytes[offset]
-        end
-      end
-      buf
-    end
-
-    private def decode_fixed_length_strings(buf : Bytes, count : Int32, element_size : Int32) : Array(String)
-      Array(String).new(count) do |index|
-        start = index * element_size
-        slice = buf[start, element_size]
-        String.new(trim_fixed_string_slice(slice))
+    private def with_selection(selection : Selection?, &)
+      Cleanup.with(dataspace) do |file|
+        raise ShapeMismatchError.new("Null datasets require read_null") if file.type.null?
+        count = selection ? selection.npoints(file.id) : file.npoints
+        memory = file.type.scalar? ? Dataspace.scalar : Dataspace.simple([count.to_u64])
+        Cleanup.with(memory) { |space| yield file, space, Shapes.buffer_count(count) }
       end
     end
 
-    private def trim_fixed_string_slice(slice : Bytes) : Bytes
-      terminator = slice.index(0_u8)
-      if terminator
-        return slice[0, terminator]
+    private def with_creation_properties(&)
+      ensure_open
+      properties = InternalChecks.ensure_hid(Native.h5dget_create_plist(@id), "Failed to get creation properties")
+      begin
+        yield properties
+      ensure
+        Native.h5pclose(properties)
       end
-
-      last = slice.size - 1
-      while last >= 0 && (slice[last] == 0_u8 || slice[last] == ' '.ord.to_u8)
-        last -= 1
-      end
-      return Bytes.new(0) if last < 0
-      slice[0, last + 1]
     end
   end
 end

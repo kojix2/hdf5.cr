@@ -1,228 +1,156 @@
 module HDF5
   class Attribute
     getter id : LibHDF5::Hid
+    getter context : FileContext?
 
-    def initialize(@id : LibHDF5::Hid)
+    def initialize(@id : LibHDF5::Hid, @context : FileContext? = nil)
+      @context.try(&.register(@id, :attribute))
+    end
+
+    def hid : LibHDF5::Hid
+      ensure_open
+      @id
     end
 
     def datatype : Datatype
-      ensure_open
-      type_id = LibHDF5.H5Aget_type(@id)
-      InternalChecks.ensure_hid(type_id, "Failed to get attribute datatype")
-      Datatype.new(type_id)
-    end
-
-    def dataspace : Dataspace
-      ensure_open
-      space_id = LibHDF5.H5Aget_space(@id)
-      InternalChecks.ensure_hid(space_id, "Failed to get attribute dataspace")
-      Dataspace.new(space_id)
-    end
-
-    def shape : Array(UInt64)
-      with_dataspace(&.dims)
-    end
-
-    def rank : Int32
-      with_dataspace(&.ndims)
-    end
-
-    def size : UInt64
-      npoints = with_dataspace(&.npoints)
-      npoints < 0 ? 0_u64 : npoints.to_u64
-    end
-
-    def scalar? : Bool
-      with_dataspace(&.type) == LibHDF5::SpaceClass::Scalar
-    end
-
-    def array? : Bool
-      with_dataspace(&.type) == LibHDF5::SpaceClass::Simple
-    end
-
-    def name : String
-      ensure_open
-      size = LibHDF5.H5Aget_name(@id, 0, nil)
-      raise Error.new("Failed to get attribute name size") if size < 0
-      buf = Bytes.new(size + 1)
-      LibHDF5.H5Aget_name(@id, LibC::SizeT.new(size + 1), buf.to_unsafe.as(UInt8*))
-      String.new(buf[0, size])
-    end
-
-    def read(type : T.class) : T forall T
-      {% if T == String %}
-        read_string
-      {% elsif T == HDF5::Reference %}
-        read_reference
-      {% elsif T < Number %}
-        buf = uninitialized T
-        dtype = NativeType.for(T)
-        read_raw(dtype, pointerof(buf))
-        buf
-      {% else %}
-        {% raise "Unsupported attribute type: #{T}" %}
-      {% end %}
-    end
-
-    def read_array(type : T.class) : Array(T) forall T
-      space_id = LibHDF5.H5Aget_space(@id)
-      raise Error.new("Failed to get attribute space") if space_id == LibHDF5::H5_INVALID_HID
-      npoints = LibHDF5.H5Sget_simple_extent_npoints(space_id)
-      raise Error.new("Invalid npoints") if npoints < 0
-      begin
-        {% if T == HDF5::Reference %}
-          refs = Array(LibHDF5::Reference).new(npoints.to_i) { LibHDF5::Reference.new }
-          read_raw(NativeType.for(Reference), refs.to_unsafe)
-          refs.map { |ref| Reference.new(ref) }
-        {% elsif T < Array %}
-          read_vlen_array(T, space_id, npoints.to_i)
-        {% else %}
-          buf = Array(T).new(npoints.to_i, T.zero)
-          dtype = NativeType.for(T)
-          read_raw(dtype, buf.to_unsafe)
-          buf
-        {% end %}
-      ensure
-        LibHDF5.H5Sclose(space_id)
+      Native.synchronize do
+        Datatype.new(InternalChecks.ensure_hid(Native.h5aget_type(hid), "Failed to get attribute type"), context)
       end
     end
 
-    def write(value : T) forall T
-      {% if T == String %}
-        write_string(value)
-      {% elsif T == HDF5::Reference %}
-        write_reference(value)
-      {% elsif T < Number %}
-        dtype = NativeType.for(T)
-        write_raw(dtype, pointerof(value))
-      {% else %}
-        {% raise "Unsupported attribute type: #{T}" %}
-      {% end %}
+    def dataspace : Dataspace
+      Native.synchronize do
+        Dataspace.new(InternalChecks.ensure_hid(Native.h5aget_space(hid), "Failed to get attribute space"), context)
+      end
     end
 
-    def write_array(data : Array(T)) forall T
-      dtype = NativeType.for(T)
-      write_raw(dtype, data.to_unsafe)
+    def shape : Array(UInt64)
+      Cleanup.with(dataspace, &.dims)
     end
 
-    def read_raw(type_id : LibHDF5::Hid, buf : Pointer(T)) : Nil forall T
-      read_raw_impl(type_id, buf.as(Void*))
+    def rank : Int32
+      Cleanup.with(dataspace, &.ndims)
     end
 
-    def read_raw(type_id : LibHDF5::Hid, buf : Void*) : Nil
-      read_raw_impl(type_id, buf)
+    def size : UInt64
+      Cleanup.with(dataspace, &.npoints.to_u64)
     end
 
-    def write_raw(type_id : LibHDF5::Hid, buf : Pointer(T)) : Nil forall T
-      write_raw_impl(type_id, buf.as(Void*))
+    def space_class : LibHDF5::SpaceClass
+      Cleanup.with(dataspace, &.type)
     end
 
-    def write_raw(type_id : LibHDF5::Hid, buf : Void*) : Nil
-      write_raw_impl(type_id, buf)
+    def scalar? : Bool
+      space_class.scalar?
     end
 
-    private def read_raw_impl(type_id : LibHDF5::Hid, buf : Void*) : Nil
-      ensure_open
-      ret = LibHDF5.H5Aread(@id, type_id, buf)
-      raise Error.new("Failed to read attribute") if ret < 0
+    def array? : Bool
+      space_class.simple?
     end
 
-    private def write_raw_impl(type_id : LibHDF5::Hid, buf : Void*) : Nil
-      ensure_open
-      ret = LibHDF5.H5Awrite(@id, type_id, buf)
-      raise Error.new("Failed to write attribute") if ret < 0
+    def null? : Bool
+      space_class.null?
     end
 
-    def close
-      LibHDF5.H5Aclose(@id) if @id != LibHDF5::H5_INVALID_HID
-      @id = LibHDF5::H5_INVALID_HID
+    def closed? : Bool
+      @id == LibHDF5::H5_INVALID_HID || !!context.try(&.closed?)
+    end
+
+    def name : String
+      Native.synchronize do
+        length = Native.h5aget_name(hid, 0_u64, nil)
+        raise Error.new("Failed to get attribute name") if length < 0
+        bytes = Bytes.new(length + 1)
+        InternalChecks.ensure_herr(Native.h5aget_name(hid, bytes.size.to_u64, bytes.to_unsafe).to_i32, "Failed to get attribute name")
+        String.new(bytes[0, length])
+      end
+    end
+
+    def read(type : T.class, *, casting : Casting = Casting::Unsafe) : T forall T
+      Native.synchronize do
+        raise ShapeMismatchError.new("Expected scalar attribute; use read_array or read_null") unless scalar?
+        read_array(T, casting: casting).first
+      end
+    end
+
+    def read_array(type : T.class, *, casting : Casting = Casting::Unsafe) : Array(T) forall T
+      Native.synchronize do
+        Cleanup.with(dataspace) do |space|
+          raise ShapeMismatchError.new("Null attributes require read_null") if space.type.null?
+          Cleanup.with(datatype) do |dtype|
+            Codec.read(:attribute, hid, T, dtype, space.id, LibHDF5::H5S_ALL, Shapes.buffer_count(space.npoints), context, casting)
+          end
+        end
+      end
+    end
+
+    def read_null(type : T.class) : Empty(T) forall T
+      Native.synchronize do
+        raise ShapeMismatchError.new("Expected Null attribute") unless null?
+        Cleanup.with(datatype) do |dtype|
+          Cleanup.with(TypeFactory.build(T)) { |expected| CastingChecks.check(dtype, expected, Casting::Safe) }
+        end
+        Empty(T).new
+      end
+    end
+
+    def write(value : T, *, casting : Casting = Casting::Unsafe) : Nil forall T
+      Native.synchronize do
+        raise ShapeMismatchError.new("Expected scalar attribute") unless scalar?
+        Cleanup.with(datatype) do |dtype|
+          CastingChecks.scalar(value, dtype, casting)
+          write_array([value])
+        end
+      end
+    end
+
+    def write_array(data : Array(T) | Slice(T), *, casting : Casting = Casting::Unsafe) : Nil forall T
+      Native.synchronize do
+        Cleanup.with(dataspace) do |space|
+          raise ShapeMismatchError.new("Cannot modify Null attribute") if space.type.null?
+          raise ShapeMismatchError.new("Attribute element count mismatch") unless data.size == space.npoints
+          Cleanup.with(datatype) { |dtype| Codec.write(:attribute, hid, data, dtype, space.id, LibHDF5::H5S_ALL, casting) }
+        end
+      end
+    end
+
+    # Raw access is deliberately unsafe: the caller supplies the native layout
+    # and enough capacity for the entire attribute.
+    def read_raw(type_id : LibHDF5::Hid, buffer : Pointer(T)) : Nil forall T
+      Native.synchronize { Codec.transfer(true, :attribute, hid, type_id, LibHDF5::H5S_ALL, LibHDF5::H5S_ALL, buffer.as(Void*)) }
+    end
+
+    def read_raw(type_id : LibHDF5::Hid, buffer : Void*) : Nil
+      Native.synchronize { Codec.transfer(true, :attribute, hid, type_id, LibHDF5::H5S_ALL, LibHDF5::H5S_ALL, buffer) }
+    end
+
+    def write_raw(type_id : LibHDF5::Hid, buffer : Pointer(T)) : Nil forall T
+      Native.synchronize { Codec.transfer(false, :attribute, hid, type_id, LibHDF5::H5S_ALL, LibHDF5::H5S_ALL, buffer.as(Void*)) }
+    end
+
+    def write_raw(type_id : LibHDF5::Hid, buffer : Void*) : Nil
+      Native.synchronize { Codec.transfer(false, :attribute, hid, type_id, LibHDF5::H5S_ALL, LibHDF5::H5S_ALL, buffer) }
+    end
+
+    def close : Nil
+      Native.synchronize do
+        if ctx = context
+          ctx.close(@id)
+        elsif @id != LibHDF5::H5_INVALID_HID
+          InternalChecks.ensure_herr(Native.h5aclose(@id), "Failed to close attribute")
+        end
+        @id = LibHDF5::H5_INVALID_HID
+      end
     end
 
     def finalize
       close
+    rescue
     end
 
     private def ensure_open : Nil
+      context.try(&.ensure_open(@id))
       raise ClosedObjectError.new("Attribute is closed") if @id == LibHDF5::H5_INVALID_HID
-    end
-
-    private def read_string : String
-      type_id = LibHDF5.H5Aget_type(@id)
-      raise Error.new("Failed to get attribute type") if type_id == LibHDF5::H5_INVALID_HID
-      is_vlen = LibHDF5.H5Tis_variable_str(type_id)
-      if is_vlen < 0
-        LibHDF5.H5Tclose(type_id)
-        raise Error.new("Failed to inspect attribute string storage")
-      end
-      size = LibHDF5.H5Tget_size(type_id)
-      if is_vlen > 0
-        # For variable-length strings, read into a char** and wrap the pointed string
-        space_id = LibHDF5.H5Aget_space(@id)
-        if space_id == LibHDF5::H5_INVALID_HID
-          LibHDF5.H5Tclose(type_id)
-          raise Error.new("Failed to get attribute dataspace")
-        end
-        ptr = Pointer(UInt8).null
-        begin
-          read_raw(type_id, pointerof(ptr))
-        rescue Error
-          LibHDF5.H5Sclose(space_id)
-          LibHDF5.H5Tclose(type_id)
-          raise Error.new("Failed to read string attribute")
-        end
-
-        begin
-          ptr.null? ? "" : String.new(ptr)
-        ensure
-          reclaim = LibHDF5.H5Dvlen_reclaim(type_id, space_id, LibHDF5::H5P_DEFAULT, pointerof(ptr).as(Void*))
-          LibHDF5.H5Sclose(space_id)
-          LibHDF5.H5Tclose(type_id)
-          raise Error.new("Failed to reclaim variable-length attribute string memory") if reclaim < 0
-        end
-      else
-        buf = Bytes.new(size + 1)
-        read_raw(type_id, buf.to_unsafe)
-        LibHDF5.H5Tclose(type_id)
-        String.new(buf.to_unsafe)
-      end
-    end
-
-    private def write_string(value : String)
-      type_id = NativeType.variable_length_string
-      ptr = value.to_unsafe
-      write_raw(type_id, pointerof(ptr))
-      LibHDF5.H5Tclose(type_id)
-    end
-
-    private def read_reference : Reference
-      ref = uninitialized LibHDF5::Reference
-      read_raw(NativeType.for(Reference), pointerof(ref))
-      Reference.new(ref)
-    end
-
-    private def write_reference(value : Reference)
-      ref = value.to_hdf5_reference
-      write_raw(NativeType.for(Reference), pointerof(ref))
-    end
-
-    private def read_vlen_array(type : Array(T).class, space_id : LibHDF5::Hid, count : Int) : Array(Array(T)) forall T
-      type_id = VLenType.for(T)
-      vlens = Array(LibHDF5::VLen).new(count) { LibHDF5::VLen.new }
-      begin
-        read_raw(type_id, vlens.to_unsafe)
-        VLenStorage.read(Array(T), type_id, space_id, count, vlens)
-      ensure
-        LibHDF5.H5Tclose(type_id)
-      end
-    end
-
-    private def with_dataspace(& : Dataspace -> T) : T forall T
-      space = dataspace
-      begin
-        yield space
-      ensure
-        space.close
-      end
     end
   end
 end

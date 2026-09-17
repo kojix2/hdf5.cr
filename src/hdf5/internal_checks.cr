@@ -1,7 +1,7 @@
 module HDF5
   module InternalChecks
     def self.ensure_hid(id : LibHDF5::Hid, message : String) : LibHDF5::Hid
-      raise Error.new(message) if id == LibHDF5::H5_INVALID_HID
+      raise Error.new(message) if id < 0
       id
     end
 

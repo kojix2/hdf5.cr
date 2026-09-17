@@ -1,3 +1,10 @@
+{% begin %}
+  {% hdf5_version = `pkg-config --modversion hdf5`.strip %}
+  {% if hdf5_version.split(".")[0].to_i < 2 %}
+    {% raise "HDF5 2.0 or later is required; found #{hdf5_version}. Set PKG_CONFIG_PATH to a supported HDF5 installation." %}
+  {% end %}
+{% end %}
+
 @[Link("hdf5")]
 lib LibHDF5
   alias Hid = Int64
@@ -97,6 +104,17 @@ lib LibHDF5
   $h5t_c_s1_g = H5T_C_S1_g : Hid
   $h5t_std_ref_g = H5T_STD_REF_g : Hid
 
+  $h5t_std_i8le_g = H5T_STD_I8LE_g : Hid
+  $h5t_std_u8le_g = H5T_STD_U8LE_g : Hid
+  $h5t_std_i16le_g = H5T_STD_I16LE_g : Hid
+  $h5t_std_u16le_g = H5T_STD_U16LE_g : Hid
+  $h5t_std_i32le_g = H5T_STD_I32LE_g : Hid
+  $h5t_std_u32le_g = H5T_STD_U32LE_g : Hid
+  $h5t_std_i64le_g = H5T_STD_I64LE_g : Hid
+  $h5t_std_u64le_g = H5T_STD_U64LE_g : Hid
+  $h5t_ieee_f32le_g = H5T_IEEE_F32LE_g : Hid
+  $h5t_ieee_f64le_g = H5T_IEEE_F64LE_g : Hid
+
   # Library management
   H5E_DEFAULT = 0_i64
   fun H5open : Herr
@@ -122,7 +140,7 @@ lib LibHDF5
     storage_type : Int32
     nlinks : Hsize
     max_corder : Int64
-    mounted : LibC::Int
+    mounted : Bool
   end
 
   # Link operations (for iterating groups)
@@ -198,12 +216,14 @@ lib LibHDF5
   end
 
   # Reference operations
-  struct Reference
+  union Reference
     data : UInt8[64]
+    align : Int64
   end
 
   fun H5Rcreate_object(loc_id : Hid, name : UInt8*, oapl_id : Hid, ref_ptr : Reference*) : Herr
   fun H5Rdestroy(ref_ptr : Reference*) : Herr
+  fun H5Rcopy(src_ref_ptr : Reference*, dst_ref_ptr : Reference*) : Herr
   fun H5Ropen_object(ref_ptr : Reference*, rapl_id : Hid, oapl_id : Hid) : Hid
   fun H5Rget_obj_name(ref_ptr : Reference*, rapl_id : Hid, name : UInt8*, size : LibC::SizeT) : LibC::SSizeT
   fun H5Rget_file_name(ref_ptr : Reference*, name : UInt8*, size : LibC::SizeT) : LibC::SSizeT
@@ -221,7 +241,6 @@ lib LibHDF5
   fun H5Aget_name(attr_id : Hid, buf_size : LibC::SizeT, buf : UInt8*) : LibC::SSizeT
   fun H5Aexists(obj_id : Hid, attr_name : UInt8*) : Htri
   fun H5Adelete(loc_id : Hid, attr_name : UInt8*) : Herr
-  fun H5Aget_num_attrs = H5Aget_storage_size(attr_id : Hid) : Hsize
   fun H5Aopen_by_idx(loc_id : Hid, obj_name : UInt8*, idx_type : IndexType,
                      order : IterOrder, n : Hsize, aapl_id : Hid, lapl_id : Hid) : Hid
   fun H5Aget_name_by_idx(loc_id : Hid, obj_name : UInt8*, idx_type : IndexType,
@@ -244,6 +263,59 @@ lib LibHDF5
     btime : LibC::TimeT
     num_attrs : Hsize
   end
+
+  enum ByteOrder : Int32
+    Error  = -1
+    Little =  0
+    Big    =  1
+    Vax    =  2
+    Mixed  =  3
+    None   =  4
+  end
+
+  union LinkValue
+    token : ObjToken
+    size : LibC::SizeT
+  end
+
+  struct LinkInfo
+    type : Int32
+    corder_valid : Bool
+    corder : Int64
+    cset : CharSet
+    value : LinkValue
+  end
+
+  struct Complex32
+    real : Float32
+    imag : Float32
+  end
+
+  struct Complex64
+    real : Float64
+    imag : Float64
+  end
+
+  fun H5Lmove(src_loc : Hid, src_name : UInt8*, dst_loc : Hid, dst_name : UInt8*, lcpl : Hid, lapl : Hid) : Herr
+  fun H5Lget_info2(loc : Hid, name : UInt8*, info : LinkInfo*, lapl : Hid) : Herr
+  fun H5Lget_val(loc : Hid, name : UInt8*, buf : Void*, size : LibC::SizeT, lapl : Hid) : Herr
+  fun H5Lunpack_elink_val(buf : Void*, size : LibC::SizeT, flags : UInt32*, filename : UInt8**, path : UInt8**) : Herr
+  fun H5Arename(loc : Hid, old_name : UInt8*, new_name : UInt8*) : Herr
+  fun H5Dget_create_plist(id : Hid) : Hid
+  fun H5Pget_layout(id : Hid) : Int32
+  fun H5Pget_chunk(id : Hid, rank : Int32, dims : Hsize*) : Int32
+  fun H5Pget_fill_value(id : Hid, type : Hid, buf : Void*) : Herr
+  fun H5Tget_order(id : Hid) : ByteOrder
+  fun H5Tget_precision(id : Hid) : LibC::SizeT
+  fun H5Tget_offset(id : Hid) : Int32
+  fun H5Tenum_create(base : Hid) : Hid
+  fun H5Tenum_insert(id : Hid, name : UInt8*, value : Void*) : Herr
+  fun H5Tenum_valueof(id : Hid, name : UInt8*, value : Void*) : Herr
+  fun H5Tget_member_index(id : Hid, name : UInt8*) : Int32
+  fun H5Sselect_none(id : Hid) : Herr
+  fun H5Iis_valid(id : Hid) : Htri
+  fun H5Zfilter_avail(filter : Int32) : Htri
+  fun H5Zget_filter_info(filter : Int32, flags : UInt32*) : Herr
 
   struct ObjToken
     data : UInt8[16]

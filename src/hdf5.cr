@@ -1,19 +1,24 @@
 require "./hdf5/lib_hdf5"
+require "./hdf5/native"
 require "./hdf5/error"
+require "./hdf5/file_context"
+require "./hdf5/types"
 require "./hdf5/internal_checks"
 require "./hdf5/reference"
 require "./hdf5/datatype"
+require "./hdf5/type_factory"
+require "./hdf5/codec"
 require "./hdf5/dataspace"
 require "./hdf5/compression"
 require "./hdf5/dataset_create_options"
 require "./hdf5/selection"
 require "./hdf5/vlen_storage"
-require "./hdf5/dataset_storage"
 require "./hdf5/attribute"
 require "./hdf5/attributes"
 require "./hdf5/dataset"
 require "./hdf5/typed_dataset"
 require "./hdf5/group"
+require "./hdf5/link_info"
 require "./hdf5/file"
 
 module HDF5
@@ -32,10 +37,10 @@ module HDF5
   end
 
   def self.lib_version : String
-    maj = uninitialized UInt32
-    min = uninitialized UInt32
-    rel = uninitialized UInt32
-    LibHDF5.H5get_libversion(pointerof(maj), pointerof(min), pointerof(rel))
+    maj = 0_u32
+    min = 0_u32
+    rel = 0_u32
+    InternalChecks.ensure_herr(Native.h5get_libversion(pointerof(maj), pointerof(min), pointerof(rel)), "Failed to get HDF5 library version")
     "#{maj}.#{min}.#{rel}"
   end
 end
