@@ -1,4 +1,5 @@
-require "../src/hdf5"
+# Explore string selections, fixed-width storage, and validation after tutorial 06.
+require "../../src/hdf5"
 
 path = File.join(Dir.tempdir, "hdf5_strings_#{Process.pid}.h5")
 begin

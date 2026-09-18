@@ -1,4 +1,5 @@
-require "../src/hdf5"
+# Compare attribute creation, replacement, and in-place updates after tutorial 05.
+require "../../src/hdf5"
 
 path = File.join(Dir.tempdir, "hdf5_attributes_#{Process.pid}.h5")
 begin

@@ -1,4 +1,4 @@
-require "../src/hdf5"
+require "../../src/hdf5"
 
 # A small end-to-end acquisition example: append batches, scan bounded blocks,
 # save per-channel statistics, then reopen without loading the entire dataset.

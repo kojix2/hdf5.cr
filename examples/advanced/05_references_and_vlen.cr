@@ -1,4 +1,5 @@
-require "../src/hdf5"
+# Store object references and ragged numeric arrays; close owned reference handles.
+require "../../src/hdf5"
 
 path = File.join(Dir.tempdir, "hdf5_references_#{Process.pid}.h5")
 begin

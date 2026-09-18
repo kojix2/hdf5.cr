@@ -1,4 +1,5 @@
-require "../src/hdf5"
+# Combine automatic chunking, fill values, and column-wise appends after tutorial 15.
+require "../../src/hdf5"
 
 path = File.join(Dir.tempdir, "hdf5_storage_#{Process.pid}.h5")
 begin

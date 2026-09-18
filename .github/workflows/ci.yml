@@ -68,3 +68,10 @@ jobs:
 
       - name: Run specs
         run: crystal spec
+
+      - name: Run examples
+        run: |
+          for example in examples/[0-9][0-9]_*.cr examples/advanced/[0-9][0-9]_*.cr; do
+            printf '\nRunning %s\n' "$example"
+            crystal run "$example" || exit "$?"
+          done

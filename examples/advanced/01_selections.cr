@@ -1,4 +1,5 @@
-require "../src/hdf5"
+# Explore open ranges, block hyperslabs, and empty selections after tutorial 08–10.
+require "../../src/hdf5"
 
 # Flat values use row-major order: each consecutive group of 5 is one row.
 path = File.join(Dir.tempdir, "hdf5_selections_#{Process.pid}.h5")
