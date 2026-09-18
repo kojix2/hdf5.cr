@@ -1,10 +1,3 @@
-{% begin %}
-  {% hdf5_version = `pkg-config --modversion hdf5`.strip %}
-  {% if hdf5_version.split(".")[0].to_i < 2 %}
-    {% raise "HDF5 2.0 or later is required; found #{hdf5_version}. Set PKG_CONFIG_PATH to a supported HDF5 installation." %}
-  {% end %}
-{% end %}
-
 @[Link("hdf5")]
 lib LibHDF5
   alias Hid = Int64
