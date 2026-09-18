@@ -1,0 +1,2862 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Crystal Docs 1.20.3">
+<meta name="crystal_docs.project_version" content="main">
+<meta name="crystal_docs.project_name" content="hdf5">
+
+
+
+<link href="../css/style.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="../js/doc.js"></script>
+
+  <meta name="repository-name" content="hdf5">
+  <title>HDF5::Native - hdf5 main</title>
+  <script type="text/javascript">
+    CrystalDocs.base_path = "../";
+  </script>
+</head>
+<body>
+
+<svg class="hidden">
+  <symbol id="octicon-link" viewBox="0 0 16 16">
+    <path fill="currentColor" fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path>
+  </symbol>
+</svg>
+<input type="checkbox" id="sidebar-btn">
+<label for="sidebar-btn" id="sidebar-btn-label">
+  <svg class="open" xmlns="http://www.w3.org/2000/svg" height="2em" width="2em" viewBox="0 0 512 512"><title>Open Sidebar</title><path fill="currentColor" d="M80 96v64h352V96H80zm0 112v64h352v-64H80zm0 112v64h352v-64H80z"></path></svg>
+  <svg class="close" xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" viewBox="0 0 512 512"><title>Close Sidebar</title><path fill="currentColor" d="m118.6 73.4-45.2 45.2L210.7 256 73.4 393.4l45.2 45.2L256 301.3l137.4 137.3 45.2-45.2L301.3 256l137.3-137.4-45.2-45.2L256 210.7Z"></path></svg>
+</label>
+<div class="sidebar">
+  <div class="sidebar-header">
+    <div class="search-box">
+      <input type="search" class="search-input" placeholder="Search..." spellcheck="false" aria-label="Search">
+    </div>
+
+    <div class="project-summary">
+      <h1 class="project-name">
+        <a href="../index.html">
+          hdf5
+        </a>
+      </h1>
+
+      <span class="project-version">
+        main
+      </span>
+    </div>
+  </div>
+
+  <div class="search-results hidden">
+    <ul class="search-list"></ul>
+  </div>
+
+  <div class="types-list">
+    <ul>
+  
+  <li class="parent open current" data-id="hdf5/HDF5" data-name="hdf5">
+      <a href="../HDF5.html">HDF5</a>
+      
+        <ul>
+  
+  <li class=" " data-id="hdf5/HDF5/AlreadyExistsError" data-name="hdf5::alreadyexistserror">
+      <a href="../HDF5/AlreadyExistsError.html">AlreadyExistsError</a>
+      
+    </li>
+  
+  <li class=" " data-id="hdf5/HDF5/Attribute" data-name="hdf5::attribute">
+      <a href="../HDF5/Attribute.html">Attribute</a>
+      
+    </li>
+  
+  <li class=" " data-id="hdf5/HDF5/Attributes" data-name="hdf5::attributes">
+      <a href="../HDF5/Attributes.html">Attributes</a>
+      
+    </li>
+  
+  <li class=" " data-id="hdf5/HDF5/Casting" data-name="hdf5::casting">
+      <a href="../HDF5/Casting.html">Casting</a>
+      
+    </li>
+  
+  <li class=" " data-id="hdf5/HDF5/CastingChecks" data-name="hdf5::castingchecks">
+      <a href="../HDF5/CastingChecks.html">CastingChecks</a>
+      
+    </li>
+  
+  <li class=" " data-id="hdf5/HDF5/Cleanup" data-name="hdf5::cleanup">
+      <a href="../HDF5/Cleanup.html">Cleanup</a>
+      
+    </li>
+  
+  <li class=" " data-id="hdf5/HDF5/ClosedObjectError" data-name="hdf5::closedobjecterror">
+      <a href="../HDF5/ClosedObjectError.html">ClosedObjectError</a>
+      
+    </li>
+  
+  <li class=" " data-id="hdf5/HDF5/Codec" data-name="hdf5::codec">
+      <a href="../HDF5/Codec.html">Codec</a>
+      
+    </li>
+  
+  <li class=" " data-id="hdf5/HDF5/Complex32" data-name="hdf5::complex32">
+      <a href="../HDF5/Complex32.html">Complex32</a>
+      
+    </li>
+  
+  <li class=" " data-id="hdf5/HDF5/CompoundMember" data-name="hdf5::compoundmember">
+      <a href="../HDF5/CompoundMember.html">CompoundMember</a>
+      
+    </li>
+  
+  <li class="parent " data-id="hdf5/HDF5/Compression" data-name="hdf5::compression">
+      <a href="../HDF5/Compression.html">Compression</a>
+      
+        <ul>
+  
+  <li class=" " data-id="hdf5/HDF5/Compression/Filter" data-name="hdf5::compression::filter">
+      <a href="../HDF5/Compression/Filter.html">Filter</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class=" " data-id="hdf5/HDF5/Container" data-name="hdf5::container">
+      <a href="../HDF5/Container.html">Container</a>
+      
+    </li>
+  
+  <li class=" " data-id="hdf5/HDF5/Dataset" data-name="hdf5::dataset">
+      <a href="../HDF5/Dataset.html">Dataset</a>
+      
+    </li>
+  
+  <li class=" " data-id="hdf5/HDF5/DatasetCreateOptions" data-name="hdf5::datasetcreateoptions">
+      <a href="../HDF5/DatasetCreateOptions.html">DatasetCreateOptions</a>
+      
+    </li>
+  
+  <li class=" " data-id="hdf5/HDF5/Dataspace" data-name="hdf5::dataspace">
+      <a href="../HDF5/Dataspace.html">Dataspace</a>
+      
+    </li>
+  
+  <li class=" " data-id="hdf5/HDF5/Datatype" data-name="hdf5::datatype">
+      <a href="../HDF5/Datatype.html">Datatype</a>
+      
+    </li>
+  
+  <li class=" " data-id="hdf5/HDF5/Empty" data-name="hdf5::empty(t)">
+      <a href="../HDF5/Empty.html">Empty</a>
+      
+    </li>
+  
+  <li class=" " data-id="hdf5/HDF5/Error" data-name="hdf5::error">
+      <a href="../HDF5/Error.html">Error</a>
+      
+    </li>
+  
+  <li class=" " data-id="hdf5/HDF5/ExternalLink" data-name="hdf5::externallink">
+      <a href="../HDF5/ExternalLink.html">ExternalLink</a>
+      
+    </li>
+  
+  <li class=" " data-id="hdf5/HDF5/File" data-name="hdf5::file">
+      <a href="../HDF5/File.html">File</a>
+      
+    </li>
+  
+  <li class=" " data-id="hdf5/HDF5/FileContext" data-name="hdf5::filecontext">
+      <a href="../HDF5/FileContext.html">FileContext</a>
+      
+    </li>
+  
+  <li class=" " data-id="hdf5/HDF5/FileError" data-name="hdf5::fileerror">
+      <a href="../HDF5/FileError.html">FileError</a>
+      
+    </li>
+  
+  <li class=" " data-id="hdf5/HDF5/Group" data-name="hdf5::group">
+      <a href="../HDF5/Group.html">Group</a>
+      
+    </li>
+  
+  <li class=" " data-id="hdf5/HDF5/HardLink" data-name="hdf5::hardlink">
+      <a href="../HDF5/HardLink.html">HardLink</a>
+      
+    </li>
+  
+  <li class=" " data-id="hdf5/HDF5/InternalChecks" data-name="hdf5::internalchecks">
+      <a href="../HDF5/InternalChecks.html">InternalChecks</a>
+      
+    </li>
+  
+  <li class=" " data-id="hdf5/HDF5/LinkInfo" data-name="hdf5::linkinfo">
+      <a href="../HDF5/LinkInfo.html">LinkInfo</a>
+      
+    </li>
+  
+  <li class=" current" data-id="hdf5/HDF5/Native" data-name="hdf5::native">
+      <a href="../HDF5/Native.html">Native</a>
+      
+    </li>
+  
+  <li class=" " data-id="hdf5/HDF5/NativeType" data-name="hdf5::nativetype">
+      <a href="../HDF5/NativeType.html">NativeType</a>
+      
+    </li>
+  
+  <li class=" " data-id="hdf5/HDF5/ObjectNotFoundError" data-name="hdf5::objectnotfounderror">
+      <a href="../HDF5/ObjectNotFoundError.html">ObjectNotFoundError</a>
+      
+    </li>
+  
+  <li class=" " data-id="hdf5/HDF5/Reference" data-name="hdf5::reference">
+      <a href="../HDF5/Reference.html">Reference</a>
+      
+    </li>
+  
+  <li class="parent " data-id="hdf5/HDF5/Selection" data-name="hdf5::selection">
+      <a href="../HDF5/Selection.html">Selection</a>
+      
+        <ul>
+  
+  <li class=" " data-id="hdf5/HDF5/Selection/Slice" data-name="hdf5::selection::slice">
+      <a href="../HDF5/Selection/Slice.html">Slice</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class=" " data-id="hdf5/HDF5/SelectionProxy" data-name="hdf5::selectionproxy">
+      <a href="../HDF5/SelectionProxy.html">SelectionProxy</a>
+      
+    </li>
+  
+  <li class=" " data-id="hdf5/HDF5/ShapeMismatchError" data-name="hdf5::shapemismatcherror">
+      <a href="../HDF5/ShapeMismatchError.html">ShapeMismatchError</a>
+      
+    </li>
+  
+  <li class=" " data-id="hdf5/HDF5/Shapes" data-name="hdf5::shapes">
+      <a href="../HDF5/Shapes.html">Shapes</a>
+      
+    </li>
+  
+  <li class=" " data-id="hdf5/HDF5/SoftLink" data-name="hdf5::softlink">
+      <a href="../HDF5/SoftLink.html">SoftLink</a>
+      
+    </li>
+  
+  <li class=" " data-id="hdf5/HDF5/StringEncoding" data-name="hdf5::stringencoding">
+      <a href="../HDF5/StringEncoding.html">StringEncoding</a>
+      
+    </li>
+  
+  <li class=" " data-id="hdf5/HDF5/StringPadding" data-name="hdf5::stringpadding">
+      <a href="../HDF5/StringPadding.html">StringPadding</a>
+      
+    </li>
+  
+  <li class=" " data-id="hdf5/HDF5/StringType" data-name="hdf5::stringtype">
+      <a href="../HDF5/StringType.html">StringType</a>
+      
+    </li>
+  
+  <li class=" " data-id="hdf5/HDF5/TypedDataset" data-name="hdf5::typeddataset(t)">
+      <a href="../HDF5/TypedDataset.html">TypedDataset</a>
+      
+    </li>
+  
+  <li class=" " data-id="hdf5/HDF5/TypeFactory" data-name="hdf5::typefactory">
+      <a href="../HDF5/TypeFactory.html">TypeFactory</a>
+      
+    </li>
+  
+  <li class=" " data-id="hdf5/HDF5/TypeMismatchError" data-name="hdf5::typemismatcherror">
+      <a href="../HDF5/TypeMismatchError.html">TypeMismatchError</a>
+      
+    </li>
+  
+  <li class=" " data-id="hdf5/HDF5/VLenStorage" data-name="hdf5::vlenstorage">
+      <a href="../HDF5/VLenStorage.html">VLenStorage</a>
+      
+    </li>
+  
+  <li class=" " data-id="hdf5/HDF5/VLenType" data-name="hdf5::vlentype">
+      <a href="../HDF5/VLenType.html">VLenType</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+</ul>
+
+  </div>
+</div>
+
+
+<div class="main-content">
+<h1 class="type-name">
+
+  <span class="kind">
+    module
+  </span> HDF5::<wbr>Native
+
+</h1>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2>
+    <a id="defined-in" class="anchor" href="#defined-in">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Defined in:
+  </h2>
+  
+    
+      <a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/native.cr#L2" target="_blank">
+        hdf5/native.cr
+      </a>
+    
+    <br/>
+  
+
+
+
+  
+    <h2>
+      <a id="constant-summary" class="anchor" href="#constant-summary">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+      Constant Summary
+    </h2>
+  
+  <dl>
+    
+      <dt class="entry-const" id="LOCK">
+        <strong>LOCK</strong> = <code><span class="t">Mutex</span>.new(<span class="n">:reentrant</span>)</code>
+      </dt>
+      
+    
+  </dl>
+
+
+
+  
+
+  
+  <h2>
+    <a id="class-method-summary" class="anchor" href="#class-method-summary">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Class Method Summary
+  </h2>
+  <ul class="list-summary">
+    
+      <li class="entry-summary">
+        <a href="#h5aclose%28%2Aargs%29-class-method" class="signature"><strong>.h5aclose</strong>(*args)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#h5acreate2%28%2Aargs%29-class-method" class="signature"><strong>.h5acreate2</strong>(*args)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#h5adelete%28%2Aargs%29-class-method" class="signature"><strong>.h5adelete</strong>(*args)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#h5aexists%28%2Aargs%29-class-method" class="signature"><strong>.h5aexists</strong>(*args)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#h5aget_name%28%2Aargs%29-class-method" class="signature"><strong>.h5aget_name</strong>(*args)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#h5aget_name_by_idx%28%2Aargs%29-class-method" class="signature"><strong>.h5aget_name_by_idx</strong>(*args)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#h5aget_space%28%2Aargs%29-class-method" class="signature"><strong>.h5aget_space</strong>(*args)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#h5aget_type%28%2Aargs%29-class-method" class="signature"><strong>.h5aget_type</strong>(*args)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#h5aopen%28%2Aargs%29-class-method" class="signature"><strong>.h5aopen</strong>(*args)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#h5aopen_by_idx%28%2Aargs%29-class-method" class="signature"><strong>.h5aopen_by_idx</strong>(*args)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#h5aread%28%2Aargs%29-class-method" class="signature"><strong>.h5aread</strong>(*args)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#h5arename%28%2Aargs%29-class-method" class="signature"><strong>.h5arename</strong>(*args)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#h5awrite%28%2Aargs%29-class-method" class="signature"><strong>.h5awrite</strong>(*args)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#h5close%28%2Aargs%29-class-method" class="signature"><strong>.h5close</strong>(*args)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#h5dclose%28%2Aargs%29-class-method" class="signature"><strong>.h5dclose</strong>(*args)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#h5dcreate2%28%2Aargs%29-class-method" class="signature"><strong>.h5dcreate2</strong>(*args)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#h5dget_create_plist%28%2Aargs%29-class-method" class="signature"><strong>.h5dget_create_plist</strong>(*args)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#h5dget_space%28%2Aargs%29-class-method" class="signature"><strong>.h5dget_space</strong>(*args)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#h5dget_storage_size%28%2Aargs%29-class-method" class="signature"><strong>.h5dget_storage_size</strong>(*args)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#h5dget_type%28%2Aargs%29-class-method" class="signature"><strong>.h5dget_type</strong>(*args)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#h5dopen2%28%2Aargs%29-class-method" class="signature"><strong>.h5dopen2</strong>(*args)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#h5dread%28%2Aargs%29-class-method" class="signature"><strong>.h5dread</strong>(*args)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#h5dset_extent%28%2Aargs%29-class-method" class="signature"><strong>.h5dset_extent</strong>(*args)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#h5dvlen_reclaim%28%2Aargs%29-class-method" class="signature"><strong>.h5dvlen_reclaim</strong>(*args)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#h5dwrite%28%2Aargs%29-class-method" class="signature"><strong>.h5dwrite</strong>(*args)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#h5eset_auto2%28%2Aargs%29-class-method" class="signature"><strong>.h5eset_auto2</strong>(*args)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#h5fclose%28%2Aargs%29-class-method" class="signature"><strong>.h5fclose</strong>(*args)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#h5fcreate%28%2Aargs%29-class-method" class="signature"><strong>.h5fcreate</strong>(*args)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#h5fflush%28%2Aargs%29-class-method" class="signature"><strong>.h5fflush</strong>(*args)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#h5fget_name%28%2Aargs%29-class-method" class="signature"><strong>.h5fget_name</strong>(*args)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#h5fis_accessible%28%2Aargs%29-class-method" class="signature"><strong>.h5fis_accessible</strong>(*args)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#h5fopen%28%2Aargs%29-class-method" class="signature"><strong>.h5fopen</strong>(*args)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#h5free_memory%28%2Aargs%29-class-method" class="signature"><strong>.h5free_memory</strong>(*args)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#h5gclose%28%2Aargs%29-class-method" class="signature"><strong>.h5gclose</strong>(*args)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#h5gcreate2%28%2Aargs%29-class-method" class="signature"><strong>.h5gcreate2</strong>(*args)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#h5get_libversion%28%2Aargs%29-class-method" class="signature"><strong>.h5get_libversion</strong>(*args)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#h5gget_info%28%2Aargs%29-class-method" class="signature"><strong>.h5gget_info</strong>(*args)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#h5gopen2%28%2Aargs%29-class-method" class="signature"><strong>.h5gopen2</strong>(*args)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#h5iget_type%28%2Aargs%29-class-method" class="signature"><strong>.h5iget_type</strong>(*args)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#h5iis_valid%28%2Aargs%29-class-method" class="signature"><strong>.h5iis_valid</strong>(*args)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#h5lcreate_external%28%2Aargs%29-class-method" class="signature"><strong>.h5lcreate_external</strong>(*args)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#h5lcreate_hard%28%2Aargs%29-class-method" class="signature"><strong>.h5lcreate_hard</strong>(*args)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#h5lcreate_soft%28%2Aargs%29-class-method" class="signature"><strong>.h5lcreate_soft</strong>(*args)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#h5ldelete%28%2Aargs%29-class-method" class="signature"><strong>.h5ldelete</strong>(*args)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#h5lexists%28%2Aargs%29-class-method" class="signature"><strong>.h5lexists</strong>(*args)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#h5lget_info2%28%2Aargs%29-class-method" class="signature"><strong>.h5lget_info2</strong>(*args)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#h5lget_name_by_idx%28%2Aargs%29-class-method" class="signature"><strong>.h5lget_name_by_idx</strong>(*args)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#h5lget_val%28%2Aargs%29-class-method" class="signature"><strong>.h5lget_val</strong>(*args)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#h5lmove%28%2Aargs%29-class-method" class="signature"><strong>.h5lmove</strong>(*args)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#h5lunpack_elink_val%28%2Aargs%29-class-method" class="signature"><strong>.h5lunpack_elink_val</strong>(*args)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#h5oclose%28%2Aargs%29-class-method" class="signature"><strong>.h5oclose</strong>(*args)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#h5oget_info3%28%2Aargs%29-class-method" class="signature"><strong>.h5oget_info3</strong>(*args)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#h5oopen%28%2Aargs%29-class-method" class="signature"><strong>.h5oopen</strong>(*args)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#h5open%28%2Aargs%29-class-method" class="signature"><strong>.h5open</strong>(*args)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#h5pclose%28%2Aargs%29-class-method" class="signature"><strong>.h5pclose</strong>(*args)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#h5pcreate%28%2Aargs%29-class-method" class="signature"><strong>.h5pcreate</strong>(*args)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#h5pget_chunk%28%2Aargs%29-class-method" class="signature"><strong>.h5pget_chunk</strong>(*args)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#h5pget_fill_value%28%2Aargs%29-class-method" class="signature"><strong>.h5pget_fill_value</strong>(*args)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#h5pget_layout%28%2Aargs%29-class-method" class="signature"><strong>.h5pget_layout</strong>(*args)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#h5pset_chunk%28%2Aargs%29-class-method" class="signature"><strong>.h5pset_chunk</strong>(*args)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#h5pset_create_intermediate_group%28%2Aargs%29-class-method" class="signature"><strong>.h5pset_create_intermediate_group</strong>(*args)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#h5pset_deflate%28%2Aargs%29-class-method" class="signature"><strong>.h5pset_deflate</strong>(*args)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#h5pset_fill_value%28%2Aargs%29-class-method" class="signature"><strong>.h5pset_fill_value</strong>(*args)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#h5pset_fletcher32%28%2Aargs%29-class-method" class="signature"><strong>.h5pset_fletcher32</strong>(*args)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#h5pset_shuffle%28%2Aargs%29-class-method" class="signature"><strong>.h5pset_shuffle</strong>(*args)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#h5rcopy%28%2Aargs%29-class-method" class="signature"><strong>.h5rcopy</strong>(*args)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#h5rcreate_object%28%2Aargs%29-class-method" class="signature"><strong>.h5rcreate_object</strong>(*args)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#h5rdestroy%28%2Aargs%29-class-method" class="signature"><strong>.h5rdestroy</strong>(*args)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#h5rget_file_name%28%2Aargs%29-class-method" class="signature"><strong>.h5rget_file_name</strong>(*args)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#h5rget_obj_name%28%2Aargs%29-class-method" class="signature"><strong>.h5rget_obj_name</strong>(*args)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#h5rget_obj_type3%28%2Aargs%29-class-method" class="signature"><strong>.h5rget_obj_type3</strong>(*args)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#h5ropen_object%28%2Aargs%29-class-method" class="signature"><strong>.h5ropen_object</strong>(*args)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#h5sclose%28%2Aargs%29-class-method" class="signature"><strong>.h5sclose</strong>(*args)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#h5screate%28%2Aargs%29-class-method" class="signature"><strong>.h5screate</strong>(*args)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#h5screate_simple%28%2Aargs%29-class-method" class="signature"><strong>.h5screate_simple</strong>(*args)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#h5sget_select_npoints%28%2Aargs%29-class-method" class="signature"><strong>.h5sget_select_npoints</strong>(*args)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#h5sget_simple_extent_dims%28%2Aargs%29-class-method" class="signature"><strong>.h5sget_simple_extent_dims</strong>(*args)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#h5sget_simple_extent_ndims%28%2Aargs%29-class-method" class="signature"><strong>.h5sget_simple_extent_ndims</strong>(*args)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#h5sget_simple_extent_npoints%28%2Aargs%29-class-method" class="signature"><strong>.h5sget_simple_extent_npoints</strong>(*args)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#h5sget_simple_extent_type%28%2Aargs%29-class-method" class="signature"><strong>.h5sget_simple_extent_type</strong>(*args)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#h5sselect_all%28%2Aargs%29-class-method" class="signature"><strong>.h5sselect_all</strong>(*args)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#h5sselect_hyperslab%28%2Aargs%29-class-method" class="signature"><strong>.h5sselect_hyperslab</strong>(*args)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#h5sselect_none%28%2Aargs%29-class-method" class="signature"><strong>.h5sselect_none</strong>(*args)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#h5tarray_create2%28%2Aargs%29-class-method" class="signature"><strong>.h5tarray_create2</strong>(*args)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#h5tclose%28%2Aargs%29-class-method" class="signature"><strong>.h5tclose</strong>(*args)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#h5tcopy%28%2Aargs%29-class-method" class="signature"><strong>.h5tcopy</strong>(*args)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#h5tcreate%28%2Aargs%29-class-method" class="signature"><strong>.h5tcreate</strong>(*args)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#h5tenum_create%28%2Aargs%29-class-method" class="signature"><strong>.h5tenum_create</strong>(*args)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#h5tenum_insert%28%2Aargs%29-class-method" class="signature"><strong>.h5tenum_insert</strong>(*args)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#h5tenum_valueof%28%2Aargs%29-class-method" class="signature"><strong>.h5tenum_valueof</strong>(*args)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#h5tequal%28%2Aargs%29-class-method" class="signature"><strong>.h5tequal</strong>(*args)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#h5tget_array_dims2%28%2Aargs%29-class-method" class="signature"><strong>.h5tget_array_dims2</strong>(*args)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#h5tget_array_ndims%28%2Aargs%29-class-method" class="signature"><strong>.h5tget_array_ndims</strong>(*args)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#h5tget_class%28%2Aargs%29-class-method" class="signature"><strong>.h5tget_class</strong>(*args)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#h5tget_cset%28%2Aargs%29-class-method" class="signature"><strong>.h5tget_cset</strong>(*args)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#h5tget_member_index%28%2Aargs%29-class-method" class="signature"><strong>.h5tget_member_index</strong>(*args)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#h5tget_member_name%28%2Aargs%29-class-method" class="signature"><strong>.h5tget_member_name</strong>(*args)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#h5tget_member_offset%28%2Aargs%29-class-method" class="signature"><strong>.h5tget_member_offset</strong>(*args)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#h5tget_member_type%28%2Aargs%29-class-method" class="signature"><strong>.h5tget_member_type</strong>(*args)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#h5tget_nmembers%28%2Aargs%29-class-method" class="signature"><strong>.h5tget_nmembers</strong>(*args)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#h5tget_offset%28%2Aargs%29-class-method" class="signature"><strong>.h5tget_offset</strong>(*args)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#h5tget_order%28%2Aargs%29-class-method" class="signature"><strong>.h5tget_order</strong>(*args)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#h5tget_precision%28%2Aargs%29-class-method" class="signature"><strong>.h5tget_precision</strong>(*args)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#h5tget_sign%28%2Aargs%29-class-method" class="signature"><strong>.h5tget_sign</strong>(*args)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#h5tget_size%28%2Aargs%29-class-method" class="signature"><strong>.h5tget_size</strong>(*args)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#h5tget_strpad%28%2Aargs%29-class-method" class="signature"><strong>.h5tget_strpad</strong>(*args)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#h5tget_super%28%2Aargs%29-class-method" class="signature"><strong>.h5tget_super</strong>(*args)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#h5tinsert%28%2Aargs%29-class-method" class="signature"><strong>.h5tinsert</strong>(*args)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#h5tis_variable_str%28%2Aargs%29-class-method" class="signature"><strong>.h5tis_variable_str</strong>(*args)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#h5tset_cset%28%2Aargs%29-class-method" class="signature"><strong>.h5tset_cset</strong>(*args)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#h5tset_size%28%2Aargs%29-class-method" class="signature"><strong>.h5tset_size</strong>(*args)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#h5tset_strpad%28%2Aargs%29-class-method" class="signature"><strong>.h5tset_strpad</strong>(*args)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#h5tvlen_create%28%2Aargs%29-class-method" class="signature"><strong>.h5tvlen_create</strong>(*args)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#h5zfilter_avail%28%2Aargs%29-class-method" class="signature"><strong>.h5zfilter_avail</strong>(*args)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#h5zget_filter_info%28%2Aargs%29-class-method" class="signature"><strong>.h5zget_filter_info</strong>(*args)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#synchronize%28%26%29-class-method" class="signature"><strong>.synchronize</strong>(&)</a>
+        
+      </li>
+    
+  </ul>
+
+
+  
+
+  
+
+
+  <div class="methods-inherited">
+    
+  </div>
+
+  
+
+  
+  <h2>
+    <a id="class-method-detail" class="anchor" href="#class-method-detail">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Class Method Detail
+  </h2>
+  
+    <div class="entry-detail" id="h5aclose(*args)-class-method">
+      <div class="signature">
+        
+        def self.<strong>h5aclose</strong>(*args)
+
+        <a class="method-permalink" href="#h5aclose%28%2Aargs%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/native.cr#L9" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="h5acreate2(*args)-class-method">
+      <div class="signature">
+        
+        def self.<strong>h5acreate2</strong>(*args)
+
+        <a class="method-permalink" href="#h5acreate2%28%2Aargs%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/native.cr#L9" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="h5adelete(*args)-class-method">
+      <div class="signature">
+        
+        def self.<strong>h5adelete</strong>(*args)
+
+        <a class="method-permalink" href="#h5adelete%28%2Aargs%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/native.cr#L9" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="h5aexists(*args)-class-method">
+      <div class="signature">
+        
+        def self.<strong>h5aexists</strong>(*args)
+
+        <a class="method-permalink" href="#h5aexists%28%2Aargs%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/native.cr#L9" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="h5aget_name(*args)-class-method">
+      <div class="signature">
+        
+        def self.<strong>h5aget_name</strong>(*args)
+
+        <a class="method-permalink" href="#h5aget_name%28%2Aargs%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/native.cr#L9" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="h5aget_name_by_idx(*args)-class-method">
+      <div class="signature">
+        
+        def self.<strong>h5aget_name_by_idx</strong>(*args)
+
+        <a class="method-permalink" href="#h5aget_name_by_idx%28%2Aargs%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/native.cr#L9" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="h5aget_space(*args)-class-method">
+      <div class="signature">
+        
+        def self.<strong>h5aget_space</strong>(*args)
+
+        <a class="method-permalink" href="#h5aget_space%28%2Aargs%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/native.cr#L9" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="h5aget_type(*args)-class-method">
+      <div class="signature">
+        
+        def self.<strong>h5aget_type</strong>(*args)
+
+        <a class="method-permalink" href="#h5aget_type%28%2Aargs%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/native.cr#L9" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="h5aopen(*args)-class-method">
+      <div class="signature">
+        
+        def self.<strong>h5aopen</strong>(*args)
+
+        <a class="method-permalink" href="#h5aopen%28%2Aargs%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/native.cr#L9" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="h5aopen_by_idx(*args)-class-method">
+      <div class="signature">
+        
+        def self.<strong>h5aopen_by_idx</strong>(*args)
+
+        <a class="method-permalink" href="#h5aopen_by_idx%28%2Aargs%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/native.cr#L9" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="h5aread(*args)-class-method">
+      <div class="signature">
+        
+        def self.<strong>h5aread</strong>(*args)
+
+        <a class="method-permalink" href="#h5aread%28%2Aargs%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/native.cr#L9" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="h5arename(*args)-class-method">
+      <div class="signature">
+        
+        def self.<strong>h5arename</strong>(*args)
+
+        <a class="method-permalink" href="#h5arename%28%2Aargs%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/native.cr#L9" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="h5awrite(*args)-class-method">
+      <div class="signature">
+        
+        def self.<strong>h5awrite</strong>(*args)
+
+        <a class="method-permalink" href="#h5awrite%28%2Aargs%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/native.cr#L9" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="h5close(*args)-class-method">
+      <div class="signature">
+        
+        def self.<strong>h5close</strong>(*args)
+
+        <a class="method-permalink" href="#h5close%28%2Aargs%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/native.cr#L9" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="h5dclose(*args)-class-method">
+      <div class="signature">
+        
+        def self.<strong>h5dclose</strong>(*args)
+
+        <a class="method-permalink" href="#h5dclose%28%2Aargs%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/native.cr#L9" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="h5dcreate2(*args)-class-method">
+      <div class="signature">
+        
+        def self.<strong>h5dcreate2</strong>(*args)
+
+        <a class="method-permalink" href="#h5dcreate2%28%2Aargs%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/native.cr#L9" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="h5dget_create_plist(*args)-class-method">
+      <div class="signature">
+        
+        def self.<strong>h5dget_create_plist</strong>(*args)
+
+        <a class="method-permalink" href="#h5dget_create_plist%28%2Aargs%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/native.cr#L9" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="h5dget_space(*args)-class-method">
+      <div class="signature">
+        
+        def self.<strong>h5dget_space</strong>(*args)
+
+        <a class="method-permalink" href="#h5dget_space%28%2Aargs%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/native.cr#L9" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="h5dget_storage_size(*args)-class-method">
+      <div class="signature">
+        
+        def self.<strong>h5dget_storage_size</strong>(*args)
+
+        <a class="method-permalink" href="#h5dget_storage_size%28%2Aargs%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/native.cr#L9" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="h5dget_type(*args)-class-method">
+      <div class="signature">
+        
+        def self.<strong>h5dget_type</strong>(*args)
+
+        <a class="method-permalink" href="#h5dget_type%28%2Aargs%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/native.cr#L9" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="h5dopen2(*args)-class-method">
+      <div class="signature">
+        
+        def self.<strong>h5dopen2</strong>(*args)
+
+        <a class="method-permalink" href="#h5dopen2%28%2Aargs%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/native.cr#L9" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="h5dread(*args)-class-method">
+      <div class="signature">
+        
+        def self.<strong>h5dread</strong>(*args)
+
+        <a class="method-permalink" href="#h5dread%28%2Aargs%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/native.cr#L9" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="h5dset_extent(*args)-class-method">
+      <div class="signature">
+        
+        def self.<strong>h5dset_extent</strong>(*args)
+
+        <a class="method-permalink" href="#h5dset_extent%28%2Aargs%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/native.cr#L9" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="h5dvlen_reclaim(*args)-class-method">
+      <div class="signature">
+        
+        def self.<strong>h5dvlen_reclaim</strong>(*args)
+
+        <a class="method-permalink" href="#h5dvlen_reclaim%28%2Aargs%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/native.cr#L9" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="h5dwrite(*args)-class-method">
+      <div class="signature">
+        
+        def self.<strong>h5dwrite</strong>(*args)
+
+        <a class="method-permalink" href="#h5dwrite%28%2Aargs%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/native.cr#L9" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="h5eset_auto2(*args)-class-method">
+      <div class="signature">
+        
+        def self.<strong>h5eset_auto2</strong>(*args)
+
+        <a class="method-permalink" href="#h5eset_auto2%28%2Aargs%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/native.cr#L9" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="h5fclose(*args)-class-method">
+      <div class="signature">
+        
+        def self.<strong>h5fclose</strong>(*args)
+
+        <a class="method-permalink" href="#h5fclose%28%2Aargs%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/native.cr#L9" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="h5fcreate(*args)-class-method">
+      <div class="signature">
+        
+        def self.<strong>h5fcreate</strong>(*args)
+
+        <a class="method-permalink" href="#h5fcreate%28%2Aargs%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/native.cr#L9" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="h5fflush(*args)-class-method">
+      <div class="signature">
+        
+        def self.<strong>h5fflush</strong>(*args)
+
+        <a class="method-permalink" href="#h5fflush%28%2Aargs%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/native.cr#L9" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="h5fget_name(*args)-class-method">
+      <div class="signature">
+        
+        def self.<strong>h5fget_name</strong>(*args)
+
+        <a class="method-permalink" href="#h5fget_name%28%2Aargs%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/native.cr#L9" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="h5fis_accessible(*args)-class-method">
+      <div class="signature">
+        
+        def self.<strong>h5fis_accessible</strong>(*args)
+
+        <a class="method-permalink" href="#h5fis_accessible%28%2Aargs%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/native.cr#L9" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="h5fopen(*args)-class-method">
+      <div class="signature">
+        
+        def self.<strong>h5fopen</strong>(*args)
+
+        <a class="method-permalink" href="#h5fopen%28%2Aargs%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/native.cr#L9" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="h5free_memory(*args)-class-method">
+      <div class="signature">
+        
+        def self.<strong>h5free_memory</strong>(*args)
+
+        <a class="method-permalink" href="#h5free_memory%28%2Aargs%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/native.cr#L9" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="h5gclose(*args)-class-method">
+      <div class="signature">
+        
+        def self.<strong>h5gclose</strong>(*args)
+
+        <a class="method-permalink" href="#h5gclose%28%2Aargs%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/native.cr#L9" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="h5gcreate2(*args)-class-method">
+      <div class="signature">
+        
+        def self.<strong>h5gcreate2</strong>(*args)
+
+        <a class="method-permalink" href="#h5gcreate2%28%2Aargs%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/native.cr#L9" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="h5get_libversion(*args)-class-method">
+      <div class="signature">
+        
+        def self.<strong>h5get_libversion</strong>(*args)
+
+        <a class="method-permalink" href="#h5get_libversion%28%2Aargs%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/native.cr#L9" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="h5gget_info(*args)-class-method">
+      <div class="signature">
+        
+        def self.<strong>h5gget_info</strong>(*args)
+
+        <a class="method-permalink" href="#h5gget_info%28%2Aargs%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/native.cr#L9" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="h5gopen2(*args)-class-method">
+      <div class="signature">
+        
+        def self.<strong>h5gopen2</strong>(*args)
+
+        <a class="method-permalink" href="#h5gopen2%28%2Aargs%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/native.cr#L9" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="h5iget_type(*args)-class-method">
+      <div class="signature">
+        
+        def self.<strong>h5iget_type</strong>(*args)
+
+        <a class="method-permalink" href="#h5iget_type%28%2Aargs%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/native.cr#L9" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="h5iis_valid(*args)-class-method">
+      <div class="signature">
+        
+        def self.<strong>h5iis_valid</strong>(*args)
+
+        <a class="method-permalink" href="#h5iis_valid%28%2Aargs%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/native.cr#L9" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="h5lcreate_external(*args)-class-method">
+      <div class="signature">
+        
+        def self.<strong>h5lcreate_external</strong>(*args)
+
+        <a class="method-permalink" href="#h5lcreate_external%28%2Aargs%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/native.cr#L9" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="h5lcreate_hard(*args)-class-method">
+      <div class="signature">
+        
+        def self.<strong>h5lcreate_hard</strong>(*args)
+
+        <a class="method-permalink" href="#h5lcreate_hard%28%2Aargs%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/native.cr#L9" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="h5lcreate_soft(*args)-class-method">
+      <div class="signature">
+        
+        def self.<strong>h5lcreate_soft</strong>(*args)
+
+        <a class="method-permalink" href="#h5lcreate_soft%28%2Aargs%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/native.cr#L9" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="h5ldelete(*args)-class-method">
+      <div class="signature">
+        
+        def self.<strong>h5ldelete</strong>(*args)
+
+        <a class="method-permalink" href="#h5ldelete%28%2Aargs%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/native.cr#L9" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="h5lexists(*args)-class-method">
+      <div class="signature">
+        
+        def self.<strong>h5lexists</strong>(*args)
+
+        <a class="method-permalink" href="#h5lexists%28%2Aargs%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/native.cr#L9" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="h5lget_info2(*args)-class-method">
+      <div class="signature">
+        
+        def self.<strong>h5lget_info2</strong>(*args)
+
+        <a class="method-permalink" href="#h5lget_info2%28%2Aargs%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/native.cr#L9" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="h5lget_name_by_idx(*args)-class-method">
+      <div class="signature">
+        
+        def self.<strong>h5lget_name_by_idx</strong>(*args)
+
+        <a class="method-permalink" href="#h5lget_name_by_idx%28%2Aargs%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/native.cr#L9" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="h5lget_val(*args)-class-method">
+      <div class="signature">
+        
+        def self.<strong>h5lget_val</strong>(*args)
+
+        <a class="method-permalink" href="#h5lget_val%28%2Aargs%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/native.cr#L9" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="h5lmove(*args)-class-method">
+      <div class="signature">
+        
+        def self.<strong>h5lmove</strong>(*args)
+
+        <a class="method-permalink" href="#h5lmove%28%2Aargs%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/native.cr#L9" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="h5lunpack_elink_val(*args)-class-method">
+      <div class="signature">
+        
+        def self.<strong>h5lunpack_elink_val</strong>(*args)
+
+        <a class="method-permalink" href="#h5lunpack_elink_val%28%2Aargs%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/native.cr#L9" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="h5oclose(*args)-class-method">
+      <div class="signature">
+        
+        def self.<strong>h5oclose</strong>(*args)
+
+        <a class="method-permalink" href="#h5oclose%28%2Aargs%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/native.cr#L9" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="h5oget_info3(*args)-class-method">
+      <div class="signature">
+        
+        def self.<strong>h5oget_info3</strong>(*args)
+
+        <a class="method-permalink" href="#h5oget_info3%28%2Aargs%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/native.cr#L9" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="h5oopen(*args)-class-method">
+      <div class="signature">
+        
+        def self.<strong>h5oopen</strong>(*args)
+
+        <a class="method-permalink" href="#h5oopen%28%2Aargs%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/native.cr#L9" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="h5open(*args)-class-method">
+      <div class="signature">
+        
+        def self.<strong>h5open</strong>(*args)
+
+        <a class="method-permalink" href="#h5open%28%2Aargs%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/native.cr#L9" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="h5pclose(*args)-class-method">
+      <div class="signature">
+        
+        def self.<strong>h5pclose</strong>(*args)
+
+        <a class="method-permalink" href="#h5pclose%28%2Aargs%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/native.cr#L9" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="h5pcreate(*args)-class-method">
+      <div class="signature">
+        
+        def self.<strong>h5pcreate</strong>(*args)
+
+        <a class="method-permalink" href="#h5pcreate%28%2Aargs%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/native.cr#L9" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="h5pget_chunk(*args)-class-method">
+      <div class="signature">
+        
+        def self.<strong>h5pget_chunk</strong>(*args)
+
+        <a class="method-permalink" href="#h5pget_chunk%28%2Aargs%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/native.cr#L9" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="h5pget_fill_value(*args)-class-method">
+      <div class="signature">
+        
+        def self.<strong>h5pget_fill_value</strong>(*args)
+
+        <a class="method-permalink" href="#h5pget_fill_value%28%2Aargs%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/native.cr#L9" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="h5pget_layout(*args)-class-method">
+      <div class="signature">
+        
+        def self.<strong>h5pget_layout</strong>(*args)
+
+        <a class="method-permalink" href="#h5pget_layout%28%2Aargs%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/native.cr#L9" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="h5pset_chunk(*args)-class-method">
+      <div class="signature">
+        
+        def self.<strong>h5pset_chunk</strong>(*args)
+
+        <a class="method-permalink" href="#h5pset_chunk%28%2Aargs%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/native.cr#L9" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="h5pset_create_intermediate_group(*args)-class-method">
+      <div class="signature">
+        
+        def self.<strong>h5pset_create_intermediate_group</strong>(*args)
+
+        <a class="method-permalink" href="#h5pset_create_intermediate_group%28%2Aargs%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/native.cr#L9" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="h5pset_deflate(*args)-class-method">
+      <div class="signature">
+        
+        def self.<strong>h5pset_deflate</strong>(*args)
+
+        <a class="method-permalink" href="#h5pset_deflate%28%2Aargs%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/native.cr#L9" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="h5pset_fill_value(*args)-class-method">
+      <div class="signature">
+        
+        def self.<strong>h5pset_fill_value</strong>(*args)
+
+        <a class="method-permalink" href="#h5pset_fill_value%28%2Aargs%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/native.cr#L9" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="h5pset_fletcher32(*args)-class-method">
+      <div class="signature">
+        
+        def self.<strong>h5pset_fletcher32</strong>(*args)
+
+        <a class="method-permalink" href="#h5pset_fletcher32%28%2Aargs%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/native.cr#L9" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="h5pset_shuffle(*args)-class-method">
+      <div class="signature">
+        
+        def self.<strong>h5pset_shuffle</strong>(*args)
+
+        <a class="method-permalink" href="#h5pset_shuffle%28%2Aargs%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/native.cr#L9" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="h5rcopy(*args)-class-method">
+      <div class="signature">
+        
+        def self.<strong>h5rcopy</strong>(*args)
+
+        <a class="method-permalink" href="#h5rcopy%28%2Aargs%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/native.cr#L9" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="h5rcreate_object(*args)-class-method">
+      <div class="signature">
+        
+        def self.<strong>h5rcreate_object</strong>(*args)
+
+        <a class="method-permalink" href="#h5rcreate_object%28%2Aargs%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/native.cr#L9" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="h5rdestroy(*args)-class-method">
+      <div class="signature">
+        
+        def self.<strong>h5rdestroy</strong>(*args)
+
+        <a class="method-permalink" href="#h5rdestroy%28%2Aargs%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/native.cr#L9" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="h5rget_file_name(*args)-class-method">
+      <div class="signature">
+        
+        def self.<strong>h5rget_file_name</strong>(*args)
+
+        <a class="method-permalink" href="#h5rget_file_name%28%2Aargs%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/native.cr#L9" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="h5rget_obj_name(*args)-class-method">
+      <div class="signature">
+        
+        def self.<strong>h5rget_obj_name</strong>(*args)
+
+        <a class="method-permalink" href="#h5rget_obj_name%28%2Aargs%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/native.cr#L9" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="h5rget_obj_type3(*args)-class-method">
+      <div class="signature">
+        
+        def self.<strong>h5rget_obj_type3</strong>(*args)
+
+        <a class="method-permalink" href="#h5rget_obj_type3%28%2Aargs%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/native.cr#L9" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="h5ropen_object(*args)-class-method">
+      <div class="signature">
+        
+        def self.<strong>h5ropen_object</strong>(*args)
+
+        <a class="method-permalink" href="#h5ropen_object%28%2Aargs%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/native.cr#L9" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="h5sclose(*args)-class-method">
+      <div class="signature">
+        
+        def self.<strong>h5sclose</strong>(*args)
+
+        <a class="method-permalink" href="#h5sclose%28%2Aargs%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/native.cr#L9" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="h5screate(*args)-class-method">
+      <div class="signature">
+        
+        def self.<strong>h5screate</strong>(*args)
+
+        <a class="method-permalink" href="#h5screate%28%2Aargs%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/native.cr#L9" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="h5screate_simple(*args)-class-method">
+      <div class="signature">
+        
+        def self.<strong>h5screate_simple</strong>(*args)
+
+        <a class="method-permalink" href="#h5screate_simple%28%2Aargs%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/native.cr#L9" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="h5sget_select_npoints(*args)-class-method">
+      <div class="signature">
+        
+        def self.<strong>h5sget_select_npoints</strong>(*args)
+
+        <a class="method-permalink" href="#h5sget_select_npoints%28%2Aargs%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/native.cr#L9" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="h5sget_simple_extent_dims(*args)-class-method">
+      <div class="signature">
+        
+        def self.<strong>h5sget_simple_extent_dims</strong>(*args)
+
+        <a class="method-permalink" href="#h5sget_simple_extent_dims%28%2Aargs%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/native.cr#L9" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="h5sget_simple_extent_ndims(*args)-class-method">
+      <div class="signature">
+        
+        def self.<strong>h5sget_simple_extent_ndims</strong>(*args)
+
+        <a class="method-permalink" href="#h5sget_simple_extent_ndims%28%2Aargs%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/native.cr#L9" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="h5sget_simple_extent_npoints(*args)-class-method">
+      <div class="signature">
+        
+        def self.<strong>h5sget_simple_extent_npoints</strong>(*args)
+
+        <a class="method-permalink" href="#h5sget_simple_extent_npoints%28%2Aargs%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/native.cr#L9" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="h5sget_simple_extent_type(*args)-class-method">
+      <div class="signature">
+        
+        def self.<strong>h5sget_simple_extent_type</strong>(*args)
+
+        <a class="method-permalink" href="#h5sget_simple_extent_type%28%2Aargs%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/native.cr#L9" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="h5sselect_all(*args)-class-method">
+      <div class="signature">
+        
+        def self.<strong>h5sselect_all</strong>(*args)
+
+        <a class="method-permalink" href="#h5sselect_all%28%2Aargs%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/native.cr#L9" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="h5sselect_hyperslab(*args)-class-method">
+      <div class="signature">
+        
+        def self.<strong>h5sselect_hyperslab</strong>(*args)
+
+        <a class="method-permalink" href="#h5sselect_hyperslab%28%2Aargs%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/native.cr#L9" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="h5sselect_none(*args)-class-method">
+      <div class="signature">
+        
+        def self.<strong>h5sselect_none</strong>(*args)
+
+        <a class="method-permalink" href="#h5sselect_none%28%2Aargs%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/native.cr#L9" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="h5tarray_create2(*args)-class-method">
+      <div class="signature">
+        
+        def self.<strong>h5tarray_create2</strong>(*args)
+
+        <a class="method-permalink" href="#h5tarray_create2%28%2Aargs%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/native.cr#L9" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="h5tclose(*args)-class-method">
+      <div class="signature">
+        
+        def self.<strong>h5tclose</strong>(*args)
+
+        <a class="method-permalink" href="#h5tclose%28%2Aargs%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/native.cr#L9" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="h5tcopy(*args)-class-method">
+      <div class="signature">
+        
+        def self.<strong>h5tcopy</strong>(*args)
+
+        <a class="method-permalink" href="#h5tcopy%28%2Aargs%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/native.cr#L9" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="h5tcreate(*args)-class-method">
+      <div class="signature">
+        
+        def self.<strong>h5tcreate</strong>(*args)
+
+        <a class="method-permalink" href="#h5tcreate%28%2Aargs%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/native.cr#L9" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="h5tenum_create(*args)-class-method">
+      <div class="signature">
+        
+        def self.<strong>h5tenum_create</strong>(*args)
+
+        <a class="method-permalink" href="#h5tenum_create%28%2Aargs%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/native.cr#L9" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="h5tenum_insert(*args)-class-method">
+      <div class="signature">
+        
+        def self.<strong>h5tenum_insert</strong>(*args)
+
+        <a class="method-permalink" href="#h5tenum_insert%28%2Aargs%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/native.cr#L9" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="h5tenum_valueof(*args)-class-method">
+      <div class="signature">
+        
+        def self.<strong>h5tenum_valueof</strong>(*args)
+
+        <a class="method-permalink" href="#h5tenum_valueof%28%2Aargs%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/native.cr#L9" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="h5tequal(*args)-class-method">
+      <div class="signature">
+        
+        def self.<strong>h5tequal</strong>(*args)
+
+        <a class="method-permalink" href="#h5tequal%28%2Aargs%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/native.cr#L9" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="h5tget_array_dims2(*args)-class-method">
+      <div class="signature">
+        
+        def self.<strong>h5tget_array_dims2</strong>(*args)
+
+        <a class="method-permalink" href="#h5tget_array_dims2%28%2Aargs%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/native.cr#L9" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="h5tget_array_ndims(*args)-class-method">
+      <div class="signature">
+        
+        def self.<strong>h5tget_array_ndims</strong>(*args)
+
+        <a class="method-permalink" href="#h5tget_array_ndims%28%2Aargs%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/native.cr#L9" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="h5tget_class(*args)-class-method">
+      <div class="signature">
+        
+        def self.<strong>h5tget_class</strong>(*args)
+
+        <a class="method-permalink" href="#h5tget_class%28%2Aargs%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/native.cr#L9" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="h5tget_cset(*args)-class-method">
+      <div class="signature">
+        
+        def self.<strong>h5tget_cset</strong>(*args)
+
+        <a class="method-permalink" href="#h5tget_cset%28%2Aargs%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/native.cr#L9" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="h5tget_member_index(*args)-class-method">
+      <div class="signature">
+        
+        def self.<strong>h5tget_member_index</strong>(*args)
+
+        <a class="method-permalink" href="#h5tget_member_index%28%2Aargs%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/native.cr#L9" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="h5tget_member_name(*args)-class-method">
+      <div class="signature">
+        
+        def self.<strong>h5tget_member_name</strong>(*args)
+
+        <a class="method-permalink" href="#h5tget_member_name%28%2Aargs%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/native.cr#L9" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="h5tget_member_offset(*args)-class-method">
+      <div class="signature">
+        
+        def self.<strong>h5tget_member_offset</strong>(*args)
+
+        <a class="method-permalink" href="#h5tget_member_offset%28%2Aargs%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/native.cr#L9" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="h5tget_member_type(*args)-class-method">
+      <div class="signature">
+        
+        def self.<strong>h5tget_member_type</strong>(*args)
+
+        <a class="method-permalink" href="#h5tget_member_type%28%2Aargs%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/native.cr#L9" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="h5tget_nmembers(*args)-class-method">
+      <div class="signature">
+        
+        def self.<strong>h5tget_nmembers</strong>(*args)
+
+        <a class="method-permalink" href="#h5tget_nmembers%28%2Aargs%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/native.cr#L9" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="h5tget_offset(*args)-class-method">
+      <div class="signature">
+        
+        def self.<strong>h5tget_offset</strong>(*args)
+
+        <a class="method-permalink" href="#h5tget_offset%28%2Aargs%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/native.cr#L9" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="h5tget_order(*args)-class-method">
+      <div class="signature">
+        
+        def self.<strong>h5tget_order</strong>(*args)
+
+        <a class="method-permalink" href="#h5tget_order%28%2Aargs%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/native.cr#L9" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="h5tget_precision(*args)-class-method">
+      <div class="signature">
+        
+        def self.<strong>h5tget_precision</strong>(*args)
+
+        <a class="method-permalink" href="#h5tget_precision%28%2Aargs%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/native.cr#L9" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="h5tget_sign(*args)-class-method">
+      <div class="signature">
+        
+        def self.<strong>h5tget_sign</strong>(*args)
+
+        <a class="method-permalink" href="#h5tget_sign%28%2Aargs%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/native.cr#L9" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="h5tget_size(*args)-class-method">
+      <div class="signature">
+        
+        def self.<strong>h5tget_size</strong>(*args)
+
+        <a class="method-permalink" href="#h5tget_size%28%2Aargs%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/native.cr#L9" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="h5tget_strpad(*args)-class-method">
+      <div class="signature">
+        
+        def self.<strong>h5tget_strpad</strong>(*args)
+
+        <a class="method-permalink" href="#h5tget_strpad%28%2Aargs%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/native.cr#L9" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="h5tget_super(*args)-class-method">
+      <div class="signature">
+        
+        def self.<strong>h5tget_super</strong>(*args)
+
+        <a class="method-permalink" href="#h5tget_super%28%2Aargs%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/native.cr#L9" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="h5tinsert(*args)-class-method">
+      <div class="signature">
+        
+        def self.<strong>h5tinsert</strong>(*args)
+
+        <a class="method-permalink" href="#h5tinsert%28%2Aargs%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/native.cr#L9" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="h5tis_variable_str(*args)-class-method">
+      <div class="signature">
+        
+        def self.<strong>h5tis_variable_str</strong>(*args)
+
+        <a class="method-permalink" href="#h5tis_variable_str%28%2Aargs%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/native.cr#L9" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="h5tset_cset(*args)-class-method">
+      <div class="signature">
+        
+        def self.<strong>h5tset_cset</strong>(*args)
+
+        <a class="method-permalink" href="#h5tset_cset%28%2Aargs%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/native.cr#L9" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="h5tset_size(*args)-class-method">
+      <div class="signature">
+        
+        def self.<strong>h5tset_size</strong>(*args)
+
+        <a class="method-permalink" href="#h5tset_size%28%2Aargs%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/native.cr#L9" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="h5tset_strpad(*args)-class-method">
+      <div class="signature">
+        
+        def self.<strong>h5tset_strpad</strong>(*args)
+
+        <a class="method-permalink" href="#h5tset_strpad%28%2Aargs%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/native.cr#L9" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="h5tvlen_create(*args)-class-method">
+      <div class="signature">
+        
+        def self.<strong>h5tvlen_create</strong>(*args)
+
+        <a class="method-permalink" href="#h5tvlen_create%28%2Aargs%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/native.cr#L9" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="h5zfilter_avail(*args)-class-method">
+      <div class="signature">
+        
+        def self.<strong>h5zfilter_avail</strong>(*args)
+
+        <a class="method-permalink" href="#h5zfilter_avail%28%2Aargs%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/native.cr#L9" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="h5zget_filter_info(*args)-class-method">
+      <div class="signature">
+        
+        def self.<strong>h5zget_filter_info</strong>(*args)
+
+        <a class="method-permalink" href="#h5zget_filter_info%28%2Aargs%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/native.cr#L9" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="synchronize(&amp;)-class-method">
+      <div class="signature">
+        
+        def self.<strong>synchronize</strong>(&)
+
+        <a class="method-permalink" href="#synchronize%28%26%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/native.cr#L5" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+
+
+  
+
+  
+
+
+</div>
+
+</body>
+</html>

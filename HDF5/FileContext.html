@@ -14,7 +14,7 @@
 <script type="text/javascript" src="../js/doc.js"></script>
 
   <meta name="repository-name" content="hdf5">
-  <title>HDF5::StringEncoding - hdf5 main</title>
+  <title>HDF5::FileContext - hdf5 main</title>
   <script type="text/javascript">
     CrystalDocs.base_path = "../";
   </script>
@@ -172,7 +172,7 @@
       
     </li>
   
-  <li class=" " data-id="hdf5/HDF5/FileContext" data-name="hdf5::filecontext">
+  <li class=" current" data-id="hdf5/HDF5/FileContext" data-name="hdf5::filecontext">
       <a href="../HDF5/FileContext.html">FileContext</a>
       
     </li>
@@ -257,7 +257,7 @@
       
     </li>
   
-  <li class=" current" data-id="hdf5/HDF5/StringEncoding" data-name="hdf5::stringencoding">
+  <li class=" " data-id="hdf5/HDF5/StringEncoding" data-name="hdf5::stringencoding">
       <a href="../HDF5/StringEncoding.html">StringEncoding</a>
       
     </li>
@@ -312,14 +312,27 @@
 <h1 class="type-name">
 
   <span class="kind">
-    enum
-  </span> HDF5::<wbr>StringEncoding
+    class
+  </span> HDF5::<wbr>FileContext
 
 </h1>
 
 
+  <ul class="superclass-hierarchy"><li class="superclass"><a href="../HDF5/FileContext.html">HDF5::FileContext</a></li><li class="superclass">Reference</li><li class="superclass">Object</li></ul>
 
 
+
+
+  <h2>
+    <a id="overview" class="anchor" href="#overview">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Overview
+  </h2>
+
+  <p>Owns native handles without retaining their Crystal wrappers.</p>
 
 
 
@@ -346,38 +359,14 @@
   </h2>
   
     
-      <a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/datatype.cr#L2" target="_blank">
-        hdf5/datatype.cr
+      <a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/file_context.cr#L3" target="_blank">
+        hdf5/file_context.cr
       </a>
     
     <br/>
   
 
 
-
-  
-    <h2>
-      <a id="enum-members" class="anchor" href="#enum-members">
-  <svg class="octicon-link" aria-hidden="true">
-    <use href="#octicon-link"/>
-  </svg>
-</a>
-      Enum Members
-    </h2>
-  
-  <dl>
-    
-      <dt class="entry-const" id="Ascii">
-        <strong>Ascii</strong> = <code><span class="n">0</span></code>
-      </dt>
-      
-    
-      <dt class="entry-const" id="Utf8">
-        <strong>Utf8</strong> = <code><span class="n">1</span></code>
-      </dt>
-      
-    
-  </dl>
 
 
 
@@ -393,12 +382,7 @@
   <ul class="list-summary">
     
       <li class="entry-summary">
-        <a href="#from_lib%28value%3ALibHDF5%3A%3ACharSet%29%3AStringEncoding-class-method" class="signature"><strong>.from_lib</strong>(value : LibHDF5::CharSet) : StringEncoding</a>
-        
-      </li>
-    
-      <li class="entry-summary">
-        <a href="#parse%28value%3ASymbol%7CStringEncoding%29%3AStringEncoding-class-method" class="signature"><strong>.parse</strong>(value : Symbol | StringEncoding) : StringEncoding</a>
+        <a href="#new%28file_id%3ALibHDF5%3A%3AHid%29-class-method" class="signature"><strong>.new</strong>(file_id : LibHDF5::Hid)</a>
         
       </li>
     
@@ -421,16 +405,37 @@
   <ul class="list-summary">
     
       <li class="entry-summary">
-        <a href="#ascii%3F-instance-method" class="signature"><strong>#ascii?</strong></a>
-        
-          <div class="summary"><p>Returns <code>true</code> if this enum value equals <code><a href="../HDF5/StringEncoding.html#Ascii">Ascii</a></code></p></div>
+        <a href="#close%28id%3ALibHDF5%3A%3AHid%29%3ANil-instance-method" class="signature"><strong>#close</strong>(id : LibHDF5::Hid) : Nil</a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#utf8%3F-instance-method" class="signature"><strong>#utf8?</strong></a>
+        <a href="#close_file%3ANil-instance-method" class="signature"><strong>#close_file</strong> : Nil</a>
         
-          <div class="summary"><p>Returns <code>true</code> if this enum value equals <code><a href="../HDF5/StringEncoding.html#Utf8">Utf8</a></code></p></div>
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#closed%3F%3ABool-instance-method" class="signature"><strong>#closed?</strong> : Bool</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#ensure_open%28id%3ALibHDF5%3A%3AHid%7CNil%3Dnil%29%3ANil-instance-method" class="signature"><strong>#ensure_open</strong>(id : LibHDF5::Hid | Nil = <span class="n">nil</span>) : Nil</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#register%28id%3ALibHDF5%3A%3AHid%2Ckind%3ASymbol%29%3ANil-instance-method" class="signature"><strong>#register</strong>(id : LibHDF5::Hid, kind : Symbol) : Nil</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#register%28reference%3AReference%29%3ANil-instance-method" class="signature"><strong>#register</strong>(reference : Reference) : Nil</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#unregister%28reference%3AReference%29%3ANil-instance-method" class="signature"><strong>#unregister</strong>(reference : Reference) : Nil</a>
         
       </li>
     
@@ -439,32 +444,6 @@
 
 
   <div class="methods-inherited">
-    
-      
-
-
-      
-
-
-      
-
-
-      
-
-
-    
-      
-
-
-      
-
-
-      
-
-
-      
-
-
     
       
 
@@ -504,34 +483,18 @@
     Constructor Detail
   </h2>
   
-    <div class="entry-detail" id="from_lib(value:LibHDF5::CharSet):StringEncoding-class-method">
+    <div class="entry-detail" id="new(file_id:LibHDF5::Hid)-class-method">
       <div class="signature">
         
-        def self.<strong>from_lib</strong>(value : LibHDF5::CharSet) : <a href="../HDF5/StringEncoding.html">StringEncoding</a>
+        def self.<strong>new</strong>(file_id : LibHDF5::Hid)
 
-        <a class="method-permalink" href="#from_lib%28value%3ALibHDF5%3A%3ACharSet%29%3AStringEncoding-class-method">#</a>
+        <a class="method-permalink" href="#new%28file_id%3ALibHDF5%3A%3AHid%29-class-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/datatype.cr#L22" target="_blank">View source</a>]
-        
-      </div>
-    </div>
-  
-    <div class="entry-detail" id="parse(value:Symbol|StringEncoding):StringEncoding-class-method">
-      <div class="signature">
-        
-        def self.<strong>parse</strong>(value : Symbol | <a href="../HDF5/StringEncoding.html">StringEncoding</a>) : <a href="../HDF5/StringEncoding.html">StringEncoding</a>
-
-        <a class="method-permalink" href="#parse%28value%3ASymbol%7CStringEncoding%29%3AStringEncoding-class-method">#</a>
-      </div>
-      
-      <br/>
-      <div>
-        
-          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/datatype.cr#L6" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/file_context.cr#L10" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -552,44 +515,114 @@
     Instance Method Detail
   </h2>
   
-    <div class="entry-detail" id="ascii?-instance-method">
+    <div class="entry-detail" id="close(id:LibHDF5::Hid):Nil-instance-method">
       <div class="signature">
         
-        def <strong>ascii?</strong>
+        def <strong>close</strong>(id : LibHDF5::Hid) : Nil
 
-        <a class="method-permalink" href="#ascii%3F-instance-method">#</a>
+        <a class="method-permalink" href="#close%28id%3ALibHDF5%3A%3AHid%29%3ANil-instance-method">#</a>
       </div>
-      
-        <div class="doc">
-          
-          <p>Returns <code>true</code> if this enum value equals <code><a href="../HDF5/StringEncoding.html#Ascii">Ascii</a></code></p>
-        </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/datatype.cr#L3" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/file_context.cr#L56" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="utf8?-instance-method">
+    <div class="entry-detail" id="close_file:Nil-instance-method">
       <div class="signature">
         
-        def <strong>utf8?</strong>
+        def <strong>close_file</strong> : Nil
 
-        <a class="method-permalink" href="#utf8%3F-instance-method">#</a>
+        <a class="method-permalink" href="#close_file%3ANil-instance-method">#</a>
       </div>
-      
-        <div class="doc">
-          
-          <p>Returns <code>true</code> if this enum value equals <code><a href="../HDF5/StringEncoding.html#Utf8">Utf8</a></code></p>
-        </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/datatype.cr#L4" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/file_context.cr#L74" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="closed?:Bool-instance-method">
+      <div class="signature">
+        
+        def <strong>closed?</strong> : Bool
+
+        <a class="method-permalink" href="#closed%3F%3ABool-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/file_context.cr#L52" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="ensure_open(id:LibHDF5::Hid|Nil=nil):Nil-instance-method">
+      <div class="signature">
+        
+        def <strong>ensure_open</strong>(id : LibHDF5::Hid | Nil = <span class="n">nil</span>) : Nil
+
+        <a class="method-permalink" href="#ensure_open%28id%3ALibHDF5%3A%3AHid%7CNil%3Dnil%29%3ANil-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/file_context.cr#L47" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="register(id:LibHDF5::Hid,kind:Symbol):Nil-instance-method">
+      <div class="signature">
+        
+        def <strong>register</strong>(id : LibHDF5::Hid, kind : Symbol) : Nil
+
+        <a class="method-permalink" href="#register%28id%3ALibHDF5%3A%3AHid%2Ckind%3ASymbol%29%3ANil-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/file_context.cr#L29" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="register(reference:Reference):Nil-instance-method">
+      <div class="signature">
+        
+        def <strong>register</strong>(reference : <a href="../HDF5/Reference.html">Reference</a>) : Nil
+
+        <a class="method-permalink" href="#register%28reference%3AReference%29%3ANil-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/file_context.cr#L36" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="unregister(reference:Reference):Nil-instance-method">
+      <div class="signature">
+        
+        def <strong>unregister</strong>(reference : <a href="../HDF5/Reference.html">Reference</a>) : Nil
+
+        <a class="method-permalink" href="#unregister%28reference%3AReference%29%3ANil-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/file_context.cr#L43" target="_blank">View source</a>]
         
       </div>
     </div>

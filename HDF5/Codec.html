@@ -14,7 +14,7 @@
 <script type="text/javascript" src="../js/doc.js"></script>
 
   <meta name="repository-name" content="hdf5">
-  <title>HDF5::StringEncoding - hdf5 main</title>
+  <title>HDF5::Codec - hdf5 main</title>
   <script type="text/javascript">
     CrystalDocs.base_path = "../";
   </script>
@@ -97,7 +97,7 @@
       
     </li>
   
-  <li class=" " data-id="hdf5/HDF5/Codec" data-name="hdf5::codec">
+  <li class=" current" data-id="hdf5/HDF5/Codec" data-name="hdf5::codec">
       <a href="../HDF5/Codec.html">Codec</a>
       
     </li>
@@ -257,7 +257,7 @@
       
     </li>
   
-  <li class=" current" data-id="hdf5/HDF5/StringEncoding" data-name="hdf5::stringencoding">
+  <li class=" " data-id="hdf5/HDF5/StringEncoding" data-name="hdf5::stringencoding">
       <a href="../HDF5/StringEncoding.html">StringEncoding</a>
       
     </li>
@@ -312,14 +312,25 @@
 <h1 class="type-name">
 
   <span class="kind">
-    enum
-  </span> HDF5::<wbr>StringEncoding
+    module
+  </span> HDF5::<wbr>Codec
 
 </h1>
 
 
 
 
+
+  <h2>
+    <a id="overview" class="anchor" href="#overview">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Overview
+  </h2>
+
+  <p>Shared buffer encoding for datasets, attributes and fill values.</p>
 
 
 
@@ -346,8 +357,8 @@
   </h2>
   
     
-      <a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/datatype.cr#L2" target="_blank">
-        hdf5/datatype.cr
+      <a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/codec.cr#L3" target="_blank">
+        hdf5/codec.cr
       </a>
     
     <br/>
@@ -355,50 +366,43 @@
 
 
 
-  
-    <h2>
-      <a id="enum-members" class="anchor" href="#enum-members">
-  <svg class="octicon-link" aria-hidden="true">
-    <use href="#octicon-link"/>
-  </svg>
-</a>
-      Enum Members
-    </h2>
-  
-  <dl>
-    
-      <dt class="entry-const" id="Ascii">
-        <strong>Ascii</strong> = <code><span class="n">0</span></code>
-      </dt>
-      
-    
-      <dt class="entry-const" id="Utf8">
-        <strong>Utf8</strong> = <code><span class="n">1</span></code>
-      </dt>
-      
-    
-  </dl>
 
 
+  
 
   
   <h2>
-    <a id="constructors" class="anchor" href="#constructors">
+    <a id="class-method-summary" class="anchor" href="#class-method-summary">
   <svg class="octicon-link" aria-hidden="true">
     <use href="#octicon-link"/>
   </svg>
 </a>
-    Constructors
+    Class Method Summary
   </h2>
   <ul class="list-summary">
     
       <li class="entry-summary">
-        <a href="#from_lib%28value%3ALibHDF5%3A%3ACharSet%29%3AStringEncoding-class-method" class="signature"><strong>.from_lib</strong>(value : LibHDF5::CharSet) : StringEncoding</a>
+        <a href="#read%28kind%3ASymbol%2Cid%3ALibHDF5%3A%3AHid%2Ctype%3AT.class%2Cfile_type%3ADatatype%2Cmemory%3ALibHDF5%3A%3AHid%2Cfile%3ALibHDF5%3A%3AHid%2Ccount%3AInt%2Ccontext%3AFileContext%7CNil%3Dnil%2Ccasting%3ACasting%3DCasting%3A%3AUnsafe%29%3AArray%28T%29forallT-class-method" class="signature"><strong>.read</strong>(kind : Symbol, id : LibHDF5::Hid, type : <span class="t">T</span>.<span class="k">class</span>, file_type : Datatype, memory : LibHDF5::Hid, file : LibHDF5::Hid, count : Int, context : FileContext | Nil = <span class="n">nil</span>, casting : Casting = <span class="t">Casting</span><span class="t">::</span><span class="t">Unsafe</span>) : Array(T) forall T</a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#parse%28value%3ASymbol%7CStringEncoding%29%3AStringEncoding-class-method" class="signature"><strong>.parse</strong>(value : Symbol | StringEncoding) : StringEncoding</a>
+        <a href="#transfer%28read%3ABool%2Ckind%3ASymbol%2Cid%3ALibHDF5%3A%3AHid%2Ctype%3ALibHDF5%3A%3AHid%2Cmemory%3ALibHDF5%3A%3AHid%2Cfile%3ALibHDF5%3A%3AHid%2Cbuffer%3APointer%28Void%29%29%3ANil-class-method" class="signature"><strong>.transfer</strong>(read : Bool, kind : Symbol, id : LibHDF5::Hid, type : LibHDF5::Hid, memory : LibHDF5::Hid, file : LibHDF5::Hid, buffer : Pointer(Void)) : Nil</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#validate_strings%28data%3AIndexable%28String%29%2Cencoding%3AStringEncoding%29%3ANil-class-method" class="signature"><strong>.validate_strings</strong>(data : Indexable(String), encoding : StringEncoding) : Nil</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#validate_strings%28data%3AIndexable%28String%29%2Cdtype%3ADatatype%2Ccasting%3ACasting%3DCasting%3A%3AUnsafe%29%3ANil-class-method" class="signature"><strong>.validate_strings</strong>(data : Indexable(String), dtype : Datatype, casting : Casting = <span class="t">Casting</span><span class="t">::</span><span class="t">Unsafe</span>) : Nil</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#write%28kind%3ASymbol%2Cid%3ALibHDF5%3A%3AHid%2Cdata%3AIndexable%28T%29%2Cfile_type%3ADatatype%2Cmemory%3ALibHDF5%3A%3AHid%2Cfile%3ALibHDF5%3A%3AHid%2Ccasting%3ACasting%3DCasting%3A%3AUnsafe%29%3ANilforallT-class-method" class="signature"><strong>.write</strong>(kind : Symbol, id : LibHDF5::Hid, data : Indexable(T), file_type : Datatype, memory : LibHDF5::Hid, file : LibHDF5::Hid, casting : Casting = <span class="t">Casting</span><span class="t">::</span><span class="t">Unsafe</span>) : Nil forall T</a>
         
       </li>
     
@@ -408,193 +412,109 @@
   
 
   
-
-  
-  <h2>
-    <a id="instance-method-summary" class="anchor" href="#instance-method-summary">
-  <svg class="octicon-link" aria-hidden="true">
-    <use href="#octicon-link"/>
-  </svg>
-</a>
-    Instance Method Summary
-  </h2>
-  <ul class="list-summary">
-    
-      <li class="entry-summary">
-        <a href="#ascii%3F-instance-method" class="signature"><strong>#ascii?</strong></a>
-        
-          <div class="summary"><p>Returns <code>true</code> if this enum value equals <code><a href="../HDF5/StringEncoding.html#Ascii">Ascii</a></code></p></div>
-        
-      </li>
-    
-      <li class="entry-summary">
-        <a href="#utf8%3F-instance-method" class="signature"><strong>#utf8?</strong></a>
-        
-          <div class="summary"><p>Returns <code>true</code> if this enum value equals <code><a href="../HDF5/StringEncoding.html#Utf8">Utf8</a></code></p></div>
-        
-      </li>
-    
-  </ul>
-
 
 
   <div class="methods-inherited">
     
-      
-
-
-      
-
-
-      
-
-
-      
-
-
-    
-      
-
-
-      
-
-
-      
-
-
-      
-
-
-    
-      
-
-
-      
-
-
-      
-
-
-      
-
-
-    
-      
-
-
-      
-
-
-      
-
-
-      
-
-
-    
   </div>
 
   
+
+  
   <h2>
-    <a id="constructor-detail" class="anchor" href="#constructor-detail">
+    <a id="class-method-detail" class="anchor" href="#class-method-detail">
   <svg class="octicon-link" aria-hidden="true">
     <use href="#octicon-link"/>
   </svg>
 </a>
-    Constructor Detail
+    Class Method Detail
   </h2>
   
-    <div class="entry-detail" id="from_lib(value:LibHDF5::CharSet):StringEncoding-class-method">
+    <div class="entry-detail" id="read(kind:Symbol,id:LibHDF5::Hid,type:T.class,file_type:Datatype,memory:LibHDF5::Hid,file:LibHDF5::Hid,count:Int,context:FileContext|Nil=nil,casting:Casting=Casting::Unsafe):Array(T)forallT-class-method">
       <div class="signature">
         
-        def self.<strong>from_lib</strong>(value : LibHDF5::CharSet) : <a href="../HDF5/StringEncoding.html">StringEncoding</a>
+        def self.<strong>read</strong>(kind : Symbol, id : LibHDF5::Hid, type : <span class="t">T</span>.<span class="k">class</span>, file_type : <a href="../HDF5/Datatype.html">Datatype</a>, memory : LibHDF5::Hid, file : LibHDF5::Hid, count : Int, context : <a href="../HDF5/FileContext.html">FileContext</a> | Nil = <span class="n">nil</span>, casting : <a href="../HDF5/Casting.html">Casting</a> = <span class="t">Casting</span><span class="t">::</span><span class="t">Unsafe</span>) : Array(T) forall T
 
-        <a class="method-permalink" href="#from_lib%28value%3ALibHDF5%3A%3ACharSet%29%3AStringEncoding-class-method">#</a>
+        <a class="method-permalink" href="#read%28kind%3ASymbol%2Cid%3ALibHDF5%3A%3AHid%2Ctype%3AT.class%2Cfile_type%3ADatatype%2Cmemory%3ALibHDF5%3A%3AHid%2Cfile%3ALibHDF5%3A%3AHid%2Ccount%3AInt%2Ccontext%3AFileContext%7CNil%3Dnil%2Ccasting%3ACasting%3DCasting%3A%3AUnsafe%29%3AArray%28T%29forallT-class-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/datatype.cr#L22" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/codec.cr#L19" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="parse(value:Symbol|StringEncoding):StringEncoding-class-method">
+    <div class="entry-detail" id="transfer(read:Bool,kind:Symbol,id:LibHDF5::Hid,type:LibHDF5::Hid,memory:LibHDF5::Hid,file:LibHDF5::Hid,buffer:Pointer(Void)):Nil-class-method">
       <div class="signature">
         
-        def self.<strong>parse</strong>(value : Symbol | <a href="../HDF5/StringEncoding.html">StringEncoding</a>) : <a href="../HDF5/StringEncoding.html">StringEncoding</a>
+        def self.<strong>transfer</strong>(read : Bool, kind : Symbol, id : LibHDF5::Hid, type : LibHDF5::Hid, memory : LibHDF5::Hid, file : LibHDF5::Hid, buffer : Pointer(Void)) : Nil
 
-        <a class="method-permalink" href="#parse%28value%3ASymbol%7CStringEncoding%29%3AStringEncoding-class-method">#</a>
+        <a class="method-permalink" href="#transfer%28read%3ABool%2Ckind%3ASymbol%2Cid%3ALibHDF5%3A%3AHid%2Ctype%3ALibHDF5%3A%3AHid%2Cmemory%3ALibHDF5%3A%3AHid%2Cfile%3ALibHDF5%3A%3AHid%2Cbuffer%3APointer%28Void%29%29%3ANil-class-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/datatype.cr#L6" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/codec.cr#L4" target="_blank">View source</a>]
         
       </div>
     </div>
   
-
-
-  
-
-  
-
-  
-  <h2>
-    <a id="instance-method-detail" class="anchor" href="#instance-method-detail">
-  <svg class="octicon-link" aria-hidden="true">
-    <use href="#octicon-link"/>
-  </svg>
-</a>
-    Instance Method Detail
-  </h2>
-  
-    <div class="entry-detail" id="ascii?-instance-method">
+    <div class="entry-detail" id="validate_strings(data:Indexable(String),encoding:StringEncoding):Nil-class-method">
       <div class="signature">
         
-        def <strong>ascii?</strong>
+        def self.<strong>validate_strings</strong>(data : Indexable(String), encoding : <a href="../HDF5/StringEncoding.html">StringEncoding</a>) : Nil
 
-        <a class="method-permalink" href="#ascii%3F-instance-method">#</a>
+        <a class="method-permalink" href="#validate_strings%28data%3AIndexable%28String%29%2Cencoding%3AStringEncoding%29%3ANil-class-method">#</a>
       </div>
-      
-        <div class="doc">
-          
-          <p>Returns <code>true</code> if this enum value equals <code><a href="../HDF5/StringEncoding.html#Ascii">Ascii</a></code></p>
-        </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/datatype.cr#L3" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/codec.cr#L156" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="utf8?-instance-method">
+    <div class="entry-detail" id="validate_strings(data:Indexable(String),dtype:Datatype,casting:Casting=Casting::Unsafe):Nil-class-method">
       <div class="signature">
         
-        def <strong>utf8?</strong>
+        def self.<strong>validate_strings</strong>(data : Indexable(String), dtype : <a href="../HDF5/Datatype.html">Datatype</a>, casting : <a href="../HDF5/Casting.html">Casting</a> = <span class="t">Casting</span><span class="t">::</span><span class="t">Unsafe</span>) : Nil
 
-        <a class="method-permalink" href="#utf8%3F-instance-method">#</a>
+        <a class="method-permalink" href="#validate_strings%28data%3AIndexable%28String%29%2Cdtype%3ADatatype%2Ccasting%3ACasting%3DCasting%3A%3AUnsafe%29%3ANil-class-method">#</a>
       </div>
-      
-        <div class="doc">
-          
-          <p>Returns <code>true</code> if this enum value equals <code><a href="../HDF5/StringEncoding.html#Utf8">Utf8</a></code></p>
-        </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/datatype.cr#L4" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/codec.cr#L167" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="write(kind:Symbol,id:LibHDF5::Hid,data:Indexable(T),file_type:Datatype,memory:LibHDF5::Hid,file:LibHDF5::Hid,casting:Casting=Casting::Unsafe):NilforallT-class-method">
+      <div class="signature">
+        
+        def self.<strong>write</strong>(kind : Symbol, id : LibHDF5::Hid, data : Indexable(T), file_type : <a href="../HDF5/Datatype.html">Datatype</a>, memory : LibHDF5::Hid, file : LibHDF5::Hid, casting : <a href="../HDF5/Casting.html">Casting</a> = <span class="t">Casting</span><span class="t">::</span><span class="t">Unsafe</span>) : Nil forall T
+
+        <a class="method-permalink" href="#write%28kind%3ASymbol%2Cid%3ALibHDF5%3A%3AHid%2Cdata%3AIndexable%28T%29%2Cfile_type%3ADatatype%2Cmemory%3ALibHDF5%3A%3AHid%2Cfile%3ALibHDF5%3A%3AHid%2Ccasting%3ACasting%3DCasting%3A%3AUnsafe%29%3ANilforallT-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/codec.cr#L99" target="_blank">View source</a>]
         
       </div>
     </div>
   
 
+
+  
+
+  
 
 
 </div>

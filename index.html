@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="generator" content="Crystal Docs 1.19.1">
+<meta name="generator" content="Crystal Docs 1.20.3">
 <meta name="crystal_docs.project_version" content="main">
 <meta name="crystal_docs.project_name" content="hdf5">
 
@@ -77,8 +77,33 @@
       
     </li>
   
+  <li class=" " data-id="hdf5/HDF5/Casting" data-name="hdf5::casting">
+      <a href="HDF5/Casting.html">Casting</a>
+      
+    </li>
+  
+  <li class=" " data-id="hdf5/HDF5/CastingChecks" data-name="hdf5::castingchecks">
+      <a href="HDF5/CastingChecks.html">CastingChecks</a>
+      
+    </li>
+  
+  <li class=" " data-id="hdf5/HDF5/Cleanup" data-name="hdf5::cleanup">
+      <a href="HDF5/Cleanup.html">Cleanup</a>
+      
+    </li>
+  
   <li class=" " data-id="hdf5/HDF5/ClosedObjectError" data-name="hdf5::closedobjecterror">
       <a href="HDF5/ClosedObjectError.html">ClosedObjectError</a>
+      
+    </li>
+  
+  <li class=" " data-id="hdf5/HDF5/Codec" data-name="hdf5::codec">
+      <a href="HDF5/Codec.html">Codec</a>
+      
+    </li>
+  
+  <li class=" " data-id="hdf5/HDF5/Complex32" data-name="hdf5::complex32">
+      <a href="HDF5/Complex32.html">Complex32</a>
       
     </li>
   
@@ -117,11 +142,6 @@
       
     </li>
   
-  <li class=" " data-id="hdf5/HDF5/DatasetStorage" data-name="hdf5::datasetstorage">
-      <a href="HDF5/DatasetStorage.html">DatasetStorage</a>
-      
-    </li>
-  
   <li class=" " data-id="hdf5/HDF5/Dataspace" data-name="hdf5::dataspace">
       <a href="HDF5/Dataspace.html">Dataspace</a>
       
@@ -132,13 +152,28 @@
       
     </li>
   
+  <li class=" " data-id="hdf5/HDF5/Empty" data-name="hdf5::empty(t)">
+      <a href="HDF5/Empty.html">Empty</a>
+      
+    </li>
+  
   <li class=" " data-id="hdf5/HDF5/Error" data-name="hdf5::error">
       <a href="HDF5/Error.html">Error</a>
       
     </li>
   
+  <li class=" " data-id="hdf5/HDF5/ExternalLink" data-name="hdf5::externallink">
+      <a href="HDF5/ExternalLink.html">ExternalLink</a>
+      
+    </li>
+  
   <li class=" " data-id="hdf5/HDF5/File" data-name="hdf5::file">
       <a href="HDF5/File.html">File</a>
+      
+    </li>
+  
+  <li class=" " data-id="hdf5/HDF5/FileContext" data-name="hdf5::filecontext">
+      <a href="HDF5/FileContext.html">FileContext</a>
       
     </li>
   
@@ -152,8 +187,23 @@
       
     </li>
   
+  <li class=" " data-id="hdf5/HDF5/HardLink" data-name="hdf5::hardlink">
+      <a href="HDF5/HardLink.html">HardLink</a>
+      
+    </li>
+  
   <li class=" " data-id="hdf5/HDF5/InternalChecks" data-name="hdf5::internalchecks">
       <a href="HDF5/InternalChecks.html">InternalChecks</a>
+      
+    </li>
+  
+  <li class=" " data-id="hdf5/HDF5/LinkInfo" data-name="hdf5::linkinfo">
+      <a href="HDF5/LinkInfo.html">LinkInfo</a>
+      
+    </li>
+  
+  <li class=" " data-id="hdf5/HDF5/Native" data-name="hdf5::native">
+      <a href="HDF5/Native.html">Native</a>
       
     </li>
   
@@ -197,6 +247,16 @@
       
     </li>
   
+  <li class=" " data-id="hdf5/HDF5/Shapes" data-name="hdf5::shapes">
+      <a href="HDF5/Shapes.html">Shapes</a>
+      
+    </li>
+  
+  <li class=" " data-id="hdf5/HDF5/SoftLink" data-name="hdf5::softlink">
+      <a href="HDF5/SoftLink.html">SoftLink</a>
+      
+    </li>
+  
   <li class=" " data-id="hdf5/HDF5/StringEncoding" data-name="hdf5::stringencoding">
       <a href="HDF5/StringEncoding.html">StringEncoding</a>
       
@@ -214,6 +274,11 @@
   
   <li class=" " data-id="hdf5/HDF5/TypedDataset" data-name="hdf5::typeddataset(t)">
       <a href="HDF5/TypedDataset.html">TypedDataset</a>
+      
+    </li>
+  
+  <li class=" " data-id="hdf5/HDF5/TypeFactory" data-name="hdf5::typefactory">
+      <a href="HDF5/TypeFactory.html">TypeFactory</a>
       
     </li>
   
@@ -251,31 +316,130 @@
 <p><a href="https://github.com/kojix2/hdf5.cr/actions/workflows/ci.yml"><img src="https://github.com/kojix2/hdf5.cr/actions/workflows/ci.yml/badge.svg" alt="CI" /></a>
 <a href="https://tokei.kojix2.net/github/kojix2/hdf5.cr"><img src="https://img.shields.io/endpoint?url=https://tokei.kojix2.net/badge/github/kojix2/hdf5.cr/lines" alt="Lines of Code" /></a>
 <img src="https://img.shields.io/badge/PURE-Vibe_Coding-magenta" alt="Static Badge" /></p>
-<p>HDF5 bindings for Crystal.</p>
-<h2><a id="installation" class="anchor" href="#installation">
+<p>HDF5 bindings for Crystal, with typed datasets, partial I/O and extensible storage.</p>
+<h2><a id="requirements-and-installation" class="anchor" href="#requirements-and-installation">
   <svg class="octicon-link" aria-hidden="true">
     <use href="#octicon-link"/>
   </svg>
-</a>Installation</h2>
+</a>Requirements and installation</h2>
+<p>Crystal <strong>1.20+</strong>, HDF5 <strong>2.0+</strong>, and <code>pkg-config</code> are required. HDF5 1.x is unsupported and rejected at compile time. Install HDF5 with your system package manager, then add:</p>
 <pre><code class="language-yaml">dependencies:
   hdf5:
     github: kojix2/hdf5.cr</code></pre>
-<h2><a id="usage" class="anchor" href="#usage">
+<p>Run <code>shards install</code>. HDF5 is linked at compile time. For a nonstandard installation, configure <code>PKG_CONFIG_PATH</code> and <code>LIBRARY_PATH</code>; on Linux, also set <code>LD_LIBRARY_PATH</code> to its library directory at runtime. Ruby's runtime <code>HDF5_LIB_PATH</code> setting is not used.</p>
+<h2><a id="write-and-read" class="anchor" href="#write-and-read">
   <svg class="octicon-link" aria-hidden="true">
     <use href="#octicon-link"/>
   </svg>
-</a>Usage</h2>
+</a>Write and read</h2>
 <pre><code class="language-crystal"><span class="k">require</span> <span class="s">&quot;hdf5&quot;</span>
 
-<span class="t">HDF5</span><span class="t">::</span><span class="t">File</span>.open(<span class="s">&quot;data.h5&quot;</span>, <span class="n">:w</span>) <span class="k">do</span> <span class="o">|</span>file<span class="o">|</span>
-  file.write_dataset(<span class="s">&quot;values&quot;</span>, [<span class="n">1.0</span>, <span class="n">2.0</span>, <span class="n">3.0</span>])
-  file.set_attribute(<span class="s">&quot;title&quot;</span>, <span class="s">&quot;example&quot;</span>)
+<span class="t">HDF5</span>.open(<span class="s">&quot;data.h5&quot;</span>, <span class="n">:w</span>) <span class="k">do</span> <span class="o">|</span>file<span class="o">|</span>
+  file.create_dataset(<span class="s">&quot;measurements/signal&quot;</span>, [<span class="n">1.0</span>, <span class="n">2.0</span>, <span class="n">3.0</span>, <span class="n">4.0</span>], shape: {<span class="n">2</span>, <span class="n">2</span>}) <span class="k">do</span> <span class="o">|</span>signal<span class="o">|</span>
+    signal.attrs[<span class="s">&quot;unit&quot;</span>] <span class="o">=</span> <span class="s">&quot;a.u.&quot;</span>
+  <span class="k">end</span>
+  file.attrs[<span class="s">&quot;title&quot;</span>] <span class="o">=</span> <span class="s">&quot;example&quot;</span>
 <span class="k">end</span>
 
-<span class="t">HDF5</span><span class="t">::</span><span class="t">File</span>.open(<span class="s">&quot;data.h5&quot;</span>, <span class="n">:r</span>) <span class="k">do</span> <span class="o">|</span>file<span class="o">|</span>
-  p file.read_dataset(<span class="s">&quot;values&quot;</span>, <span class="t">Float64</span>)
-  p file.get_attribute(<span class="s">&quot;title&quot;</span>, <span class="t">String</span>)
+<span class="t">HDF5</span>.open(<span class="s">&quot;data.h5&quot;</span>) <span class="k">do</span> <span class="o">|</span>file<span class="o">|</span>
+  file.dataset(<span class="s">&quot;measurements/signal&quot;</span>, <span class="t">Float64</span>) <span class="k">do</span> <span class="o">|</span>signal<span class="o">|</span>
+    p signal.shape                                  <span class="c"># [2, 2]</span>
+    p signal.read                                   <span class="c"># [1.0, 2.0, 3.0, 4.0]</span>
+    p signal.read(<span class="t">HDF5</span>.s[<span class="n">1</span>, <span class="t">HDF5</span>.all])                <span class="c"># [3.0, 4.0]</span>
+    p signal.read_scalar(<span class="t">HDF5</span>.s[<span class="n">0</span>, <span class="n">1</span>])                <span class="c"># 2.0</span>
+    p signal.attrs.get(<span class="s">&quot;unit&quot;</span>, <span class="t">String</span>)                <span class="c"># &quot;a.u.&quot;</span>
+  <span class="k">end</span>
 <span class="k">end</span></code></pre>
+<p><code>create_dataset</code> infers the Crystal element type, returning <code>TypedDataset(T)</code>. <code>dataset(path, T)</code> supplies the type when opening an existing dataset. <code>open_dataset</code> returns an untyped <code>Dataset</code>; read it with <code>read(T)</code> or <code>read_scalar(T)</code>. <code>file[path]</code> returns <code>Group | Dataset</code>, so narrow that union before using object-specific operations.</p>
+<p>Data is always flat and in row-major order. Specify <code>shape:</code> for multidimensional data. <code>read</code> always returns <code>Array(T)</code>, including a one-element array for a scalar. Shape information comes from <code>dataset.shape</code> or <code>selection.result_shape(dataset.shape)</code>. Nested numeric arrays remain variable-length elements, not rectangular matrices.</p>
+<p>You can choose a storage type explicitly: <code>file.create_dataset(&quot;wide&quot;, Int64, [1, 2])</code>. Both <code>Array(T)</code> and <code>Slice(T)</code> inputs support shape and storage options. Creation from a scalar defaults to shape <code>[]</code>; an explicit shape broadcasts that scalar across the dataset.</p>
+<h2><a id="selections-and-existing-buffers" class="anchor" href="#selections-and-existing-buffers">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>Selections and existing buffers</h2>
+<pre><code class="language-crystal">selection <span class="o">=</span> <span class="t">HDF5</span>.s[<span class="n">1</span>.., <span class="t">HDF5</span>.slice(<span class="n">0</span>...<span class="n">10</span>, step: <span class="n">2</span>)]
+values <span class="o">=</span> dataset.read(selection)
+p selection.result_shape(dataset.shape)
+dataset.write(values, selection)
+dataset.write(<span class="n">0.0</span>, selection: selection) <span class="c"># scalar broadcast, bounded working buffer</span>
+
+buffer <span class="o">=</span> <span class="t">Slice</span>(<span class="t">Float64</span>).new(values.size, <span class="n">0.0</span>)
+dataset.read_into(buffer, selection: selection)</code></pre>
+<p>Selectors support integers, negative indices, inclusive/exclusive ranges, open-ended ranges, <code>HDF5.all</code> (or <code>nil</code>) and positive strides. Omitted axes select the complete axis. Integer indices drop an axis in the result shape. Empty selections return empty arrays and accept empty writes. Out-of-range integers and excess axes raise <code>IndexError</code>.</p>
+<p><code>Selection.hyperslab(start, count, stride: ..., block: ...)</code> supports non-overlapping block hyperslabs. <code>dataset[selection]</code> and <code>dataset[selection] = values</code> are shortcuts. String datasets also support partial I/O.</p>
+<p>Buffer length and write element counts must match the selected element count. <code>read_to(Slice(T))</code> remains an alias of <code>read_into</code>. Pointer-based <code>read_to</code> and attribute <code>read_raw</code>/<code>write_raw</code> are low-level unsafe APIs: callers must supply the native representation and sufficient capacity.</p>
+<h2><a id="scalars-null-and-special-types" class="anchor" href="#scalars-null-and-special-types">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>Scalars, Null and special types</h2>
+<pre><code class="language-crystal">file.create_dataset(<span class="s">&quot;scalar&quot;</span>, <span class="n">1.5</span>).close
+file.create_dataset(<span class="s">&quot;empty&quot;</span>, <span class="t">Float32</span>, shape: {<span class="n">0</span>, <span class="n">3</span>}).close
+file.create_dataset(<span class="s">&quot;null&quot;</span>, <span class="t">HDF5</span><span class="t">::</span><span class="t">Empty</span>(<span class="t">Float32</span>).new).close
+file.create_dataset(<span class="s">&quot;enabled&quot;</span>, [<span class="n">false</span>, <span class="n">true</span>]).close
+file.create_dataset(<span class="s">&quot;complex128&quot;</span>, [<span class="t">Complex</span>.new(<span class="n">1</span>, <span class="n">2</span>)]).close
+file.create_dataset(<span class="s">&quot;complex64&quot;</span>, [<span class="t">HDF5</span><span class="t">::</span><span class="t">Complex32</span>.new(<span class="n">1</span>, <span class="n">2</span>)]).close
+file.create_dataset(<span class="s">&quot;labels&quot;</span>, [<span class="s">&quot;alpha&quot;</span>, <span class="s">&quot;日本語&quot;</span>]).close
+file.create_dataset(<span class="s">&quot;fixed&quot;</span>, [<span class="s">&quot;alpha&quot;</span>], string_type: <span class="t">HDF5</span><span class="t">::</span><span class="t">StringType</span>.fixed(<span class="n">8</span>)).close</code></pre>
+<p>Use <code>scalar?</code>, <code>null?</code> and <code>space_class</code> to distinguish scalar, Null and simple dataspaces. <code>shape</code> remains an array: both a scalar and Null have <code>[]</code>, while an empty matrix has <code>[0, 3]</code>. A Null has zero elements and uses <code>read_null</code>, returning <code>Empty(T)</code>; regular I/O, resize and append reject it.</p>
+<p>Bool uses an enum (<code>FALSE=0</code>, <code>TRUE=1</code>). Complex values use compound members <code>r</code> and <code>i</code>. These storage formats are compatible with ruby-hdf5 and h5py. Standard <code>Complex</code> has Float64 components; <code><a href="HDF5/Complex32.html">HDF5::Complex32</a></code> has Float32 components and converts explicitly with <code>.to_c</code> or <code>Complex32.new(complex)</code>.</p>
+<p>Strings default to variable-length UTF-8. Use <code>encoding: :ascii</code> or an explicit <code>StringType</code> for other supported storage. Embedded NUL, invalid UTF-8 and non-ASCII input for ASCII storage are rejected. Fixed-length strings keep the existing truncation and padding behavior by default; <code>Casting::Safe</code> rejects input that would be truncated.</p>
+<p>Object references and variable-length numeric arrays are supported as before. <code>Reference#dup</code> makes an independent native copy. Close references when finished; file closure also destroys references associated with that file.</p>
+<h2><a id="storage-append-and-iteration" class="anchor" href="#storage-append-and-iteration">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>Storage, append and iteration</h2>
+<pre><code class="language-crystal">file.create_dataset(<span class="s">&quot;samples&quot;</span>, <span class="t">Float32</span>,
+  shape: {<span class="n">0</span>, <span class="n">2</span>}, max_shape: {<span class="n">nil</span>, <span class="n">2</span>}, chunk: {<span class="n">256</span>, <span class="n">2</span>},
+  compression: <span class="n">:gzip</span>, compression_level: <span class="n">6</span>,
+  shuffle: <span class="n">true</span>, fletcher32: <span class="n">true</span>, fill_value: <span class="n">0.0_f32</span>) <span class="k">do</span> <span class="o">|</span>samples<span class="o">|</span>
+  samples.append([<span class="n">1.0_f32</span>, <span class="n">2.0_f32</span>, <span class="n">3.0_f32</span>, <span class="n">4.0_f32</span>], shape: {<span class="n">2</span>, <span class="n">2</span>})
+  samples.each_block(max_bytes: <span class="n">4</span> <span class="o">*</span> <span class="n">1024</span> <span class="o">*</span> <span class="n">1024</span>) <span class="k">do</span> <span class="o">|</span>selection, values<span class="o">|</span>
+    p values.sum
+  <span class="k">end</span>
+  samples.each_chunk { <span class="o">|</span>selection, values<span class="o">|</span> p selection.result_shape(samples.shape) }
+<span class="k">end</span></code></pre>
+<p><code>chunk: :auto</code> targets 256 KiB for fixed-length storage. Filters and an extendible maximum shape enable automatic chunking when no explicit chunks are supplied. Zero-sized initial dimensions are supported. <code>nil</code> in <code>max_shape</code> means unlimited; <code>HDF5.unlimited</code> remains accepted.</p>
+<p>Inspect stored settings with <code>chunk</code>, <code>max_shape</code> and typed <code>fill_value</code> (or <code>fill_value(T)</code> on an untyped Dataset). <code>datatype</code> exposes byte order, precision, bit offset, string metadata and compound members. Close returned datatype/dataspace handles when finished.</p>
+<p><code>resize</code> checks rank, maximum dimensions and chunked storage. <code>append</code> defaults to axis 0; multidimensional appends require their incoming <code>shape:</code>. Other axes must match. A failed append restores the original extent; if restoration also fails, the error retains the original write failure as its cause.</p>
+<p><code>each_block</code> yields a Selection and an independent flat Array within the requested element-payload byte budget, calculated using the requested Crystal type. Fixed-length string blocks use the stored byte width as an upper bound on each returned string payload. Variable-length strings and numeric arrays cannot provide that byte bound and reject this operation. <code>each_chunk</code> works with those types and includes clipped final chunks. For untyped datasets, pass the element type as the first argument. Neither operation holds the native lock while your block runs.</p>
+<h2><a id="attributes-and-hierarchy" class="anchor" href="#attributes-and-hierarchy">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>Attributes and hierarchy</h2>
+<pre><code class="language-crystal">attrs <span class="o">=</span> dataset.attrs
+attrs.create(<span class="s">&quot;scale&quot;</span>, <span class="t">Int16</span>, <span class="n">2</span>)                         <span class="c"># reject existing name</span>
+attrs.modify(<span class="s">&quot;scale&quot;</span>, <span class="n">4</span>)                               <span class="c"># preserve type and shape</span>
+attrs.write(<span class="s">&quot;scale&quot;</span>, <span class="s">&quot;replacement&quot;</span>)                    <span class="c"># create or replace</span>
+attrs.create(<span class="s">&quot;matrix&quot;</span>, [<span class="n">1</span>, <span class="n">2</span>, <span class="n">3</span>, <span class="n">4</span>], shape: {<span class="n">2</span>, <span class="n">2</span>})
+p attrs.get_array(<span class="s">&quot;matrix&quot;</span>, <span class="t">Int32</span>)
+attrs.create(<span class="s">&quot;null&quot;</span>, <span class="t">HDF5</span><span class="t">::</span><span class="t">Empty</span>(<span class="t">Int16</span>).new)
+p attrs.get_null(<span class="s">&quot;null&quot;</span>, <span class="t">Int16</span>)</code></pre>
+<p><code>attrs[name]</code> returns an Attribute handle; <code>get</code> reads a scalar, <code>get_array</code> reads a flat array, and <code>get_null</code> reads a Null marker. <code>attrs[name] = value</code> uses <code>write</code>. Replacement is staged through a temporary attribute so failed input validation or writing preserves the original attribute. <code>modify</code> preserves the existing datatype and shape; an optional <code>shape:</code> is checked against that shape. Creation, replacement and modification return <code>Nil</code>.</p>
+<p>Containers support <code>create_group</code>, <code>require_group</code>, <code>keys</code>, <code>each</code>, <code>exists?</code>, <code>delete</code>, <code>move</code>, hard <code>link</code>, <code>soft_link</code> and <code>external_link</code>. <code>link_info</code> returns <code>HardLink | SoftLink | ExternalLink</code>, including for dangling links. <code>require_group</code> raises <code>TypeMismatchError</code> if the existing object is a Dataset.</p>
+<p>File modes are <code>:r</code>, <code>:r_plus</code>/<code>:rw</code>, <code>:w</code>, <code>:x</code>/<code>:excl</code> and <code>:a</code>. Block APIs close resources automatically. Closing a file closes associated children and metadata; later operations raise <code>ClosedObjectError</code>. Close is idempotent, and a native close failure leaves the handle available for retry. Cleanup failures do not replace an exception from a user block.</p>
+<h2><a id="casting-and-migration" class="anchor" href="#casting-and-migration">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>Casting and migration</h2>
+<p>The default <code>Casting::Unsafe</code> permits HDF5's available conversions, including narrowing. It does not waive shape or buffer checks. Opt into lossless conversion checks with <code>casting: <a href="HDF5/Casting.html#Safe">HDF5::Casting::Safe</a></code>. Array conversion is checked by source/target type; scalar values and fill values are checked for representability. Safe casts keep Bool distinct from numeric coercion. Inputs must have a supported homogeneous Crystal element type.</p>
+<p>Existing <code>read</code>/<code>write</code>, <code>HDF5.s</code>, <code>chunk</code>, <code>max_shape</code>, Symbol file modes and typed datasets remain available. String selections and checked Slice reads now work. Attribute scalar <code>read</code> rejects arrays; use <code>read_array</code> instead. File closure now invalidates associated child handles. Earlier README examples using <code>write_dataset</code>, <code>read_dataset</code>, <code>set_attribute</code> and <code>get_attribute</code> were obsolete: use <code>create_dataset</code>, <code>dataset(..., T)</code> and <code>attrs</code> as shown above.</p>
+<p>See <a href="FEATURE_PARITY.md">the ruby-hdf5 feature mapping</a> and <a href="examples/README.md">runnable examples</a>.</p>
+<h2><a id="development" class="anchor" href="#development">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>Development</h2>
+<pre><code class="language-sh">crystal spec
+# Enable the bidirectional Python checks with an environment containing h5py and numpy:
+H5PY_PYTHON=/path/to/python crystal spec
+crystal tool format --check src spec examples</code></pre>
+<p>The reference lifecycle tests build a small Crystal worker and check explicit close, GC and process exit in separate processes. CI enables h5py tests on Linux and macOS. The local comparison checkout of ruby-hdf5 is not a build or test dependency.</p>
+<p>Fancy indexing, masks, negative slice steps, general broadcasting beyond scalar fill, SWMR, MPI and VDS creation are unsupported.</p>
 <h2><a id="license" class="anchor" href="#license">
   <svg class="octicon-link" aria-hidden="true">
     <use href="#octicon-link"/>

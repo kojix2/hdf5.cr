@@ -14,7 +14,7 @@
 <script type="text/javascript" src="../js/doc.js"></script>
 
   <meta name="repository-name" content="hdf5">
-  <title>HDF5::StringEncoding - hdf5 main</title>
+  <title>HDF5::SoftLink - hdf5 main</title>
   <script type="text/javascript">
     CrystalDocs.base_path = "../";
   </script>
@@ -252,12 +252,12 @@
       
     </li>
   
-  <li class=" " data-id="hdf5/HDF5/SoftLink" data-name="hdf5::softlink">
+  <li class=" current" data-id="hdf5/HDF5/SoftLink" data-name="hdf5::softlink">
       <a href="../HDF5/SoftLink.html">SoftLink</a>
       
     </li>
   
-  <li class=" current" data-id="hdf5/HDF5/StringEncoding" data-name="hdf5::stringencoding">
+  <li class=" " data-id="hdf5/HDF5/StringEncoding" data-name="hdf5::stringencoding">
       <a href="../HDF5/StringEncoding.html">StringEncoding</a>
       
     </li>
@@ -312,11 +312,13 @@
 <h1 class="type-name">
 
   <span class="kind">
-    enum
-  </span> HDF5::<wbr>StringEncoding
+    struct
+  </span> HDF5::<wbr>SoftLink
 
 </h1>
 
+
+  <ul class="superclass-hierarchy"><li class="superclass"><a href="../HDF5/SoftLink.html">HDF5::SoftLink</a></li><li class="superclass">Struct</li><li class="superclass">Value</li><li class="superclass">Object</li></ul>
 
 
 
@@ -346,38 +348,14 @@
   </h2>
   
     
-      <a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/datatype.cr#L2" target="_blank">
-        hdf5/datatype.cr
+      <a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/link_info.cr#L5" target="_blank">
+        hdf5/link_info.cr
       </a>
     
     <br/>
   
 
 
-
-  
-    <h2>
-      <a id="enum-members" class="anchor" href="#enum-members">
-  <svg class="octicon-link" aria-hidden="true">
-    <use href="#octicon-link"/>
-  </svg>
-</a>
-      Enum Members
-    </h2>
-  
-  <dl>
-    
-      <dt class="entry-const" id="Ascii">
-        <strong>Ascii</strong> = <code><span class="n">0</span></code>
-      </dt>
-      
-    
-      <dt class="entry-const" id="Utf8">
-        <strong>Utf8</strong> = <code><span class="n">1</span></code>
-      </dt>
-      
-    
-  </dl>
 
 
 
@@ -393,12 +371,7 @@
   <ul class="list-summary">
     
       <li class="entry-summary">
-        <a href="#from_lib%28value%3ALibHDF5%3A%3ACharSet%29%3AStringEncoding-class-method" class="signature"><strong>.from_lib</strong>(value : LibHDF5::CharSet) : StringEncoding</a>
-        
-      </li>
-    
-      <li class="entry-summary">
-        <a href="#parse%28value%3ASymbol%7CStringEncoding%29%3AStringEncoding-class-method" class="signature"><strong>.parse</strong>(value : Symbol | StringEncoding) : StringEncoding</a>
+        <a href="#new%28target%3AString%29-class-method" class="signature"><strong>.new</strong>(target : String)</a>
         
       </li>
     
@@ -421,16 +394,17 @@
   <ul class="list-summary">
     
       <li class="entry-summary">
-        <a href="#ascii%3F-instance-method" class="signature"><strong>#ascii?</strong></a>
-        
-          <div class="summary"><p>Returns <code>true</code> if this enum value equals <code><a href="../HDF5/StringEncoding.html#Ascii">Ascii</a></code></p></div>
+        <a href="#clone-instance-method" class="signature"><strong>#clone</strong></a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#utf8%3F-instance-method" class="signature"><strong>#utf8?</strong></a>
+        <a href="#copy_with%28target_target%3D%40target%29-instance-method" class="signature"><strong>#copy_with</strong>(target _target = @target)</a>
         
-          <div class="summary"><p>Returns <code>true</code> if this enum value equals <code><a href="../HDF5/StringEncoding.html#Utf8">Utf8</a></code></p></div>
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#target%3AString-instance-method" class="signature"><strong>#target</strong> : String</a>
         
       </li>
     
@@ -439,19 +413,6 @@
 
 
   <div class="methods-inherited">
-    
-      
-
-
-      
-
-
-      
-
-
-      
-
-
     
       
 
@@ -504,34 +465,18 @@
     Constructor Detail
   </h2>
   
-    <div class="entry-detail" id="from_lib(value:LibHDF5::CharSet):StringEncoding-class-method">
+    <div class="entry-detail" id="new(target:String)-class-method">
       <div class="signature">
         
-        def self.<strong>from_lib</strong>(value : LibHDF5::CharSet) : <a href="../HDF5/StringEncoding.html">StringEncoding</a>
+        def self.<strong>new</strong>(target : String)
 
-        <a class="method-permalink" href="#from_lib%28value%3ALibHDF5%3A%3ACharSet%29%3AStringEncoding-class-method">#</a>
+        <a class="method-permalink" href="#new%28target%3AString%29-class-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/datatype.cr#L22" target="_blank">View source</a>]
-        
-      </div>
-    </div>
-  
-    <div class="entry-detail" id="parse(value:Symbol|StringEncoding):StringEncoding-class-method">
-      <div class="signature">
-        
-        def self.<strong>parse</strong>(value : Symbol | <a href="../HDF5/StringEncoding.html">StringEncoding</a>) : <a href="../HDF5/StringEncoding.html">StringEncoding</a>
-
-        <a class="method-permalink" href="#parse%28value%3ASymbol%7CStringEncoding%29%3AStringEncoding-class-method">#</a>
-      </div>
-      
-      <br/>
-      <div>
-        
-          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/datatype.cr#L6" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/link_info.cr#L5" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -552,44 +497,48 @@
     Instance Method Detail
   </h2>
   
-    <div class="entry-detail" id="ascii?-instance-method">
+    <div class="entry-detail" id="clone-instance-method">
       <div class="signature">
         
-        def <strong>ascii?</strong>
+        def <strong>clone</strong>
 
-        <a class="method-permalink" href="#ascii%3F-instance-method">#</a>
+        <a class="method-permalink" href="#clone-instance-method">#</a>
       </div>
-      
-        <div class="doc">
-          
-          <p>Returns <code>true</code> if this enum value equals <code><a href="../HDF5/StringEncoding.html#Ascii">Ascii</a></code></p>
-        </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/datatype.cr#L3" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/link_info.cr#L5" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="utf8?-instance-method">
+    <div class="entry-detail" id="copy_with(target_target=@target)-instance-method">
       <div class="signature">
         
-        def <strong>utf8?</strong>
+        def <strong>copy_with</strong>(target _target = @target)
 
-        <a class="method-permalink" href="#utf8%3F-instance-method">#</a>
+        <a class="method-permalink" href="#copy_with%28target_target%3D%40target%29-instance-method">#</a>
       </div>
-      
-        <div class="doc">
-          
-          <p>Returns <code>true</code> if this enum value equals <code><a href="../HDF5/StringEncoding.html#Utf8">Utf8</a></code></p>
-        </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/datatype.cr#L4" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/link_info.cr#L5" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="target:String-instance-method">
+      <div class="signature">
+        
+        def <strong>target</strong> : String
+
+        <a class="method-permalink" href="#target%3AString-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
         
       </div>
     </div>

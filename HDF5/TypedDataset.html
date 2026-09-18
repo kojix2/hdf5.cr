@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="generator" content="Crystal Docs 1.19.1">
+<meta name="generator" content="Crystal Docs 1.20.3">
 <meta name="crystal_docs.project_version" content="main">
 <meta name="crystal_docs.project_name" content="hdf5">
 
@@ -77,8 +77,33 @@
       
     </li>
   
+  <li class=" " data-id="hdf5/HDF5/Casting" data-name="hdf5::casting">
+      <a href="../HDF5/Casting.html">Casting</a>
+      
+    </li>
+  
+  <li class=" " data-id="hdf5/HDF5/CastingChecks" data-name="hdf5::castingchecks">
+      <a href="../HDF5/CastingChecks.html">CastingChecks</a>
+      
+    </li>
+  
+  <li class=" " data-id="hdf5/HDF5/Cleanup" data-name="hdf5::cleanup">
+      <a href="../HDF5/Cleanup.html">Cleanup</a>
+      
+    </li>
+  
   <li class=" " data-id="hdf5/HDF5/ClosedObjectError" data-name="hdf5::closedobjecterror">
       <a href="../HDF5/ClosedObjectError.html">ClosedObjectError</a>
+      
+    </li>
+  
+  <li class=" " data-id="hdf5/HDF5/Codec" data-name="hdf5::codec">
+      <a href="../HDF5/Codec.html">Codec</a>
+      
+    </li>
+  
+  <li class=" " data-id="hdf5/HDF5/Complex32" data-name="hdf5::complex32">
+      <a href="../HDF5/Complex32.html">Complex32</a>
       
     </li>
   
@@ -117,11 +142,6 @@
       
     </li>
   
-  <li class=" " data-id="hdf5/HDF5/DatasetStorage" data-name="hdf5::datasetstorage">
-      <a href="../HDF5/DatasetStorage.html">DatasetStorage</a>
-      
-    </li>
-  
   <li class=" " data-id="hdf5/HDF5/Dataspace" data-name="hdf5::dataspace">
       <a href="../HDF5/Dataspace.html">Dataspace</a>
       
@@ -132,13 +152,28 @@
       
     </li>
   
+  <li class=" " data-id="hdf5/HDF5/Empty" data-name="hdf5::empty(t)">
+      <a href="../HDF5/Empty.html">Empty</a>
+      
+    </li>
+  
   <li class=" " data-id="hdf5/HDF5/Error" data-name="hdf5::error">
       <a href="../HDF5/Error.html">Error</a>
       
     </li>
   
+  <li class=" " data-id="hdf5/HDF5/ExternalLink" data-name="hdf5::externallink">
+      <a href="../HDF5/ExternalLink.html">ExternalLink</a>
+      
+    </li>
+  
   <li class=" " data-id="hdf5/HDF5/File" data-name="hdf5::file">
       <a href="../HDF5/File.html">File</a>
+      
+    </li>
+  
+  <li class=" " data-id="hdf5/HDF5/FileContext" data-name="hdf5::filecontext">
+      <a href="../HDF5/FileContext.html">FileContext</a>
       
     </li>
   
@@ -152,8 +187,23 @@
       
     </li>
   
+  <li class=" " data-id="hdf5/HDF5/HardLink" data-name="hdf5::hardlink">
+      <a href="../HDF5/HardLink.html">HardLink</a>
+      
+    </li>
+  
   <li class=" " data-id="hdf5/HDF5/InternalChecks" data-name="hdf5::internalchecks">
       <a href="../HDF5/InternalChecks.html">InternalChecks</a>
+      
+    </li>
+  
+  <li class=" " data-id="hdf5/HDF5/LinkInfo" data-name="hdf5::linkinfo">
+      <a href="../HDF5/LinkInfo.html">LinkInfo</a>
+      
+    </li>
+  
+  <li class=" " data-id="hdf5/HDF5/Native" data-name="hdf5::native">
+      <a href="../HDF5/Native.html">Native</a>
       
     </li>
   
@@ -197,6 +247,16 @@
       
     </li>
   
+  <li class=" " data-id="hdf5/HDF5/Shapes" data-name="hdf5::shapes">
+      <a href="../HDF5/Shapes.html">Shapes</a>
+      
+    </li>
+  
+  <li class=" " data-id="hdf5/HDF5/SoftLink" data-name="hdf5::softlink">
+      <a href="../HDF5/SoftLink.html">SoftLink</a>
+      
+    </li>
+  
   <li class=" " data-id="hdf5/HDF5/StringEncoding" data-name="hdf5::stringencoding">
       <a href="../HDF5/StringEncoding.html">StringEncoding</a>
       
@@ -214,6 +274,11 @@
   
   <li class=" current" data-id="hdf5/HDF5/TypedDataset" data-name="hdf5::typeddataset(t)">
       <a href="../HDF5/TypedDataset.html">TypedDataset</a>
+      
+    </li>
+  
+  <li class=" " data-id="hdf5/HDF5/TypeFactory" data-name="hdf5::typefactory">
+      <a href="../HDF5/TypeFactory.html">TypeFactory</a>
       
     </li>
   
@@ -283,7 +348,7 @@
   </h2>
   
     
-      <a href="https://github.com/kojix2/hdf5.cr/blob/1c78c64b6f50787abc2ceb10b5709c1a7bc98590/src/hdf5/typed_dataset.cr#L2" target="_blank">
+      <a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/typed_dataset.cr#L2" target="_blank">
         hdf5/typed_dataset.cr
       </a>
     
@@ -334,87 +399,212 @@
       </li>
     
       <li class="entry-summary">
-        <a href="#%5B%5D%3D%28selection%3ASelection%2Cdata%3AArray%28T%29%29%3ANil-instance-method" class="signature"><strong>#[]=</strong>(selection : Selection, data : Array(T)) : Nil</a>
+        <a href="#%5B%5D%3D%28selection%3ASelection%2Cdata%29%3ANil-instance-method" class="signature"><strong>#[]=</strong>(selection : Selection, data) : Nil</a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#attrs%3AAttributes-instance-method" class="signature"><strong>#attrs</strong> : Attributes</a>
+        <a href="#append%28data%2C%2A%2Cshape%3AIndexable%7CNil%3Dnil%2Caxis%3AInt%3D0%2Ccasting%3ACasting%3DCasting%3A%3AUnsafe%29%3ANil-instance-method" class="signature"><strong>#append</strong>(data, *, shape : Indexable | Nil = <span class="n">nil</span>, axis : Int = <span class="n">0</span>, casting : Casting = <span class="t">Casting</span><span class="t">::</span><span class="t">Unsafe</span>) : Nil</a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#close%3ANil-instance-method" class="signature"><strong>#close</strong> : Nil</a>
+        <a href="#attrs%28%2Aargs%2C%2A%2Aoptions%29-instance-method" class="signature"><strong>#attrs</strong>(*args, **options)</a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#dataspace%3ADataspace-instance-method" class="signature"><strong>#dataspace</strong> : Dataspace</a>
+        <a href="#attrs%28%2Aargs%2C%2A%2Aoptions%2C%26%29-instance-method" class="signature"><strong>#attrs</strong>(*args, **options, &)</a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#datatype%3ADatatype-instance-method" class="signature"><strong>#datatype</strong> : Datatype</a>
+        <a href="#chunk%28%2Aargs%2C%2A%2Aoptions%29-instance-method" class="signature"><strong>#chunk</strong>(*args, **options)</a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#finalize-instance-method" class="signature"><strong>#finalize</strong></a>
+        <a href="#chunk%28%2Aargs%2C%2A%2Aoptions%2C%26%29-instance-method" class="signature"><strong>#chunk</strong>(*args, **options, &)</a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#rank%3AInt32-instance-method" class="signature"><strong>#rank</strong> : Int32</a>
+        <a href="#close%28%2Aargs%2C%2A%2Aoptions%29-instance-method" class="signature"><strong>#close</strong>(*args, **options)</a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#read%28selection%3ASelection%29%3AArray%28T%29-instance-method" class="signature"><strong>#read</strong>(selection : Selection) : Array(T)</a>
+        <a href="#close%28%2Aargs%2C%2A%2Aoptions%2C%26%29-instance-method" class="signature"><strong>#close</strong>(*args, **options, &)</a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#read%3AArray%28T%29-instance-method" class="signature"><strong>#read</strong> : Array(T)</a>
+        <a href="#closed%3F%28%2Aargs%2C%2A%2Aoptions%29-instance-method" class="signature"><strong>#closed?</strong>(*args, **options)</a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#read_to%28buffer%3ASlice%28T%29%29%3ANil-instance-method" class="signature"><strong>#read_to</strong>(buffer : Slice(T)) : Nil</a>
+        <a href="#closed%3F%28%2Aargs%2C%2A%2Aoptions%2C%26%29-instance-method" class="signature"><strong>#closed?</strong>(*args, **options, &)</a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#resize%28new_shape%3AIndexable%29%3ANil-instance-method" class="signature"><strong>#resize</strong>(new_shape : Indexable) : Nil</a>
+        <a href="#dataset%3ADataset-instance-method" class="signature"><strong>#dataset</strong> : Dataset</a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#shape%3AArray%28UInt64%29-instance-method" class="signature"><strong>#shape</strong> : Array(UInt64)</a>
+        <a href="#dataspace%28%2Aargs%2C%2A%2Aoptions%29-instance-method" class="signature"><strong>#dataspace</strong>(*args, **options)</a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#size%3AUInt64-instance-method" class="signature"><strong>#size</strong> : UInt64</a>
+        <a href="#dataspace%28%2Aargs%2C%2A%2Aoptions%2C%26%29-instance-method" class="signature"><strong>#dataspace</strong>(*args, **options, &)</a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#storage_size%3AUInt64-instance-method" class="signature"><strong>#storage_size</strong> : UInt64</a>
+        <a href="#datatype%28%2Aargs%2C%2A%2Aoptions%29-instance-method" class="signature"><strong>#datatype</strong>(*args, **options)</a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#write%28data%3AArray%28T%29%2Cselection%3ASelection%29%3ANil-instance-method" class="signature"><strong>#write</strong>(data : Array(T), selection : Selection) : Nil</a>
+        <a href="#datatype%28%2Aargs%2C%2A%2Aoptions%2C%26%29-instance-method" class="signature"><strong>#datatype</strong>(*args, **options, &)</a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#write%28data%3AArray%28T%29%29%3ANil-instance-method" class="signature"><strong>#write</strong>(data : Array(T)) : Nil</a>
+        <a href="#each_block%28%2A%2Cmax_bytes%3AInt%2Ccasting%3ACasting%3DCasting%3A%3AUnsafe%2C%26block%3ASelection%2CArray%28T%29-%3E%29%3ANil-instance-method" class="signature"><strong>#each_block</strong>(*, max_bytes : Int, casting : Casting = <span class="t">Casting</span><span class="t">::</span><span class="t">Unsafe</span>, &block : Selection, Array(T) -> ) : Nil</a>
         
       </li>
     
       <li class="entry-summary">
-        <a href="#write%28data%3ASlice%28T%29%29%3ANil-instance-method" class="signature"><strong>#write</strong>(data : Slice(T)) : Nil</a>
+        <a href="#each_chunk%28%2A%2Ccasting%3ACasting%3DCasting%3A%3AUnsafe%2C%26block%3ASelection%2CArray%28T%29-%3E%29%3ANil-instance-method" class="signature"><strong>#each_chunk</strong>(*, casting : Casting = <span class="t">Casting</span><span class="t">::</span><span class="t">Unsafe</span>, &block : Selection, Array(T) -> ) : Nil</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#fill_value%28%2A%2Ccasting%3ACasting%3DCasting%3A%3AUnsafe%29%3AT-instance-method" class="signature"><strong>#fill_value</strong>(*, casting : Casting = <span class="t">Casting</span><span class="t">::</span><span class="t">Unsafe</span>) : T</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#max_shape%28%2Aargs%2C%2A%2Aoptions%29-instance-method" class="signature"><strong>#max_shape</strong>(*args, **options)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#max_shape%28%2Aargs%2C%2A%2Aoptions%2C%26%29-instance-method" class="signature"><strong>#max_shape</strong>(*args, **options, &)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#null%3F%28%2Aargs%2C%2A%2Aoptions%29-instance-method" class="signature"><strong>#null?</strong>(*args, **options)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#null%3F%28%2Aargs%2C%2A%2Aoptions%2C%26%29-instance-method" class="signature"><strong>#null?</strong>(*args, **options, &)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#rank%28%2Aargs%2C%2A%2Aoptions%29-instance-method" class="signature"><strong>#rank</strong>(*args, **options)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#rank%28%2Aargs%2C%2A%2Aoptions%2C%26%29-instance-method" class="signature"><strong>#rank</strong>(*args, **options, &)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#read%28selection%3ASelection%7CNil%3Dnil%2C%2A%2Ccasting%3ACasting%3DCasting%3A%3AUnsafe%29%3AArray%28T%29-instance-method" class="signature"><strong>#read</strong>(selection : Selection | Nil = <span class="n">nil</span>, *, casting : Casting = <span class="t">Casting</span><span class="t">::</span><span class="t">Unsafe</span>) : Array(T)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#read_into%28buffer%3ASlice%28T%29%2Cselection%3ASelection%7CNil%3Dnil%2C%2A%2Ccasting%3ACasting%3DCasting%3A%3AUnsafe%29%3ANil-instance-method" class="signature"><strong>#read_into</strong>(buffer : Slice(T), selection : Selection | Nil = <span class="n">nil</span>, *, casting : Casting = <span class="t">Casting</span><span class="t">::</span><span class="t">Unsafe</span>) : Nil</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#read_null%3AEmpty%28T%29-instance-method" class="signature"><strong>#read_null</strong> : Empty(T)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#read_scalar%28selection%3ASelection%7CNil%3Dnil%2C%2A%2Ccasting%3ACasting%3DCasting%3A%3AUnsafe%29%3AT-instance-method" class="signature"><strong>#read_scalar</strong>(selection : Selection | Nil = <span class="n">nil</span>, *, casting : Casting = <span class="t">Casting</span><span class="t">::</span><span class="t">Unsafe</span>) : T</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#read_to%28buffer%3ASlice%28T%29%2Cselection%3ASelection%7CNil%3Dnil%2C%2A%2Ccasting%3ACasting%3DCasting%3A%3AUnsafe%29%3ANil-instance-method" class="signature"><strong>#read_to</strong>(buffer : Slice(T), selection : Selection | Nil = <span class="n">nil</span>, *, casting : Casting = <span class="t">Casting</span><span class="t">::</span><span class="t">Unsafe</span>) : Nil</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#resize%28%2Aargs%2C%2A%2Aoptions%29-instance-method" class="signature"><strong>#resize</strong>(*args, **options)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#resize%28%2Aargs%2C%2A%2Aoptions%2C%26%29-instance-method" class="signature"><strong>#resize</strong>(*args, **options, &)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#scalar%3F%28%2Aargs%2C%2A%2Aoptions%29-instance-method" class="signature"><strong>#scalar?</strong>(*args, **options)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#scalar%3F%28%2Aargs%2C%2A%2Aoptions%2C%26%29-instance-method" class="signature"><strong>#scalar?</strong>(*args, **options, &)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#shape%28%2Aargs%2C%2A%2Aoptions%29-instance-method" class="signature"><strong>#shape</strong>(*args, **options)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#shape%28%2Aargs%2C%2A%2Aoptions%2C%26%29-instance-method" class="signature"><strong>#shape</strong>(*args, **options, &)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#size%28%2Aargs%2C%2A%2Aoptions%29-instance-method" class="signature"><strong>#size</strong>(*args, **options)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#size%28%2Aargs%2C%2A%2Aoptions%2C%26%29-instance-method" class="signature"><strong>#size</strong>(*args, **options, &)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#space_class%28%2Aargs%2C%2A%2Aoptions%29-instance-method" class="signature"><strong>#space_class</strong>(*args, **options)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#space_class%28%2Aargs%2C%2A%2Aoptions%2C%26%29-instance-method" class="signature"><strong>#space_class</strong>(*args, **options, &)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#storage_size%28%2Aargs%2C%2A%2Aoptions%29-instance-method" class="signature"><strong>#storage_size</strong>(*args, **options)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#storage_size%28%2Aargs%2C%2A%2Aoptions%2C%26%29-instance-method" class="signature"><strong>#storage_size</strong>(*args, **options, &)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#write%28data%2Cselection%3ASelection%7CNil%3Dnil%2C%2A%2Ccasting%3ACasting%3DCasting%3A%3AUnsafe%29%3ANil-instance-method" class="signature"><strong>#write</strong>(data, selection : Selection | Nil = <span class="n">nil</span>, *, casting : Casting = <span class="t">Casting</span><span class="t">::</span><span class="t">Unsafe</span>) : Nil</a>
         
       </li>
     
@@ -473,7 +663,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/hdf5.cr/blob/1c78c64b6f50787abc2ceb10b5709c1a7bc98590/src/hdf5/typed_dataset.cr#L3" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/typed_dataset.cr#L5" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -505,279 +695,679 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/hdf5.cr/blob/1c78c64b6f50787abc2ceb10b5709c1a7bc98590/src/hdf5/typed_dataset.cr#L82" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/typed_dataset.cr#L52" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="[]=(selection:Selection,data:Array(T)):Nil-instance-method">
+    <div class="entry-detail" id="[]=(selection:Selection,data):Nil-instance-method">
       <div class="signature">
         
-        def <strong>[]=</strong>(selection : <a href="../HDF5/Selection.html">Selection</a>, data : Array(T)) : Nil
+        def <strong>[]=</strong>(selection : <a href="../HDF5/Selection.html">Selection</a>, data) : Nil
 
-        <a class="method-permalink" href="#%5B%5D%3D%28selection%3ASelection%2Cdata%3AArray%28T%29%29%3ANil-instance-method">#</a>
+        <a class="method-permalink" href="#%5B%5D%3D%28selection%3ASelection%2Cdata%29%3ANil-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/hdf5.cr/blob/1c78c64b6f50787abc2ceb10b5709c1a7bc98590/src/hdf5/typed_dataset.cr#L86" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/typed_dataset.cr#L56" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="attrs:Attributes-instance-method">
+    <div class="entry-detail" id="append(data,*,shape:Indexable|Nil=nil,axis:Int=0,casting:Casting=Casting::Unsafe):Nil-instance-method">
       <div class="signature">
         
-        def <strong>attrs</strong> : <a href="../HDF5/Attributes.html">Attributes</a>
+        def <strong>append</strong>(data, *, shape : Indexable | Nil = <span class="n">nil</span>, axis : Int = <span class="n">0</span>, casting : <a href="../HDF5/Casting.html">Casting</a> = <span class="t">Casting</span><span class="t">::</span><span class="t">Unsafe</span>) : Nil
 
-        <a class="method-permalink" href="#attrs%3AAttributes-instance-method">#</a>
+        <a class="method-permalink" href="#append%28data%2C%2A%2Cshape%3AIndexable%7CNil%3Dnil%2Caxis%3AInt%3D0%2Ccasting%3ACasting%3DCasting%3A%3AUnsafe%29%3ANil-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/hdf5.cr/blob/1c78c64b6f50787abc2ceb10b5709c1a7bc98590/src/hdf5/typed_dataset.cr#L30" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/typed_dataset.cr#L35" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="close:Nil-instance-method">
+    <div class="entry-detail" id="attrs(*args,**options)-instance-method">
       <div class="signature">
         
-        def <strong>close</strong> : Nil
+        def <strong>attrs</strong>(*args, **options)
 
-        <a class="method-permalink" href="#close%3ANil-instance-method">#</a>
+        <a class="method-permalink" href="#attrs%28%2Aargs%2C%2A%2Aoptions%29-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/hdf5.cr/blob/1c78c64b6f50787abc2ceb10b5709c1a7bc98590/src/hdf5/typed_dataset.cr#L90" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/typed_dataset.cr#L8" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="dataspace:Dataspace-instance-method">
+    <div class="entry-detail" id="attrs(*args,**options,&amp;)-instance-method">
       <div class="signature">
         
-        def <strong>dataspace</strong> : <a href="../HDF5/Dataspace.html">Dataspace</a>
+        def <strong>attrs</strong>(*args, **options, &)
 
-        <a class="method-permalink" href="#dataspace%3ADataspace-instance-method">#</a>
+        <a class="method-permalink" href="#attrs%28%2Aargs%2C%2A%2Aoptions%2C%26%29-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/hdf5.cr/blob/1c78c64b6f50787abc2ceb10b5709c1a7bc98590/src/hdf5/typed_dataset.cr#L22" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/typed_dataset.cr#L8" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="datatype:Datatype-instance-method">
+    <div class="entry-detail" id="chunk(*args,**options)-instance-method">
       <div class="signature">
         
-        def <strong>datatype</strong> : <a href="../HDF5/Datatype.html">Datatype</a>
+        def <strong>chunk</strong>(*args, **options)
 
-        <a class="method-permalink" href="#datatype%3ADatatype-instance-method">#</a>
+        <a class="method-permalink" href="#chunk%28%2Aargs%2C%2A%2Aoptions%29-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/hdf5.cr/blob/1c78c64b6f50787abc2ceb10b5709c1a7bc98590/src/hdf5/typed_dataset.cr#L18" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/typed_dataset.cr#L8" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="finalize-instance-method">
+    <div class="entry-detail" id="chunk(*args,**options,&amp;)-instance-method">
       <div class="signature">
         
-        def <strong>finalize</strong>
+        def <strong>chunk</strong>(*args, **options, &)
 
-        <a class="method-permalink" href="#finalize-instance-method">#</a>
+        <a class="method-permalink" href="#chunk%28%2Aargs%2C%2A%2Aoptions%2C%26%29-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/hdf5.cr/blob/1c78c64b6f50787abc2ceb10b5709c1a7bc98590/src/hdf5/typed_dataset.cr#L94" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/typed_dataset.cr#L8" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="rank:Int32-instance-method">
+    <div class="entry-detail" id="close(*args,**options)-instance-method">
       <div class="signature">
         
-        def <strong>rank</strong> : Int32
+        def <strong>close</strong>(*args, **options)
 
-        <a class="method-permalink" href="#rank%3AInt32-instance-method">#</a>
+        <a class="method-permalink" href="#close%28%2Aargs%2C%2A%2Aoptions%29-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/hdf5.cr/blob/1c78c64b6f50787abc2ceb10b5709c1a7bc98590/src/hdf5/typed_dataset.cr#L10" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/typed_dataset.cr#L8" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="read(selection:Selection):Array(T)-instance-method">
+    <div class="entry-detail" id="close(*args,**options,&amp;)-instance-method">
       <div class="signature">
         
-        def <strong>read</strong>(selection : <a href="../HDF5/Selection.html">Selection</a>) : Array(T)
+        def <strong>close</strong>(*args, **options, &)
 
-        <a class="method-permalink" href="#read%28selection%3ASelection%29%3AArray%28T%29-instance-method">#</a>
+        <a class="method-permalink" href="#close%28%2Aargs%2C%2A%2Aoptions%2C%26%29-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/hdf5.cr/blob/1c78c64b6f50787abc2ceb10b5709c1a7bc98590/src/hdf5/typed_dataset.cr#L42" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/typed_dataset.cr#L8" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="read:Array(T)-instance-method">
+    <div class="entry-detail" id="closed?(*args,**options)-instance-method">
       <div class="signature">
         
-        def <strong>read</strong> : Array(T)
+        def <strong>closed?</strong>(*args, **options)
 
-        <a class="method-permalink" href="#read%3AArray%28T%29-instance-method">#</a>
+        <a class="method-permalink" href="#closed%3F%28%2Aargs%2C%2A%2Aoptions%29-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/hdf5.cr/blob/1c78c64b6f50787abc2ceb10b5709c1a7bc98590/src/hdf5/typed_dataset.cr#L34" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/typed_dataset.cr#L8" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="read_to(buffer:Slice(T)):Nil-instance-method">
+    <div class="entry-detail" id="closed?(*args,**options,&amp;)-instance-method">
       <div class="signature">
         
-        def <strong>read_to</strong>(buffer : Slice(T)) : Nil
+        def <strong>closed?</strong>(*args, **options, &)
 
-        <a class="method-permalink" href="#read_to%28buffer%3ASlice%28T%29%29%3ANil-instance-method">#</a>
+        <a class="method-permalink" href="#closed%3F%28%2Aargs%2C%2A%2Aoptions%2C%26%29-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/hdf5.cr/blob/1c78c64b6f50787abc2ceb10b5709c1a7bc98590/src/hdf5/typed_dataset.cr#L50" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/typed_dataset.cr#L8" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="resize(new_shape:Indexable):Nil-instance-method">
+    <div class="entry-detail" id="dataset:Dataset-instance-method">
       <div class="signature">
         
-        def <strong>resize</strong>(new_shape : Indexable) : Nil
+        def <strong>dataset</strong> : <a href="../HDF5/Dataset.html">Dataset</a>
 
-        <a class="method-permalink" href="#resize%28new_shape%3AIndexable%29%3ANil-instance-method">#</a>
+        <a class="method-permalink" href="#dataset%3ADataset-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/hdf5.cr/blob/1c78c64b6f50787abc2ceb10b5709c1a7bc98590/src/hdf5/typed_dataset.cr#L78" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/typed_dataset.cr#L3" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="shape:Array(UInt64)-instance-method">
+    <div class="entry-detail" id="dataspace(*args,**options)-instance-method">
       <div class="signature">
         
-        def <strong>shape</strong> : Array(UInt64)
+        def <strong>dataspace</strong>(*args, **options)
 
-        <a class="method-permalink" href="#shape%3AArray%28UInt64%29-instance-method">#</a>
+        <a class="method-permalink" href="#dataspace%28%2Aargs%2C%2A%2Aoptions%29-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/hdf5.cr/blob/1c78c64b6f50787abc2ceb10b5709c1a7bc98590/src/hdf5/typed_dataset.cr#L6" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/typed_dataset.cr#L8" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="size:UInt64-instance-method">
+    <div class="entry-detail" id="dataspace(*args,**options,&amp;)-instance-method">
       <div class="signature">
         
-        def <strong>size</strong> : UInt64
+        def <strong>dataspace</strong>(*args, **options, &)
 
-        <a class="method-permalink" href="#size%3AUInt64-instance-method">#</a>
+        <a class="method-permalink" href="#dataspace%28%2Aargs%2C%2A%2Aoptions%2C%26%29-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/hdf5.cr/blob/1c78c64b6f50787abc2ceb10b5709c1a7bc98590/src/hdf5/typed_dataset.cr#L14" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/typed_dataset.cr#L8" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="storage_size:UInt64-instance-method">
+    <div class="entry-detail" id="datatype(*args,**options)-instance-method">
       <div class="signature">
         
-        def <strong>storage_size</strong> : UInt64
+        def <strong>datatype</strong>(*args, **options)
 
-        <a class="method-permalink" href="#storage_size%3AUInt64-instance-method">#</a>
+        <a class="method-permalink" href="#datatype%28%2Aargs%2C%2A%2Aoptions%29-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/hdf5.cr/blob/1c78c64b6f50787abc2ceb10b5709c1a7bc98590/src/hdf5/typed_dataset.cr#L26" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/typed_dataset.cr#L8" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="write(data:Array(T),selection:Selection):Nil-instance-method">
+    <div class="entry-detail" id="datatype(*args,**options,&amp;)-instance-method">
       <div class="signature">
         
-        def <strong>write</strong>(data : Array(T), selection : <a href="../HDF5/Selection.html">Selection</a>) : Nil
+        def <strong>datatype</strong>(*args, **options, &)
 
-        <a class="method-permalink" href="#write%28data%3AArray%28T%29%2Cselection%3ASelection%29%3ANil-instance-method">#</a>
+        <a class="method-permalink" href="#datatype%28%2Aargs%2C%2A%2Aoptions%2C%26%29-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/hdf5.cr/blob/1c78c64b6f50787abc2ceb10b5709c1a7bc98590/src/hdf5/typed_dataset.cr#L70" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/typed_dataset.cr#L8" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="write(data:Array(T)):Nil-instance-method">
+    <div class="entry-detail" id="each_block(*,max_bytes:Int,casting:Casting=Casting::Unsafe,&amp;block:Selection,Array(T)-&gt;):Nil-instance-method">
       <div class="signature">
         
-        def <strong>write</strong>(data : Array(T)) : Nil
+        def <strong>each_block</strong>(*, max_bytes : Int, casting : <a href="../HDF5/Casting.html">Casting</a> = <span class="t">Casting</span><span class="t">::</span><span class="t">Unsafe</span>, &block : <a href="../HDF5/Selection.html">Selection</a>, Array(T) -> ) : Nil
 
-        <a class="method-permalink" href="#write%28data%3AArray%28T%29%29%3ANil-instance-method">#</a>
+        <a class="method-permalink" href="#each_block%28%2A%2Cmax_bytes%3AInt%2Ccasting%3ACasting%3DCasting%3A%3AUnsafe%2C%26block%3ASelection%2CArray%28T%29-%3E%29%3ANil-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/hdf5.cr/blob/1c78c64b6f50787abc2ceb10b5709c1a7bc98590/src/hdf5/typed_dataset.cr#L54" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/typed_dataset.cr#L43" target="_blank">View source</a>]
         
       </div>
     </div>
   
-    <div class="entry-detail" id="write(data:Slice(T)):Nil-instance-method">
+    <div class="entry-detail" id="each_chunk(*,casting:Casting=Casting::Unsafe,&amp;block:Selection,Array(T)-&gt;):Nil-instance-method">
       <div class="signature">
         
-        def <strong>write</strong>(data : Slice(T)) : Nil
+        def <strong>each_chunk</strong>(*, casting : <a href="../HDF5/Casting.html">Casting</a> = <span class="t">Casting</span><span class="t">::</span><span class="t">Unsafe</span>, &block : <a href="../HDF5/Selection.html">Selection</a>, Array(T) -> ) : Nil
 
-        <a class="method-permalink" href="#write%28data%3ASlice%28T%29%29%3ANil-instance-method">#</a>
+        <a class="method-permalink" href="#each_chunk%28%2A%2Ccasting%3ACasting%3DCasting%3A%3AUnsafe%2C%26block%3ASelection%2CArray%28T%29-%3E%29%3ANil-instance-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/hdf5.cr/blob/1c78c64b6f50787abc2ceb10b5709c1a7bc98590/src/hdf5/typed_dataset.cr#L62" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/typed_dataset.cr#L48" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="fill_value(*,casting:Casting=Casting::Unsafe):T-instance-method">
+      <div class="signature">
+        
+        def <strong>fill_value</strong>(*, casting : <a href="../HDF5/Casting.html">Casting</a> = <span class="t">Casting</span><span class="t">::</span><span class="t">Unsafe</span>) : T
+
+        <a class="method-permalink" href="#fill_value%28%2A%2Ccasting%3ACasting%3DCasting%3A%3AUnsafe%29%3AT-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/typed_dataset.cr#L39" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="max_shape(*args,**options)-instance-method">
+      <div class="signature">
+        
+        def <strong>max_shape</strong>(*args, **options)
+
+        <a class="method-permalink" href="#max_shape%28%2Aargs%2C%2A%2Aoptions%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/typed_dataset.cr#L8" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="max_shape(*args,**options,&amp;)-instance-method">
+      <div class="signature">
+        
+        def <strong>max_shape</strong>(*args, **options, &)
+
+        <a class="method-permalink" href="#max_shape%28%2Aargs%2C%2A%2Aoptions%2C%26%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/typed_dataset.cr#L8" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="null?(*args,**options)-instance-method">
+      <div class="signature">
+        
+        def <strong>null?</strong>(*args, **options)
+
+        <a class="method-permalink" href="#null%3F%28%2Aargs%2C%2A%2Aoptions%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/typed_dataset.cr#L8" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="null?(*args,**options,&amp;)-instance-method">
+      <div class="signature">
+        
+        def <strong>null?</strong>(*args, **options, &)
+
+        <a class="method-permalink" href="#null%3F%28%2Aargs%2C%2A%2Aoptions%2C%26%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/typed_dataset.cr#L8" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="rank(*args,**options)-instance-method">
+      <div class="signature">
+        
+        def <strong>rank</strong>(*args, **options)
+
+        <a class="method-permalink" href="#rank%28%2Aargs%2C%2A%2Aoptions%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/typed_dataset.cr#L8" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="rank(*args,**options,&amp;)-instance-method">
+      <div class="signature">
+        
+        def <strong>rank</strong>(*args, **options, &)
+
+        <a class="method-permalink" href="#rank%28%2Aargs%2C%2A%2Aoptions%2C%26%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/typed_dataset.cr#L8" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="read(selection:Selection|Nil=nil,*,casting:Casting=Casting::Unsafe):Array(T)-instance-method">
+      <div class="signature">
+        
+        def <strong>read</strong>(selection : <a href="../HDF5/Selection.html">Selection</a> | Nil = <span class="n">nil</span>, *, casting : <a href="../HDF5/Casting.html">Casting</a> = <span class="t">Casting</span><span class="t">::</span><span class="t">Unsafe</span>) : Array(T)
+
+        <a class="method-permalink" href="#read%28selection%3ASelection%7CNil%3Dnil%2C%2A%2Ccasting%3ACasting%3DCasting%3A%3AUnsafe%29%3AArray%28T%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/typed_dataset.cr#L11" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="read_into(buffer:Slice(T),selection:Selection|Nil=nil,*,casting:Casting=Casting::Unsafe):Nil-instance-method">
+      <div class="signature">
+        
+        def <strong>read_into</strong>(buffer : Slice(T), selection : <a href="../HDF5/Selection.html">Selection</a> | Nil = <span class="n">nil</span>, *, casting : <a href="../HDF5/Casting.html">Casting</a> = <span class="t">Casting</span><span class="t">::</span><span class="t">Unsafe</span>) : Nil
+
+        <a class="method-permalink" href="#read_into%28buffer%3ASlice%28T%29%2Cselection%3ASelection%7CNil%3Dnil%2C%2A%2Ccasting%3ACasting%3DCasting%3A%3AUnsafe%29%3ANil-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/typed_dataset.cr#L23" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="read_null:Empty(T)-instance-method">
+      <div class="signature">
+        
+        def <strong>read_null</strong> : <a href="../HDF5/Empty.html">Empty</a>(T)
+
+        <a class="method-permalink" href="#read_null%3AEmpty%28T%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/typed_dataset.cr#L19" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="read_scalar(selection:Selection|Nil=nil,*,casting:Casting=Casting::Unsafe):T-instance-method">
+      <div class="signature">
+        
+        def <strong>read_scalar</strong>(selection : <a href="../HDF5/Selection.html">Selection</a> | Nil = <span class="n">nil</span>, *, casting : <a href="../HDF5/Casting.html">Casting</a> = <span class="t">Casting</span><span class="t">::</span><span class="t">Unsafe</span>) : T
+
+        <a class="method-permalink" href="#read_scalar%28selection%3ASelection%7CNil%3Dnil%2C%2A%2Ccasting%3ACasting%3DCasting%3A%3AUnsafe%29%3AT-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/typed_dataset.cr#L15" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="read_to(buffer:Slice(T),selection:Selection|Nil=nil,*,casting:Casting=Casting::Unsafe):Nil-instance-method">
+      <div class="signature">
+        
+        def <strong>read_to</strong>(buffer : Slice(T), selection : <a href="../HDF5/Selection.html">Selection</a> | Nil = <span class="n">nil</span>, *, casting : <a href="../HDF5/Casting.html">Casting</a> = <span class="t">Casting</span><span class="t">::</span><span class="t">Unsafe</span>) : Nil
+
+        <a class="method-permalink" href="#read_to%28buffer%3ASlice%28T%29%2Cselection%3ASelection%7CNil%3Dnil%2C%2A%2Ccasting%3ACasting%3DCasting%3A%3AUnsafe%29%3ANil-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/typed_dataset.cr#L27" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="resize(*args,**options)-instance-method">
+      <div class="signature">
+        
+        def <strong>resize</strong>(*args, **options)
+
+        <a class="method-permalink" href="#resize%28%2Aargs%2C%2A%2Aoptions%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/typed_dataset.cr#L8" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="resize(*args,**options,&amp;)-instance-method">
+      <div class="signature">
+        
+        def <strong>resize</strong>(*args, **options, &)
+
+        <a class="method-permalink" href="#resize%28%2Aargs%2C%2A%2Aoptions%2C%26%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/typed_dataset.cr#L8" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="scalar?(*args,**options)-instance-method">
+      <div class="signature">
+        
+        def <strong>scalar?</strong>(*args, **options)
+
+        <a class="method-permalink" href="#scalar%3F%28%2Aargs%2C%2A%2Aoptions%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/typed_dataset.cr#L8" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="scalar?(*args,**options,&amp;)-instance-method">
+      <div class="signature">
+        
+        def <strong>scalar?</strong>(*args, **options, &)
+
+        <a class="method-permalink" href="#scalar%3F%28%2Aargs%2C%2A%2Aoptions%2C%26%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/typed_dataset.cr#L8" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="shape(*args,**options)-instance-method">
+      <div class="signature">
+        
+        def <strong>shape</strong>(*args, **options)
+
+        <a class="method-permalink" href="#shape%28%2Aargs%2C%2A%2Aoptions%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/typed_dataset.cr#L8" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="shape(*args,**options,&amp;)-instance-method">
+      <div class="signature">
+        
+        def <strong>shape</strong>(*args, **options, &)
+
+        <a class="method-permalink" href="#shape%28%2Aargs%2C%2A%2Aoptions%2C%26%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/typed_dataset.cr#L8" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="size(*args,**options)-instance-method">
+      <div class="signature">
+        
+        def <strong>size</strong>(*args, **options)
+
+        <a class="method-permalink" href="#size%28%2Aargs%2C%2A%2Aoptions%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/typed_dataset.cr#L8" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="size(*args,**options,&amp;)-instance-method">
+      <div class="signature">
+        
+        def <strong>size</strong>(*args, **options, &)
+
+        <a class="method-permalink" href="#size%28%2Aargs%2C%2A%2Aoptions%2C%26%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/typed_dataset.cr#L8" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="space_class(*args,**options)-instance-method">
+      <div class="signature">
+        
+        def <strong>space_class</strong>(*args, **options)
+
+        <a class="method-permalink" href="#space_class%28%2Aargs%2C%2A%2Aoptions%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/typed_dataset.cr#L8" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="space_class(*args,**options,&amp;)-instance-method">
+      <div class="signature">
+        
+        def <strong>space_class</strong>(*args, **options, &)
+
+        <a class="method-permalink" href="#space_class%28%2Aargs%2C%2A%2Aoptions%2C%26%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/typed_dataset.cr#L8" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="storage_size(*args,**options)-instance-method">
+      <div class="signature">
+        
+        def <strong>storage_size</strong>(*args, **options)
+
+        <a class="method-permalink" href="#storage_size%28%2Aargs%2C%2A%2Aoptions%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/typed_dataset.cr#L8" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="storage_size(*args,**options,&amp;)-instance-method">
+      <div class="signature">
+        
+        def <strong>storage_size</strong>(*args, **options, &)
+
+        <a class="method-permalink" href="#storage_size%28%2Aargs%2C%2A%2Aoptions%2C%26%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/typed_dataset.cr#L8" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="write(data,selection:Selection|Nil=nil,*,casting:Casting=Casting::Unsafe):Nil-instance-method">
+      <div class="signature">
+        
+        def <strong>write</strong>(data, selection : <a href="../HDF5/Selection.html">Selection</a> | Nil = <span class="n">nil</span>, *, casting : <a href="../HDF5/Casting.html">Casting</a> = <span class="t">Casting</span><span class="t">::</span><span class="t">Unsafe</span>) : Nil
+
+        <a class="method-permalink" href="#write%28data%2Cselection%3ASelection%7CNil%3Dnil%2C%2A%2Ccasting%3ACasting%3DCasting%3A%3AUnsafe%29%3ANil-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/typed_dataset.cr#L31" target="_blank">View source</a>]
         
       </div>
     </div>

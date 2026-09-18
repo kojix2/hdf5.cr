@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="generator" content="Crystal Docs 1.19.1">
+<meta name="generator" content="Crystal Docs 1.20.3">
 <meta name="crystal_docs.project_version" content="main">
 <meta name="crystal_docs.project_name" content="hdf5">
 
@@ -77,8 +77,33 @@
       
     </li>
   
+  <li class=" " data-id="hdf5/HDF5/Casting" data-name="hdf5::casting">
+      <a href="../HDF5/Casting.html">Casting</a>
+      
+    </li>
+  
+  <li class=" " data-id="hdf5/HDF5/CastingChecks" data-name="hdf5::castingchecks">
+      <a href="../HDF5/CastingChecks.html">CastingChecks</a>
+      
+    </li>
+  
+  <li class=" " data-id="hdf5/HDF5/Cleanup" data-name="hdf5::cleanup">
+      <a href="../HDF5/Cleanup.html">Cleanup</a>
+      
+    </li>
+  
   <li class=" " data-id="hdf5/HDF5/ClosedObjectError" data-name="hdf5::closedobjecterror">
       <a href="../HDF5/ClosedObjectError.html">ClosedObjectError</a>
+      
+    </li>
+  
+  <li class=" " data-id="hdf5/HDF5/Codec" data-name="hdf5::codec">
+      <a href="../HDF5/Codec.html">Codec</a>
+      
+    </li>
+  
+  <li class=" " data-id="hdf5/HDF5/Complex32" data-name="hdf5::complex32">
+      <a href="../HDF5/Complex32.html">Complex32</a>
       
     </li>
   
@@ -117,11 +142,6 @@
       
     </li>
   
-  <li class=" " data-id="hdf5/HDF5/DatasetStorage" data-name="hdf5::datasetstorage">
-      <a href="../HDF5/DatasetStorage.html">DatasetStorage</a>
-      
-    </li>
-  
   <li class=" " data-id="hdf5/HDF5/Dataspace" data-name="hdf5::dataspace">
       <a href="../HDF5/Dataspace.html">Dataspace</a>
       
@@ -132,13 +152,28 @@
       
     </li>
   
+  <li class=" " data-id="hdf5/HDF5/Empty" data-name="hdf5::empty(t)">
+      <a href="../HDF5/Empty.html">Empty</a>
+      
+    </li>
+  
   <li class=" " data-id="hdf5/HDF5/Error" data-name="hdf5::error">
       <a href="../HDF5/Error.html">Error</a>
       
     </li>
   
+  <li class=" " data-id="hdf5/HDF5/ExternalLink" data-name="hdf5::externallink">
+      <a href="../HDF5/ExternalLink.html">ExternalLink</a>
+      
+    </li>
+  
   <li class=" current" data-id="hdf5/HDF5/File" data-name="hdf5::file">
       <a href="../HDF5/File.html">File</a>
+      
+    </li>
+  
+  <li class=" " data-id="hdf5/HDF5/FileContext" data-name="hdf5::filecontext">
+      <a href="../HDF5/FileContext.html">FileContext</a>
       
     </li>
   
@@ -152,8 +187,23 @@
       
     </li>
   
+  <li class=" " data-id="hdf5/HDF5/HardLink" data-name="hdf5::hardlink">
+      <a href="../HDF5/HardLink.html">HardLink</a>
+      
+    </li>
+  
   <li class=" " data-id="hdf5/HDF5/InternalChecks" data-name="hdf5::internalchecks">
       <a href="../HDF5/InternalChecks.html">InternalChecks</a>
+      
+    </li>
+  
+  <li class=" " data-id="hdf5/HDF5/LinkInfo" data-name="hdf5::linkinfo">
+      <a href="../HDF5/LinkInfo.html">LinkInfo</a>
+      
+    </li>
+  
+  <li class=" " data-id="hdf5/HDF5/Native" data-name="hdf5::native">
+      <a href="../HDF5/Native.html">Native</a>
       
     </li>
   
@@ -197,6 +247,16 @@
       
     </li>
   
+  <li class=" " data-id="hdf5/HDF5/Shapes" data-name="hdf5::shapes">
+      <a href="../HDF5/Shapes.html">Shapes</a>
+      
+    </li>
+  
+  <li class=" " data-id="hdf5/HDF5/SoftLink" data-name="hdf5::softlink">
+      <a href="../HDF5/SoftLink.html">SoftLink</a>
+      
+    </li>
+  
   <li class=" " data-id="hdf5/HDF5/StringEncoding" data-name="hdf5::stringencoding">
       <a href="../HDF5/StringEncoding.html">StringEncoding</a>
       
@@ -214,6 +274,11 @@
   
   <li class=" " data-id="hdf5/HDF5/TypedDataset" data-name="hdf5::typeddataset(t)">
       <a href="../HDF5/TypedDataset.html">TypedDataset</a>
+      
+    </li>
+  
+  <li class=" " data-id="hdf5/HDF5/TypeFactory" data-name="hdf5::typefactory">
+      <a href="../HDF5/TypeFactory.html">TypeFactory</a>
       
     </li>
   
@@ -297,7 +362,7 @@
   </h2>
   
     
-      <a href="https://github.com/kojix2/hdf5.cr/blob/1c78c64b6f50787abc2ceb10b5709c1a7bc98590/src/hdf5/file.cr#L2" target="_blank">
+      <a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/file.cr#L2" target="_blank">
         hdf5/file.cr
       </a>
     
@@ -414,6 +479,16 @@
       </li>
     
       <li class="entry-summary">
+        <a href="#closed%3F%3ABool-instance-method" class="signature"><strong>#closed?</strong> : Bool</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#context%3AFileContext-instance-method" class="signature"><strong>#context</strong> : FileContext</a>
+        
+      </li>
+    
+      <li class="entry-summary">
         <a href="#filename%3AString-instance-method" class="signature"><strong>#filename</strong> : String</a>
         
       </li>
@@ -469,8 +544,8 @@
     attrs</a>, 
     
   
-    <a href="../HDF5/Container.html#create_dataset%28path%3AString%2Cdata%3AArray%28T%29%29%3ATypedDataset%28T%29forallT-instance-method" class="tooltip">
-      <span>create_dataset(path : String, data : Array(T)) : TypedDataset(T) forall T<br/>create_dataset(path : String, data : Array(String), *, string_type : StringType = <span class="t">StringType</span>.variable, encoding : Symbol | StringEncoding | Nil = <span class="n">nil</span>) : TypedDataset(String)<br/>create_dataset(path : String, data : Array(T), &block : TypedDataset(T) -> ) : Nil forall T<br/>create_dataset(path : String, data : Array(String), *, string_type : StringType = <span class="t">StringType</span>.variable, encoding : Symbol | StringEncoding | Nil = <span class="n">nil</span>, &block) : Nil<br/>create_dataset(path : String, type : <span class="t">String</span>.<span class="k">class</span>, *, shape : Indexable, max_shape : Indexable | Nil = <span class="n">nil</span>, chunk : Indexable | Nil = <span class="n">nil</span>, compression : Compression | Symbol | Nil = <span class="n">nil</span>, compression_level : Int32 = <span class="n">6</span>, shuffle : Bool = <span class="n">false</span>, fletcher32 : Bool = <span class="n">false</span>, options : DatasetCreateOptions | Nil = <span class="n">nil</span>, string_type : StringType = <span class="t">StringType</span>.variable, encoding : Symbol | StringEncoding | Nil = <span class="n">nil</span>) : TypedDataset(String)<br/>create_dataset(path : String, type : <span class="t">T</span>.<span class="k">class</span>, *, shape : Indexable, max_shape : Indexable | Nil = <span class="n">nil</span>, chunk : Indexable | Nil = <span class="n">nil</span>, compression : Compression | Symbol | Nil = <span class="n">nil</span>, compression_level : Int32 = <span class="n">6</span>, shuffle : Bool = <span class="n">false</span>, fletcher32 : Bool = <span class="n">false</span>, options : DatasetCreateOptions | Nil = <span class="n">nil</span>) : TypedDataset(T) forall T<br/>create_dataset(path : String, type : <span class="t">String</span>.<span class="k">class</span>, *, shape : Indexable, max_shape : Indexable | Nil = <span class="n">nil</span>, chunk : Indexable | Nil = <span class="n">nil</span>, compression : Compression | Symbol | Nil = <span class="n">nil</span>, compression_level : Int32 = <span class="n">6</span>, shuffle : Bool = <span class="n">false</span>, fletcher32 : Bool = <span class="n">false</span>, options : DatasetCreateOptions | Nil = <span class="n">nil</span>, string_type : StringType = <span class="t">StringType</span>.variable, encoding : Symbol | StringEncoding | Nil = <span class="n">nil</span>, &block : TypedDataset(String) -> ) : Nil<br/>create_dataset(path : String, type : <span class="t">T</span>.<span class="k">class</span>, *, shape : Indexable, max_shape : Indexable | Nil = <span class="n">nil</span>, chunk : Indexable | Nil = <span class="n">nil</span>, compression : Compression | Symbol | Nil = <span class="n">nil</span>, compression_level : Int32 = <span class="n">6</span>, shuffle : Bool = <span class="n">false</span>, fletcher32 : Bool = <span class="n">false</span>, options : DatasetCreateOptions | Nil = <span class="n">nil</span>, &block : TypedDataset(T) -> ) : Nil forall T</span>
+    <a href="../HDF5/Container.html#create_dataset%28path%3AString%2Ctype%3AT.class%2Cdata%3ASlice%28U%29%2C%2A%2Aoptions%29%3ATypedDataset%28T%29forallT%2CU-instance-method" class="tooltip">
+      <span>create_dataset(path : String, type : <span class="t">T</span>.<span class="k">class</span>, data : Slice(U), **options) : TypedDataset(T) forall T, U<br/>create_dataset(path : String, type : <span class="t">T</span>.<span class="k">class</span>, data : Array(U), *, shape : Indexable | Nil = <span class="n">nil</span>, casting : Casting = <span class="t">Casting</span><span class="t">::</span><span class="t">Unsafe</span>, **options) : TypedDataset(T) forall T, U<br/>create_dataset(path : String, type : <span class="t">T</span>.<span class="k">class</span>, value : Int8, *, shape : Indexable = <span class="o">[]</span> <span class="k">of</span> <span class="t">UInt64</span>, casting : Casting = <span class="t">Casting</span><span class="t">::</span><span class="t">Unsafe</span>, **options) : TypedDataset(T) forall T<br/>create_dataset(path : String, type : <span class="t">T</span>.<span class="k">class</span>, value : UInt8, *, shape : Indexable = <span class="o">[]</span> <span class="k">of</span> <span class="t">UInt64</span>, casting : Casting = <span class="t">Casting</span><span class="t">::</span><span class="t">Unsafe</span>, **options) : TypedDataset(T) forall T<br/>create_dataset(path : String, type : <span class="t">T</span>.<span class="k">class</span>, value : Int16, *, shape : Indexable = <span class="o">[]</span> <span class="k">of</span> <span class="t">UInt64</span>, casting : Casting = <span class="t">Casting</span><span class="t">::</span><span class="t">Unsafe</span>, **options) : TypedDataset(T) forall T<br/>create_dataset(path : String, type : <span class="t">T</span>.<span class="k">class</span>, value : UInt16, *, shape : Indexable = <span class="o">[]</span> <span class="k">of</span> <span class="t">UInt64</span>, casting : Casting = <span class="t">Casting</span><span class="t">::</span><span class="t">Unsafe</span>, **options) : TypedDataset(T) forall T<br/>create_dataset(path : String, type : <span class="t">T</span>.<span class="k">class</span>, value : Int32, *, shape : Indexable = <span class="o">[]</span> <span class="k">of</span> <span class="t">UInt64</span>, casting : Casting = <span class="t">Casting</span><span class="t">::</span><span class="t">Unsafe</span>, **options) : TypedDataset(T) forall T<br/>create_dataset(path : String, type : <span class="t">T</span>.<span class="k">class</span>, value : UInt32, *, shape : Indexable = <span class="o">[]</span> <span class="k">of</span> <span class="t">UInt64</span>, casting : Casting = <span class="t">Casting</span><span class="t">::</span><span class="t">Unsafe</span>, **options) : TypedDataset(T) forall T<br/>create_dataset(path : String, type : <span class="t">T</span>.<span class="k">class</span>, value : Int64, *, shape : Indexable = <span class="o">[]</span> <span class="k">of</span> <span class="t">UInt64</span>, casting : Casting = <span class="t">Casting</span><span class="t">::</span><span class="t">Unsafe</span>, **options) : TypedDataset(T) forall T<br/>create_dataset(path : String, type : <span class="t">T</span>.<span class="k">class</span>, value : UInt64, *, shape : Indexable = <span class="o">[]</span> <span class="k">of</span> <span class="t">UInt64</span>, casting : Casting = <span class="t">Casting</span><span class="t">::</span><span class="t">Unsafe</span>, **options) : TypedDataset(T) forall T<br/>create_dataset(path : String, type : <span class="t">T</span>.<span class="k">class</span>, value : Float32, *, shape : Indexable = <span class="o">[]</span> <span class="k">of</span> <span class="t">UInt64</span>, casting : Casting = <span class="t">Casting</span><span class="t">::</span><span class="t">Unsafe</span>, **options) : TypedDataset(T) forall T<br/>create_dataset(path : String, type : <span class="t">T</span>.<span class="k">class</span>, value : Float64, *, shape : Indexable = <span class="o">[]</span> <span class="k">of</span> <span class="t">UInt64</span>, casting : Casting = <span class="t">Casting</span><span class="t">::</span><span class="t">Unsafe</span>, **options) : TypedDataset(T) forall T<br/>create_dataset(path : String, type : <span class="t">T</span>.<span class="k">class</span>, value : Bool, *, shape : Indexable = <span class="o">[]</span> <span class="k">of</span> <span class="t">UInt64</span>, casting : Casting = <span class="t">Casting</span><span class="t">::</span><span class="t">Unsafe</span>, **options) : TypedDataset(T) forall T<br/>create_dataset(path : String, type : <span class="t">T</span>.<span class="k">class</span>, value : String, *, shape : Indexable = <span class="o">[]</span> <span class="k">of</span> <span class="t">UInt64</span>, casting : Casting = <span class="t">Casting</span><span class="t">::</span><span class="t">Unsafe</span>, **options) : TypedDataset(T) forall T<br/>create_dataset(path : String, type : <span class="t">T</span>.<span class="k">class</span>, value : Complex, *, shape : Indexable = <span class="o">[]</span> <span class="k">of</span> <span class="t">UInt64</span>, casting : Casting = <span class="t">Casting</span><span class="t">::</span><span class="t">Unsafe</span>, **options) : TypedDataset(T) forall T<br/>create_dataset(path : String, type : <span class="t">T</span>.<span class="k">class</span>, value : HDF5::Complex32, *, shape : Indexable = <span class="o">[]</span> <span class="k">of</span> <span class="t">UInt64</span>, casting : Casting = <span class="t">Casting</span><span class="t">::</span><span class="t">Unsafe</span>, **options) : TypedDataset(T) forall T<br/>create_dataset(path : String, type : <span class="t">T</span>.<span class="k">class</span>, value : HDF5::Reference, *, shape : Indexable = <span class="o">[]</span> <span class="k">of</span> <span class="t">UInt64</span>, casting : Casting = <span class="t">Casting</span><span class="t">::</span><span class="t">Unsafe</span>, **options) : TypedDataset(T) forall T<br/>create_dataset(path : String, type : <span class="t">T</span>.<span class="k">class</span>, *, shape : Indexable = <span class="o">[]</span> <span class="k">of</span> <span class="t">UInt64</span>, null : Bool = <span class="n">false</span>, max_shape : Indexable | Nil = <span class="n">nil</span>, chunk : Indexable | Symbol | Nil = <span class="n">nil</span>, compression : Compression | Symbol | Nil = <span class="n">nil</span>, compression_level : Int32 = <span class="n">6</span>, shuffle : Bool = <span class="n">false</span>, fletcher32 : Bool = <span class="n">false</span>, options : DatasetCreateOptions | Nil = <span class="n">nil</span>, string_type : StringType = <span class="t">StringType</span>.variable, encoding : Symbol | StringEncoding | Nil = <span class="n">nil</span>, fill_value = <span class="n">nil</span>, casting : Casting = <span class="t">Casting</span><span class="t">::</span><span class="t">Unsafe</span>) : TypedDataset(T) forall T<br/>create_dataset(path : String, data : Slice(T), **options) : TypedDataset(T) forall T<br/>create_dataset(path : String, value : Empty(T), **options) : TypedDataset(T) forall T<br/>create_dataset(path : String, data : Array(T), *, shape : Indexable | Nil = <span class="n">nil</span>, casting : Casting = <span class="t">Casting</span><span class="t">::</span><span class="t">Unsafe</span>, **options) : TypedDataset(T) forall T<br/>create_dataset(path : String, value : Int8, *, shape : Indexable = <span class="o">[]</span> <span class="k">of</span> <span class="t">UInt64</span>, casting : Casting = <span class="t">Casting</span><span class="t">::</span><span class="t">Unsafe</span>, **options) : TypedDataset(Int8)<br/>create_dataset(path : String, type : <span class="t">T</span>.<span class="k">class</span>, data : Array(U), **options, &block : TypedDataset(T) -> ) : Nil forall T, U<br/>create_dataset(path : String, type : <span class="t">T</span>.<span class="k">class</span>, data : Slice(U), **options, &block : TypedDataset(T) -> ) : Nil forall T, U<br/>create_dataset(path : String, type : <span class="t">T</span>.<span class="k">class</span>, value : Int8, **options, &block : TypedDataset(T) -> ) : Nil forall T<br/>create_dataset(path : String, type : <span class="t">T</span>.<span class="k">class</span>, value : UInt8, **options, &block : TypedDataset(T) -> ) : Nil forall T<br/>create_dataset(path : String, type : <span class="t">T</span>.<span class="k">class</span>, value : Int16, **options, &block : TypedDataset(T) -> ) : Nil forall T<br/>create_dataset(path : String, type : <span class="t">T</span>.<span class="k">class</span>, value : UInt16, **options, &block : TypedDataset(T) -> ) : Nil forall T<br/>create_dataset(path : String, type : <span class="t">T</span>.<span class="k">class</span>, value : Int32, **options, &block : TypedDataset(T) -> ) : Nil forall T<br/>create_dataset(path : String, type : <span class="t">T</span>.<span class="k">class</span>, value : UInt32, **options, &block : TypedDataset(T) -> ) : Nil forall T<br/>create_dataset(path : String, type : <span class="t">T</span>.<span class="k">class</span>, value : Int64, **options, &block : TypedDataset(T) -> ) : Nil forall T<br/>create_dataset(path : String, type : <span class="t">T</span>.<span class="k">class</span>, value : UInt64, **options, &block : TypedDataset(T) -> ) : Nil forall T<br/>create_dataset(path : String, type : <span class="t">T</span>.<span class="k">class</span>, value : Float32, **options, &block : TypedDataset(T) -> ) : Nil forall T<br/>create_dataset(path : String, type : <span class="t">T</span>.<span class="k">class</span>, value : Float64, **options, &block : TypedDataset(T) -> ) : Nil forall T<br/>create_dataset(path : String, type : <span class="t">T</span>.<span class="k">class</span>, value : Bool, **options, &block : TypedDataset(T) -> ) : Nil forall T<br/>create_dataset(path : String, type : <span class="t">T</span>.<span class="k">class</span>, value : String, **options, &block : TypedDataset(T) -> ) : Nil forall T<br/>create_dataset(path : String, type : <span class="t">T</span>.<span class="k">class</span>, value : Complex, **options, &block : TypedDataset(T) -> ) : Nil forall T<br/>create_dataset(path : String, type : <span class="t">T</span>.<span class="k">class</span>, value : HDF5::Complex32, **options, &block : TypedDataset(T) -> ) : Nil forall T<br/>create_dataset(path : String, type : <span class="t">T</span>.<span class="k">class</span>, value : HDF5::Reference, **options, &block : TypedDataset(T) -> ) : Nil forall T<br/>create_dataset(path : String, data : Array(T), **options, &block : TypedDataset(T) -> ) : Nil forall T<br/>create_dataset(path : String, data : Slice(T), **options, &block : TypedDataset(T) -> ) : Nil forall T<br/>create_dataset(path : String, empty : Empty(T), **options, &block : TypedDataset(T) -> ) : Nil forall T<br/>create_dataset(path : String, value : Int8, **options, &block : TypedDataset(Int8) -> ) : Nil<br/>create_dataset(path : String, value : UInt8, *, shape : Indexable = <span class="o">[]</span> <span class="k">of</span> <span class="t">UInt64</span>, casting : Casting = <span class="t">Casting</span><span class="t">::</span><span class="t">Unsafe</span>, **options) : TypedDataset(UInt8)<br/>create_dataset(path : String, value : UInt8, **options, &block : TypedDataset(UInt8) -> ) : Nil<br/>create_dataset(path : String, value : Int16, *, shape : Indexable = <span class="o">[]</span> <span class="k">of</span> <span class="t">UInt64</span>, casting : Casting = <span class="t">Casting</span><span class="t">::</span><span class="t">Unsafe</span>, **options) : TypedDataset(Int16)<br/>create_dataset(path : String, value : Int16, **options, &block : TypedDataset(Int16) -> ) : Nil<br/>create_dataset(path : String, value : UInt16, *, shape : Indexable = <span class="o">[]</span> <span class="k">of</span> <span class="t">UInt64</span>, casting : Casting = <span class="t">Casting</span><span class="t">::</span><span class="t">Unsafe</span>, **options) : TypedDataset(UInt16)<br/>create_dataset(path : String, value : UInt16, **options, &block : TypedDataset(UInt16) -> ) : Nil<br/>create_dataset(path : String, value : Int32, *, shape : Indexable = <span class="o">[]</span> <span class="k">of</span> <span class="t">UInt64</span>, casting : Casting = <span class="t">Casting</span><span class="t">::</span><span class="t">Unsafe</span>, **options) : TypedDataset(Int32)<br/>create_dataset(path : String, value : Int32, **options, &block : TypedDataset(Int32) -> ) : Nil<br/>create_dataset(path : String, value : UInt32, *, shape : Indexable = <span class="o">[]</span> <span class="k">of</span> <span class="t">UInt64</span>, casting : Casting = <span class="t">Casting</span><span class="t">::</span><span class="t">Unsafe</span>, **options) : TypedDataset(UInt32)<br/>create_dataset(path : String, value : UInt32, **options, &block : TypedDataset(UInt32) -> ) : Nil<br/>create_dataset(path : String, value : Int64, *, shape : Indexable = <span class="o">[]</span> <span class="k">of</span> <span class="t">UInt64</span>, casting : Casting = <span class="t">Casting</span><span class="t">::</span><span class="t">Unsafe</span>, **options) : TypedDataset(Int64)<br/>create_dataset(path : String, value : Int64, **options, &block : TypedDataset(Int64) -> ) : Nil<br/>create_dataset(path : String, value : UInt64, *, shape : Indexable = <span class="o">[]</span> <span class="k">of</span> <span class="t">UInt64</span>, casting : Casting = <span class="t">Casting</span><span class="t">::</span><span class="t">Unsafe</span>, **options) : TypedDataset(UInt64)<br/>create_dataset(path : String, value : UInt64, **options, &block : TypedDataset(UInt64) -> ) : Nil<br/>create_dataset(path : String, value : Float32, *, shape : Indexable = <span class="o">[]</span> <span class="k">of</span> <span class="t">UInt64</span>, casting : Casting = <span class="t">Casting</span><span class="t">::</span><span class="t">Unsafe</span>, **options) : TypedDataset(Float32)<br/>create_dataset(path : String, value : Float32, **options, &block : TypedDataset(Float32) -> ) : Nil<br/>create_dataset(path : String, value : Float64, *, shape : Indexable = <span class="o">[]</span> <span class="k">of</span> <span class="t">UInt64</span>, casting : Casting = <span class="t">Casting</span><span class="t">::</span><span class="t">Unsafe</span>, **options) : TypedDataset(Float64)<br/>create_dataset(path : String, value : Float64, **options, &block : TypedDataset(Float64) -> ) : Nil<br/>create_dataset(path : String, value : Bool, *, shape : Indexable = <span class="o">[]</span> <span class="k">of</span> <span class="t">UInt64</span>, casting : Casting = <span class="t">Casting</span><span class="t">::</span><span class="t">Unsafe</span>, **options) : TypedDataset(Bool)<br/>create_dataset(path : String, value : Bool, **options, &block : TypedDataset(Bool) -> ) : Nil<br/>create_dataset(path : String, value : String, *, shape : Indexable = <span class="o">[]</span> <span class="k">of</span> <span class="t">UInt64</span>, casting : Casting = <span class="t">Casting</span><span class="t">::</span><span class="t">Unsafe</span>, **options) : TypedDataset(String)<br/>create_dataset(path : String, value : String, **options, &block : TypedDataset(String) -> ) : Nil<br/>create_dataset(path : String, value : Complex, *, shape : Indexable = <span class="o">[]</span> <span class="k">of</span> <span class="t">UInt64</span>, casting : Casting = <span class="t">Casting</span><span class="t">::</span><span class="t">Unsafe</span>, **options) : TypedDataset(Complex)<br/>create_dataset(path : String, value : Complex, **options, &block : TypedDataset(Complex) -> ) : Nil<br/>create_dataset(path : String, value : HDF5::Complex32, *, shape : Indexable = <span class="o">[]</span> <span class="k">of</span> <span class="t">UInt64</span>, casting : Casting = <span class="t">Casting</span><span class="t">::</span><span class="t">Unsafe</span>, **options) : TypedDataset(HDF5::Complex32)<br/>create_dataset(path : String, value : HDF5::Complex32, **options, &block : TypedDataset(HDF5::Complex32) -> ) : Nil<br/>create_dataset(path : String, value : HDF5::Reference, *, shape : Indexable = <span class="o">[]</span> <span class="k">of</span> <span class="t">UInt64</span>, casting : Casting = <span class="t">Casting</span><span class="t">::</span><span class="t">Unsafe</span>, **options) : TypedDataset(HDF5::Reference)<br/>create_dataset(path : String, value : HDF5::Reference, **options, &block : TypedDataset(HDF5::Reference) -> ) : Nil<br/>create_dataset(path : String, type : <span class="t">T</span>.<span class="k">class</span>, **options, &block : TypedDataset(T) -> ) : Nil forall T</span>
     create_dataset</a>, 
     
   
@@ -512,6 +587,16 @@
     <a href="../HDF5/Container.html#link%28source_path%3AString%2Cdestination_path%3AString%29%3ANil-instance-method" class="tooltip">
       <span>link(source_path : String, destination_path : String) : Nil</span>
     link</a>, 
+    
+  
+    <a href="../HDF5/Container.html#link_info%28path%3AString%29%3ALinkInfo-instance-method" class="tooltip">
+      <span>link_info(path : String) : LinkInfo</span>
+    link_info</a>, 
+    
+  
+    <a href="../HDF5/Container.html#move%28source%3AString%2Cdestination%3AString%29%3ANil-instance-method" class="tooltip">
+      <span>move(source : String, destination : String) : Nil</span>
+    move</a>, 
     
   
     <a href="../HDF5/Container.html#nlinks%3AUInt64-instance-method" class="tooltip">
@@ -615,7 +700,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/hdf5.cr/blob/1c78c64b6f50787abc2ceb10b5709c1a7bc98590/src/hdf5/file.cr#L28" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/file.cr#L25" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -631,7 +716,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/hdf5.cr/blob/1c78c64b6f50787abc2ceb10b5709c1a7bc98590/src/hdf5/file.cr#L15" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/file.cr#L17" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -659,7 +744,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/hdf5.cr/blob/1c78c64b6f50787abc2ceb10b5709c1a7bc98590/src/hdf5/file.cr#L73" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/file.cr#L82" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -675,7 +760,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/hdf5.cr/blob/1c78c64b6f50787abc2ceb10b5709c1a7bc98590/src/hdf5/file.cr#L19" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/file.cr#L21" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -705,7 +790,39 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/hdf5.cr/blob/1c78c64b6f50787abc2ceb10b5709c1a7bc98590/src/hdf5/file.cr#L64" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/file.cr#L71" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="closed?:Bool-instance-method">
+      <div class="signature">
+        
+        def <strong>closed?</strong> : Bool
+
+        <a class="method-permalink" href="#closed%3F%3ABool-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/file.cr#L67" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="context:FileContext-instance-method">
+      <div class="signature">
+        
+        def <strong>context</strong> : <a href="../HDF5/FileContext.html">FileContext</a>
+
+        <a class="method-permalink" href="#context%3AFileContext-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/file.cr#L14" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -721,7 +838,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/hdf5.cr/blob/1c78c64b6f50787abc2ceb10b5709c1a7bc98590/src/hdf5/file.cr#L12" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/file.cr#L13" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -737,7 +854,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/hdf5.cr/blob/1c78c64b6f50787abc2ceb10b5709c1a7bc98590/src/hdf5/file.cr#L69" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/file.cr#L77" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -753,7 +870,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/hdf5.cr/blob/1c78c64b6f50787abc2ceb10b5709c1a7bc98590/src/hdf5/file.cr#L60" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/file.cr#L63" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -769,7 +886,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/hdf5.cr/blob/1c78c64b6f50787abc2ceb10b5709c1a7bc98590/src/hdf5/file.cr#L55" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/file.cr#L57" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -785,7 +902,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/hdf5.cr/blob/1c78c64b6f50787abc2ceb10b5709c1a7bc98590/src/hdf5/file.cr#L11" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/file.cr#L12" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -801,7 +918,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/hdf5.cr/blob/1c78c64b6f50787abc2ceb10b5709c1a7bc98590/src/hdf5/file.cr#L13" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/hdf5.cr/blob/7907208c0a28bde8f405c9e17dd68aa738337d60/src/hdf5/file.cr#L15" target="_blank">View source</a>]
         
       </div>
     </div>
